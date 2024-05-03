@@ -1,6 +1,7 @@
 import {NavLink} from '@remix-run/react';
 import type {FooterQuery, HeaderQuery} from 'storefrontapi.generated';
 import {useRootLoaderData} from '~/lib/root-data';
+import '../styles/footer.scss';
 
 export function Footer({
   menu,

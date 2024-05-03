@@ -8,6 +8,8 @@
  * </Aside>
  * ```
  */
+
+import '../styles/aside.scss';
 export function Aside({
   children,
   heading,

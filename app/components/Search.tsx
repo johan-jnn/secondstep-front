@@ -8,6 +8,7 @@ import {
 import {Image, Money, Pagination} from '@shopify/hydrogen';
 import React, {useRef, useEffect} from 'react';
 import {applyTrackingParams} from '~/lib/search';
+import '../styles/search.scss';
 
 import type {
   PredictiveProductFragment,

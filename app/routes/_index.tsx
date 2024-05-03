@@ -2,6 +2,7 @@ import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link, type MetaFunction} from '@remix-run/react';
 import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
+import '../styles/app.scss';
 import type {
   FeaturedCollectionFragment,
   RecommendedProductsQuery,

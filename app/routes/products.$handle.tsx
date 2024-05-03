@@ -1,5 +1,6 @@
 import {Suspense} from 'react';
 import {defer, redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import '../styles/products.$handle.scss';
 import {
   Await,
   Link,

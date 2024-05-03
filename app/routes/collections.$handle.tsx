@@ -1,5 +1,6 @@
 import {json, redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, Link, type MetaFunction} from '@remix-run/react';
+import '../styles/collections.$handle.scss';
 import {
   Pagination,
   getPaginationVariables,
