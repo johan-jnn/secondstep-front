@@ -3,7 +3,7 @@ import {Suspense} from 'react';
 import type {HeaderQuery} from 'storefrontapi.generated';
 import type {LayoutProps} from './Layout';
 import {useRootLoaderData} from '~/lib/root-data';
-import '../styles/header.scss';
+import './styles/header.scss';
 
 type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>;
 
@@ -14,7 +14,7 @@ export function Header({header, isLoggedIn, cart}: HeaderProps) {
   return (
     <header className="header">
       <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-        <strong>{shop.name}</strong>
+        <strong>second-step</strong>
       </NavLink>
       <HeaderMenu
         menu={menu}
@@ -96,13 +96,23 @@ function HeaderCtas({
       <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
         <Suspense fallback="Sign in">
           <Await resolve={isLoggedIn} errorElement="Sign in">
-            {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
+            {(isLoggedIn) => (isLoggedIn ? <LogInIcon /> : <LogInIcon />)}
           </Await>
         </Suspense>
       </NavLink>
       <SearchToggle />
       <CartToggle cart={cart} />
     </nav>
+  );
+}
+
+function LogInIcon() {
+  return (
+    <img
+      src="app/assets/PersonIcon.svg"
+      alt=" "
+      className="header_person_icon"
+    />
   );
 }
 
@@ -115,11 +125,24 @@ function HeaderMenuMobileToggle() {
 }
 
 function SearchToggle() {
-  return <a href="#search-aside">Search</a>;
+  return (
+    <a href="#search-aside">
+      <img
+        src="app/assets/SearchIcon.svg"
+        alt=""
+        className="header_search_icon"
+      />
+    </a>
+  );
 }
 
 function CartBadge({count}: {count: number}) {
-  return <a href="#cart-aside">Cart {count}</a>;
+  return (
+    <a href="#cart-aside">
+      <img src="app/assets/CartIcon.svg" alt="" className="header_cart_icon" />
+      {count}
+    </a>
+  );
 }
 
 function CartToggle({cart}: Pick<HeaderProps, 'cart'>) {
