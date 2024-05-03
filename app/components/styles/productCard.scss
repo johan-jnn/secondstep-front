@@ -1,0 +1,35 @@
+.product-card {
+  background-color: #F2F2F2;
+  width: 215px;
+  height: 335px;
+  padding: 5px;
+
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+
+  > #top {
+    height: 75%;
+  }
+  > #bottom {
+    display: grid;
+    grid-template-areas: 
+      "title price"
+      "sub sub"
+      "rate rate"
+    ;
+
+    > h3 {
+      grid-area: "title";
+    }
+    > h4 {
+      grid-area: "sub";
+    }
+    > .price {
+      grid-area: "price";
+    }
+    > .rating {
+      grid-area: "rate";
+    }
+  }
+}
