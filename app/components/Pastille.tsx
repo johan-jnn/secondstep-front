@@ -1,3 +1,5 @@
+import './styles/pastille.scss';
+
 export interface PastilleProps {
   color: 'green' | 'yellow';
 }
