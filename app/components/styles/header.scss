@@ -4,17 +4,26 @@
 * --------------------------------------------------
 */
 
+$header-height: 50px;
+$icons-height: calc($header-height / 1.75);
+$cartBadge-height: calc($icons-height / 2.25);
+
 .header {
   align-items: center;
   justify-content: space-between;
   background: #fff;
   display: flex;
   height: var(--header-height);
-  padding: 0 1rem;
+  padding: 0 5rem;
   position: sticky;
   top: 0;
   z-index: 1;
   font-family: 'Manrope';
+  height: $header-height;
+
+  nav .icon {
+    height: $icons-height;
+  }
 }
 
 .header-menu-mobile-toggle {
@@ -34,7 +43,7 @@
   text-transform: uppercase;
   @media (min-width: 45em) {
     display: flex;
-    gap: 2rem;
+    gap: 3rem;
     margin-left: 3rem;
   }
 }
@@ -63,6 +72,27 @@
 
 .header_Logo {
   height: 10vh;
+}
+
+.cartOpenner {
+  position: relative;
+
+  > span {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+
+    width: $cartBadge-height;
+    height: $cartBadge-height;
+    display: grid;
+    place-content: center;
+
+    border-radius: 50%;
+
+    font-size: calc($cartBadge-height) - 5;
+  }
 }
 
 /*

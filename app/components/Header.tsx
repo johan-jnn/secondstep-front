@@ -4,6 +4,13 @@ import type {HeaderQuery} from 'storefrontapi.generated';
 import type {LayoutProps} from './Layout';
 import {useRootLoaderData} from '~/lib/root-data';
 import './styles/header.scss';
+import {
+  CartIcon,
+  OrderIcon,
+  PersonIcon,
+  SearchIcon,
+} from '@shopify/polaris-icons';
+import Icon from './Icon';
 
 type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>;
 
@@ -135,13 +142,7 @@ function HeaderCtas({
 }
 
 function LogInIcon() {
-  return (
-    <img
-      src="app/assets/PersonIcon.svg"
-      alt=" "
-      className="header_person_icon"
-    />
-  );
+  return <Icon icon={PersonIcon} />;
 }
 
 function HeaderMenuMobileToggle() {
@@ -155,20 +156,16 @@ function HeaderMenuMobileToggle() {
 function SearchToggle() {
   return (
     <a href="#search-aside">
-      <img
-        src="app/assets/SearchIcon.svg"
-        alt=""
-        className="header_search_icon"
-      />
+      <Icon icon={SearchIcon} />
     </a>
   );
 }
 
 function CartBadge({count}: {count: number}) {
   return (
-    <a href="#cart-aside">
-      <img src="app/assets/CartIcon.svg" alt="" className="header_cart_icon" />
-      {count}
+    <a href="#cart-aside" className="cartOpenner">
+      <Icon icon={OrderIcon} />
+      <span>{count}</span>
     </a>
   );
 }
@@ -177,10 +174,7 @@ function CartToggle({cart}: Pick<HeaderProps, 'cart'>) {
   return (
     <Suspense fallback={<CartBadge count={0} />}>
       <Await resolve={cart}>
-        {(cart) => {
-          if (!cart) return <CartBadge count={0} />;
-          return <CartBadge count={cart.totalQuantity || 0} />;
-        }}
+        {(cart) => <CartBadge count={cart?.totalQuantity || 0} />}
       </Await>
     </Suspense>
   );
