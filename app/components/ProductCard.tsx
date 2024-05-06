@@ -56,7 +56,7 @@ export default function ProductCard({
       .reduce((pre: number, _) => pre + Math.random() * maxScore, 0) /
     fakeReviewsLength;
   return (
-    <Link className="product-card" to={`/products/${handle}`} key={id}>
+    <Link className="product-card" to={`/product/${handle}`} key={id}>
       <div className="top">
         <Image
           src={featuredImage?.url}
