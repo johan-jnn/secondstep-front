@@ -1,0 +1,47 @@
+$aspect-ratio: 31 / 5;
+
+button {
+  &.primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    > p:last-of-type {
+      color: var(--color-white);
+    }
+  }
+  &.secondary {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    border: 5px solid var(--color-primary);
+
+    > p:last-of-type {
+      color: var(--color-black);
+    }
+  }
+
+  padding: 15px;
+
+  border: none;
+  border-radius: 5px;
+
+  font-size: 35px;
+
+  aspect-ratio: $aspect-ratio;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  > p:first-of-type {
+    font-size: 1.5em;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    
+    &:has(+ p) {
+      font-size: 0.5em;
+    }
+  }
+  > p:last-of-type {
+    font-size: 0.25em;
+  }
+}

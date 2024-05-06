@@ -8,6 +8,7 @@ import type {
   RecommendedProductsQuery,
 } from 'storefrontapi.generated';
 import ProductCard, {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
+import Button from '~/components/Button';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -26,6 +27,12 @@ export default function Homepage() {
   const data = useLoaderData<typeof loader>();
   return (
     <div className="home">
+      <Button
+        text="Meilleures ventes"
+        type="primary"
+        // caption="This is an exemple button"
+      />
+
       <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} />
     </div>

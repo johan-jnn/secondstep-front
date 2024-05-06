@@ -1,3 +1,5 @@
+import './styles/button.scss';
+
 export interface ButtonProps {
   type: 'primary' | 'secondary';
   text: string;
