@@ -14,6 +14,7 @@ import {
 import favicon from './assets/favicon.svg';
 import resetStyles from './styles/reset.scss?url';
 import appStyles from './styles/app.scss?url';
+
 import {Layout} from '~/components/Layout';
 
 /**
