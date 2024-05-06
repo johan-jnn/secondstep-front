@@ -2,6 +2,7 @@ import {Await} from '@remix-run/react';
 import {Suspense} from 'react';
 import type {
   CartApiQueryFragment,
+  FooterGoToQuery,
   FooterQuery,
   HeaderQuery,
 } from 'storefrontapi.generated';
@@ -18,7 +19,8 @@ import {marquisContent} from '~/lib/constants.json';
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
   children?: React.ReactNode;
-  footer: Promise<FooterQuery>;
+  footer: FooterQuery;
+  footerGoTo: FooterGoToQuery;
   header: HeaderQuery;
   isLoggedIn: Promise<boolean>;
 };
@@ -27,6 +29,7 @@ export function Layout({
   cart,
   children = null,
   footer,
+  footerGoTo,
   header,
   isLoggedIn,
 }: LayoutProps) {
@@ -46,7 +49,13 @@ export function Layout({
       <main>{children}</main>
       <Suspense>
         <Await resolve={footer}>
-          {(footer) => <Footer menu={footer?.menu} shop={header?.shop} />}
+          {(footer) => (
+            <Footer
+              footer={footer}
+              footerGoTo={footerGoTo}
+              shop={header?.shop}
+            />
+          )}
         </Await>
       </Suspense>
     </>
