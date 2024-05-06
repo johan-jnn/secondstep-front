@@ -3,64 +3,105 @@
 * components/Header
 * --------------------------------------------------
 */
+
 .header {
-    align-items: center;
-    background: #fff;
-    display: flex;
-    height: var(--header-height);
-    padding: 0 1rem;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    font-family: "Manrope"
-  }
-  
-  .header-menu-mobile-toggle {
-    @media (min-width: 48em) {
-      display: none;
-    }
-  }
-  
-  .header-menu-mobile {
-    display: flex;
-    flex-direction: column;
-    grid-gap: 1rem;
-  }
-  
-  .header-menu-desktop {
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  display: flex;
+  height: var(--header-height);
+  padding: 0 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-family: 'Manrope';
+}
+
+.header-menu-mobile-toggle {
+  @media (min-width: 48em) {
     display: none;
-    grid-gap: 1rem;
-    @media (min-width: 45em) {
-      display: flex;
-      grid-gap: 1rem;
-      margin-left: 3rem;
-    }
   }
-  
-  .header-menu-item {
-    cursor: pointer;
-  }
+}
 
-  
-  .header-ctas {
-    align-items: center;
+.header-menu-mobile {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 1rem;
+}
+
+.header-menu-desktop {
+  display: none;
+  text-transform: uppercase;
+  @media (min-width: 45em) {
     display: flex;
-    grid-gap: 1rem;
-    margin-left: auto;
+    gap: 2rem;
+    margin-left: 3rem;
   }
+}
 
-  .header_search_icon{
-    height: 4vh;
-  }
+.header-menu-item {
+  cursor: pointer;
+}
 
-  .header_cart_icon{
-    height: 4vh;
-  }
+.header-ctas {
+  align-items: center;
+  display: flex;
+  grid-gap: 1rem;
+}
 
-  .header_person_icon{
-    height: 4vh;
-  }
+.header_search_icon {
+  height: 4vh;
+}
 
-  .header_Logo{
-    height: 10vh; ;
+.header_cart_icon {
+  height: 4vh;
+}
+
+.header_person_icon {
+  height: 4vh;
+}
+
+.header_Logo {
+  height: 10vh;
+}
+
+/*
+* --------------------------------------------------
+* Header Marquis
+* --------------------------------------------------
+*/
+
+#headerMarquis {
+  $itemsGap: 20vw;
+
+  display: flex;
+  align-items: center;
+
+  background-color: var(--color-black);
+  color: var(--color-white);
+  overflow-x: hidden;
+  padding: 10px 0;
+
+  > ul {
+    display: flex;
+    align-items: center;
+    padding-left: $itemsGap;
+    gap: $itemsGap;
+
+    > li {
+      margin: 0;
+      text-wrap: nowrap;
+    }
+
+    animation: marquisAnimation 15s infinite linear;
   }
+}
+
+@keyframes marquisAnimation {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: -100% 0;
+  }
+}

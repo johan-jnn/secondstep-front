@@ -9,24 +9,48 @@ type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>;
 
 type Viewport = 'desktop' | 'mobile';
 
-export function Header({header, isLoggedIn, cart}: HeaderProps) {
+export function Header({
+  header,
+  isLoggedIn,
+  cart,
+  marquisTexts,
+}: HeaderProps & {
+  marquisTexts: string[];
+}) {
   const {shop, menu} = header;
   return (
-    <header className="header">
-      <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-        <img
-          src="app/assets/LOGO_SECSTEP.PNG"
-          alt=" "
-          className="header_Logo"
+    <>
+      <HeaderMarquis texts={marquisTexts} />
+      <header className="header">
+        <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
+          <img
+            src="app/assets/LOGO_SECSTEP.PNG"
+            alt=" "
+            className="header_Logo"
+          />
+        </NavLink>
+        <HeaderMenu
+          menu={menu}
+          viewport="desktop"
+          primaryDomainUrl={header.shop.primaryDomain.url}
         />
-      </NavLink>
-      <HeaderMenu
-        menu={menu}
-        viewport="desktop"
-        primaryDomainUrl={header.shop.primaryDomain.url}
-      />
-      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
-    </header>
+        <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+      </header>
+    </>
+  );
+}
+
+export function HeaderMarquis(props: {texts: string[]}) {
+  return (
+    <div id="headerMarquis">
+      {['a', 'b'].map((id) => (
+        <ul key={`list_${id}`}>
+          {props.texts.map((text) => (
+            <li key={`${id}_${text}`}>{text}</li>
+          ))}
+        </ul>
+      ))}
+    </div>
   );
 }
 

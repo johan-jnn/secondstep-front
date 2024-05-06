@@ -13,6 +13,7 @@ import {
   PredictiveSearchForm,
   PredictiveSearchResults,
 } from '~/components/Search';
+import {marquisContent} from '~/lib/constants.json';
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
@@ -34,7 +35,14 @@ export function Layout({
       <CartAside cart={cart} />
       <SearchAside />
       <MobileMenuAside menu={header?.menu} shop={header?.shop} />
-      {header && <Header header={header} cart={cart} isLoggedIn={isLoggedIn} />}
+      {header && (
+        <Header
+          marquisTexts={marquisContent}
+          header={header}
+          cart={cart}
+          isLoggedIn={isLoggedIn}
+        />
+      )}
       <main>{children}</main>
       <Suspense>
         <Await resolve={footer}>
