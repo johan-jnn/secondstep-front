@@ -12,6 +12,7 @@
     position: sticky;
     top: 0;
     z-index: 1;
+    font-family: "Manrope"
   }
   
   .header-menu-mobile-toggle {
@@ -39,6 +40,7 @@
   .header-menu-item {
     cursor: pointer;
   }
+
   
   .header-ctas {
     align-items: center;
@@ -57,4 +59,8 @@
 
   .header_person_icon{
     height: 4vh;
+  }
+
+  .header_Logo{
+    height: 10vh; ;
   }

@@ -14,7 +14,11 @@ export function Header({header, isLoggedIn, cart}: HeaderProps) {
   return (
     <header className="header">
       <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-        <strong>second-step</strong>
+        <img
+          src="app/assets/LOGO_SECSTEP.PNG"
+          alt=" "
+          className="header_Logo"
+        />
       </NavLink>
       <HeaderMenu
         menu={menu}
