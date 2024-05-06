@@ -28,9 +28,9 @@ export default function Homepage() {
   return (
     <div className="home">
       <Button
-        text="Meilleures ventes"
+        text="Oui je la veux"
         type="primary"
-        // caption="This is an exemple button"
+        caption="Obtenez la boite personnalisé pour 7,99€"
       />
 
       <FeaturedCollection collection={data.featuredCollection} />
@@ -49,7 +49,7 @@ function FeaturedCollection({
   return (
     <Link
       className="featured-collection"
-      to={`/collection/${collection.handle}`}
+      to={`/collections/${collection.handle}`}
     >
       {image && (
         <div className="featured-collection-image">
