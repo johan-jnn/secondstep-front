@@ -1,7 +1,5 @@
-$aspect-ratio: 25 / 5;
-
 button {
-  &.primary {
+  &.primary, &.price {
     background-color: var(--color-primary);
     color: var(--color-white);
   }
@@ -17,26 +15,46 @@ button {
 
   padding: 15px;
   min-height: 50px;
-
   border: none;
   border-radius: 5px;
-
   font-size: 12.5px;
   cursor: pointer;
 
-  aspect-ratio: $aspect-ratio;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  
-  > p:nth-of-type(1) {
-    font-size: 1em;
-    font-weight: 900;
-    text-transform: uppercase;
+
+  &.primary, &.secondary {
+    flex-direction: column;
+    aspect-ratio: 35 / 5;
+
+    > p:nth-of-type(1) {
+      font-size: 1.15em;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    > p:nth-of-type(2) {
+      font-size: 0.75em;
+    }
   }
-  > p:nth-of-type(2) {
-    font-size: 0.75em;
+  
+  &.price {
+    font-size: 1em;
+    aspect-ratio: 35 / 4;
+    text-transform: uppercase;
+    
+    > p:nth-of-type(1) {
+      font-weight: 600;
+    }
+
+    > hr {
+      width: 1.5px;
+      height: 75%;
+      border: none;
+      background-color: var(--color-white);
+      border-radius: 999px;
+      margin: 0 10px;
+    }
   }
 
   transition: border-radius .15s;

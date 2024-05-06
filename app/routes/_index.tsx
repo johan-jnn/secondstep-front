@@ -9,6 +9,7 @@ import type {
 } from 'storefrontapi.generated';
 import ProductCard, {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
 import Button from '~/components/Button';
+import PriceButton from '~/components/PriceButton';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -27,12 +28,6 @@ export default function Homepage() {
   const data = useLoaderData<typeof loader>();
   return (
     <div className="home">
-      <Button
-        text="Oui je la veux"
-        type="primary"
-        caption="Obtenez la boite personnalisé pour 7,99€"
-      />
-
       <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} />
     </div>
