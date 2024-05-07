@@ -22,33 +22,30 @@ STATIC FOOTER (INFORMATIONS GRID PAYEMENTS, SHIPP-
 .footer-template-static{
   padding-top: 2%;
   padding-bottom: 2%;
-  width: 20%;
 }
 
 .footer-static{
   display: flex; 
   justify-content: center;
-  grid-gap: 5rem;
+  grid-gap: 1%;
   padding-bottom: 2%;
 }  
 
 .footer-static img{
   float: left;
-  margin-right: 6%;
+  margin-right: 4%;
   rotate: 110deg;
 }
 .footer-template-static h1{
   color: var(--color-light);
   font-weight: 1000;
   font-size: 0.8rem;
-  overflow: hidden;
 }
 
 .footer-template-static p{
   color: var(--color-light);
   font-weight: 1;
   font-size: 0.8rem;
-  overflow: hidden;
 }
 
 /*
@@ -63,7 +60,7 @@ DYNAMIC FOOTER (MENUS GRID INFOS, POLICIES, GOTO...)
 .footer_grid{
   display: flex;
   color:var(--color-light); 
-  grid-gap: 10rem;
+  grid-gap: 1%;
   padding: 1rem;
 }
   
@@ -97,4 +94,152 @@ DYNAMIC FOOTER (MENUS GRID INFOS, POLICIES, GOTO...)
   display: flex; 
   justify-content: space-around; 
   margin: 0 auto; 
+}
+
+
+
+/*RESPONSIVE*/
+
+/* Extra Small (XS) */
+@media only screen and (max-width: 575px) {
+.footer-template-static{
+  display: table-cell;
+  padding: 5% 4% 0% 2%;
+  text-align: center;
+}
+.footer-static{
+  display: table;
+  padding-bottom: 2%;
+  width: 100%;
+}  
+.footer-static img{
+  display: none;
+}
+.footer-template-static h1{
+  font-size: 0.6rem;
+}
+.footer-template-static p{
+  font-size: 0.6rem;
+}
+.footer_help a{
+  font-size: 0.6rem;
+}
+.footer_grid{
+  display: grid;
+  justify-content: center;
+  text-align: center;
+}
+.footer-menu a {
+  font-size: 0.6rem;
+}
+.footer_grid h1{
+  font-size: 1rem;
+}
+.footer_AboutUs p{
+  margin-top: 0.2rem;
+  font-size: 0.6rem;
+}
+.div_socials {
+  padding-top: 7%;
+  padding-bottom: 10%;
+}
+}
+
+/* Small (SM) */
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .footer-template-static{
+    display: table-cell;
+    padding: 5% 4% 0% 2%;
+    text-align: center;
+  }
+  .footer-static{
+    display: table;
+    padding-bottom: 2%;
+    width: 100%;
+  }  
+  .footer-static img{
+    display: none;
+  }
+  .footer-template-static h1{
+    font-size: 0.6rem;
+  }
+  .footer-template-static p{
+    font-size: 0.6rem;
+  }
+  .footer_help a{
+    font-size: 0.6rem;
+  }
+  .footer_grid{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  .footer-menu a {
+    font-size: 0.6rem;
+  }
+  .footer_grid h1{
+    font-size: 1rem;
+  }
+  .footer_AboutUs p{
+    margin-top: 0.2rem;
+    font-size: 0.6rem;
+  }
+  .div_socials {
+    padding-top: 7%;
+    padding-bottom: 10%;
+  }
+}
+/* Medium (MD) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .footer-template-static{
+    display: table-cell;
+    padding: 5% 5% 0% 2%;
+    justify-content: center;
+  }
+  .footer-static{
+    display: table;
+    padding-bottom: 2%;
+    width: 100%;
+    margin: 0 auto;
+  }  
+  .footer-static img{
+    width: 10%;
+  }
+  .footer_grid{
+    display: flex;
+    justify-content: center;
+
+  }
+  .div_socials {
+    padding-top: 7%;
+    padding-bottom: 10%;
+  }
+}
+
+/* Large (LG) */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .footer-static{
+    grid-gap: 7%;
+  }
+  .footer-template-static{
+    width: 23vw;
+  }
+
+}
+
+@media only screen and (min-width: 1200px){
+    .footer-static{
+    grid-gap: 3%;
+    justify-content: center;
+  }
+  .footer-template-static{
+    width: 25vw;
+  }
+
+  .footer_grid{
+    display: flex;
+    justify-content: center;
+    grid-gap: 5%;
+  }
+  
 }
