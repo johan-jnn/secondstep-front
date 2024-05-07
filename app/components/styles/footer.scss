@@ -9,46 +9,92 @@
     display: grid;
     justify-content: center;
     align-items: start;
-  }
+}
 
-  .footer_help a{
-    font-size: 0.8rem;
-  }
-  .footer_grid{
-    display: flex;
-    color:var(--color-light); 
-    grid-gap: 10rem;
-    padding: 1rem;
-  }
+
+/*
+--------------------------------------------------
+STATIC FOOTER (INFORMATIONS GRID PAYEMENTS, SHIPP-
+-ING...)
+--------------------------------------------------
+*/
+
+.footer-template-static{
+  padding-top: 2%;
+  padding-bottom: 2%;
+  width: 20%;
+}
+
+.footer-static{
+  display: flex; 
+  justify-content: center;
+  grid-gap: 5rem;
+  padding-bottom: 2%;
+}  
+
+.footer-static img{
+  float: left;
+  margin-right: 6%;
+  rotate: 110deg;
+}
+.footer-template-static h1{
+  color: var(--color-light);
+  font-weight: 1000;
+  font-size: 0.8rem;
+  overflow: hidden;
+}
+
+.footer-template-static p{
+  color: var(--color-light);
+  font-weight: 1;
+  font-size: 0.8rem;
+  overflow: hidden;
+}
+
+/*
+--------------------------------------------------
+DYNAMIC FOOTER (MENUS GRID INFOS, POLICIES, GOTO...)
+--------------------------------------------------
+*/
+
+.footer_help a{
+  font-size: 0.8rem;
+}
+.footer_grid{
+  display: flex;
+  color:var(--color-light); 
+  grid-gap: 10rem;
+  padding: 1rem;
+}
   
-  .footer-menu {
-    display: grid;
-    grid-gap: 0.2rem;
-    color: var(--color-light); 
-  }
+.footer-menu {
+  display: grid;
+  grid-gap: 0.2rem;
+  color: var(--color-light); 
+}
   
-  .footer-menu a {
-    color: var(--color-light);
-    font-size: 0.8rem;
-  }
+.footer-menu a {
+  color: var(--color-light);
+  font-size: 0.7rem;
+}
 
-  .footer h1{
-    font-size: 1.2rem;
-  }
+.footer_grid h1{
+  font-size: 1rem;
+  font-weight: 1000;
+}
 
-  .footer_Socials{
-    display: grid;
-  }
+.footer_AboutUs{
+  width: 20rem;
+}
 
-  .footer_AboutUs{
-    width: 20rem;
-  }
+.footer_AboutUs p{
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+}
 
-  .footer_AboutUs p{
-    margin-top: 0.2rem;
-    font-size: 0.8rem;
-  }
-
-  .div_socials{
-    margin: 0 auto;
-  }
+.div_socials {
+  padding-top: 13%;
+  display: flex; 
+  justify-content: space-around; 
+  margin: 0 auto; 
+}

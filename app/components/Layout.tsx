@@ -4,6 +4,7 @@ import type {
   CartApiQueryFragment,
   FooterGoToQuery,
   FooterQuery,
+  FooterInfosQuery,
   HeaderQuery,
 } from 'storefrontapi.generated';
 import {Aside} from '~/components/Aside';
@@ -21,6 +22,7 @@ export type LayoutProps = {
   children?: React.ReactNode;
   footer: FooterQuery;
   footerGoTo: FooterGoToQuery;
+  footerInfos: FooterInfosQuery;
   header: HeaderQuery;
   isLoggedIn: Promise<boolean>;
 };
@@ -30,6 +32,7 @@ export function Layout({
   children = null,
   footer,
   footerGoTo,
+  footerInfos,
   header,
   isLoggedIn,
 }: LayoutProps) {
@@ -53,6 +56,7 @@ export function Layout({
             <Footer
               footer={footer}
               footerGoTo={footerGoTo}
+              footerInfos={footerInfos}
               shop={header?.shop}
             />
           )}
