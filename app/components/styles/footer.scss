@@ -22,7 +22,7 @@ STATIC FOOTER (INFORMATIONS GRID PAYEMENTS, SHIPP-
 .footer-template-static{
   padding-top: 2%;
   padding-bottom: 2%;
-  width: 25rem;
+  width: 20rem;
 }
 
 .footer-static{
@@ -62,7 +62,7 @@ DYNAMIC FOOTER (MENUS GRID INFOS, POLICIES, GOTO...)
   justify-content: center;
   display: flex;
   color:var(--color-light); 
-  grid-gap: 1%;
+  grid-gap: 10%;
   padding: 1rem;
 }
   
@@ -130,6 +130,7 @@ DYNAMIC FOOTER (MENUS GRID INFOS, POLICIES, GOTO...)
   display: grid;
   justify-content: center;
   text-align: center;
+  grid-gap: 1%;
 }
 .footer-menu a {
   font-size: 0.6rem;
@@ -175,6 +176,7 @@ DYNAMIC FOOTER (MENUS GRID INFOS, POLICIES, GOTO...)
     display: flex;
     justify-content: center;
     text-align: center;
+    grid-gap: 1%;
   }
   .footer-menu a {
     font-size: 0.6rem;
@@ -210,7 +212,7 @@ DYNAMIC FOOTER (MENUS GRID INFOS, POLICIES, GOTO...)
   .footer_grid{
     display: flex;
     justify-content: center;
-
+    grid-gap: 1%;
   }
   .div_socials {
     padding-top: 7%;
@@ -228,6 +230,11 @@ DYNAMIC FOOTER (MENUS GRID INFOS, POLICIES, GOTO...)
   }
   .footer-static img{
     width: 10%;
+  }
+  .footer_grid{
+    display: flex;
+    justify-content: center;
+    grid-gap: 1%;
   }
 
 }
