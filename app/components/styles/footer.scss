@@ -58,11 +58,10 @@ STATIC FOOTER (INFORMATIONS GRID PAYEMENTS, SHIPP-
 }
 
 .footer-input-email{
-  z-index: 999;
   background-color: black;
   border-color: white;
   color: white;
-  height: 5vh;
+  height: 45px;
   border-radius: 5px 0 0 5px;
 }
 
@@ -71,7 +70,7 @@ STATIC FOOTER (INFORMATIONS GRID PAYEMENTS, SHIPP-
   background-color: white;
   border: solid 1px white;
   width: 10vh;
-  height: 5vh;
+  height: 45px;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
 }
