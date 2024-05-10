@@ -77,7 +77,7 @@
     display: flex 1;
     color: var(--color-primary);
     font-weight: bold; 
-    margin-left: 50%;
+    margin-left: 0%;
   }
 
   .cart-line-size{
@@ -86,11 +86,13 @@
     opacity: 0.3;
     font-weight: bold; 
     font-size: 1rem;
+    width: 10rem;
   }
 
   .cart-line-remove-btn{
-    opacity: 0.3;
-    margin-left: 600%;
+    opacity:0.5;
+    margin-bottom: -60%;
+    margin-left: 380%;
     background-color: transparent;
     border: none;
     text-decoration: underline;
