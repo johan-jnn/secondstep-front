@@ -49,6 +49,58 @@ STATIC FOOTER (INFORMATIONS GRID PAYEMENTS, SHIPP-
   font-weight: 1;
   font-size: 0.8rem;
 }
+
+/*
+--------------------------------------------------
+DYNAMIC FOOTER (MENUS GRID INFOS, POLICIES, GOTO...)
+--------------------------------------------------
+*/
+
+.footer_help a{
+  font-size: 0.8rem;
+}
+.footer_grid{
+  justify-content: center;
+  display: flex;
+  color:var(--color-light); 
+  grid-gap: 10%;
+  padding: 1rem;
+}
+  
+.footer-menu {
+  display: grid;
+  grid-gap: 0.2rem;
+  color: var(--color-light); 
+  width: 20vh;
+}
+  
+.footer-menu a {
+  color: var(--color-light);
+  font-size: 0.7rem;
+}
+
+.footer_grid h1{
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.footer_AboutUs{
+  width: 20rem;
+}
+
+.footer_AboutUs p{
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+}
+
+.div_socials {
+  padding-top: 13%;
+  padding-bottom: 10%;
+  display: flex; 
+  justify-content: space-around; 
+  margin: 0 auto; 
+}
+
 .footer-input{
   display: flex;
   justify-content: center;
@@ -73,56 +125,6 @@ STATIC FOOTER (INFORMATIONS GRID PAYEMENTS, SHIPP-
   height: 45px;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
-}
-
-/*
---------------------------------------------------
-DYNAMIC FOOTER (MENUS GRID INFOS, POLICIES, GOTO...)
---------------------------------------------------
-*/
-
-.footer_help a{
-  font-size: 0.8rem;
-}
-.footer_grid{
-  justify-content: center;
-  display: flex;
-  color:var(--color-light); 
-  grid-gap: 10%;
-  padding: 1rem;
-}
-  
-.footer-menu {
-  display: grid;
-  grid-gap: 0.2rem;
-  color: var(--color-light); 
-}
-  
-.footer-menu a {
-  color: var(--color-light);
-  font-size: 0.7rem;
-}
-
-.footer_grid h1{
-  font-size: 1rem;
-  font-weight: 1000;
-}
-
-.footer_AboutUs{
-  width: 20rem;
-}
-
-.footer_AboutUs p{
-  margin-top: 0.2rem;
-  font-size: 0.8rem;
-}
-
-.div_socials {
-  padding-top: 13%;
-  padding-bottom: 10%;
-  display: flex; 
-  justify-content: space-around; 
-  margin: 0 auto; 
 }
 
 
