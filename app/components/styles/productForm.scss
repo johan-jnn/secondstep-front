@@ -98,6 +98,7 @@
     }
 
     > #tailleGrid {
+      min-height: 75px;
       max-height: 150px;
       overflow-y: scroll;
       display: grid;

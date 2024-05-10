@@ -3,6 +3,7 @@ import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {Pagination, getPaginationVariables, Image} from '@shopify/hydrogen';
 import type {CollectionFragment} from 'storefrontapi.generated';
 import '../styles/collections._index.scss';
+import CollectionCTA from '~/components/CollectionCTA';
 
 export async function loader({context, request}: LoaderFunctionArgs) {
   const paginationVariables = getPaginationVariables(request, {
@@ -42,12 +43,8 @@ export default function Collections() {
 function CollectionsGrid({collections}: {collections: CollectionFragment[]}) {
   return (
     <div className="collections-grid">
-      {collections.map((collection, index) => (
-        <CollectionItem
-          key={collection.id}
-          collection={collection}
-          index={index}
-        />
+      {collections.map((collection) => (
+        <CollectionCTA key={collection.id} collection={collection} />
       ))}
     </div>
   );
@@ -80,11 +77,12 @@ function CollectionItem({
   );
 }
 
-const COLLECTIONS_QUERY = `#graphql
+export const COLLECTION_FRAGMENT = `#graphql
   fragment Collection on Collection {
     id
     title
     handle
+    description
     image {
       id
       url
@@ -92,7 +90,9 @@ const COLLECTIONS_QUERY = `#graphql
       width
       height
     }
-  }
+  }`;
+const COLLECTIONS_QUERY = `#graphql
+  ${COLLECTION_FRAGMENT}
   query StoreCollections(
     $country: CountryCode
     $endCursor: String

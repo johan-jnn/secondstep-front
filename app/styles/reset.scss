@@ -16,6 +16,8 @@
   --color-black: #{$black};
 
   --color-lightblack: #{$light_black};
+  --color-darkwhite: #{$dark_white};
+
   --color-grey: #{$grey};
 
   --color-green: #{$green};
@@ -30,6 +32,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: var(--color-darkwhite);
 }
 
 a {
