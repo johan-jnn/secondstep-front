@@ -205,9 +205,9 @@ function FooterMenu({
           <h1>A propos de nous</h1>
           <p>
             Chez Second Step, nous voulons redéfinir la façon dont les sneakers
-            sont consommées et perçues dans le monde de la monde. Nous aspirons à
-            créer une communauté engagée qui apprécie la valeur des sneakers
-            d'occasion.
+            sont consommées et perçues dans le monde de la monde. Nous aspirons
+            à créer une communauté engagée qui apprécie la valeur des sneakers
+            d&apos;occasion.
           </p>
         </div>
         <div className="footer_Socials">

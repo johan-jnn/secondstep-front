@@ -10,7 +10,6 @@ import {
 } from '@remix-run/react';
 import type {
   ProductFragment,
-  ProductVariantsQuery,
   ProductVariantFragment,
 } from 'storefrontapi.generated';
 import {
@@ -80,16 +79,7 @@ export async function loader({params, request, context}: LoaderFunctionArgs) {
     }
   }
 
-  // In order to show which variants are available in the UI, we need to query
-  // all of them. But there might be a *lot*, so instead separate the variants
-  // into it's own separate query that is deferred. So there's a brief moment
-  // where variant options might show as available when they're not, but after
-  // this deffered query resolves, the UI will update.
-  const variants = storefront.query(VARIANTS_QUERY, {
-    variables: {handle},
-  });
-
-  return defer({product, variants});
+  return defer({product});
 }
 
 function redirectToFirstVariant({
@@ -100,24 +90,25 @@ function redirectToFirstVariant({
   request: Request;
 }) {
   const url = new URL(request.url);
-  const firstVariant = product.variants.nodes[0];
+  const firstVariant = product.variants.nodes.find((v) => v.availableForSale);
 
-  return redirect(
-    getVariantUrl({
-      pathname: url.pathname,
-      handle: product.handle,
-      selectedOptions: firstVariant.selectedOptions,
-      searchParams: new URLSearchParams(url.search),
-    }),
-    {
-      status: 302,
-    },
-  );
+  if (!firstVariant) return redirect('/');
+  else
+    return redirect(
+      getVariantUrl({
+        pathname: url.pathname,
+        handle: product.handle,
+        selectedOptions: firstVariant.selectedOptions,
+        searchParams: new URLSearchParams(url.search),
+      }),
+      {
+        status: 302,
+      },
+    );
 }
 
 export default function Product() {
-  const {product, variants} = useLoaderData<typeof loader>();
-  const {selectedVariant} = product;
+  const {product} = useLoaderData<typeof loader>();
 
   return (
     <>
@@ -248,28 +239,4 @@ const PRODUCT_QUERY = `#graphql
     }
   }
   ${PRODUCT_FRAGMENT}
-` as const;
-
-const PRODUCT_VARIANTS_FRAGMENT = `#graphql
-  fragment ProductVariants on Product {
-    variants(first: 250) {
-      nodes {
-        ...ProductVariant
-      }
-    }
-  }
-  ${PRODUCT_VARIANT_FRAGMENT}
-` as const;
-
-const VARIANTS_QUERY = `#graphql
-  ${PRODUCT_VARIANTS_FRAGMENT}
-  query ProductVariants(
-    $country: CountryCode
-    $language: LanguageCode
-    $handle: String!
-  ) @inContext(country: $country, language: $language) {
-    product(handle: $handle) {
-      ...ProductVariants
-    }
-  }
 ` as const;

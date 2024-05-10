@@ -9,6 +9,8 @@ import './styles/productForm.scss';
 import PriceButton from './PriceButton';
 import {CartForm} from '@shopify/hydrogen';
 import type {CartLineInput} from '@shopify/hydrogen/storefront-api-types';
+import {Link} from '@remix-run/react';
+import {getVariantUrl} from '~/lib/variants';
 
 export interface ProductFormProps {
   product: ProductFragment;
@@ -22,13 +24,18 @@ export default function ProductForm({product}: ProductFormProps) {
     subtitle: product.title,
   };
   if (!product.selectedVariant)
-    product.selectedVariant = product.variants.nodes[0];
+    product.selectedVariant = product.variants.nodes.find(
+      (p) => p.availableForSale,
+    );
+  if (!product.selectedVariant)
+    throw new Error("No product' variant selected.");
   const {selectedVariant} = product;
   const lines: CartLineInput[] = [
     {
       merchandiseId: selectedVariant.id,
     },
   ];
+
   return (
     <CartForm route="/cart" action={CartForm.ACTIONS.LinesAdd} inputs={{lines}}>
       <div id="productForm">
@@ -96,6 +103,7 @@ export default function ProductForm({product}: ProductFormProps) {
           <GrilleTaille
             tailles={product.variants.nodes}
             selected={product.selectedVariant}
+            productHandle={product.handle}
           />
         </section>
 
@@ -112,6 +120,7 @@ export default function ProductForm({product}: ProductFormProps) {
 export interface GrilleTailleProps {
   tailles: ProductVariantFragment[];
   selected?: ProductVariantFragment;
+  productHandle: string;
 }
 export function GrilleTaille(props: GrilleTailleProps) {
   return (
@@ -124,7 +133,14 @@ export function GrilleTaille(props: GrilleTailleProps) {
         >
           {info.availableForSale ? (
             <>
-              <a href={`?Taille=${info.title}`}>
+              <Link
+                to={getVariantUrl({
+                  handle: props.productHandle,
+                  selectedOptions: info.selectedOptions,
+                  pathname: '',
+                  searchParams: new URLSearchParams(),
+                })}
+              >
                 {info.currentlyNotInStock ? null : (
                   <div className="liv48h">
                     <Pastille color="var(--color-primary)" />
@@ -134,7 +150,7 @@ export function GrilleTaille(props: GrilleTailleProps) {
                 <p className="variantPrice">
                   <Price value={info.price} decimals={0} />
                 </p>
-              </a>
+              </Link>
             </>
           ) : (
             <>
