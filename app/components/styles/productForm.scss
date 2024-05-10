@@ -114,6 +114,7 @@
 
         &[data-selected="true"] {
           border-color: var(--color-primary);
+          border-width: 2px;
         }
 
         > * {
