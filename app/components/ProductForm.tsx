@@ -35,16 +35,19 @@ export default function ProductForm({product}: ProductFormProps) {
         <h3>{title}</h3>
         <h4>{subtitle}</h4>
 
-        <div id="price">
+        <section id="price">
           {product.selectedVariant.compareAtPrice && (
-            <div id="neuf" className="priceDisplay">
-              <p>
-                <Price value={product.selectedVariant?.compareAtPrice} />
-              </p>
-              <span>Prix neuf</span>
-            </div>
+            <>
+              <div id="neuf" className="priceDisplay">
+                <p>
+                  <Price value={product.selectedVariant?.compareAtPrice} />
+                </p>
+                <span>Prix neuf</span>
+              </div>
+              <hr />
+            </>
           )}
-          <div id="secondstep_price" className="priceDisplay">
+          <div id="ss_price" className="priceDisplay">
             <p>
               <Price value={product.selectedVariant.price} />
             </p>
@@ -65,15 +68,16 @@ export default function ProductForm({product}: ProductFormProps) {
                       parseFloat(product.selectedVariant.price.amount)),
                   currencyCode: 'EUR',
                 }}
+                decimals={0}
               />
             </div>
           )}
-        </div>
+        </section>
 
         <hr />
 
-        <div id="taille">
-          <div className="header">
+        <section id="taille">
+          <div className="heading">
             <h5>Tailles</h5>
             <a href="/guide_des_tailles.pdf" target="_blank">
               Guide des tailles
@@ -83,17 +87,17 @@ export default function ProductForm({product}: ProductFormProps) {
           {product.variants.nodes.find(
             (variant) => !variant.currentlyNotInStock,
           ) ? (
-            <>
+            <div className="liv48h">
               <Pastille color="var(--color-primary)" />
               Livraison 48h disponible
-            </>
+            </div>
           ) : null}
 
           <GrilleTaille
             tailles={product.variants.nodes}
             selected={product.selectedVariant}
           />
-        </div>
+        </section>
 
         <PriceButton
           caption="Ajouter au panier"
@@ -122,7 +126,7 @@ export function GrilleTaille(props: GrilleTailleProps) {
             <>
               <a href={`?Taille=${info.title}`}>
                 {info.currentlyNotInStock ? null : (
-                  <div className="livraison48h">
+                  <div className="liv48h">
                     <Pastille color="var(--color-primary)" />
                   </div>
                 )}
