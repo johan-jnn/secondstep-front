@@ -103,6 +103,40 @@ export default function ProductForm({product}: ProductFormProps) {
           />
         </section>
 
+        <hr />
+
+        <section id="livraison">
+          <label htmlFor="normalDelivery">
+            <div className="title">
+              <input
+                type="radio"
+                name="fastDelivery"
+                id="normalDelivery"
+                checked
+              />
+              Livraison standard offerte - <b>5/15j</b>
+            </div>
+            <Price
+              value={{
+                amount: '0',
+                currencyCode: 'EUR',
+              }}
+            />
+          </label>
+          <label htmlFor="fastDelivery">
+            <div className="title">
+              <input type="radio" name="fastDelivery" id="normalDelivery" />
+              Livraison express - <b>24/48h</b>
+            </div>
+            <Price
+              value={{
+                amount: '9.90',
+                currencyCode: 'EUR',
+              }}
+            />
+          </label>
+        </section>
+
         <PriceButton
           caption="Ajouter au panier"
           btnType="submit"
