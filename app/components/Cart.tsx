@@ -134,7 +134,7 @@ export function CartEmpty({
           }
         }}
       >
-        Continue shopping →
+        <button className="cart-empty-button">Continue shopping &rarr;</button>
       </Link>
     </div>
   );
