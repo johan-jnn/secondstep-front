@@ -5,6 +5,7 @@ import type {CartApiQueryFragment} from 'storefrontapi.generated';
 import {useVariantUrl} from '~/lib/variants';
 import CartLineItem from 'app/components/CartProductCard';
 import '../styles/cart.scss';
+import Price from './Price';
 
 type CartLine = CartApiQueryFragment['lines']['nodes'][0];
 
@@ -70,7 +71,9 @@ function CartCheckoutActions({checkoutUrl}: {checkoutUrl: string}) {
   return (
     <div>
       <a href={checkoutUrl} target="_self">
-        <p>Continue to Checkout &rarr;</p>
+        <button className="cart-checkout-btn">
+          Continue to Checkout &rarr;
+        </button>
       </a>
       <br />
     </div>
@@ -94,9 +97,10 @@ export function CartSummary({
       <h4>Totals</h4>
       <dl className="cart-subtotal">
         <dt>Subtotal</dt>
+        &ensp;
         <dd>
           {cost?.subtotalAmount?.amount ? (
-            <Money data={cost?.subtotalAmount} />
+            <Price value={cost?.subtotalAmount} />
           ) : (
             '-'
           )}
@@ -165,9 +169,16 @@ function CartDiscounts({
       {/* Show an input to apply a discount */}
       <UpdateDiscountForm discountCodes={codes}>
         <div>
-          <input type="text" name="discountCode" placeholder="Discount code" />
+          <input
+            className="cart-discount-input"
+            type="text"
+            name="discountCode"
+            placeholder="Discount code"
+          />
           &nbsp;
-          <button type="submit">Apply</button>
+          <button className="cart-apply-btn" type="submit">
+            Apply
+          </button>
         </div>
       </UpdateDiscountForm>
     </div>
