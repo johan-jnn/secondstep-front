@@ -192,9 +192,10 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
       name
       value
     }
+    currentlyNotInStock
     sku
     title
-    unitPrice {
+    price {
       amount
       currencyCode
     }
@@ -222,7 +223,7 @@ const PRODUCT_FRAGMENT = `#graphql
     selectedVariant: variantBySelectedOptions(selectedOptions: $selectedOptions, ignoreUnknownOptions: true, caseInsensitiveMatch: true) {
       ...ProductVariant
     }
-    variants(first: 1) {
+    variants(first: 250) {
       nodes {
         ...ProductVariant
       }

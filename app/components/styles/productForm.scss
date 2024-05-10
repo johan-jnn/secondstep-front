@@ -1,0 +1,23 @@
+#price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > .priceDisplay {
+    text-align: center;
+    p {
+      font-size: 15px;
+      font-weight: 900;
+    }
+    span {
+      font-size: 10px;
+    }
+
+    &#neuf {
+      color: var(--color-grey);
+      p {
+        text-decoration: overline;
+      }
+    }
+  }
+}
