@@ -205,9 +205,9 @@ function FooterMenu({
           <h1>A propos de nous</h1>
           <p>
             Chez Second Step, nous voulons redéfinir la façon dont les sneakers
-            sont consommées et perçues dans le monde de la monde. Nous aspirons à
-            créer une communauté engagée qui apprécie la valeur des sneakers
-            d'occasion.
+            sont consommées et perçues dans le monde de la monde. Nous aspirons
+            à créer une communauté engagée qui apprécie la valeur des sneakers
+            d&rsquo;occasion.
           </p>
         </div>
         <div className="footer_Socials">
@@ -257,6 +257,15 @@ function FooterMenu({
                 className="logo_social"
               />
             </a>
+          </div>
+          <h1>Recevez nos offres</h1>
+          <div className="footer-input">
+            <input
+              className="footer-input-email"
+              type="text"
+              placeholder="Ton email"
+            />
+            <button className="footer-btn-email">Souscrire</button>
           </div>
         </div>
       </div>
