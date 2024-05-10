@@ -52,7 +52,7 @@ function FooterMenu({
   const {publicStoreDomain} = useRootLoaderData();
 
   return (
-    <div className="footer">
+    <div className="footer_div">
       {/*STATIC Footer (payement, shipping infos...)*/}
       <div className="footer-static">
         <div className="footer-template-static">
