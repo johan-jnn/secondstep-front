@@ -7,6 +7,12 @@ import type {
 } from 'storefrontapi.generated';
 import {useRootLoaderData} from '~/lib/root-data';
 import './styles/footer.scss';
+import CardIcon from '../assets/Logos/icons-card.png?url';
+import Instagram from '../assets/Logos/logo-instagram.svg?url';
+import Facebook from '../assets/Logos/logo-facebook.svg?url';
+import Linkedin from '../assets/Logos/logo-linkedin.svg?url';
+import Tiktok from '../assets/Logos/logo-tiktok.svg?url';
+import {Image} from '@shopify/hydrogen';
 
 export function Footer({
   footer,
@@ -21,16 +27,19 @@ export function Footer({
 }) {
   return (
     <footer className="footer">
-      {footer.menu && shop?.primaryDomain?.url && (
-        <div>
-          <FooterMenu
-            menu={footer.menu}
-            menuGoto={footerGoTo.menu}
-            menuInfos={footerInfos.menu}
-            primaryDomainUrl={shop.primaryDomain.url}
-          />
-        </div>
-      )}
+      {footer?.menu &&
+        footerGoTo?.menu &&
+        footerInfos?.menu &&
+        shop?.primaryDomain?.url && (
+          <div>
+            <FooterMenu
+              menu={footer.menu}
+              menuGoto={footerGoTo.menu}
+              menuInfos={footerInfos.menu}
+              primaryDomainUrl={shop.primaryDomain.url}
+            />
+          </div>
+        )}
     </footer>
   );
 }
@@ -56,22 +65,22 @@ function FooterMenu({
       {/*STATIC Footer (payement, shipping infos...)*/}
       <div className="footer-static">
         <div className="footer-template-static">
-          <img src="app/assets/Logos/icons-card.png" alt="card img" />
+          <img src={CardIcon} alt="card img" />
           <h1>PAYEMENT FLEXIBLE ET SÉCURISÉ</h1>
           <p>Payez en 2x ou 3x dans frais avec Klarna</p>
         </div>
         <div className="footer-template-static">
-          <img src="app/assets/Logos/icons-card.png" alt="card img" />
+          <img src={CardIcon} alt="card img" />
           <h1>LIVRAISON EXPRESS</h1>
           <p>Certaines paires sont disponibles en 48/72h</p>
         </div>
         <div className="footer-template-static">
-          <img src="app/assets/Logos/icons-card.png" alt="card img" />
+          <img src={CardIcon} alt="card img" />
           <h1>AUTHENTICITÉ CERTIFIÉE</h1>
           <p>Toutes nos paires sont identifiées par des experts</p>
         </div>
         <div className="footer-template-static">
-          <img src="app/assets/Logos/icons-card.png" alt="card img" />
+          <img src={CardIcon} alt="card img" />
           <h1>RECONDISIONNÉES A NEUF</h1>
           <p>Nos artistes se chargent de reconditionner</p>
         </div>
@@ -102,10 +111,9 @@ function FooterMenu({
                   {item.title}
                 </a>
               ) : (
-                <div className="footer_infos">
+                <div className="footer_infos" key={item.id}>
                   <NavLink
                     end
-                    key={item.id}
                     prefetch="intent"
                     style={activeLinkStyle}
                     to={url}
@@ -149,14 +157,8 @@ function FooterMenu({
                 {item.title}
               </a>
             ) : (
-              <div className="footer_infos">
-                <NavLink
-                  end
-                  key={item.id}
-                  prefetch="intent"
-                  style={activeLinkStyle}
-                  to={url}
-                >
+              <div className="footer_infos" key={item.id}>
+                <NavLink end prefetch="intent" style={activeLinkStyle} to={url}>
                   {item.title}
                 </NavLink>
               </div>
@@ -186,14 +188,8 @@ function FooterMenu({
                 {item.title}
               </a>
             ) : (
-              <div className="footer_infos">
-                <NavLink
-                  end
-                  key={item.id}
-                  prefetch="intent"
-                  style={activeLinkStyle}
-                  to={url}
-                >
+              <div className="footer_infos" key={item.id}>
+                <NavLink end prefetch="intent" style={activeLinkStyle} to={url}>
                   {item.title}
                 </NavLink>
               </div>
@@ -218,44 +214,28 @@ function FooterMenu({
               target="_blank"
               rel="noreferrer"
             >
-              <img
-                src="app/assets/Logos/logo-instagram.svg"
-                alt="logo insta"
-                className="logo_social"
-              />
+              <img src={Instagram} alt="logo insta" className="logo_social" />
             </a>
             <a
               href="https://www.tiktok.com/@secondstep.fr"
               target="_blank"
               rel="noreferrer"
             >
-              <img
-                src="app/assets/Logos/logo-tiktok.svg"
-                alt="logo tiktok"
-                className="logo_social"
-              />
+              <img src={Tiktok} alt="logo tiktok" className="logo_social" />
             </a>
             <a
               href="https://www.linkedin.com/company/second-step-paris/?viewAsMember=true"
               target="_blank"
               rel="noreferrer"
             >
-              <img
-                src="app/assets/Logos/logo-linkedin.svg"
-                alt="logo linkedin"
-                className="logo_social"
-              />
+              <img src={Linkedin} alt="logo linkedin" className="logo_social" />
             </a>
             <a
               href="https://www.facebook.com/people/SecondStep/100091844828034/"
               target="_blank"
               rel="noreferrer"
             >
-              <img
-                src="app/assets/Logos/logo-facebook.svg"
-                alt="logo facebook"
-                className="logo_social"
-              />
+              <img src={Facebook} alt="logo facebook" className="logo_social" />
             </a>
           </div>
         </div>

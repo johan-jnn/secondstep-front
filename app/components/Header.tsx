@@ -4,13 +4,9 @@ import type {HeaderQuery} from 'storefrontapi.generated';
 import type {LayoutProps} from './Layout';
 import {useRootLoaderData} from '~/lib/root-data';
 import './styles/header.scss';
-import {
-  CartIcon,
-  OrderIcon,
-  PersonIcon,
-  SearchIcon,
-} from '@shopify/polaris-icons';
+import {OrderIcon, PersonIcon, SearchIcon} from '@shopify/polaris-icons';
 import Icon from './Icon';
+import Banner from '../assets/banner.svg';
 
 type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>;
 
@@ -30,11 +26,7 @@ export function Header({
       <HeaderMarquis texts={marquisTexts} />
       <header className="header">
         <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-          <img
-            src="app/assets/LOGO_SECSTEP.PNG"
-            alt=" "
-            className="header_Logo"
-          />
+          <img src={Banner} alt="Bannière SecondStep" className="header_Logo" />
         </NavLink>
         <HeaderMenu
           menu={menu}

@@ -1,3 +1,5 @@
+import {Image} from '@shopify/hydrogen';
+
 export type ValidLogos = 'nike' | 'new_balance' | 'adidas';
 
 export interface BrandLogoProps {
@@ -6,7 +8,7 @@ export interface BrandLogoProps {
 export default function BrandLogo(props: BrandLogoProps) {
   return (
     <img
-      src={`/brands_icons/${props.logo}.svg`}
+      src={`/brands_icons/${props.logo}.svg?url`}
       alt={`Logo of ${props.logo}`}
     />
   );

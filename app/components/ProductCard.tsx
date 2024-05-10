@@ -5,6 +5,7 @@ import type {ProductCardFragment} from 'storefrontapi.generated';
 import './styles/productCard.scss';
 import Price from './Price';
 import Stars from './Stars';
+import BrandLogo, {type ValidLogos} from './BrandLogo';
 
 export interface ProductCardProps {
   informations: ProductCardFragment;
@@ -66,6 +67,11 @@ export default function ProductCard({
         <div className="stock">
           <Pastille color={availableForSale ? 'green' : 'yellow'} />
           <p>{availableForSale ? 'En stock' : 'Epuisé'}</p>
+        </div>
+        <div className="brand">
+          <BrandLogo
+            logo={vendor.toLowerCase().replaceAll(' ', '_') as ValidLogos}
+          />
         </div>
       </div>
       <div className="bottom">

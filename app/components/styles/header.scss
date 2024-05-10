@@ -24,6 +24,16 @@ $cartBadge-height: calc($icons-height / 2.25);
   nav .icon {
     height: $icons-height;
   }
+
+  > a {
+    height: 100%;
+    display: grid;
+    place-items: center;
+
+    img {
+      height: 65%;
+    }
+  }
 }
 
 .header-menu-mobile-toggle {
