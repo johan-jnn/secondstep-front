@@ -75,7 +75,7 @@ function CollectionItem({
           loading={index < 3 ? 'eager' : undefined}
         />
       )}
-      <h5>{collection.title}</h5>
+      <h5 className="collection-Item-Title">{collection.title}</h5>
     </Link>
   );
 }

@@ -4,12 +4,23 @@
 * --------------------------------------------------
 */
 .collections-grid {
+    align-self: center;
     display: grid;
     grid-gap: 1.5rem;
     grid-template-columns: repeat(auto-fit, minmax(var(--grid-item-width), 1fr));
     margin-bottom: 2rem;
   }
+
+  .collection-item{
+    height: 25%;
+    width: 25%;
+  }
   
   .collection-item img {
     height: auto;
   }
+
+
+.collection-Item-Title{
+  text-align: center;
+}
