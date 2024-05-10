@@ -226,20 +226,3 @@ DYNAMIC FOOTER (MENUS GRID INFOS, POLICIES, GOTO...)
   }
 
 }
-
-@media only screen and (min-width: 1200px){
-    .footer-static{
-    grid-gap: 3%;
-    justify-content: center;
-  }
-  .footer-template-static{
-    width: 25vw;
-  }
-
-  .footer_grid{
-    display: flex;
-    justify-content: center;
-    grid-gap: 5%;
-  }
-  
-}
