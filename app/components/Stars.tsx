@@ -48,6 +48,7 @@ export default function Stars({
         key={`filled_${i}`}
       />,
     );
+
   semiFilledStarRate &&
     starsElements.push(
       <Star

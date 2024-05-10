@@ -11,18 +11,14 @@ import {CartForm} from '@shopify/hydrogen';
 import type {CartLineInput} from '@shopify/hydrogen/storefront-api-types';
 import {Link} from '@remix-run/react';
 import {getVariantUrl} from '~/lib/variants';
+import getProductTitleAndSub from '~/lib/productTitles';
 
 export interface ProductFormProps {
   product: ProductFragment;
 }
 
-const title_subtitle_regexp = /(?<title>.*\d.*?)\s+(?<subtitle>.*)/i;
 export default function ProductForm({product}: ProductFormProps) {
-  const {title, subtitle} = title_subtitle_regexp.exec(product.title)
-    ?.groups || {
-    title: '',
-    subtitle: product.title,
-  };
+  const {title, subtitle} = getProductTitleAndSub(product.title);
   if (!product.selectedVariant)
     product.selectedVariant = product.variants.nodes.find(
       (p) => p.availableForSale,

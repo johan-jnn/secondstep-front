@@ -12,7 +12,6 @@ import Instagram from '../assets/Logos/logo-instagram.svg?url';
 import Facebook from '../assets/Logos/logo-facebook.svg?url';
 import Linkedin from '../assets/Logos/logo-linkedin.svg?url';
 import Tiktok from '../assets/Logos/logo-tiktok.svg?url';
-import {Image} from '@shopify/hydrogen';
 
 export function Footer({
   footer,

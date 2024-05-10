@@ -6,20 +6,65 @@
 
 .product {
   display: flex;
-  align-items: center;
-  justify-content: stretch;
+  justify-content: space-between;
+  padding: 25px 5px;
   gap: 15px;
+
+  @media screen and (max-width: 1250px) {
+    display: grid;
+    grid-template-areas: 
+      "info galery"
+      "info buying"
+    ;
+    grid-template-columns: 250px auto;
+  }
+
+  > .infos {
+    max-width: 250px;
+    grid-area: info;
+    > .def {
+      display: grid;
+      gap: 10px;
+
+      > div {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+  
+        > img {
+          height: 25px;
+        }
+        > h3 {
+          text-transform: uppercase;
+          font-weight: 900;
+        }
+        > p {
+          font-size: 12px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
 
   #galery {
     $galery-bg: var(--color-white);
+    grid-area: galery;
 
     position: relative;
     background-color: $galery-bg;
+    max-width: 750px;
+
+    #viewer {
+      width: 100%;
+    }
 
     #selectorWrapper {
       position: absolute;
       top: 0;
       right: 0;
+      width: 10%;
+      height: 40%;
+      
       $transitionSize: 20%;
 
       &::after {
@@ -40,8 +85,8 @@
       }
 
       > #selector {
-        width: 65px;
-        height: 200px;
+        height: 100%;
+        width: 100%;
         overflow-y: scroll;
         display: flex;
         flex-direction: column;
@@ -54,6 +99,8 @@
 
         > li {
           margin: 0;
+          width: 100%;
+          aspect-ratio: 1 / 1;
           &:first-of-type {
             margin-top: $transitionSize * 2;
           }
@@ -82,5 +129,9 @@
         }
       }
     }
+  }
+
+  > #buying {
+    grid-area: buying;
   }
 }

@@ -6,6 +6,7 @@ import type {CartApiQueryFragment} from 'storefrontapi.generated';
 import {useVariantUrl} from '~/lib/variants';
 import Price from './Price';
 import '../styles/cart.scss';
+import getProductTitleAndSub from '~/lib/productTitles';
 
 type CartMainProps = {
   cart: CartApiQueryFragment | null;
@@ -13,8 +14,6 @@ type CartMainProps = {
 };
 
 type CartLine = CartApiQueryFragment['lines']['nodes'][0];
-
-const title_subtitle_regexp = /(?<title>.*\d.*?)\s+(?<subtitle>.*)/i;
 
 export default function CartLineItem({
   layout,
@@ -26,11 +25,7 @@ export default function CartLineItem({
   const {id, merchandise} = line;
   const {product, image, selectedOptions} = merchandise;
   const lineItemUrl = useVariantUrl(product.handle, selectedOptions);
-  const {title, subtitle} = title_subtitle_regexp.exec(product.title)
-    ?.groups || {
-    title: '',
-    subtitle: product.title,
-  };
+  const {title, subtitle} = getProductTitleAndSub(product.title);
 
   return (
     <div className="cart-product-card">

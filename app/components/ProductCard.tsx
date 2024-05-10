@@ -6,6 +6,7 @@ import './styles/productCard.scss';
 import Price from './Price';
 import Stars from './Stars';
 import BrandLogo, {type ValidLogos} from './BrandLogo';
+import getProductTitleAndSub from '~/lib/productTitles';
 
 export interface ProductCardProps {
   informations: ProductCardFragment;
@@ -30,8 +31,6 @@ fragment ProductCard on Product {
   vendor
 }`;
 
-const title_subtitle_regexp = /(?<title>.*\d.*?)\s+(?<subtitle>.*)/i;
-
 export default function ProductCard({
   informations: {
     availableForSale,
@@ -43,11 +42,7 @@ export default function ProductCard({
     id,
   },
 }: ProductCardProps) {
-  const {title, subtitle} = title_subtitle_regexp.exec(productTitle)
-    ?.groups || {
-    title: '',
-    subtitle: productTitle,
-  };
+  const {title, subtitle} = getProductTitleAndSub(productTitle);
 
   const fakeReviewsLength = Math.floor(Math.random() * 25) + 5;
   const maxScore = 1;

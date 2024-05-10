@@ -27,6 +27,9 @@ import type {
 import {getVariantUrl} from '~/lib/variants';
 import Price from '~/components/Price';
 import ProductForm from '~/components/ProductForm';
+import getProductTitleAndSub from '~/lib/productTitles';
+import Certification from '~/components/Certification';
+import BrandLogo, {type ValidLogos} from '~/components/BrandLogo';
 
 export const meta: MetaFunction<typeof loader> = ({data, location}) => {
   return [{title: `Hydrogen | ${data?.product.title ?? ''}`}];
@@ -113,13 +116,45 @@ export default function Product() {
   return (
     <>
       <div className="product">
-        <div id="productInfo"></div>
+        <Infos product={product} />
         <Galery images={product.images} />
-        <div id="productBuying">
+        <div id="buying">
           <ProductForm product={product} />
         </div>
       </div>
     </>
+  );
+}
+
+function Infos({product}: {product: ProductFragment}) {
+  const {subtitle} = getProductTitleAndSub(product.title);
+  const brand = product.vendor.toLowerCase().replaceAll(' ', '_');
+
+  const data = {
+    marque: (
+      <>
+        <p>{product.vendor.toUpperCase()}</p>
+        <BrandLogo logo={brand as ValidLogos} />
+      </>
+    ),
+    modèle: <p>{subtitle}</p>,
+  };
+
+  return (
+    <div className="infos">
+      <section className="def">
+        {Object.entries(data).map(([name, element]) => (
+          <div key={name} data-def={name}>
+            <h3>{name}</h3>
+            {element}
+          </div>
+        ))}
+      </section>
+      <hr />
+      <section className="certification">
+        <Certification />
+      </section>
+    </div>
   );
 }
 
@@ -129,7 +164,7 @@ function Galery(props: {images: ProductFragment['images']}) {
   return (
     <div id="galery">
       <div id="viewer">
-        <img
+        <Image
           src={props.images.nodes[currentIndex].url}
           alt={
             props.images.nodes[currentIndex].altText ||
@@ -142,7 +177,7 @@ function Galery(props: {images: ProductFragment['images']}) {
           {props.images.nodes.map(({url, altText}, index) => (
             <li key={url} data-selected={+(index === currentIndex)}>
               <button type="button" onClick={() => setCurrentIndex(index)}>
-                <img
+                <Image
                   src={url}
                   alt={altText || `Select the ${index + 1}rd preview.`}
                 />
