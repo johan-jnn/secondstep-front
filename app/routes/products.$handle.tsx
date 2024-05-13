@@ -240,6 +240,11 @@ const PRODUCT_FRAGMENT = `#graphql
       name
       values
     }
+    metafields {
+      value
+      type
+      id
+    }
     images(first: 50) {
       nodes {
         url
