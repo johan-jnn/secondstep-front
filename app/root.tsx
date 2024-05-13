@@ -16,6 +16,7 @@ import resetStyles from './styles/reset.scss?url';
 import appStyles from './styles/app.scss?url';
 
 import {Layout} from '~/components/Layout';
+import type {footerMenus} from './components/Footer';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -61,27 +62,19 @@ export async function loader({context}: LoaderFunctionArgs) {
   const isLoggedInPromise = customerAccount.isLoggedIn();
   const cartPromise = cart.get();
 
-  // defer the footer query (below the fold)
-  const footerPromise = storefront.query(FOOTER_QUERY, {
-    cache: storefront.CacheLong(),
-    variables: {
-      footerMenuHandle: 'footer', // Adjust to your footer menu handle
-    },
-  });
+  const getFooterMenu = (name: string) =>
+    storefront.query(FOOTER_MENU_QUERY, {
+      cache: storefront.CacheLong(),
+      variables: {
+        menuName: name, // Adjust to your footer menu handle
+      },
+    });
 
-  const footerPromise_goto = storefront.query(FOOTER_QUERY_GOTO, {
-    cache: storefront.CacheLong(),
-    variables: {
-      footerMenuHandle: 'footer_Goto', // Adjust to your footer menu handle
-    },
-  });
-
-  const footerPromise_infos = storefront.query(FOOTER_QUERY_INFOS, {
-    cache: storefront.CacheLong(),
-    variables: {
-      footerMenuHandle: 'footer_infos', // Adjust to your footer menu handle
-    },
-  });
+  const footerMenus: footerMenus = {
+    main: await getFooterMenu('footer'),
+    goto: await getFooterMenu('footer_Goto'),
+    infos: await getFooterMenu('footer_infos'),
+  };
 
   // await the header query (above the fold)
   const headerPromise = storefront.query(HEADER_QUERY, {
@@ -94,9 +87,7 @@ export async function loader({context}: LoaderFunctionArgs) {
   return defer(
     {
       cart: cartPromise,
-      footer: await footerPromise,
-      footerGoTo: await footerPromise_goto,
-      footerInfos: await footerPromise_infos,
+      footerMenus,
       header: await headerPromise,
       isLoggedIn: isLoggedInPromise,
       publicStoreDomain,
@@ -230,39 +221,13 @@ const HEADER_QUERY = `#graphql
   ${MENU_FRAGMENT}
 ` as const;
 
-const FOOTER_QUERY = `#graphql
+const FOOTER_MENU_QUERY = `#graphql
   query Footer(
     $country: CountryCode
-    $footerMenuHandle: String!
+    $menuName: String!
     $language: LanguageCode
   ) @inContext(language: $language, country: $country) {
-    menu(handle: $footerMenuHandle) {
-      ...Menu
-    }
-  }
-  ${MENU_FRAGMENT}
-` as const;
-
-const FOOTER_QUERY_GOTO = `#graphql
-  query FooterGoTo(
-    $country: CountryCode
-    $footerMenuHandle: String!
-    $language: LanguageCode
-  ) @inContext(language: $language, country: $country) {
-    menu(handle: $footerMenuHandle) {
-      ...Menu
-    }
-  }
-  ${MENU_FRAGMENT}
-` as const;
-
-const FOOTER_QUERY_INFOS = `#graphql
-  query FooterInfos(
-    $country: CountryCode
-    $footerMenuHandle: String!
-    $language: LanguageCode
-  ) @inContext(language: $language, country: $country) {
-    menu(handle: $footerMenuHandle) {
+    menu(handle: $menuName) {
       ...Menu
     }
   }

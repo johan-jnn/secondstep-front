@@ -1,9 +1,8 @@
 import {NavLink} from '@remix-run/react';
 import type {
-  FooterGoToQuery,
-  FooterInfosQuery,
   FooterQuery,
   HeaderQuery,
+  MenuFragment,
 } from 'storefrontapi.generated';
 import {useRootLoaderData} from '~/lib/root-data';
 import './styles/footer.scss';
@@ -12,105 +11,70 @@ import Instagram from '../assets/Logos/logo-instagram.svg?url';
 import Facebook from '../assets/Logos/logo-facebook.svg?url';
 import Linkedin from '../assets/Logos/logo-linkedin.svg?url';
 import Tiktok from '../assets/Logos/logo-tiktok.svg?url';
+import EmailInbox from './EmailInBox';
+
+export interface footerMenus {
+  main: FooterQuery;
+  goto: FooterQuery;
+  infos: FooterQuery;
+}
 
 export function Footer({
-  footer,
-  footerGoTo,
-  footerInfos,
+  menus,
   shop,
 }: {
-  footer: FooterQuery;
-  footerGoTo: FooterGoToQuery;
-  footerInfos: FooterInfosQuery;
+  menus: footerMenus;
   shop: HeaderQuery['shop'];
 }) {
+  const {goto, infos, main} = menus;
   return (
-    <footer className="footer">
-      {footer?.menu &&
-        footerGoTo?.menu &&
-        footerInfos?.menu &&
-        shop?.primaryDomain?.url && (
-          <div>
-            <FooterMenu
-              menu={footer.menu}
-              menuGoto={footerGoTo.menu}
-              menuInfos={footerInfos.menu}
-              primaryDomainUrl={shop.primaryDomain.url}
-            />
-          </div>
-        )}
+    <footer>
+      {main.menu && goto.menu && infos.menu && shop?.primaryDomain?.url && (
+        <FooterContent
+          menu={main.menu}
+          menuGoto={goto.menu}
+          menuInfos={infos.menu}
+          primaryDomainUrl={shop.primaryDomain.url}
+        />
+      )}
     </footer>
   );
 }
 
-function FooterMenu({
+function FooterNav({
+  title,
   menu,
-  menuGoto,
-  menuInfos,
-  primaryDomainUrl,
+  domainUrls,
 }: {
-  //Policies Menu QUERY ("footer" on shopify)
-  menu: FooterQuery['menu'];
-  //Redirection Menu QUERY ("footer_Goto" on shopify)
-  menuGoto: FooterGoToQuery['menu'];
-  //Help & infos menu QUERY ("footer_infos" on shopify)
-  menuInfos: FooterInfosQuery['menu'];
-  primaryDomainUrl: HeaderQuery['shop']['primaryDomain']['url'];
+  title: string;
+  menu?: MenuFragment;
+  domainUrls: {
+    store: string;
+    primary: string;
+  };
 }) {
-  const {publicStoreDomain} = useRootLoaderData();
-
   return (
-    <div className="footer_div">
-      {/*STATIC Footer (payement, shipping infos...)*/}
-      <div className="footer-static">
-        <div className="footer-template-static">
-          <img src={CardIcon} alt="card img" />
-          <h1>PAYEMENT FLEXIBLE ET SÉCURISÉ</h1>
-          <p>Payez en 2x ou 3x dans frais avec Klarna</p>
-        </div>
-        <div className="footer-template-static">
-          <img src={CardIcon} alt="card img" />
-          <h1>LIVRAISON EXPRESS</h1>
-          <p>Certaines paires sont disponibles en 48/72h</p>
-        </div>
-        <div className="footer-template-static">
-          <img src={CardIcon} alt="card img" />
-          <h1>AUTHENTICITÉ CERTIFIÉE</h1>
-          <p>Toutes nos paires sont identifiées par des experts</p>
-        </div>
-        <div className="footer-template-static">
-          <img src={CardIcon} alt="card img" />
-          <h1>RECONDISIONNÉES A NEUF</h1>
-          <p>Nos artistes se chargent de reconditionner</p>
-        </div>
-      </div>
-      {/*DYNANMIC Footer (Menus, Links, Infos ...)*/}
-      <div className="footer_grid">
-        {/*HELP & INFOS MENU NAV WITH LINKS (the links (<a/>) are not related to the menu query)*/}
-        <div className="footer_help">
-          <h1>Aides & Informations</h1>
-          <nav className="footer-menu" role="navigation">
-            {(menuInfos || FALLBACK_FOOTER_MENU_INFO).items.map((item) => {
-              if (!item.url) return null;
-              // if the url is internal, we strip the domain
-              const url =
-                item.url.includes('myshopify.com') ||
-                item.url.includes(publicStoreDomain) ||
-                item.url.includes(primaryDomainUrl)
-                  ? new URL(item.url).pathname
-                  : item.url;
-              const isExternal = !url.startsWith('/');
-              return isExternal ? (
-                <a
-                  href={url}
-                  key={item.id}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  {item.title}
-                </a>
-              ) : (
-                <div className="footer_infos" key={item.id}>
+    <div className="nav">
+      <h2>{title}</h2>
+      <nav className="footer-menu" role="navigation">
+        <ul>
+          {(menu || FALLBACK_FOOTER_MENU_INFO).items.map((item) => {
+            if (!item.url) return null;
+            // if the url is internal, we strip the domain
+            const url =
+              item.url.includes('myshopify.com') ||
+              item.url.includes(domainUrls.primary) ||
+              item.url.includes(domainUrls.store)
+                ? new URL(item.url).pathname
+                : item.url;
+            const isExternal = !url.startsWith('/');
+            return (
+              <li key={item.id}>
+                {isExternal ? (
+                  <a href={url} rel="noopener noreferrer" target="_blank">
+                    {item.title}
+                  </a>
+                ) : (
                   <NavLink
                     end
                     prefetch="intent"
@@ -119,85 +83,78 @@ function FooterMenu({
                   >
                     {item.title}
                   </NavLink>
-                </div>
-              );
-            })}
-          </nav>
-          <a href="mailto:contact@secondstep.fr"> contact@secondstep.fr</a>
-          <br />
-          <a
-            href="https://www.instagram.com/secondstep.fr/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Instagram : @secondstep.fr
-          </a>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </div>
+  );
+}
+
+function FooterContent({
+  menu,
+  menuGoto,
+  menuInfos,
+  primaryDomainUrl,
+}: {
+  //Policies Menu QUERY ("footer" on shopify)
+  menu: MenuFragment;
+  //Redirection Menu QUERY ("footer_Goto" on shopify)
+  menuGoto: MenuFragment;
+  //Help & infos menu QUERY ("footer_infos" on shopify)
+  menuInfos: MenuFragment;
+  primaryDomainUrl: HeaderQuery['shop']['primaryDomain']['url'];
+}) {
+  const {publicStoreDomain} = useRootLoaderData();
+
+  const domainUrls: Parameters<typeof FooterNav>[0]['domainUrls'] = {
+    primary: primaryDomainUrl,
+    store: publicStoreDomain,
+  };
+  return (
+    <>
+      {/*STATIC Footer (payement, shipping infos...)*/}
+      <section id="buyingTrust">
+        <div>
+          <img src={CardIcon} alt="Illustration d'une carte de paiement" />
+          <h3>Payement flexible et sécurisé</h3>
+          <p>Payez en 2x ou 3x dans frais avec Klarna</p>
         </div>
-        {/*POLICIES MENU*/}
-        <nav className="footer-menu" role="navigation">
-          <h1>Policies</h1>
-          {(menu || FALLBACK_FOOTER_MENU_INFO).items.map((item) => {
-            if (!item.url) return null;
-            // if the url is internal, we strip the domain
-            const url =
-              item.url.includes('myshopify.com') ||
-              item.url.includes(publicStoreDomain) ||
-              item.url.includes(primaryDomainUrl)
-                ? new URL(item.url).pathname
-                : item.url;
-            const isExternal = !url.startsWith('/');
-            return isExternal ? (
-              <a
-                href={url}
-                key={item.id}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                {item.title}
-              </a>
-            ) : (
-              <div className="footer_infos" key={item.id}>
-                <NavLink end prefetch="intent" style={activeLinkStyle} to={url}>
-                  {item.title}
-                </NavLink>
-              </div>
-            );
-          })}
-        </nav>
-        {/*GOTO (redirection) MENU*/}
-        <nav className="footer-menu" role="navigation">
-          <h1>Parcourir</h1>
-          {(menuGoto || FALLBACK_FOOTER_MENU_INFO).items.map((item) => {
-            if (!item.url) return null;
-            // if the url is internal, we strip the domain
-            const url =
-              item.url.includes('myshopify.com') ||
-              item.url.includes(publicStoreDomain) ||
-              item.url.includes(primaryDomainUrl)
-                ? new URL(item.url).pathname
-                : item.url;
-            const isExternal = !url.startsWith('/');
-            return isExternal ? (
-              <a
-                href={url}
-                key={item.id}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                {item.title}
-              </a>
-            ) : (
-              <div className="footer_infos" key={item.id}>
-                <NavLink end prefetch="intent" style={activeLinkStyle} to={url}>
-                  {item.title}
-                </NavLink>
-              </div>
-            );
-          })}
-        </nav>
+        <div>
+          <img src={CardIcon} alt="Illustration d'une carte de paiement" />
+          <h3>Livraison express</h3>
+          <p>Certaines paires sont disponibles en 48/72h</p>
+        </div>
+        <div>
+          <img src={CardIcon} alt="Illustration d'une carte de paiement" />
+          <h3>Authenticité certifié</h3>
+          <p>Toutes nos paires sont identifiées par des experts</p>
+        </div>
+        <div>
+          <img src={CardIcon} alt="Illustration d'une carte de paiement" />
+          <h3>Reconditionnées à neuf</h3>
+          <p>Nos artistes se chargent de reconditionner</p>
+        </div>
+      </section>
+      {/*DYNANMIC Footer (Menus, Links, Infos ...)*/}
+      <section className="navigations">
+        <div className="menus">
+          {/*HELP & INFOS MENU NAV WITH LINKS (the links (<a/>) are not related to the menu query)*/}
+          <FooterNav
+            title="Aides & Informations"
+            menu={menuInfos}
+            domainUrls={domainUrls}
+          />
+          {/*POLICIES MENU*/}
+          <FooterNav title="Policies" menu={menu} domainUrls={domainUrls} />
+          {/*GOTO (redirection) MENU*/}
+          <FooterNav title="Sitemap" menu={menuGoto} domainUrls={domainUrls} />
+        </div>
         {/*ABOUT US DIV*/}
-        <div className="footer_AboutUs">
-          <h1>A propos de nous</h1>
+        <div className="aboutus">
+          <h2>A propos de nous</h2>
           <p>
             Chez Second Step, nous voulons redéfinir la façon dont les sneakers
             sont consommées et perçues dans le monde de la monde. Nous aspirons
@@ -205,50 +162,67 @@ function FooterMenu({
             d&rsquo;occasion
           </p>
         </div>
-        <div className="footer_Socials">
-          <h1>Rejoignez nous sur nos réseaux</h1>
-          <div className="div_socials">
-            <a
-              href="https://www.instagram.com/secondstep.fr/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img src={Instagram} alt="logo insta" className="logo_social" />
-            </a>
-            <a
-              href="https://www.tiktok.com/@secondstep.fr"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img src={Tiktok} alt="logo tiktok" className="logo_social" />
-            </a>
-            <a
-              href="https://www.linkedin.com/company/second-step-paris/?viewAsMember=true"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img src={Linkedin} alt="logo linkedin" className="logo_social" />
-            </a>
-            <a
-              href="https://www.facebook.com/people/SecondStep/100091844828034/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img src={Facebook} alt="logo facebook" className="logo_social" />
-            </a>
+        <div className="socials">
+          <div className="medias">
+            <h2>Rejoignez nous sur nos réseaux</h2>
+            <ul>
+              <li>
+                <a
+                  href="https://www.instagram.com/secondstep.fr/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img
+                    src={Instagram}
+                    alt="logo insta"
+                    className="logo_social"
+                  />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.tiktok.com/@secondstep.fr"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img src={Tiktok} alt="logo tiktok" className="logo_social" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/company/second-step-paris/?viewAsMember=true"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img
+                    src={Linkedin}
+                    alt="logo linkedin"
+                    className="logo_social"
+                  />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/people/SecondStep/100091844828034/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img
+                    src={Facebook}
+                    alt="logo facebook"
+                    className="logo_social"
+                  />
+                </a>
+              </li>
+            </ul>
           </div>
-          <h1>Recevez nos offres</h1>
-          <div className="footer-input">
-            <input
-              className="footer-input-email"
-              type="text"
-              placeholder="Ton email"
-            />
-            <button className="footer-btn-email">Souscrire</button>
+          <div className="offers">
+            <h2>Recevez nos offres</h2>
+            <EmailInbox caption="Ton mail" />
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }
 

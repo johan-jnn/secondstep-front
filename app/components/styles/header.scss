@@ -14,7 +14,7 @@ $cartBadge-height: calc($icons-height / 2.25);
   background: #fff;
   display: flex;
   height: var(--header-height);
-  padding: 0 5rem;
+  padding: 0 30px;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -37,7 +37,7 @@ $cartBadge-height: calc($icons-height / 2.25);
 }
 
 .header-menu-mobile-toggle {
-  @media (min-width: 48em) {
+  @media (min-width: 730px) {
     display: none;
   }
 }
@@ -49,12 +49,15 @@ $cartBadge-height: calc($icons-height / 2.25);
 }
 
 .header-menu-desktop {
-  display: none;
+  display: flex;
   text-transform: uppercase;
-  @media (min-width: 45em) {
-    display: flex;
+  gap: 10px;
+  @media screen and (min-width: 1000px) {
     gap: 3rem;
-    margin-left: 3rem;
+  }
+
+  @media (max-width: 730px) {
+    display: none;
   }
 }
 

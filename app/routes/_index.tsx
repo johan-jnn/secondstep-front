@@ -10,7 +10,7 @@ import HomePageEngagements from '~/components/HomePageEngagements';
 import HomePageCollectionCTA from '~/components/HomePageCollectionCTA';
 
 export const meta: MetaFunction = () => {
-  return [{title: 'Hydrogen | Home'}];
+  return [{title: 'Second Step | Home'}];
 };
 
 export async function loader({context}: LoaderFunctionArgs) {

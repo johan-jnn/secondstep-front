@@ -31,7 +31,7 @@ export function Header({
         <HeaderMenu
           menu={menu}
           viewport="desktop"
-          primaryDomainUrl={header.shop.primaryDomain.url}
+          primaryDomainUrl={shop.primaryDomain.url}
         />
         <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
       </header>

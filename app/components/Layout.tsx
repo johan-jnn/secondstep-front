@@ -1,14 +1,8 @@
 import {Await} from '@remix-run/react';
 import {Suspense} from 'react';
-import type {
-  CartApiQueryFragment,
-  FooterGoToQuery,
-  FooterQuery,
-  FooterInfosQuery,
-  HeaderQuery,
-} from 'storefrontapi.generated';
+import type {CartApiQueryFragment, HeaderQuery} from 'storefrontapi.generated';
 import {Aside} from '~/components/Aside';
-import {Footer} from '~/components/Footer';
+import {Footer, type footerMenus} from '~/components/Footer';
 import {Header, HeaderMenu} from '~/components/Header';
 import {CartMain} from '~/components/Cart';
 import {
@@ -20,9 +14,7 @@ import {marquisContent} from '~/lib/constants.json';
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
   children?: React.ReactNode;
-  footer: FooterQuery;
-  footerGoTo: FooterGoToQuery;
-  footerInfos: FooterInfosQuery;
+  footerMenus: footerMenus;
   header: HeaderQuery;
   isLoggedIn: Promise<boolean>;
 };
@@ -30,9 +22,7 @@ export type LayoutProps = {
 export function Layout({
   cart,
   children = null,
-  footer,
-  footerGoTo,
-  footerInfos,
+  footerMenus,
   header,
   isLoggedIn,
 }: LayoutProps) {
@@ -50,18 +40,7 @@ export function Layout({
         />
       )}
       <main>{children}</main>
-      <Suspense>
-        <Await resolve={footer}>
-          {(footer) => (
-            <Footer
-              footer={footer}
-              footerGoTo={footerGoTo}
-              footerInfos={footerInfos}
-              shop={header?.shop}
-            />
-          )}
-        </Await>
-      </Suspense>
+      <Footer menus={footerMenus} shop={header?.shop} />
     </>
   );
 }

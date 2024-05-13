@@ -14,7 +14,6 @@ button {
   }
 
   padding: 15px;
-  min-height: 50px;
   border: none;
   border-radius: 5px;
   font-size: 12.5px;
@@ -42,14 +41,15 @@ button {
     font-size: 1em;
     aspect-ratio: 35 / 4;
     text-transform: uppercase;
-    
+    height: 100%;
+
     > p:nth-of-type(1) {
       font-weight: 600;
     }
 
     > hr {
       width: 1.5px;
-      height: 75%;
+      min-height: 100%;
       border: none;
       background-color: var(--color-white);
       border-radius: 999px;
