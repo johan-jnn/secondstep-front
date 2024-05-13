@@ -1,0 +1,40 @@
+$inBoxBorderRadius: 10px;
+
+.emailInbox {
+    --bg-color: var(--color-white);
+    display: flex;
+    align-self: stretch;
+    height: 50px;
+    width: 100%;
+    border: 1px solid var(--bg-color);
+    border-radius: $inBoxBorderRadius;
+    overflow: hidden;
+
+    > * {
+        margin: 0;
+        border-radius: 0;
+    }
+
+    > input {
+        flex-grow: 1;
+        outline: none;
+        border: none;
+        background-color: var(--color-black);
+        color: var(--color-white);
+    }
+    > button {
+        background-color: var(--bg-color);
+        transition: background-color .15s, color .15s;
+        font-weight: 900;
+        &:hover {
+            border-radius: 0;
+            color: var(--color-white);
+        }
+    }
+
+    &:has(> button:hover) {
+        --bg-color: var(--color-primary);
+        border-radius: $inBoxBorderRadius + 5px;
+        transition: .15s;
+    }
+}

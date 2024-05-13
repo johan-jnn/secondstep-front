@@ -3,270 +3,81 @@
 * components/Footer
 * --------------------------------------------------
 */
-.footer {
-    background: var(--color-dark);
-    margin-top: auto;
-    display: grid;
-    justify-content: center;
-    align-items: start;
-}
-
-
-/*
---------------------------------------------------
-STATIC FOOTER (INFORMATIONS GRID PAYEMENTS, SHIPP-
--ING...)
---------------------------------------------------
-*/
-
-.footer-template-static{
-  padding-top: 2%;
-  padding-bottom: 2%;
-  width: 20rem;
-}
-
-.footer-static{
-  display: flex; 
-  justify-content: center;
-  align-items: baseline;
-  grid-gap: 1%;
-  padding-bottom: 2%;
-}  
-
-.footer-static img{
-  float: left;
-  margin-right: 4%;
-  rotate: 110deg;
-}
-.footer-template-static h1{
+footer {
+  background: var(--color-dark);
   color: var(--color-light);
-  font-weight: 1000;
-  font-size: 0.8rem;
-}
+  padding: 50px 15px;
 
-.footer-template-static p{
-  color: var(--color-light);
-  font-weight: 1;
-  font-size: 0.8rem;
-}
-
-/*
---------------------------------------------------
-DYNAMIC FOOTER (MENUS GRID INFOS, POLICIES, GOTO...)
---------------------------------------------------
-*/
-
-.footer_help a{
-  font-size: 0.8rem;
-}
-.footer_grid{
-  justify-content: center;
-  display: flex;
-  color:var(--color-light); 
-  grid-gap: 10%;
-  padding: 1rem;
-}
-  
-.footer-menu {
-  display: grid;
-  grid-gap: 0.2rem;
-  color: var(--color-light); 
-  width: 20vh;
-}
-  
-.footer-menu a {
-  color: var(--color-light);
-  font-size: 0.7rem;
-}
-
-.footer_grid h1{
-  font-size: 1rem;
-  font-weight: bold;
-}
-
-.footer_AboutUs{
-  width: 20rem;
-}
-
-.footer_AboutUs p{
-  margin-top: 0.2rem;
-  font-size: 0.8rem;
-}
-
-.div_socials {
-  padding-top: 13%;
-  padding-bottom: 10%;
-  display: flex; 
-  justify-content: space-around; 
-  margin: 0 auto; 
-}
-
-.footer-input{
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-  padding-top: 2%;
-  padding-bottom: 2%;
-}
-
-.footer-input-email{
-  background-color: black;
-  border-color: white;
-  color: white;
-  height: 45px;
-  border-radius: 5px 0 0 5px;
-}
-
-.footer-btn-email{
-  color: black;
-  background-color: white;
-  border: solid 1px white;
-  width: 10vh;
-  height: 45px;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
-}
-
-
-
-/*RESPONSIVE*/
-
-/* Extra Small (XS) */
-@media only screen and (max-width: 575px) {
-.footer-template-static{
-  display: table-cell;
-  padding: 5% 4% 0% 2%;
-  text-align: center;
-}
-.footer-static{
-  display: table;
-  padding-bottom: 2%;
-  width: 100%;
-}  
-.footer-static img{
-  display: none;
-}
-.footer-template-static h1{
-  font-size: 0.6rem;
-}
-.footer-template-static p{
-  font-size: 0.6rem;
-}
-.footer_help a{
-  font-size: 0.6rem;
-}
-.footer_grid{
-  display: grid;
-  justify-content: center;
-  text-align: center;
-  grid-gap: 1%;
-}
-.footer-menu a {
-  font-size: 0.6rem;
-}
-.footer_grid h1{
-  font-size: 1rem;
-}
-.footer_AboutUs p{
-  margin-top: 0.2rem;
-  font-size: 0.6rem;
-}
-.div_socials {
-  padding-top: 7%;
-  padding-bottom: 10%;
-}
-.footer-input{
-  padding-bottom: 10%;
-}
-}
-
-/* Small (SM) */
-@media only screen and (min-width: 576px) and (max-width: 767px) {
-  .footer-template-static{
-    display: table-cell;
-    padding: 5% 4% 0% 2%;
-    text-align: center;
-  }
-  .footer-static{
-    display: table;
-    padding-bottom: 2%;
-    width: 100%;
-  }  
-  .footer-static img{
-    display: none;
-  }
-  .footer-template-static h1{
-    font-size: 0.6rem;
-  }
-  .footer-template-static p{
-    font-size: 0.6rem;
-  }
-  .footer_help a{
-    font-size: 0.6rem;
-  }
-  .footer_grid{
+  #buyingTrust {
     display: flex;
     justify-content: center;
-    text-align: center;
-    grid-gap: 1%;
-  }
-  .footer-menu a {
-    font-size: 0.6rem;
-  }
-  .footer_grid h1{
-    font-size: 1rem;
-  }
-  .footer_AboutUs p{
-    margin-top: 0.2rem;
-    font-size: 0.6rem;
-  }
-  .div_socials {
-    padding-top: 7%;
-    padding-bottom: 10%;
-  }
-}
-/* Medium (MD) */
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .footer-template-static{
-    display: table-cell;
-    padding: 5% 5% 0% 2%;
-    justify-content: center;
-  }
-  .footer-static{
-    display: table;
-    padding-bottom: 2%;
-    width: 100%;
-    margin: 0 auto;
-  }  
-  .footer-static img{
-    width: 10%;
-  }
-  .footer_grid{
-    display: flex;
-    justify-content: center;
-    grid-gap: 1%;
-  }
-  .div_socials {
-    padding-top: 7%;
-    padding-bottom: 10%;
-  }
-}
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 50px;
 
-/* Large (LG) */
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .footer-static{
-    grid-gap: 7%;
-  }
-  .footer-template-static{
-    width: 23vw;
-  }
-  .footer-static img{
-    width: 10%;
-  }
-  .footer_grid{
-    display: flex;
-    justify-content: center;
-    grid-gap: 1%;
+    > div {
+      width: 275px;
+
+      > img {
+        float: left;
+        margin-right: 4%;
+        rotate: 110deg;
+      }
+
+      > h3 {
+        color: var(--color-light);
+        font-weight: 1000;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+      }
+
+      > p {
+        color: var(--color-light);
+        font-weight: 1;
+        font-size: 0.8rem;
+      }
+    }
   }
 
+  .navigations {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 0.75em;
+    padding: 0 20px;
+
+    > .menus {
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      flex-wrap: wrap;
+      gap: 25px;
+
+      > .nav {
+        min-width: 115px;
+        > h2 {
+          margin-bottom: 10px;
+        }
+        ul {
+          list-style: none;
+          > li {
+            margin: 5px 0;
+          }
+        }
+      }
+    }
+
+    > .aboutus {
+      max-width: 225px;
+    }
+
+    > .socials {
+      > .medias ul {
+        display: flex;
+      }
+    }
+  }
 }
