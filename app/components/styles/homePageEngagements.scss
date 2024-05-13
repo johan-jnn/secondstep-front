@@ -1,0 +1,42 @@
+
+.homepage-banner-informations{
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    grid-gap: 9%;
+}
+.homepage-banner-engagements h1{
+    text-transform: uppercase;
+    font-size: 1.5rem;
+}
+
+.homepage-banner-cardtext{
+    width: 20%;
+}
+.homepage-banner-cardtext-head{
+    display: flex;
+    align-items: start;
+    justify-content: left;
+    margin-left: -10%;
+}
+
+.homepage-banner-cardtext-head-icon{
+    height: 10%;
+    width: 10%;
+    margin-top: -2%;
+}
+
+.homepage-banner-cardtext h2{
+    text-transform: uppercase;
+    font-size: 1rem;
+}
+
+.homepage-banner-cardtext p{
+    font-size: small;
+}
+
+.homepage-banner-rate h2{
+    text-transform: uppercase;
+    font-size: 1rem;
+}

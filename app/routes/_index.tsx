@@ -5,7 +5,9 @@ import '../styles/app.scss';
 import type {RecommendedProductsQuery} from 'storefrontapi.generated';
 import ProductCard, {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
 import {COLLECTION_FRAGMENT} from './collections._index';
-import CollectionCTA from '../components/CollectionCTA';
+import HomePageBanner from '~/components/HomePage-Banner';
+import HomePageEngagements from '~/components/HomePageEngagements';
+import HomePageCollectionCTA from '~/components/HomePageCollectionCTA';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -14,7 +16,7 @@ export const meta: MetaFunction = () => {
 export async function loader({context}: LoaderFunctionArgs) {
   const {storefront} = context;
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
-  const featuredCollection = collections.nodes[0];
+  const featuredCollection = collections.nodes;
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
 
   return defer({featuredCollection, recommendedProducts});
@@ -24,7 +26,13 @@ export default function Homepage() {
   const data = useLoaderData<typeof loader>();
   return (
     <div className="home">
-      <CollectionCTA collection={data.featuredCollection} />
+      <HomePageBanner />
+      <div className="homepage-featured-collection">
+        {data.featuredCollection.map((collection) => (
+          <HomePageCollectionCTA key={collection.id} collection={collection} />
+        ))}
+      </div>
+      <HomePageEngagements />
       <RecommendedProducts products={data.recommendedProducts} />
     </div>
   );
@@ -58,7 +66,7 @@ const FEATURED_COLLECTION_QUERY = `#graphql
   ${COLLECTION_FRAGMENT}
   query FeaturedCollection($country: CountryCode, $language: LanguageCode)
     @inContext(country: $country, language: $language) {
-    collections(first: 1, sortKey: UPDATED_AT, reverse: true) {
+    collections(first: 4, sortKey: UPDATED_AT, reverse: true) {
       nodes {
         ...Collection
       }

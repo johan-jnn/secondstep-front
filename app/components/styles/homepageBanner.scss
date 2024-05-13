@@ -1,0 +1,42 @@
+.homepage-banner-img{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.homepage-banner-text{
+    margin-top: 50%;
+    color: white;
+    text-align: center;
+    padding-bottom: 8%;
+
+}
+
+.homepage-banner-clock{
+    font-size: 4rem;
+}
+
+.homepage-banner-title{
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.homepage-banner-btn{
+    margin-top: 15%;
+    padding: 3%;
+    width: 100%;
+    background-color: black;
+    color: white;
+    border:none;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+.homepage-banner-sub{
+    margin-top: 5%;
+    font-size: 0.9rem;
+    font-weight: 100;
+}

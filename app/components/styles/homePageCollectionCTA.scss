@@ -1,0 +1,17 @@
+.collection-cta {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    width: min-content;
+}
+
+.collection-cta img{
+    aspect-ratio: 2 / 1;
+    height: 100px;
+    margin: 20px 10px 0px 10px;
+    border: solid 1px;
+}
+
+.collection-cta h3{
+    font-weight: 300;
+}
