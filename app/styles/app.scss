@@ -15,6 +15,7 @@ img {
 .homepage-featured-collection{
   display: flex;
   justify-content: center;
+  grid-gap: 1%;
 }
 
 
@@ -23,11 +24,7 @@ img {
 * routes/__index
 * --------------------------------------------------
 */
-.featured-collection {
-  display: block;
-  margin-bottom: 2rem;
-  position: relative;
-}
+
 
 .featured-collection h1{
   font-size: 1.5rem;
@@ -46,6 +43,17 @@ img {
   height: auto;
   max-height: 100%;
   object-fit: cover;
+}
+
+.recommended-products {
+  h1{
+    text-transform: uppercase;
+  }
+  h2{
+    font-weight: 100;
+    font-size: 1rem;
+  }
+
 }
 
 .recommended-products-grid {

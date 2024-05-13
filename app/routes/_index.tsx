@@ -45,7 +45,8 @@ function RecommendedProducts({
 }) {
   return (
     <div className="recommended-products">
-      <h2>Produits recommandés</h2>
+      <h1>Nos meilleures ventes</h1>
+      <h2>Attention ca part un peu (beaucoup) vite</h2>
       <Suspense fallback={<div>Loading...</div>}>
         <Await resolve={products}>
           {({products}) => (

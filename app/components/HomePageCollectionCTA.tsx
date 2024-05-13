@@ -9,7 +9,7 @@ export default function HomePageCollectionCTA({
   collection,
 }: CollectionCTAProps) {
   return (
-    <div className="collection-cta">
+    <div className="homepage-collection-cta">
       <Link to={`/collections/${collection.handle}`}>
         <img src={collection.image?.url} alt=" " />
         <h3>{collection.title}</h3>
