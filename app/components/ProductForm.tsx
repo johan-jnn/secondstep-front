@@ -12,6 +12,9 @@ import type {CartLineInput} from '@shopify/hydrogen/storefront-api-types';
 import {Link} from '@remix-run/react';
 import {getVariantUrl} from '~/lib/variants';
 import getProductTitleAndSub from '~/lib/productTitles';
+import Icon from './Icon';
+import {DeliveryIcon} from '@shopify/polaris-icons';
+import {useState} from 'react';
 
 export interface ProductFormProps {
   product: ProductFragment;
@@ -26,9 +29,12 @@ export default function ProductForm({product}: ProductFormProps) {
   if (!product.selectedVariant)
     throw new Error("No product' variant selected.");
   const {selectedVariant} = product;
+  const [fastDelivery, setFastDelivery] = useState(false);
   const lines: CartLineInput[] = [
     {
       merchandiseId: selectedVariant.id,
+      // ! TODO --> "SellingPlanID" pour obtenir une livraison plus rapide
+      // sellingPlanId: fastDelivery ? 'fastDelivery' : undefined,
     },
   ];
 
@@ -103,39 +109,49 @@ export default function ProductForm({product}: ProductFormProps) {
           />
         </section>
 
-        <hr />
-
-        <section id="livraison">
-          <label htmlFor="normalDelivery">
-            <div className="title">
-              <input
-                type="radio"
-                name="fastDelivery"
-                id="normalDelivery"
-                checked
-              />
-              Livraison standard offerte - <b>5/15j</b>
-            </div>
-            <Price
-              value={{
-                amount: '0',
-                currencyCode: 'EUR',
-              }}
-            />
-          </label>
-          <label htmlFor="fastDelivery">
-            <div className="title">
-              <input type="radio" name="fastDelivery" id="normalDelivery" />
-              Livraison express - <b>24/48h</b>
-            </div>
-            <Price
-              value={{
-                amount: '9.90',
-                currencyCode: 'EUR',
-              }}
-            />
-          </label>
-        </section>
+        {!selectedVariant.currentlyNotInStock && (
+          <>
+            <hr />
+            <section id="livraison">
+              <label htmlFor="normalDelivery">
+                <div className="title">
+                  <input
+                    type="radio"
+                    name="fastDelivery"
+                    id="normalDelivery"
+                    onChange={() => setFastDelivery(false)}
+                    defaultChecked
+                  />
+                  Livraison standard offerte - <b>5/15j</b>
+                </div>
+                <Price
+                  value={{
+                    amount: '0',
+                    currencyCode: 'EUR',
+                  }}
+                />
+              </label>
+              <label htmlFor="fastDelivery">
+                <div className="title">
+                  <input
+                    type="radio"
+                    name="fastDelivery"
+                    id="fastDelivery"
+                    onChange={() => setFastDelivery(true)}
+                  />
+                  <Icon icon={DeliveryIcon} />
+                  Livraison express - <b>24/48h</b>
+                </div>
+                <Price
+                  value={{
+                    amount: '9.90',
+                    currencyCode: 'EUR',
+                  }}
+                />
+              </label>
+            </section>
+          </>
+        )}
 
         <PriceButton
           caption="Ajouter au panier"

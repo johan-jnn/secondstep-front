@@ -8,7 +8,7 @@ import {COLLECTION_FRAGMENT} from './collections._index';
 import CollectionCTA from '../components/CollectionCTA';
 
 export const meta: MetaFunction = () => {
-  return [{title: 'Hydrogen | Home'}];
+  return [{title: 'Second Step | Home'}];
 };
 
 export async function loader({context}: LoaderFunctionArgs) {
