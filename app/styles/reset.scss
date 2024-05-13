@@ -47,6 +47,16 @@ a:hover {
 
 button {
   font-family: inherit;
+  
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 12.5px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 hr {
