@@ -41,16 +41,16 @@ function VideoCard({
       className="VideoCard"
       style={{backgroundColor: backgroundcolor, color: textColor}}
     >
-      <h1>{num}</h1>
-      <Link to={' '}>
-        <button className="VideoCard-btn">
-          <img src=" " alt=" " />
-        </button>
-      </Link>
+      <div className="VideoCard-top">
+        <h3>{num}</h3>
+        <Link to={' '}>
+          <img className="VideoCard-img" src=" " alt=" " />
+        </Link>
+      </div>
+
       <div className="VideoCard-bottom">
-        <h1>{title}</h1>
+        <h4>{title}</h4>
         {renderTextWithBoldKeywords(text)}
-        <br />
         <p className="VideoCard-sub">{renderTextWithBoldKeywords(subtext)}</p>
       </div>
     </div>

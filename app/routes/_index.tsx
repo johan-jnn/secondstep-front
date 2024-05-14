@@ -39,12 +39,16 @@ export default function Homepage() {
       <div className="video-cards">
         <VideoCard
           backgroundcolor="var(--color-light)"
-          textColor=" "
-          text=""
+          textColor="var(--color-dark)"
           num="01"
-          title=""
-          subtext=" "
-          boldKeywords={[]}
+          text="Chez SecondStep, l'autheticité des produits constitue un pilier fondamental de notre philosophie d'entreprise. Nous comprenons à quel point il est essentiel pour nos clients de se sentir en confiance lors de leurs achats."
+          title="Recherche et Dénichage"
+          subtext="C'est pourquoi nous avons instauré un processus de vérification rigoureux pour chaque article proposé sur notre site..."
+          boldKeywords={[
+            'SecondStep',
+            'confiance',
+            'processus de vérification rigoureux',
+          ]}
         />
         <VideoCard
           backgroundcolor="var(--color-dark)"
@@ -60,13 +64,17 @@ export default function Homepage() {
           ]}
         />
         <VideoCard
-          backgroundcolor=" "
-          textColor=" "
-          text="blablablablablablablablabl ablablablablabla "
-          title="03"
-          boldKeywords={[]}
-          subtext=" "
-          num=" "
+          backgroundcolor="var(--color-light)"
+          textColor="var(--color-dark)"
+          num="03"
+          text="Chez SecondStep, l'autheticité des produits constitue un pilier fondamental de notre philosophie d'entreprise. Nous comprenons à quel point il est essentiel pour nos clients de se sentir en confiance lors de leurs achats."
+          title="Reconditionement"
+          subtext="C'est pourquoi nous avons instauré un processus de vérification rigoureux pour chaque article proposé sur notre site..."
+          boldKeywords={[
+            'SecondStep',
+            'confiance',
+            'processus de vérification rigoureux',
+          ]}
         />
       </div>
     </div>

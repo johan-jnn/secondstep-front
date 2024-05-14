@@ -1,41 +1,38 @@
 .VideoCard{
-    border: solid 1px var(--color-dark);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px var(--color-grey);
+    width: 20%;
+    padding: 2%;
     aspect-ratio: 0.8/1;
-    display: grid;
-    padding: 5px;
-    width: 25%;
-    place-items: baseline;
-    align-items: center;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto max-content;
-    border-radius: 5px;
-    grid-template-areas:
-      'num btn'
-      'title title'
-      'text text';
-    > h1{
-        text-transform: uppercase;
-        font-size: 4em;
-        margin-left: 10%;
-        grid-area: num;
-        width: auto;
-    }
-    .VideoCard-btn{
-        aspect-ratio: 1/1;
-        width: 200%;
-        grid-area: btn;
-        border-radius: 50px;
-    }
-    > .VideoCard-bottom{
-        > h1{
-            width: 150%;
-            grid-area: title;
+    > .VideoCard-top{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        min-height: 30%;
+        > h3{
+            font-size: 3rem;
         }
-        > p{
+        .VideoCard-img{
+            aspect-ratio: 1/1;
+            width: 100%;
+            border-radius: 50px;
             border: solid 1px white;
-            width: 150%;
-            grid-area: text;
         }
     }
 
+    >.VideoCard-bottom{
+        flex-grow: 1;
+        display: grid;
+        padding: 2%;
+        > h4{
+            text-transform: uppercase;
+            font-size: 1.3rem;
+        }
+        > p{
+            font-size: 0.8rem;
+        }
+    }
 }
+
