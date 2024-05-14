@@ -1,7 +1,6 @@
-import React from 'react';
 import './styles/homePageEngagements.scss';
-import Icon from './Icon';
-import {CheckIcon} from '@shopify/polaris-icons';
+import './styles/certification.scss';
+import {CarteAuthenticite, Reconditionnement} from './Certification';
 
 function HomePageEngagements() {
   return (
@@ -14,32 +13,10 @@ function HomePageEngagements() {
         <h2>Nous sommes notés 4.3/5 sur</h2>
         <img src="app/assets/Trustpilot.png" alt="google rating" />
       </div>
-      <div className="homepage-banner-cardtext">
-        <div className="homepage-banner-cardtext-head">
-          <Icon
-            icon={CheckIcon}
-            classes={'homepage-banner-cardtext-head-icon'}
-          />
-          <h2>Carte d'authenticité certifiée</h2>
-        </div>
-        <p>
-          Nous certifions l'authenticité de nos artccles soumis aux contrôles
-          les plus rigoureux et sérieux.
-        </p>
-      </div>
-      <div className="homepage-banner-cardtext">
-        <div className="homepage-banner-cardtext-head">
-          <Icon
-            icon={CheckIcon}
-            classes={'homepage-banner-cardtext-head-icon'}
-          />
-          <h2>Carte d'authenticité certifiée</h2>
-        </div>
-        <p>
-          Nous collaborons avec des experts sneakers artists qui ont fait de
-          cette passion un métier.
-        </p>
-      </div>
+      <ul className="certifications">
+        <CarteAuthenticite />
+        <Reconditionnement />
+      </ul>
     </div>
   );
 }

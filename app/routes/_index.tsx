@@ -9,6 +9,7 @@ import HomePageBanner from '~/components/HomePage-Banner';
 import HomePageEngagements from '~/components/HomePageEngagements';
 import HomePageCollectionCTA from '~/components/HomePageCollectionCTA';
 import VideoCard from '~/components/VideoCard';
+import ProductGrid from '~/components/ProductGrid';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Second Step | Home'}];
@@ -83,13 +84,7 @@ function RecommendedProducts({
       <h2>Attention ca part un peu (beaucoup) vite</h2>
       <Suspense fallback={<div>Loading...</div>}>
         <Await resolve={products}>
-          {({products}) => (
-            <div className="recommended-products-grid">
-              {products.nodes.map((product) => (
-                <ProductCard informations={product} key={product.id} />
-              ))}
-            </div>
-          )}
+          {({products}) => <ProductGrid products={products.nodes} />}
         </Await>
       </Suspense>
       <br />

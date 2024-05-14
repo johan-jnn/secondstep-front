@@ -28,9 +28,7 @@ export default function Stars({
   };
 
   const ratingID = useRef(0);
-  useEffect(() => {
-    ratingID.current++;
-  });
+  ratingID.current++;
 
   const ratio = value / max;
   const filledStars = Math.floor(ratio * stars);

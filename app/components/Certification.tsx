@@ -6,19 +6,41 @@ export default function Certification() {
       <CertificationItem
         title="Carte d'authenticité certifiée"
         description="Nous certifions l'authencité de cet article soumis aux contrôles les plus rigoureux"
-        link="?"
       />
       <CertificationItem
         title="Reconditionnées par nos artistes"
         description="Nous collaborons avec des experts sneakers artists qui ont fait de cet passion leur métier"
-        link="?"
       />
       <CertificationItem
         title="Sourcées par nos experts"
         description="Un réseaux de revendeur soigneusement sélectionné pour leur experience et leur expertise"
-        link="?"
       />
     </ul>
+  );
+}
+
+export function CarteAuthenticite() {
+  return (
+    <CertificationItem
+      title="Carte d'authenticité certifiée"
+      description="Nous certifions l'authencité de cet article soumis aux contrôles les plus rigoureux"
+    />
+  );
+}
+export function Reconditionnement() {
+  return (
+    <CertificationItem
+      title="Reconditionnées par nos artistes"
+      description="Nous collaborons avec des experts sneakers artists qui ont fait de cet passion leur métier"
+    />
+  );
+}
+export function SourceesParNosExperts() {
+  return (
+    <CertificationItem
+      title="Sourcées par nos experts"
+      description="Un réseaux de revendeur soigneusement sélectionné pour leur experience et leur expertise"
+    />
   );
 }
 
@@ -48,7 +70,7 @@ function CertificationItem(props: ItemProps) {
         {props.description}
         {props.link && (
           <>
-            ... <a href={props.link}>En savoir plus</a>
+            ... <a href={props.link || '?'}>En savoir plus</a>
           </>
         )}
       </p>
