@@ -14,7 +14,7 @@ function HomePageBanner() {
       >
         <div className="homepage-banner-text">
           <Timer targetDate={targetDate} />
-          <h1 className="homepage-banner-title">C'est la lucky week</h1>
+          <h1 className="homepage-banner-title">C&apos;est la lucky week</h1>
           <button className="homepage-banner-btn">
             SHOPPER MA PAIRE MAINTENANT
           </button>

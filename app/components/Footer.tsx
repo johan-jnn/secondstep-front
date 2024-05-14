@@ -29,7 +29,7 @@ export function Footer({
   const {goto, infos, main} = menus;
   return (
     <footer>
-      {main.menu && goto.menu && infos.menu && shop?.primaryDomain?.url && (
+      {main?.menu && goto?.menu && infos?.menu && shop?.primaryDomain?.url && (
         <FooterContent
           menu={main.menu}
           menuGoto={goto.menu}

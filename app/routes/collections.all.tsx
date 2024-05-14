@@ -4,6 +4,7 @@ import {Pagination, getPaginationVariables} from '@shopify/hydrogen';
 import type {ProductCardFragment} from 'storefrontapi.generated';
 import ProductCard, {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
 import '../styles/collections.$handle.scss';
+import ProductGrid from '~/components/ProductGrid';
 
 export const meta: MetaFunction<typeof loader> = () => {
   return [{title: `Hydrogen | Products`}];
@@ -34,7 +35,7 @@ export default function Collection() {
             <PreviousLink>
               {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
             </PreviousLink>
-            <ProductsGrid products={nodes} />
+            <ProductGrid products={nodes} />
             <br />
             <NextLink>
               {isLoading ? 'Loading...' : <span>Load more ↓</span>}
