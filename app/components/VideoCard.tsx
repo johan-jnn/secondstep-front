@@ -44,7 +44,11 @@ function VideoCard({
       <div className="VideoCard-top">
         <h3>{num}</h3>
         <Link to={' '}>
-          <img className="VideoCard-img" src=" " alt=" " />
+          <img
+            className="VideoCard-img"
+            src="app/assets/VideoCard-Btn.png"
+            alt=" "
+          />
         </Link>
       </div>
 
