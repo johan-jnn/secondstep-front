@@ -14,11 +14,17 @@
         > h3{
             font-size: 3rem;
         }
+        > a{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
         .VideoCard-img{
             aspect-ratio: 1/1;
-            width: 100%;
+            width: 30%;
             border-radius: 50px;
-            border: solid 1px white;
+            border: solid 3px white;
+            object-fit: cover;
         }
     }
 
