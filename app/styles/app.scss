@@ -60,11 +60,11 @@ img {
 
 .video-cards{
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   gap : 2%; 
   padding-bottom: 2%;
-  margin-left: 10% auto;
+  margin: 5% auto;
 }
 
 
