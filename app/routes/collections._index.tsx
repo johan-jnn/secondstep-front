@@ -4,6 +4,7 @@ import {Pagination, getPaginationVariables, Image} from '@shopify/hydrogen';
 import type {CollectionFragment} from 'storefrontapi.generated';
 import '../styles/collections._index.scss';
 import CollectionCTA from '~/components/CollectionCTA';
+import LoadMore from '~/components/loadMoreContent';
 
 export async function loader({context, request}: LoaderFunctionArgs) {
   const paginationVariables = getPaginationVariables(request, {
@@ -26,13 +27,13 @@ export default function Collections() {
       <Pagination connection={collections}>
         {({nodes, isLoading, PreviousLink, NextLink}) => (
           <div>
-            <PreviousLink>
-              {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
-            </PreviousLink>
+            <LoadMore
+              direction="previous"
+              isLoading={isLoading}
+              link={PreviousLink}
+            />
             <CollectionsGrid collections={nodes} />
-            <NextLink>
-              {isLoading ? 'Loading...' : <span>Load more ↓</span>}
-            </NextLink>
+            <LoadMore direction="more" isLoading={isLoading} link={NextLink} />
           </div>
         )}
       </Pagination>
@@ -47,33 +48,6 @@ function CollectionsGrid({collections}: {collections: CollectionFragment[]}) {
         <CollectionCTA key={collection.id} collection={collection} />
       ))}
     </div>
-  );
-}
-
-function CollectionItem({
-  collection,
-  index,
-}: {
-  collection: CollectionFragment;
-  index: number;
-}) {
-  return (
-    <Link
-      className="collection-item"
-      key={collection.id}
-      to={`/collections/${collection.handle}`}
-      prefetch="intent"
-    >
-      {collection?.image && (
-        <Image
-          alt={collection.image.altText || collection.title}
-          aspectRatio="1/1"
-          data={collection.image}
-          loading={index < 3 ? 'eager' : undefined}
-        />
-      )}
-      <h5 className="collection-Item-Title">{collection.title}</h5>
-    </Link>
   );
 }
 

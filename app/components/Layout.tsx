@@ -14,7 +14,7 @@ import {marquisContent} from '~/lib/constants.json';
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
   children?: React.ReactNode;
-  footerMenus: footerMenus;
+  footerMenus: Promise<footerMenus>;
   header: HeaderQuery;
   isLoggedIn: Promise<boolean>;
 };
@@ -40,7 +40,12 @@ export function Layout({
         />
       )}
       <main>{children}</main>
-      <Footer menus={footerMenus} shop={header?.shop} />
+      <Await
+        resolve={footerMenus}
+        errorElement={'Error while loading the footer...'}
+      >
+        {(data) => data && <Footer menus={data} shop={header?.shop} />}
+      </Await>
     </>
   );
 }

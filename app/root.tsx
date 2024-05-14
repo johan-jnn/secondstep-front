@@ -70,11 +70,11 @@ export async function loader({context}: LoaderFunctionArgs) {
       },
     });
 
-  const footerMenus: footerMenus = {
+  const footerMenus: Promise<footerMenus> = (async () => ({
     main: await getFooterMenu('footer'),
     goto: await getFooterMenu('footer_Goto'),
     infos: await getFooterMenu('footer_infos'),
-  };
+  }))();
 
   // await the header query (above the fold)
   const headerPromise = storefront.query(HEADER_QUERY, {

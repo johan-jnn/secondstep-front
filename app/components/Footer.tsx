@@ -26,6 +26,7 @@ export function Footer({
   menus: footerMenus;
   shop: HeaderQuery['shop'];
 }) {
+  if (!menus) return;
   const {goto, infos, main} = menus;
   return (
     <footer>
