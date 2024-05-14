@@ -1,44 +1,43 @@
-.VideoCard{
-    border-radius: 10px;
+.VideoCard {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  border: solid 1px var(--color-grey);
+  width: 25%;
+  padding: 2%;
+  aspect-ratio: 0.8/1;
+  > .VideoCard-top {
     display: flex;
-    flex-direction: column;
-    border: solid 1px var(--color-grey);
-    width: 20%;
+    align-items: center;
+    justify-content: space-around;
+    min-height: 30%;
+    > h3 {
+      font-size: 3rem;
+    }
+    > a {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .VideoCard-img {
+      aspect-ratio: 1/1;
+      width: 30%;
+      border-radius: 50px;
+      border: solid 3px white;
+      object-fit: cover;
+    }
+  }
+
+  > .VideoCard-bottom {
+    flex-grow: 1;
+    display: grid;
     padding: 2%;
-    aspect-ratio: 0.8/1;
-    > .VideoCard-top{
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        min-height: 30%;
-        > h3{
-            font-size: 3rem;
-        }
-        > a{
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-        }
-        .VideoCard-img{
-            aspect-ratio: 1/1;
-            width: 30%;
-            border-radius: 50px;
-            border: solid 3px white;
-            object-fit: cover;
-        }
+    > h4 {
+      text-transform: uppercase;
+      font-size: 1.3rem;
     }
-
-    >.VideoCard-bottom{
-        flex-grow: 1;
-        display: grid;
-        padding: 2%;
-        > h4{
-            text-transform: uppercase;
-            font-size: 1.3rem;
-        }
-        > p{
-            font-size: 0.8rem;
-        }
+    > p {
+      font-size: 0.8rem;
     }
+  }
 }
-

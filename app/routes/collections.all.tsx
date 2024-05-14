@@ -6,6 +6,7 @@ import ProductCard, {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
 import '../styles/collections.$handle.scss';
 import ProductGrid from '~/components/ProductGrid';
 import Button from '~/components/Button';
+import LoadMore from '~/components/loadMoreContent';
 
 export const meta: MetaFunction<typeof loader> = () => {
   return [{title: `Hydrogen | Products`}];
@@ -33,36 +34,16 @@ export default function Collection() {
       <Pagination connection={products}>
         {({nodes, isLoading, PreviousLink, NextLink}) => (
           <>
-            <PreviousLink className="buttonLoad">
-              <Button
-                text="Charger les articles précédents"
-                type="primary"
-                caption={isLoading ? 'Chargement...' : undefined}
-              />
-            </PreviousLink>
-
+            <LoadMore
+              direction="previous"
+              isLoading={isLoading}
+              link={PreviousLink}
+            />
             <ProductGrid products={nodes} />
-
-            <NextLink className="buttonLoad">
-              <Button
-                text="Charger plus d'articles"
-                type="primary"
-                caption={isLoading ? 'Chargement...' : undefined}
-              />
-            </NextLink>
+            <LoadMore direction="more" isLoading={isLoading} link={NextLink} />
           </>
         )}
       </Pagination>
-    </div>
-  );
-}
-
-function ProductsGrid({products}: {products: ProductCardFragment[]}) {
-  return (
-    <div className="products-grid">
-      {products.map((product) => {
-        return <ProductCard informations={product} key={product.id} />;
-      })}
     </div>
   );
 }

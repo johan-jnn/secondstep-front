@@ -1,4 +1,3 @@
-import React from 'react';
 import './styles/videoCard.scss';
 import {Link} from 'react-router-dom';
 
@@ -27,9 +26,9 @@ function VideoCard({
       <p className="VideoCard-text">
         {parts.map((part, index) => {
           if (boldKeywords.includes(part)) {
-            return <strong key={index}>{part}</strong>;
+            return <strong key={part}>{part}</strong>;
           } else {
-            return <span key={index}>{part}</span>;
+            return <span key={part}>{part}</span>;
           }
         })}
       </p>
