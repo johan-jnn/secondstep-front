@@ -8,9 +8,9 @@ import {COLLECTION_FRAGMENT} from './collections._index';
 import HomePageBanner from '~/components/HomePage-Banner';
 import HomePageEngagements from '~/components/HomePageEngagements';
 import HomePageCollectionCTA from '~/components/HomePageCollectionCTA';
-import VideoCard from '~/components/VideoCard';
 import ProductGrid from '~/components/ProductGrid';
-
+import HomePageVideoCards from '~/components/HomePageVideoCards';
+import HomePageRestoredProduct from '~/components/HomePageRestoredProduct';
 export const meta: MetaFunction = () => {
   return [{title: 'Second Step | Home'}];
 };
@@ -20,8 +20,9 @@ export async function loader({context}: LoaderFunctionArgs) {
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
   const featuredCollection = collections.nodes;
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
+  const restoredProducts = storefront.query(RESTORED_PRODUCT_QUERRY);
 
-  return defer({featuredCollection, recommendedProducts});
+  return defer({featuredCollection, recommendedProducts, restoredProducts});
 }
 
 export default function Homepage() {
@@ -36,47 +37,12 @@ export default function Homepage() {
       </div>
       <HomePageEngagements />
       <RecommendedProducts products={data.recommendedProducts} />
-      <div className="video-cards">
-        <VideoCard
-          backgroundcolor="var(--color-light)"
-          textColor="var(--color-dark)"
-          num="01"
-          text="Chez SecondStep, l'autheticité des produits constitue un pilier fondamental de notre philosophie d'entreprise. Nous comprenons à quel point il est essentiel pour nos clients de se sentir en confiance lors de leurs achats."
-          title="Recherche et Dénichage"
-          subtext="C'est pourquoi nous avons instauré un processus de vérification rigoureux pour chaque article proposé sur notre site..."
-          boldKeywords={[
-            'SecondStep',
-            'confiance',
-            'processus de vérification rigoureux',
-          ]}
-        />
-        <VideoCard
-          backgroundcolor="var(--color-dark)"
-          textColor="var(--color-light)"
-          num="02"
-          text="Chez SecondStep, l'autheticité des produits constitue un pilier fondamental de notre philosophie d'entreprise. Nous comprenons à quel point il est essentiel pour nos clients de se sentir en confiance lors de leurs achats."
-          title="Authentification"
-          subtext="C'est pourquoi nous avons instauré un processus de vérification rigoureux pour chaque article proposé sur notre site..."
-          boldKeywords={[
-            'SecondStep',
-            'confiance',
-            'processus de vérification rigoureux',
-          ]}
-        />
-        <VideoCard
-          backgroundcolor="var(--color-light)"
-          textColor="var(--color-dark)"
-          num="03"
-          text="Chez SecondStep, l'autheticité des produits constitue un pilier fondamental de notre philosophie d'entreprise. Nous comprenons à quel point il est essentiel pour nos clients de se sentir en confiance lors de leurs achats."
-          title="Reconditionement"
-          subtext="C'est pourquoi nous avons instauré un processus de vérification rigoureux pour chaque article proposé sur notre site..."
-          boldKeywords={[
-            'SecondStep',
-            'confiance',
-            'processus de vérification rigoureux',
-          ]}
-        />
-      </div>
+      <HomePageVideoCards />
+      <Await resolve={data.restoredProducts}>
+        {({collection}) =>
+          collection && <HomePageRestoredProduct collection={collection} />
+        }
+      </Await>
     </div>
   );
 }
@@ -123,3 +89,17 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
     }
   }
 ` as const;
+
+const RESTORED_PRODUCT_QUERRY = `#graphql
+${PRODUCT_CARD_FRAGMENT}
+query RestoredShoes {
+    collection(handle: "Yeezy") {
+      description
+      products(first: 5) {
+        nodes{
+            ...ProductCard
+        }
+      }
+    }
+  }
+  `;
