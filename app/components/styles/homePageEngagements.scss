@@ -1,9 +1,10 @@
 
 .homepage-banner-informations{
-    margin-top: 2%;
+    padding: 2%;
     display: flex;
     justify-content: center;
     align-items: start;
+    background-color: var(--color-darkwhite);
     grid-gap: 9%;
 }
 .homepage-banner-engagements h1{

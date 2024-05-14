@@ -8,6 +8,7 @@ import {COLLECTION_FRAGMENT} from './collections._index';
 import HomePageBanner from '~/components/HomePage-Banner';
 import HomePageEngagements from '~/components/HomePageEngagements';
 import HomePageCollectionCTA from '~/components/HomePageCollectionCTA';
+import VideoCard from '~/components/VideoCard';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Second Step | Home'}];

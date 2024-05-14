@@ -1,0 +1,18 @@
+.VideoCard{
+    border: solid 1px var(--color-dark);
+    display: grid;
+    grid-template-areas:
+      'title btn'
+      'text text';
+    grid-template-rows: auto max-content 15%;
+    > h1{
+        grid-area: title;
+    }
+    .VideoCard-btn{
+        grid-area: btn;
+    }
+    > p{
+        grid-area: text;
+    }
+
+}

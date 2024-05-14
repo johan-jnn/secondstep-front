@@ -84,7 +84,7 @@ export default function ProductCard({
             value={reviewsAverage}
             stars={5}
             colors={{
-              foreground: 'var(--color-primary)',
+              foreground: 'var(--color-dark)',
             }}
           />
           <span className="reviewsCount">({fakeReviewsLength})</span>

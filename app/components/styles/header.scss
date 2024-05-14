@@ -11,7 +11,7 @@ $cartBadge-height: calc($icons-height / 2.25);
 .header {
   align-items: center;
   justify-content: space-between;
-  background: #fff;
+  background: var(--color-darkwhite);
   display: flex;
   height: var(--header-height);
   padding: 0 30px;
