@@ -56,8 +56,8 @@ function RecommendedProducts({
 }) {
   return (
     <div className="recommended-products">
-      <h1>Nos meilleures ventes</h1>
-      <h2>Attention ca part un peu (beaucoup) vite</h2>
+      <h2>Nos meilleures ventes</h2>
+      <p>Attention ca part un peu (beaucoup) vite</p>
       <Suspense fallback={<div>Loading...</div>}>
         <Await resolve={products}>
           {({products}) => <ProductGrid products={products.nodes} />}

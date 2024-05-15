@@ -32,7 +32,7 @@ main {
     background-size: 50vw;
 
     animation: bgAnim 5s infinite linear;
-    
+
     @keyframes bgAnim {
       from {
         background-position-x: 0;
@@ -49,6 +49,7 @@ main {
   display: flex;
   justify-content: center;
   grid-gap: 1%;
+  flex-wrap: wrap;
 }
 
 .buttonLoad {
@@ -69,12 +70,10 @@ main {
   padding: 2%;
   height: auto;
   background-color: white;
-  > h1 {
-    text-transform: uppercase;
-  }
   > h2 {
+    text-transform: uppercase;
     font-weight: 100;
-    font-size: 1rem;
+    font-size: 1.5em;
   }
 
   > .recommended-products-grid {
@@ -89,5 +88,3 @@ main {
     }
   }
 }
-
-
