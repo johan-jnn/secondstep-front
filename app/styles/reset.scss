@@ -33,18 +33,25 @@ body {
   background-color: var(--color-light);
 }
 
+@for $i from 1 to 6 {
+  h#{$i} {
+    font-family: 'Anton', Arial, Helvetica, sans-serif;
+    font-weight: 500;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;
+  &:not(:has(> button)):hover {
+    text-decoration: underline;
+  }
 }
 
-a:hover {
-  text-decoration: underline;
-  cursor: pointer;
-}
 
 button {
-  font-family: inherit;
+  font-family: 'Anton', Arial, Helvetica, sans-serif;
+  font-weight: 500;
   
   padding: 15px;
   border: none;

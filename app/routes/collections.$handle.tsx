@@ -10,6 +10,8 @@ import {
 import type {ProductCardFragment} from 'storefrontapi.generated';
 import {useVariantUrl} from '~/lib/variants';
 import ProductCard, {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
+import LoadMore from '~/components/loadMoreContent';
+import ProductGrid from '~/components/ProductGrid';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Hydrogen | ${data?.collection.title ?? ''} Collection`}];
@@ -48,27 +50,17 @@ export default function Collection() {
       <Pagination connection={collection.products}>
         {({nodes, isLoading, PreviousLink, NextLink}) => (
           <>
-            <PreviousLink>
-              {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
-            </PreviousLink>
-            <ProductsGrid products={nodes} />
+            <LoadMore
+              direction="previous"
+              isLoading={isLoading}
+              link={PreviousLink}
+            />
+            <ProductGrid products={nodes} />
             <br />
-            <NextLink>
-              {isLoading ? 'Loading...' : <span>Load more ↓</span>}
-            </NextLink>
+            <LoadMore direction="more" isLoading={isLoading} link={NextLink} />
           </>
         )}
       </Pagination>
-    </div>
-  );
-}
-
-function ProductsGrid({products}: {products: ProductCardFragment[]}) {
-  return (
-    <div className="products-grid">
-      {products.map((product) => {
-        return <ProductCard informations={product} key={product.id} />;
-      })}
     </div>
   );
 }

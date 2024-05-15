@@ -2,6 +2,8 @@ import {Link} from 'react-router-dom';
 import './styles/HomePageRestoredProduct.scss';
 import type {RestoredShoesQuery} from 'storefrontapi.generated';
 import CollectionBA from './CollectionBeforeAfter';
+import Button from './Button';
+
 function HomePageRestoredProduct({
   collection,
 }: {
@@ -17,7 +19,7 @@ function HomePageRestoredProduct({
           dolar
         </p>
         <Link to="/collections/all">
-          <button>Shopper ma paire reconditionnée</button>
+          <Button type="primary" text="Shopper ma paire reconditionnée" />
         </Link>
         <div>
           <svg

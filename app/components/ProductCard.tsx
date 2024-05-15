@@ -71,7 +71,7 @@ export default function ProductCard({
       </div>
       <div className="bottom">
         <h3>{title}</h3>
-        <h4>{subtitle}</h4>
+        <p>{subtitle}</p>
         <div className="price">
           {'Dès '}
           <span>
