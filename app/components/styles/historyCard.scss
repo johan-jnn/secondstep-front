@@ -1,10 +1,8 @@
 .history-card{
     background-color: var(--color-darkwhite);
-    padding: 2%;
+    padding: 5% 10% 5% 10%;
     display: flex;
     justify-content: space-around;
-    padding-left: 10%;
-    padding-right: 10%;
     gap: 5%;
     > .card{
         background-color: var(--color-light);
