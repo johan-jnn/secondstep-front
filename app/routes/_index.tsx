@@ -5,7 +5,7 @@ import '../styles/app.scss';
 import type {RecommendedProductsQuery} from 'storefrontapi.generated';
 import ProductCard, {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
 import {COLLECTION_FRAGMENT} from './collections._index';
-import HomePageBanner from '~/components/HomePage-Banner';
+import HeroBanner from '~/components/HeroBanner';
 import HomePageEngagements from '~/components/HomePageEngagements';
 import HomePageCollectionCTA from '~/components/HomePageCollectionCTA';
 import ProductGrid from '~/components/ProductGrid';
@@ -30,7 +30,7 @@ export default function Homepage() {
   const data = useLoaderData<typeof loader>();
   return (
     <div className="home">
-      <HomePageBanner />
+      <HeroBanner />
       <div className="homepage-featured-collection">
         {data.featuredCollection.map((collection) => (
           <HomePageCollectionCTA key={collection.id} collection={collection} />

@@ -1,9 +1,8 @@
-.homepage-banner{
+.hero-banner{
     background-color: var(--color-darkwhite);
     width: 100%;
 }
-
-.homepage-banner-img{
+.hero-banner-img{
     display: grid;
     justify-content: center;
     align-items: center;
@@ -11,24 +10,20 @@
     margin: 0 auto;
     border-radius: 10px;
 }
-
-.homepage-banner-text{
+.hero-banner-text{
     margin-top: 50%;
     color: white;
     text-align: center;
     padding-bottom: 8%;
 }
-
-.homepage-banner-clock{
+.hero-banner-clock{
     font-size: 4rem;
 }
-
-.homepage-banner-title{
+.hero-banner-title{
     text-transform: uppercase;
     font-weight: bold;
 }
-
-.homepage-banner-btn{
+.hero-banner-btn{
     margin-top: 15%;
     padding: 3%;
     width: 100%;
@@ -38,8 +33,7 @@
     border-radius: 3px;
     font-weight: 600;
 }
-
-.homepage-banner-sub{
+.hero-banner-sub{
     margin-top: 5%;
     font-size: 0.9rem;
     font-weight: 100;
