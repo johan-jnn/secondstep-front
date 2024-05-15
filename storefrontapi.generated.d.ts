@@ -1043,7 +1043,7 @@ interface GeneratedQueryTypes {
     return: RecommendedProductsQuery;
     variables: RecommendedProductsQueryVariables;
   };
-  '#graphql\n#graphql\nfragment ProductCard on Product {\n  id\n  title\n  handle\n  priceRange {\n    minVariantPrice {\n      amount\n      currencyCode\n    }\n  }\n  featuredImage {\n    url\n    altText\n  }\n  availableForSale\n  vendor\n}\nquery RestoredShoes {\n    collection(handle: "Yeezy") {\n      description\n      products(first: 5) {\n        nodes{\n            ...ProductCard\n        }\n      }\n    }\n  }\n  ': {
+  '#graphql\n#graphql\nfragment ProductCard on Product {\n  id\n  title\n  handle\n  priceRange {\n    minVariantPrice {\n      amount\n      currencyCode\n    }\n  }\n  featuredImage {\n    url\n    altText\n  }\n  availableForSale\n  vendor\n}\nquery RestoredShoes {\n    collection(handle: "Yeezy") {\n      description\n      products(first: 3) {\n        nodes{\n            ...ProductCard\n        }\n      }\n    }\n  }\n  ': {
     return: RestoredShoesQuery;
     variables: RestoredShoesQueryVariables;
   };

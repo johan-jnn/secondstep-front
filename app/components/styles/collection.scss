@@ -23,4 +23,60 @@
 
 .collection-BA{
     display: flex;
+    justify-content: center;
+    background-color: var(--color-darkwhite);
+}
+
+.collection-BA-card{
+    display: flex;
+    aspect-ratio: 1/1;
+    justify-content: center;
+    align-items: center;
+    margin: .2%;
+    width: 100%;
+    > div{
+        width: 90%;
+        border-radius: 5px;
+        height: max-content;
+        display: grid;
+        background-color: var(--color-light);
+        place-content: center;
+        margin: 1%;
+        > img{
+            background-color: var(--color-light);
+            aspect-ratio: 0.5/1;
+            flex-grow: 1;
+            width: 100%;
+            object-fit: contain;
+            margin-bottom: 5%;
+        }
+        > .before-text{
+            padding: 3%;
+            margin: 5%;
+            border-radius: 5px;
+            border: solid 1px var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            > p{
+                text-transform: uppercase;
+                color: var(--color-primary);
+                cursor: default;
+            }
+        }
+        > .after-bottom{
+            padding: 3%;
+            margin: 5%;
+            border-radius: 5px;
+            background-color: var(--color-primary);
+            color: var(--color-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            > p{
+                text-transform: uppercase;
+                cursor: default;
+            }
+        }
+    }
 }

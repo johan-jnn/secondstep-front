@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from '@remix-run/react';
 import {ProductCardFragment, RestoredShoesQuery} from 'storefrontapi.generated';
 import {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
+import Banner from './Banner';
 
 export interface CollectionBAProps {
   collection: NonNullable<RestoredShoesQuery['collection']>;
@@ -24,8 +25,20 @@ interface BACardProps {
 function BACard({product}: BACardProps) {
   return (
     <div className="collection-BA-card">
-      <img src={product.featuredImage?.url} alt=" " />
-      <h3>{product.title}</h3>
+      <div className="before">
+        <img src={product.featuredImage?.url} alt=" " />
+        <div className="before-text">
+          <p>Before</p>
+        </div>
+      </div>
+      <div className="after">
+        <img src={product.featuredImage?.url} alt=" " />
+        <div className="after-bottom">
+          <p>After</p>
+          &nbsp;&nbsp;
+          <Banner color="var(--color-light)" />
+        </div>
+      </div>
     </div>
   );
 }

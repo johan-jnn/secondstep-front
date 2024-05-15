@@ -12,12 +12,11 @@ function HomePageRestoredProduct({
       <div className="restoredProduct-left">
         <h1> Nos Dernières paires restaurées</h1>
         <p>Chez SecondStep nous prennons à coeur notre mission</p>
-        <br />
         <p>
           Lorem ipsum dolar Lorem ipsum dolar Lorem ipsum dolar Lorem ipsum
           dolar
         </p>
-        <Link to=" ">
+        <Link to="/collections/all">
           <button>Shopper ma paire reconditionnée</button>
         </Link>
         <div>

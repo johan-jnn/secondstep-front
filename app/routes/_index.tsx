@@ -95,7 +95,7 @@ ${PRODUCT_CARD_FRAGMENT}
 query RestoredShoes {
     collection(handle: "Yeezy") {
       description
-      products(first: 5) {
+      products(first: 3) {
         nodes{
             ...ProductCard
         }
