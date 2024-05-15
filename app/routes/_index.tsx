@@ -6,12 +6,12 @@ import type {RecommendedProductsQuery} from 'storefrontapi.generated';
 import ProductCard, {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
 import {COLLECTION_FRAGMENT} from './collections._index';
 import HeroBanner from '~/components/HeroBanner';
-import HomePageEngagements from '~/components/HomePageEngagements';
+import Engagements from '~/components/Engagements';
 import HomePageCollectionCTA from '~/components/HomePageCollectionCTA';
 import ProductGrid from '~/components/ProductGrid';
-import HomePageVideoCards from '~/components/HomePageVideoCards';
-import HomePageRestoredProduct from '~/components/HomePageRestoredProduct';
-import HomePageImageGrid from '~/components/HomePageImageGrid';
+import VideoCards from '~/components/VideoCards';
+import RestoredProduct from '~/components/RestoredProduct';
+import BrandImageGrid from '~/components/BrandImageGrid';
 export const meta: MetaFunction = () => {
   return [{title: 'Second Step | Home'}];
 };
@@ -36,15 +36,15 @@ export default function Homepage() {
           <HomePageCollectionCTA key={collection.id} collection={collection} />
         ))}
       </div>
-      <HomePageEngagements />
+      <Engagements />
       <RecommendedProducts products={data.recommendedProducts} />
-      <HomePageVideoCards />
+      <VideoCards />
       <Await resolve={data.restoredProducts}>
         {({collection}) =>
-          collection && <HomePageRestoredProduct collection={collection} />
+          collection && <RestoredProduct collection={collection} />
         }
       </Await>
-      <HomePageImageGrid />
+      <BrandImageGrid />
     </div>
   );
 }

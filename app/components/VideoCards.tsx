@@ -1,8 +1,8 @@
 import React from 'react';
 import VideoCard from './VideoCard';
-import './styles/HomePageVideoCards.scss';
+import './styles/VideoCards.scss';
 
-class HomePageVideoCards extends React.Component {
+class VideoCards extends React.Component {
   render() {
     return (
       <div className="video-cards">
@@ -50,4 +50,4 @@ class HomePageVideoCards extends React.Component {
   }
 }
 
-export default HomePageVideoCards;
+export default VideoCards;

@@ -1,14 +1,14 @@
-import './styles/homePageImageGrid.scss';
+import './styles/brandImageGrid.scss';
 import {Link} from 'react-router-dom';
-export default function homePageImageGrid() {
+export default function BrandImageGrid() {
   return (
-    <div className="homePage-img-grid">
-      <div className="homePage-img-grid-top">
+    <div className="brand-img-grid">
+      <div className="brand-img-grid-top">
         <Link to="/collections">
           <button>Voir tout</button>
         </Link>
       </div>
-      <div className="homePage-img-grid-bottom">
+      <div className="brand-img-grid-bottom">
         <Link to="/collection/nike">
           <div className="img1">
             <h2>Dunk Low</h2>

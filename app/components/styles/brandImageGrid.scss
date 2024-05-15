@@ -1,10 +1,10 @@
-.homePage-img-grid {
+.brand-img-grid {
     padding: 2%;
   display: grid;
   width: 100%;
   height: max-content;
   background-color: var(--color-darkwhite);
-  > .homePage-img-grid-top {
+  > .brand-img-grid-top {
     padding-right: 8%;
     padding-bottom: 2%;
     > a{
@@ -20,7 +20,7 @@
         }
     }
   }
-  .homePage-img-grid-bottom {
+  .brand-img-grid-bottom {
     display: grid;
     height: max-content;
     place-content: center;

@@ -1,10 +1,10 @@
 import {Link} from 'react-router-dom';
-import './styles/HomePageRestoredProduct.scss';
+import './styles/restoredProduct.scss';
 import type {RestoredShoesQuery} from 'storefrontapi.generated';
 import CollectionBA from './CollectionBeforeAfter';
 import Button from './Button';
 
-export default function HomePageRestoredProduct({
+export default function RestoredProduct({
   collection,
 }: {
   collection: NonNullable<RestoredShoesQuery['collection']>;

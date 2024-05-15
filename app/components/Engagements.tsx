@@ -1,15 +1,15 @@
-import './styles/homePageEngagements.scss';
+import './styles/engagements.scss';
 import './styles/certification.scss';
 import {CarteAuthenticite, Reconditionnement} from './Certification';
 
-function HomePageEngagements() {
+function Engagements() {
   return (
-    <div className="homepage-banner-informations">
-      <div className="homepage-banner-engagements">
+    <div className="banner-informations">
+      <div className="banner-engagements">
         <h1>Nos Engagements</h1>
         <a href=" ">Découvrez le concept</a>
       </div>
-      <div className="homepage-banner-rate">
+      <div className="banner-rate">
         <h2>Nous sommes notés 4.3/5 sur</h2>
         <img src="app/assets/Trustpilot.png" alt="google rating" />
       </div>
@@ -21,4 +21,4 @@ function HomePageEngagements() {
   );
 }
 
-export default HomePageEngagements;
+export default Engagements;
