@@ -7,6 +7,7 @@ import Price from './Price';
 import Stars from './Stars';
 import BrandLogo, {type ValidLogos} from './BrandLogo';
 import getProductTitleAndSub from '~/lib/productTitles';
+import {useRef} from 'react';
 
 export interface ProductCardProps {
   informations: ProductCardFragment;
@@ -44,13 +45,14 @@ export default function ProductCard({
 }: ProductCardProps) {
   const {title, subtitle} = getProductTitleAndSub(productTitle);
 
-  const fakeReviewsLength = Math.floor(Math.random() * 25) + 5;
+  const fakeReviewsLength = useRef(Math.floor(Math.random() * 25) + 5);
   const maxScore = 1;
-  const reviewsAverage =
-    new Array(fakeReviewsLength)
+  const reviewsAverage = useRef(
+    new Array(fakeReviewsLength.current)
       .fill(null)
       .reduce((pre: number, _) => pre + Math.random() * maxScore, 0) /
-    fakeReviewsLength;
+      fakeReviewsLength.current,
+  );
   return (
     <Link className="product-card" to={`/products/${handle}`} key={id}>
       <div className="top">
@@ -81,13 +83,14 @@ export default function ProductCard({
         <div className="rating">
           <Stars
             max={maxScore}
-            value={reviewsAverage}
+            value={reviewsAverage.current}
             stars={5}
             colors={{
               foreground: 'var(--color-dark)',
             }}
+            key={id}
           />
-          <span className="reviewsCount">({fakeReviewsLength})</span>
+          <span className="reviewsCount">({fakeReviewsLength.current})</span>
         </div>
       </div>
     </Link>

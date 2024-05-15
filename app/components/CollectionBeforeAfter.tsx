@@ -1,8 +1,9 @@
-import React from 'react';
-import {Link} from '@remix-run/react';
-import {ProductCardFragment, RestoredShoesQuery} from 'storefrontapi.generated';
-import {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
+import type {
+  ProductCardFragment,
+  RestoredShoesQuery,
+} from 'storefrontapi.generated';
 import Banner from './Banner';
+import './styles/collection.scss';
 
 export interface CollectionBAProps {
   collection: NonNullable<RestoredShoesQuery['collection']>;

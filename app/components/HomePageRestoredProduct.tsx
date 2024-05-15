@@ -4,7 +4,7 @@ import type {RestoredShoesQuery} from 'storefrontapi.generated';
 import CollectionBA from './CollectionBeforeAfter';
 import Button from './Button';
 
-function HomePageRestoredProduct({
+export default function HomePageRestoredProduct({
   collection,
 }: {
   collection: NonNullable<RestoredShoesQuery['collection']>;
@@ -42,5 +42,3 @@ function HomePageRestoredProduct({
     </div>
   );
 }
-
-export default HomePageRestoredProduct;

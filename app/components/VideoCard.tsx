@@ -11,7 +11,7 @@ interface VideoCardProps {
   boldKeywords: string[];
 }
 
-function VideoCard({
+export default function VideoCard({
   backgroundcolor,
   text,
   subtext,
@@ -20,21 +20,6 @@ function VideoCard({
   num,
   boldKeywords,
 }: VideoCardProps) {
-  function renderTextWithBoldKeywords(text: string) {
-    const parts = text.split(new RegExp(`(${boldKeywords.join('|')})`, 'i'));
-    return (
-      <p className="VideoCard-text">
-        {parts.map((part, index) => {
-          if (boldKeywords.includes(part)) {
-            return <strong key={part}>{part}</strong>;
-          } else {
-            return <span key={part}>{part}</span>;
-          }
-        })}
-      </p>
-    );
-  }
-
   return (
     <div
       className="VideoCard"
@@ -53,11 +38,25 @@ function VideoCard({
 
       <div className="VideoCard-bottom">
         <h4>{title}</h4>
-        {renderTextWithBoldKeywords(text)}
-        <p className="VideoCard-sub">{renderTextWithBoldKeywords(subtext)}</p>
+        {renderTextWithBoldKeywords(text, boldKeywords)}
+        <br />
+        {renderTextWithBoldKeywords(subtext, boldKeywords)}
       </div>
     </div>
   );
 }
 
-export default VideoCard;
+function renderTextWithBoldKeywords(text: string, keywords: string[]) {
+  const parts = text.split(new RegExp(`(${keywords.join('|')})`, 'i'));
+  return (
+    <p className="VideoCard-text">
+      {parts.map((part, index) => {
+        if (keywords.includes(part)) {
+          return <b key={part}>{part}</b>;
+        } else {
+          return part;
+        }
+      })}
+    </p>
+  );
+}

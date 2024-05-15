@@ -1,4 +1,4 @@
-import {useEffect, useRef, type ReactElement} from 'react';
+import {type ReactElement} from 'react';
 import './styles/starRating.scss';
 
 interface StarsColor {
@@ -27,9 +27,6 @@ export default function Stars({
     background: givenColors?.background || '#e2e2e2',
   };
 
-  const ratingID = useRef(0);
-  ratingID.current++;
-
   const ratio = value / max;
   const filledStars = Math.floor(ratio * stars);
   const semiFilledStarRate =
@@ -53,7 +50,7 @@ export default function Stars({
         filledPourcent={semiFilledStarRate * 100}
         foreground={colors.foreground}
         background={colors.background}
-        key={`semi`}
+        key={`semi_${semiFilledStarRate}`}
       />,
     );
   for (const i in new Array(emptyStars).fill(null))
@@ -66,11 +63,7 @@ export default function Stars({
       />,
     );
 
-  return (
-    <div className="stars-rating" key={ratingID.current}>
-      {starsElements}
-    </div>
-  );
+  return <div className="stars-rating">{starsElements}</div>;
 }
 
 export interface StarProps {
@@ -84,8 +77,16 @@ export function Star({filledPourcent, background, foreground}: StarProps) {
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
       <defs>
         <linearGradient id={gradientID}>
-          <stop offset={`${filledPourcent}%`} stopColor={foreground} />
-          <stop offset={`${filledPourcent}%`} stopColor={background} />
+          <stop
+            offset={`${filledPourcent}%`}
+            stopColor={foreground}
+            key={`fg_stop_${gradientID}`}
+          />
+          <stop
+            offset={`${filledPourcent}%`}
+            stopColor={background}
+            key={`bg_stop_${gradientID}`}
+          />
         </linearGradient>
       </defs>
       <path
