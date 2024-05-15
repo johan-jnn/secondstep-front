@@ -30,6 +30,13 @@ import ProductForm from '~/components/ProductForm';
 import getProductTitleAndSub from '~/lib/productTitles';
 import Certification from '~/components/Certification';
 import BrandLogo, {type ValidLogos} from '~/components/BrandLogo';
+import Button from '~/components/Button';
+import TrustPilotReviews from '~/components/trustPilotReviews';
+import ProcessReconditionnement from '~/components/ProcessReconditionnement';
+import BestInstagramLooks from '~/components/BestInstagramLooks';
+import KitEntretientCTA from '~/components/KitEntretientCTA';
+import NeufVSReconditionne from '~/components/ComparatifNeufVSRecondionne';
+import FAQ from '~/components/FAQ';
 
 export const meta: MetaFunction<typeof loader> = ({data, location}) => {
   return [{title: `Hydrogen | ${data?.product.title ?? ''}`}];
@@ -121,6 +128,54 @@ export default function Product() {
         <div id="buying">
           <ProductForm product={product} />
         </div>
+      </div>
+      <div className="extra">
+        <aside className="menu">
+          <ul>
+            <li>
+              <a href="#reviews">Avis</a>
+            </li>
+            <li>
+              <a href="#process">Process Seconde Main</a>
+            </li>
+            <li>
+              <a href="#looks">Vos Looks</a>
+            </li>
+            <li>
+              <a href="#allies">Alliés Indispensable</a>
+            </li>
+            <li>
+              <a href="#neuf-vs-recond">Neuf VS Reconditionné</a>
+            </li>
+            <li>
+              <a href="#faq">FAQ</a>
+            </li>
+            <li>
+              <a href="/collections/all">
+                <Button type="primary" text="Shopper ma paire" />
+              </a>
+            </li>
+          </ul>
+        </aside>
+
+        <section id="reviews">
+          <TrustPilotReviews />
+        </section>
+        <section id="process">
+          <ProcessReconditionnement />
+        </section>
+        <section id="looks">
+          <BestInstagramLooks />
+        </section>
+        <section id="allies">
+          <KitEntretientCTA for={product} />
+        </section>
+        <section id="neuf-vs-recond">
+          <NeufVSReconditionne />
+        </section>
+        <section id="faq">
+          <FAQ answers={[]} />
+        </section>
       </div>
     </>
   );

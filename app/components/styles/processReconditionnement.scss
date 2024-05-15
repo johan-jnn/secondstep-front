@@ -1,0 +1,96 @@
+$bg: var(--color-light);
+.reconditionnementProcess {
+  > .processContent {
+    display: grid;
+    grid-template-columns: 75px 1fr 45%;
+    background-color: $bg;
+
+    > .progressbar {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      > .bubble {
+        $size: 25px;
+        width: $size;
+        height: $size;
+        display: grid;
+        place-content: center;
+        border-radius: 50%;
+        background-color: var(--color-grey);
+        font-weight: 700;
+        color: $bg;
+        border: 2.5px solid $bg;
+        z-index: 2;
+        transition: background-color 0.25s;
+        &[data-filled] {
+          background-color: var(--color-primary);
+        }
+      }
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 0;
+        translate: -50% 0;
+        width: 5px;
+      }
+      &::before {
+        background-color: var(--color-grey);
+        height: 100%;
+      }
+      &::after {
+        transition: height 0.25s;
+        height: var(--progress);
+        background-color: var(--color-primary);
+      }
+    }
+
+    > .content {
+      min-height: 350px;
+      > .heading {
+        display: flex;
+        align-items: center;
+        color: var(--color-primary);
+
+        > .icon {
+          height: 50px;
+
+          svg path {
+            fill: var(--color-primary);
+          }
+        }
+
+        > h3 {
+          font-size: 30px;
+        }
+      }
+      > p {
+        margin: 15px 0;
+        a {
+          color: var(--color-primary);
+        }
+      }
+    }
+
+    > .illustration {
+      height: fit-content;
+      img {
+        height: fit-content;
+        object-fit: cover;
+      }
+    }
+  }
+
+  > .navigation {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 10px;
+  }
+}

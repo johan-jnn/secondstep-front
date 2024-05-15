@@ -197,3 +197,25 @@ $infos-max-width: 300px;
     }
   }
 }
+
+.extra {
+  > aside {
+    all: unset;
+    margin: 20px auto;
+    width: 80%;
+    background-color: var(--color-darkwhite);
+    display: block;
+    padding: 10px 20px;
+    border-radius: 10px;
+
+    > ul {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      a:hover {
+        color: var(--color-primary);
+      }
+    }
+  }
+}

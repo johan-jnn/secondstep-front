@@ -125,7 +125,6 @@ export default function App() {
 
 export function ErrorBoundary() {
   const error = useRouteError();
-  const rootData = useLoaderData<typeof loader>();
   const nonce = useNonce();
   let errorMessage = 'Unknown error';
   let errorStatus = 500;
@@ -146,17 +145,15 @@ export function ErrorBoundary() {
         <Links />
       </head>
       <body>
-        <Layout {...rootData}>
-          <div className="route-error">
-            <h1>Oops</h1>
-            <h2>{errorStatus}</h2>
-            {errorMessage && (
-              <fieldset>
-                <pre>{errorMessage}</pre>
-              </fieldset>
-            )}
-          </div>
-        </Layout>
+        <div className="route-error">
+          <h1>Oops</h1>
+          <h2>{errorStatus}</h2>
+          {errorMessage && (
+            <fieldset>
+              <pre>{errorMessage}</pre>
+            </fieldset>
+          )}
+        </div>
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
       </body>
