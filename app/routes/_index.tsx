@@ -11,6 +11,7 @@ import HomePageCollectionCTA from '~/components/HomePageCollectionCTA';
 import ProductGrid from '~/components/ProductGrid';
 import HomePageVideoCards from '~/components/HomePageVideoCards';
 import HomePageRestoredProduct from '~/components/HomePageRestoredProduct';
+import HomePageImageGrid from '~/components/HomePageImageGrid';
 export const meta: MetaFunction = () => {
   return [{title: 'Second Step | Home'}];
 };
@@ -43,6 +44,7 @@ export default function Homepage() {
           collection && <HomePageRestoredProduct collection={collection} />
         }
       </Await>
+      <HomePageImageGrid />
     </div>
   );
 }
