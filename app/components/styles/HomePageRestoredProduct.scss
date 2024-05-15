@@ -1,0 +1,40 @@
+.restoredProduct{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-darkwhite);
+    padding: 2%;
+    > .restoredProduct-left{
+        margin-right: 3%;
+        width: 100%;
+        display: grid;
+        place-content: center;
+        > h1{
+            text-transform: uppercase;
+        }
+        > p{
+            margin-top: 10%;
+        }
+        > a{
+            margin-top: 3%;
+            > button{
+                left: 0;
+                background-color: var(--color-primary);
+                color: var(--color-light);
+                font-weight: bold;
+                text-transform: uppercase;
+                width: 100%;
+            }
+        }
+
+        > div{
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 3%;
+            color: var(--color-primary)
+        }
+    }
+    > .restoredProduct-right{
+        width: 100%;
+    }
+}
