@@ -12,6 +12,7 @@ import ProductGrid from '~/components/ProductGrid';
 import VideoCards from '~/components/VideoCards';
 import RestoredProduct from '~/components/RestoredProduct';
 import BrandImageGrid from '~/components/BrandImageGrid';
+import HistoryCard from '~/components/HistoryCard';
 export const meta: MetaFunction = () => {
   return [{title: 'Second Step | Home'}];
 };
@@ -45,6 +46,7 @@ export default function Homepage() {
         }
       </Await>
       <BrandImageGrid />
+      <HistoryCard />
     </div>
   );
 }
