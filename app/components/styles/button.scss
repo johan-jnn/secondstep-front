@@ -19,11 +19,11 @@ button {
 
     > p:nth-of-type(1) {
       font-size: 1.15em;
-      font-weight: 900;
       text-transform: uppercase;
     }
     > p:nth-of-type(2) {
       font-size: 0.75em;
+      font-family: 'Manrope';
     }
   }
   
@@ -32,10 +32,6 @@ button {
     aspect-ratio: 35 / 4;
     text-transform: uppercase;
     height: 100%;
-
-    > p:nth-of-type(1) {
-      font-weight: 600;
-    }
 
     > hr {
       width: 1.5px;

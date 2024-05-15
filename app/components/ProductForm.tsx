@@ -42,7 +42,7 @@ export default function ProductForm({product}: ProductFormProps) {
     <CartForm route="/cart" action={CartForm.ACTIONS.LinesAdd} inputs={{lines}}>
       <div id="productForm">
         <h3>{title}</h3>
-        <h4>{subtitle}</h4>
+        <p>{subtitle}</p>
 
         <section id="price">
           {product.selectedVariant.compareAtPrice && (
