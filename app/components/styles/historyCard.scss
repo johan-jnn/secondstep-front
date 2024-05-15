@@ -1,11 +1,14 @@
 .history-card{
+    background-color: var(--color-darkwhite);
     padding: 2%;
     display: flex;
     justify-content: space-around;
-    margin: auto 10%;
+    padding-left: 10%;
+    padding-right: 10%;
     gap: 5%;
     > .card{
-        flex: 1;
+        background-color: var(--color-light);
+        flex: 2;
         width: 100%;
         padding: 2%;
         border: solid 1px var(--color-grey);
@@ -21,6 +24,7 @@
         }
 
         > a > button{
+            margin: 2%;
             background-color: var(--color-dark);
             color: var(--color-light);
             font-family: 'Manrope';
@@ -28,10 +32,9 @@
     }
 
     > .history-card-img{
-        flex: 1;
+        flex: 2;
         border-radius: 15px;
         width: 100%;
-        border: solid 1px var(--color-grey);
         > img{
             object-fit: cover;
             border-radius: 15px;

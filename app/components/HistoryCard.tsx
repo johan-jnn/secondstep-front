@@ -22,7 +22,7 @@ export default function HistoryCard() {
           s'agisse d'une édition limitée qui a marqué une époque ou d'un modèle
           classique qui a accompagné des générations de sneakerheads
         </p>
-        <Link to=" ">
+        <Link to="/pages/nous-d-couvrir">
           <button>Découvrir la team</button>
         </Link>
       </div>
