@@ -3,7 +3,11 @@ import {Link} from 'react-router-dom';
 export default function homePageImageGrid() {
   return (
     <div className="homePage-img-grid">
-      <div className="homePage-img-grid-top"></div>
+      <div className="homePage-img-grid-top">
+        <Link to="/collections">
+            <button>Voir tout</button>
+        </Link>
+      </div>
       <div className="homePage-img-grid-bottom">
         <Link to=" ">
           <div className="img1">
