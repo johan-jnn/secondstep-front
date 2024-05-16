@@ -1,11 +1,12 @@
 import {Link} from 'react-router-dom';
 import './styles/passionate.scss';
+import HistoryImage from '../assets/history-img.png';
 
 export default function HistoryCard() {
   return (
     <div className="history-card">
       <div className="history-card-img">
-        <img src="app/assets/history-img.png" alt=" " />
+        <img src={HistoryImage} alt="Notre CEO qui inspecte une paire" />
       </div>
       <div className="card">
         <h1>Une Histoire de Passionnés</h1>

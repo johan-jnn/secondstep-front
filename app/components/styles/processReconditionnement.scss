@@ -1,101 +1,150 @@
 $bg: var(--color-light);
+$barConstantSize: 5px;
 .reconditionnementProcess {
-  > .processContent {
-    display: grid;
-    grid-template-columns: 75px 1fr 45%;
-    background-color: $bg;
+  display: grid;
+  grid-template-columns: 75px 1fr 45%;
+  grid-template-rows: 100%;
+  grid-template-areas: 'progressbar content illustration';
 
-    > .progressbar {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-around;
-      > .bubble {
-        $size: 25px;
-        width: $size;
-        height: $size;
-        display: grid;
-        place-content: center;
-        border-radius: 50%;
-        background-color: var(--color-grey);
-        font-weight: 700;
-        color: $bg;
-        border: 2.5px solid $bg;
-        z-index: 2;
-        transition: background-color 0.25s;
-        &[data-filled] {
-          background-color: var(--color-primary);
-        }
-      }
+  gap: 15px;
+  background-color: $bg;
+  padding-right: 30px;
+  aspect-ratio: 2.5 / 1;
+  max-height: 500px;
+  margin: 10px auto;
 
-      &::before,
-      &::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        top: 0;
-        translate: -50% 0;
-        width: 5px;
-      }
-      &::before {
-        background-color: var(--color-grey);
-        height: 100%;
-      }
-      &::after {
-        transition: height 0.25s;
-        height: var(--progress);
+  > .progressbar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    grid-area: progressbar;
+
+    > .bubble {
+      $size: 25px;
+      width: $size;
+      height: $size;
+      display: grid;
+      place-content: center;
+      border-radius: 50%;
+      background-color: var(--color-grey);
+      font-weight: 700;
+      color: $bg;
+      border: 2.5px solid $bg;
+      z-index: 2;
+      transition: background-color 0.25s;
+      &[data-filled] {
         background-color: var(--color-primary);
       }
     }
 
-    > .content {
-      min-height: 350px;
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      translate: -50% 0;
+      width: $barConstantSize;
+    }
+    &::before {
+      background-color: var(--color-grey);
+      height: 100%;
+    }
+    &::after {
+      transition: height 0.25s;
+      height: var(--progress);
+      background-color: var(--color-primary);
+    }
+  }
+
+  > .content {
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    grid-area: content;
+
+    > .heading {
       display: flex;
-      flex-direction: column;
-      > .heading {
-        display: flex;
-        align-items: center;
+      align-items: center;
+      color: var(--color-primary);
+
+      > .icon {
+        height: 50px;
+
+        svg path {
+          fill: var(--color-primary);
+        }
+      }
+
+      > h3 {
+        font-size: 30px;
+      }
+    }
+    > p {
+      margin: 15px 0;
+      a {
         color: var(--color-primary);
-
-        > .icon {
-          height: 50px;
-
-          svg path {
-            fill: var(--color-primary);
-          }
-        }
-
-        > h3 {
-          font-size: 30px;
-        }
-      }
-      > p {
-        margin: 15px 0;
-        a {
-          color: var(--color-primary);
-        }
-      }
-
-      > .navigation {
-        width: 100%;
-        flex-grow: 1;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        gap: 10px;
-        button {
-          max-width: 100px;
-          height: 50px;
-        }
       }
     }
 
-    > .illustration {
-      height: fit-content;
-      img {
-        height: fit-content;
-        object-fit: cover;
+    > .navigation {
+      width: 100%;
+      flex-grow: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 10px;
+      button {
+        max-width: 100px;
+        height: 50px;
+      }
+    }
+  }
+
+  > .illustration {
+    position: relative;
+    grid-area: illustration;
+
+    > img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    > .videoButton {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 75px;
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  @media screen and (max-width: 950px) {
+    grid-template-areas:
+      'content illustration'
+      'progressbar progressbar';
+    grid-template-columns: auto 45%;
+    padding: 0 25px;
+    aspect-ratio: unset;
+    > .progressbar {
+      flex-direction: row;
+      &::before,
+      &::after {
+        top: 50%;
+        left: 0;
+        translate: 0 -50%;
+        height: $barConstantSize;
+      }
+      &::before {
+        width: 100%;
+      }
+      &::after {
+        transition: width 0.25s;
+        width: var(--progress);
       }
     }
   }

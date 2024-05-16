@@ -16,8 +16,7 @@ export const processList: ProcessItem[] = [
     title: 'Achat',
     icon: CartIcon,
     illustrations: {
-      img: '',
-      vid: '',
+      img: 'https://cdn.shopify.com/s/files/1/0761/3231/9561/files/Minero-min_1_adc5131f-6c63-44da-9ad4-18c7e3a961bc.jpg?v=1701867514',
     },
     descriptions: (
       <>
@@ -34,8 +33,8 @@ export const processList: ProcessItem[] = [
     title: 'Authentification',
     icon: LockIcon,
     illustrations: {
-      img: '',
-      vid: '',
+      img: 'https://cdn.shopify.com/s/files/1/0761/3231/9561/products/8a3bb4984251e989a79b5cfbf57711d7.png?v=1701432113',
+      vid: '?',
     },
     descriptions: (
       <>
@@ -72,8 +71,7 @@ export const processList: ProcessItem[] = [
     title: 'Confiance',
     icon: SunIcon,
     illustrations: {
-      img: '/brands_icons/adidas.svg',
-      vid: '',
+      img: 'https://cdn.shopify.com/s/files/1/0761/3231/9561/files/mobile_v2-min.jpg?v=1702912975',
     },
     descriptions: (
       <>

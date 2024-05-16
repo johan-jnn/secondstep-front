@@ -150,7 +150,7 @@ export default function Product() {
             <li>
               <a href="#faq">FAQ</a>
             </li>
-            <li>
+            <li className="cta">
               <a href="/collections/all">
                 <Button type="primary" text="Shopper ma paire" />
               </a>
