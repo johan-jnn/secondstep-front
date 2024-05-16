@@ -15,6 +15,7 @@ import BrandImageGrid from '~/components/BrandImageGrid';
 import Passionate from '~/components/PassionateSection';
 import PressSection from '~/components/PressSection';
 import OpinionSection from '~/components/OpinionSection';
+import HistoryCarousel from '~/components/HistoryCarousel';
 export const meta: MetaFunction = () => {
   return [{title: 'Second Step | Home'}];
 };
@@ -51,6 +52,7 @@ export default function Homepage() {
       <Passionate />
       <PressSection />
       <OpinionSection />
+      <HistoryCarousel />
     </div>
   );
 }
