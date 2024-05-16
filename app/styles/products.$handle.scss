@@ -209,6 +209,11 @@ $infos-max-width: 300px;
 }
 
 .extra {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+
   a:not(aside a) {
     color: var(--color-primary);
   }
@@ -243,5 +248,9 @@ $infos-max-width: 300px;
         color: var(--color-primary);
       }
     }
+  }
+
+  > #looks, > #allies {
+    width: 90%;
   }
 }

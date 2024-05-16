@@ -1,0 +1,50 @@
+.neufVsSS {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 15px;
+    background-color: var(--color-darkwhite);
+    padding: 15px 0;
+
+    > .caption {
+        font-size: 12.5px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        > h3 {
+            text-transform: uppercase;
+            font-size: 30px;
+            > b {
+                color: var(--color-primary);
+            }
+            > .barred {
+                text-decoration: line-through;
+            }
+        }
+        > sub {
+            font-weight: 800;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        > a {
+            display: inline-block;
+            margin: 20px auto 0;
+        }
+        > .trust {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-primary);
+            > .icon {
+                height: 30px;
+                path {
+                    fill: var(--color-primary);
+                }
+            }
+        }
+    }
+    > table {
+        border-collapse: collapse;
+    }
+}

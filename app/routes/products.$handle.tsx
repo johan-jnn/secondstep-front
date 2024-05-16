@@ -20,12 +20,8 @@ import {
   getSelectedProductOptions,
   CartForm,
 } from '@shopify/hydrogen';
-import type {
-  CartLineInput,
-  SelectedOption,
-} from '@shopify/hydrogen/storefront-api-types';
+import type {SelectedOption} from '@shopify/hydrogen/storefront-api-types';
 import {getVariantUrl} from '~/lib/variants';
-import Price from '~/components/Price';
 import ProductForm from '~/components/ProductForm';
 import getProductTitleAndSub from '~/lib/productTitles';
 import Certification from '~/components/Certification';
@@ -35,8 +31,8 @@ import TrustPilotReviews from '~/components/trustPilotReviews';
 import ProcessReconditionnement from '~/components/ProcessReconditionnement';
 import ProductIRLLooks from '~/components/ProductIRLLooks';
 import KitEntretientCTA from '~/components/KitEntretientCTA';
-import NeufVSReconditionne from '~/components/ComparatifNeufVSRecondionne';
 import FAQ from '~/components/FAQ';
+import NeufVsSS from '~/components/ComparatifNeufVsSS';
 
 export const meta: MetaFunction<typeof loader> = ({data, location}) => {
   return [{title: `Hydrogen | ${data?.product.title ?? ''}`}];
@@ -171,7 +167,7 @@ export default function Product() {
           <KitEntretientCTA for={product} />
         </section>
         <section id="neuf-vs-recond">
-          <NeufVSReconditionne />
+          <NeufVsSS />
         </section>
         <section id="faq">
           <FAQ answers={[]} />
