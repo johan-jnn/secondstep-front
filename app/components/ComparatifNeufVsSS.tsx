@@ -3,6 +3,9 @@ import Icon from './Icon';
 import './styles/comparatifNeufVsSS.scss';
 import Button from './Button';
 import {Link} from '@remix-run/react';
+import {comparativeRows} from '~/lib/constants/comparativeTableRows';
+import {Image} from '@shopify/hydrogen';
+import Logo from './Logo';
 
 export default function NeufVsSS() {
   return (
@@ -39,7 +42,11 @@ function Table() {
       <thead>
         <tr>
           <th></th>
-          <th scope="col">[Image SecondStep]</th>
+          <th scope="col">
+            <div className="logoWrapper">
+              <Logo color="var(--color-primary)" background="transparent" />
+            </div>
+          </th>
           <th scope="col">
             <b>Plateformes</b>
             seconde main
@@ -51,93 +58,16 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">
-            <b>Ecologique,</b>
-            bon pour la planète
-          </th>
-          <td>
-            <Icon icon={CheckIcon} />
-          </td>
-          <td>
-            <Icon icon={CheckIcon} />
-          </td>
-          <td>
-            <Icon icon={XIcon} />
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">
-            <b>Economique,</b>
-            bon pour tes finances
-          </th>
-          <td>
-            <Icon icon={CashEuroIcon} />
-            <Icon icon={CashEuroIcon} />
-          </td>
-          <td>
-            <Icon icon={CashEuroIcon} />
-          </td>
-          <td>
-            <Icon icon={CashEuroIcon} />
-            <Icon icon={CashEuroIcon} />
-            <Icon icon={CashEuroIcon} />
-            <Icon icon={CashEuroIcon} />
-          </td>
-        </tr>
-        <tr>
-          <th scope="rows">
-            <b>Rareté des paires</b>
-            introuvables neuves
-          </th>
-          <td>
-            <Icon icon={CheckIcon} />
-          </td>
-          <td>
-            <Icon icon={XIcon} />
-          </td>
-          <td>
-            <Icon icon={XIcon} />
-          </td>
-        </tr>
-        <tr>
-          <th scope="rows">
-            Carte
-            <b>authentification certifiée</b>
-          </th>
-          <td>[Image de la carte d&apos;authenticité]</td>
-          <td>
-            <Icon icon={XIcon} />
-          </td>
-          <td>
-            <Icon icon={XIcon} />
-          </td>
-        </tr>
-        <tr>
-          <th scope="rows">
-            <b>Reconditionnnement</b> à neuf
-          </th>
-          <td>Par nos experts sneakers artists</td>
-          <td>
-            <Icon icon={XIcon} />
-          </td>
-          <td>
-            <Icon icon={XIcon} />
-          </td>
-        </tr>
-        <tr>
-          <th scope="rows">
-            Concept et
-            <b>marque française</b>
-          </th>
-          <td>[Image de la France]</td>
-          <td>
-            <Icon icon={XIcon} />
-          </td>
-          <td>
-            <Icon icon={XIcon} />
-          </td>
-        </tr>
+        {comparativeRows.map(({title, an, sm, ss}) => (
+          <tr key={title.toString()}>
+            <th scope="row">{title}</th>
+            {[ss, sm, an].map((content) => (
+              <td key={content.toString()}>
+                <div className="contentWrapper">{content}</div>
+              </td>
+            ))}
+          </tr>
+        ))}
       </tbody>
     </table>
   );
