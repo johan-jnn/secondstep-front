@@ -156,4 +156,22 @@ $y-marges: 20px;
       margin-left: $y-marges;
     }
   }
+  @media screen and (max-width: 675px) {
+    grid-template-areas:
+      'progressbar'
+      'content'
+      'illustration';
+    grid-template-columns: 100%;
+    grid-template-rows: 75px auto 45%;
+    height: 80vh;
+    padding: calc($y-marges / 2);
+
+    > * {
+      margin: 0 !important;
+    }
+
+    > .content {
+      min-height: unset;
+    }
+  }
 }
