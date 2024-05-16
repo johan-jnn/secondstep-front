@@ -30,7 +30,7 @@ export default function ProductIRLLooks({product}: ProductIRLLooksProps) {
   return (
     <div className="bestLooks">
       <div className="heading">
-        <h3>Vos meuilleurs Looks</h3>
+        <h3>Vos meilleurs Looks</h3>
         <p>
           Partagez-nous vos meuilleurs looks avec la{' '}
           <a
