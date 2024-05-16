@@ -1,4 +1,4 @@
-import {Suspense, useState} from 'react';
+import {Suspense, useEffect, useState} from 'react';
 import {defer, redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import '../styles/products.$handle.scss';
 import {
@@ -283,6 +283,28 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
   }
 ` as const;
 
+const METAFIELD_FRAGMENT = `#graphql
+fragment MetaFieldInfo on Metafield {
+  key
+  value
+  type
+  id
+  references(first: 8) {
+    nodes {
+      __typename
+      ... on MediaImage {
+        id
+        image {
+          altText
+          id
+          src
+        }
+      }
+    }
+  }
+}
+`;
+
 const PRODUCT_FRAGMENT = `#graphql
   fragment Product on Product {
     id
@@ -294,6 +316,12 @@ const PRODUCT_FRAGMENT = `#graphql
     options {
       name
       values
+    }
+    color: metafield(key: "color", namespace: "custom") {
+      ...MetaFieldInfo
+    }
+    instagramPosts: metafield(key: "instagram_post", namespace: "custom") {
+      ...MetaFieldInfo
     }
     images(first: 50) {
       nodes {
@@ -315,6 +343,7 @@ const PRODUCT_FRAGMENT = `#graphql
     }
   }
   ${PRODUCT_VARIANT_FRAGMENT}
+  ${METAFIELD_FRAGMENT}
 ` as const;
 
 const PRODUCT_QUERY = `#graphql
