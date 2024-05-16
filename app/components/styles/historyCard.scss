@@ -1,0 +1,10 @@
+.history-card{
+    border: solid 1px var(--color-dark);
+    border-radius: 10px;
+    margin: 0 10px;
+    > div{
+        display: grid;
+        justify-content: center;
+    }
+
+}

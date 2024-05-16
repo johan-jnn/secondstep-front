@@ -1,10 +1,10 @@
 import {Link} from 'react-router-dom';
 import './styles/passionate.scss';
 
-export default function HistoryCard() {
+export default function Passionate() {
   return (
-    <div className="history-card">
-      <div className="history-card-img">
+    <div className="passionate-section">
+      <div className="passionate-section-img">
         <img src="app/assets/history-img.png" alt=" " />
       </div>
       <div className="card">
