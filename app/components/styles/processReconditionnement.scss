@@ -11,6 +11,7 @@ $y-marges: 20px;
   background-color: $bg;
   aspect-ratio: 2.5 / 1;
   max-height: 500px;
+  width: 100%;
   margin: 10px 0;
 
   background-color: var(--color-darkwhite);
@@ -130,7 +131,7 @@ $y-marges: 20px;
       'progressbar progressbar';
     grid-template-columns: auto 45%;
     grid-template-rows: 1fr 75px;
-    margin: 15px;
+    margin: 15px 0;
     aspect-ratio: unset;
     max-height: unset;
 
