@@ -39,7 +39,6 @@ export default function VideoCard({
       <div className="VideoCard-bottom">
         <h4>{title}</h4>
         {renderTextWithBoldKeywords(text, boldKeywords)}
-        <br />
         {renderTextWithBoldKeywords(subtext, boldKeywords)}
       </div>
     </div>
