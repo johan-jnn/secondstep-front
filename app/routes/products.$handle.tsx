@@ -33,7 +33,7 @@ import BrandLogo, {type ValidLogos} from '~/components/BrandLogo';
 import Button from '~/components/Button';
 import TrustPilotReviews from '~/components/trustPilotReviews';
 import ProcessReconditionnement from '~/components/ProcessReconditionnement';
-import BestInstagramLooks from '~/components/BestInstagramLooks';
+import ProductIRLLooks from '~/components/ProductIRLLooks';
 import KitEntretientCTA from '~/components/KitEntretientCTA';
 import NeufVSReconditionne from '~/components/ComparatifNeufVSRecondionne';
 import FAQ from '~/components/FAQ';
@@ -150,7 +150,7 @@ export default function Product() {
             <li>
               <a href="#faq">FAQ</a>
             </li>
-            <li>
+            <li className="cta">
               <a href="/collections/all">
                 <Button type="primary" text="Shopper ma paire" />
               </a>
@@ -165,7 +165,7 @@ export default function Product() {
           <ProcessReconditionnement />
         </section>
         <section id="looks">
-          <BestInstagramLooks />
+          <ProductIRLLooks product={product} />
         </section>
         <section id="allies">
           <KitEntretientCTA for={product} />

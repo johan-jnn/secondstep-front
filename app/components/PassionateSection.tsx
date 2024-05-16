@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom';
 import './styles/passionate.scss';
+import HistoryImage from '../assets/history-img.png';
 
 export default function Passionate() {
   return (

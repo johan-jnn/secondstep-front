@@ -1,5 +1,6 @@
 import './styles/videoCard.scss';
 import {Link} from 'react-router-dom';
+import VideoButton from './VideoButton';
 
 interface VideoCardProps {
   backgroundcolor: string;
@@ -27,13 +28,7 @@ export default function VideoCard({
     >
       <div className="VideoCard-top">
         <h3>{num}</h3>
-        <Link to={' '}>
-          <img
-            className="VideoCard-img"
-            src="app/assets/VideoCard-Btn.png"
-            alt=" "
-          />
-        </Link>
+        <VideoButton url="?" />
       </div>
 
       <div className="VideoCard-bottom">

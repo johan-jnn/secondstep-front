@@ -2,8 +2,9 @@ import {type CSSProperties, useState} from 'react';
 import {processList} from '~/lib/constants/processList';
 import Button from './Button';
 import Icon from './Icon';
-import {Link} from 'react-router-dom';
 import './styles/processReconditionnement.scss';
+import VideoButton from './VideoButton';
+import {Image} from '@shopify/hydrogen';
 
 type setter = React.Dispatch<React.SetStateAction<number>>;
 
@@ -12,48 +13,40 @@ export default function ProcessReconditionnement() {
   const processData = processList[processID];
   return (
     <div className="reconditionnementProcess">
-      <div className="processContent">
-        <ProgressBar processID={processID} setProcessID={setProcessID} />
-        <div className="content">
-          <div className="heading">
-            <Icon icon={processData.icon} />
-            <h3>{processData.title}</h3>
-          </div>
-          {processData.descriptions}
-
-          <nav className="navigation">
-            {processID > 0 && (
-              <Button
-                text="<<"
-                type="secondary"
-                onClick={() => setProcessID(processID - 1)}
-              />
-            )}
-            {processID < processList.length - 1 && (
-              <Button
-                text=">>"
-                type="primary"
-                onClick={(e) => setProcessID(processID + 1)}
-              />
-            )}
-          </nav>
+      <ProgressBar processID={processID} setProcessID={setProcessID} />
+      <div className="content">
+        <div className="heading">
+          <Icon icon={processData.icon} />
+          <h3>{processData.title}</h3>
         </div>
-        <div className="illustration">
-          <img
-            src={processData.illustrations.img}
-            alt={`Cover for ${processData.title}`}
-          />
+        {processData.descriptions}
 
-          {processData.illustrations.vid && (
-            <Link to={processData.illustrations.vid}>
-              <img
-                className="VideoCard-img"
-                src="app/assets/VideoCard-Btn.png"
-                alt=" "
-              />
-            </Link>
+        <nav className="navigation">
+          {processID > 0 && (
+            <Button
+              text="<<"
+              type="secondary"
+              onClick={() => setProcessID(processID - 1)}
+            />
           )}
-        </div>
+          {processID < processList.length - 1 && (
+            <Button
+              text=">>"
+              type="primary"
+              onClick={(e) => setProcessID(processID + 1)}
+            />
+          )}
+        </nav>
+      </div>
+      <div className="illustration">
+        <Image
+          src={processData.illustrations.img}
+          alt={`Cover for ${processData.title}`}
+        />
+
+        {processData.illustrations.vid && (
+          <VideoButton url={processData.illustrations.vid} />
+        )}
       </div>
     </div>
   );

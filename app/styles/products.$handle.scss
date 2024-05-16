@@ -185,20 +185,35 @@ $infos-max-width: 300px;
   }
   @media screen and (max-width: 1000px) {
     grid-template-areas:
-      'galery'
-      'buying'
-      'info';
+      'galery galery'
+      'info buying';
     width: 100%;
-    grid-template-columns: 1fr;
     place-items: center;
 
     > .infos {
       max-width: 95%;
     }
   }
+  @media screen and (max-width: 700px) {
+    grid-template-areas:
+      'galery'
+      'buying'
+      'info';
+    width: 100%;
+    grid-template-columns: 1fr;
+    place-items: center;
+    > #buying {
+      width: 100%;
+    }
+  }
 }
 
 .extra {
+  padding: 0 10px;
+  a:not(aside a) {
+    color: var(--color-primary);
+  }
+
   > aside {
     all: unset;
     margin: 20px auto;
@@ -212,6 +227,18 @@ $infos-max-width: 300px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+
+      > li.cta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+        > a {
+          display: inline-block;
+        }
+      }
 
       a:hover {
         color: var(--color-primary);
