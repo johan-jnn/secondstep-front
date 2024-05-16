@@ -11,7 +11,7 @@ $y-marges: 20px;
   background-color: $bg;
   aspect-ratio: 2.5 / 1;
   max-height: 500px;
-  margin: 10px auto;
+  margin: 10px 0;
 
   background-color: var(--color-darkwhite);
 
@@ -132,6 +132,7 @@ $y-marges: 20px;
     grid-template-rows: 1fr 75px;
     margin: 15px;
     aspect-ratio: unset;
+    max-height: unset;
 
     > .progressbar {
       flex-direction: row;
