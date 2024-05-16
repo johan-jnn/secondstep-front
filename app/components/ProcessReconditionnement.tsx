@@ -2,9 +2,9 @@ import {type CSSProperties, useState} from 'react';
 import {processList} from '~/lib/constants/processList';
 import Button from './Button';
 import Icon from './Icon';
-import {Link} from 'react-router-dom';
 import './styles/processReconditionnement.scss';
 import VideoButton from './VideoButton';
+import {Image} from '@shopify/hydrogen';
 
 type setter = React.Dispatch<React.SetStateAction<number>>;
 
@@ -39,7 +39,7 @@ export default function ProcessReconditionnement() {
         </nav>
       </div>
       <div className="illustration">
-        <img
+        <Image
           src={processData.illustrations.img}
           alt={`Cover for ${processData.title}`}
         />
