@@ -1,6 +1,4 @@
-import {Image} from '@shopify/hydrogen';
-
-export type ValidLogos = 'nike' | 'new_balance' | 'adidas';
+export type ValidLogos = 'nike' | 'new_balance' | 'adidas' | 'air_jordan';
 
 export interface BrandLogoProps {
   logo: ValidLogos;

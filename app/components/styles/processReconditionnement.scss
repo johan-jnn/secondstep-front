@@ -51,6 +51,8 @@ $bg: var(--color-light);
 
     > .content {
       min-height: 350px;
+      display: flex;
+      flex-direction: column;
       > .heading {
         display: flex;
         align-items: center;
@@ -74,6 +76,19 @@ $bg: var(--color-light);
           color: var(--color-primary);
         }
       }
+
+      > .navigation {
+        width: 100%;
+        flex-grow: 1;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 10px;
+        button {
+          max-width: 100px;
+          height: 50px;
+        }
+      }
     }
 
     > .illustration {
@@ -83,14 +98,5 @@ $bg: var(--color-light);
         object-fit: cover;
       }
     }
-  }
-
-  > .navigation {
-    width: 100%;
-    margin-top: 10px;
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    gap: 10px;
   }
 }

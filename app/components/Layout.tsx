@@ -9,7 +9,7 @@ import {
   PredictiveSearchForm,
   PredictiveSearchResults,
 } from '~/components/Search';
-import {marquisContent} from '~/lib/constants.json';
+import marquisContent from '~/lib/constants/marquis.json';
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
