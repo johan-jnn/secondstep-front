@@ -1,0 +1,39 @@
+{
+  "History": [
+    {
+      "imgsrc": "app/assets/VideoCard-Btn.png",
+      "section": "Sports",
+      "date": "01/01/2025",
+      "text": "Nike Dunk, des terrains de basket à icone du streetwear",
+      "sub": "Depuis sa creation en 1985, la Nike Dunk a transcendé son statut de simple chaussure de basket bla bla bla bla bla bla bla bla bla bla bla bla bla bla"
+    },
+    {
+      "imgsrc": "app/assets/VideoCard-Btn.png",
+      "section": "Mode",
+      "date": "02/01/2025",
+      "text": "L'évolution de la Nike Air Max : de la performance à la mode",
+      "sub": "Depuis son lancement en 1987, la Nike Air Max a évolué pour devenir non seulement une chaussure de sport emblématique, mais aussi un symbole de la culture streetwear et de la mode urbaine."
+    },
+    {
+      "imgsrc": "app/assets/VideoCard-Btn.png",
+      "section": "Innovation",
+      "date": "03/01/2025",
+      "text": "Technologies révolutionnaires de Nike : de l'Air à Flyknit",
+      "sub": "Au fil des décennies, Nike a continuellement repoussé les limites de l'innovation dans le domaine des chaussures de sport. Des premières technologies Air et Zoom aux matériaux modernes comme le Flyknit, Nike reste à la pointe de l'innovation dans l'industrie."
+    },
+    {
+      "imgsrc": "app/assets/VideoCard-Btn.png",
+      "section": "Légendes",
+      "date": "04/01/2025",
+      "text": "Les légendes de Nike : de Michael Jordan à Serena Williams",
+      "sub": "Nike a été associée à de nombreuses légendes du sport, de Michael Jordan, la légende du basketball, à Serena Williams, l'une des meilleures joueuses de tennis de tous les temps. Les partenariats de Nike avec ces athlètes emblématiques ont façonné l'histoire de la marque et inspiré des générations de sportifs."
+    },
+    {
+      "imgsrc": "app/assets/VideoCard-Btn.png",
+      "section": "Culture",
+      "date": "05/01/2025",
+      "text": "Influence de Nike sur la culture populaire",
+      "sub": "Au-delà de son impact sur le sport, Nike a également influencé la culture populaire à travers le monde. Des collaborations avec des artistes, des designers et des célébrités ont donné naissance à des éditions spéciales et des collections uniques, élargissant ainsi l'influence de la marque au-delà du monde du sport."
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 import './styles/historyCard.scss';
 
 interface HistoryCardProps {
@@ -6,6 +7,7 @@ interface HistoryCardProps {
   date: string;
   text: string;
   sub: string;
+  link: string;
 }
 
 export default function HistoryCard({
@@ -14,17 +16,21 @@ export default function HistoryCard({
   date,
   text,
   sub,
+  link,
 }: HistoryCardProps) {
   return (
     <div className="history-card">
       <div className="history-card-top">
-        <img src={imgsrc} alt=" " />
+        <img src={imgsrc} alt="" />
         <p>{section}</p>
       </div>
       <div className="history-card-bottom">
-        <p>{date}</p>
-        <p>{text}</p>
-        <p>{sub}</p>
+        <p className="history-card-bottom-date">{date}</p>
+        <p className="history-card-bottom-text">{text}</p>
+        <p className="history-card-bottom-sub">{sub}</p>
+        <Link to={link}>
+          <p className="history-card-bottom-more">Lire Plus</p>
+        </Link>
       </div>
     </div>
   );
