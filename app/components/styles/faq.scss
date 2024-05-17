@@ -1,12 +1,24 @@
 .faq{
     display: grid;
-    padding: 2%;
+    padding: 2% 5%;
     gap: 2%;
     grid-template-areas: 
     'socials faq';
+    grid-template-columns: 40% 60%;
+    align-items: center;
     > .faq-questions{
+        > h1{
+            padding: 2%;
+        }
+        grid-area: faq;
         display: grid;
         width: 100%;
+    }
+
+    > .faq-socials{
+        grid-area: socials;
+        width: 100%;
+        height: 300px;
     }
 }
 
@@ -16,7 +28,8 @@
     border-radius: 10px;
     display: grid;
     grid-template-columns: 70%;
-    justify-content: center;
+    place-content: center;
+    gap: 2%;
     > .faq-socials-top{
         text-align: center;
         > .title{
@@ -24,15 +37,22 @@
         }
     }
     > .faq-socials-min{
+        border: solid 1px var(--color-grey);
+        border-radius: 5px;
+        background-color: var(--color-light);
         display: grid;
         grid-template-areas: 
         'logo text arrow';
-        grid-template-columns: 15% 70% 15%;
-        justify-content: center;
+        grid-template-columns: 10% 80% 10%;
+        grid-template-rows: 60%;
+        place-content: center;
         text-align: center;
-        > img{
-            padding: 1%;
-        }
+        font-weight: 200;
+        color: var(--color-grey);
+    }
+    > .faq-socials-min:hover{
+        color: var(--color-dark);
+        border: solid 1px var(--color-dark);
     }
 
 }
@@ -40,7 +60,8 @@
 .faq-item{
     display: flex;
     flex-direction: column;
-    border-top: solid 1px;
+    padding: 1% 0;
+    border-top: solid 1px var(--color-grey);
     flex-grow: 1;
     > .question{
         display: flex;
@@ -49,8 +70,20 @@
         align-items: center;
         margin: auto 2%;
         > p{
-            font-size: 1.2rem;
+            font-size: 1rem;
             padding: 10px 0px;
+            font-weight: 300;
         }
+        > a{
+            width: 4%;
+        }
+    }
+}
+
+.answer{
+    margin: 2%;
+    > p{
+        font-size: 1rem;
+        font-weight: 100;
     }
 }
