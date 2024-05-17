@@ -39,9 +39,6 @@ export function Header({
           primaryDomainUrl={shop.primaryDomain.url}
         />
         <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
-        <a href="#collection-aside">
-          <Icon icon={MenuIcon} />
-        </a>
       </header>
     </>
   );
@@ -136,6 +133,9 @@ function HeaderCtas({
       </NavLink>
       <SearchToggle />
       <CartToggle cart={cart} />
+      <a href="#collection-aside" className="collectionOpenner">
+        <Icon icon={MenuIcon} />
+      </a>
       <HeaderMenuMobileToggle />
     </nav>
   );
