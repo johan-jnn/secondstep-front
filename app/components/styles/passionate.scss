@@ -41,3 +41,57 @@
         }
     }
 }
+
+@media (max-width: 1300px){
+    .passionate-section{
+        padding: 5%;
+    }
+}
+
+@media (max-width: 1010px){
+    .passionate-section{
+        display: grid;
+        grid-template-rows: 500px 450px;
+    }
+}
+
+@media (max-width: 700px){
+    .passionate-section{
+        display: grid;
+        grid-template-rows: 300px 350px;
+        > .card > h1{
+            font-size: 2rem;
+        }
+        > .card p{
+            font-size: 0.8rem;
+        }
+        > .card > a > button{
+            aspect-ratio: 0;
+            width: 120%;
+            padding: 3%;
+        }
+        
+    }
+}
+
+@media (max-width: 620px){
+    .passionate-section{
+        display: grid;
+        grid-template-rows: 300px 400px;
+    }
+}
+
+@media (max-width: 450px){
+    .passionate-section{
+        display: grid;
+        grid-template-rows: 300px 400px;
+        > .card > h1{
+            font-size: 1.5rem;
+        }
+        padding-bottom: 20%;
+    }
+    
+}
+
+
+
