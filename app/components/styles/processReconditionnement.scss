@@ -10,7 +10,7 @@ $y-marges: 20px;
   gap: 15px;
   background-color: $bg;
   aspect-ratio: 2.5 / 1;
-  max-height: 500px;
+  max-height: 400px;
   width: 100%;
   margin: 10px 0;
 
@@ -89,7 +89,8 @@ $y-marges: 20px;
       }
     }
     > p {
-      margin: 15px 0;
+      margin: 10px 0;
+      font-size: 12.5px;
     }
 
     > .navigation {

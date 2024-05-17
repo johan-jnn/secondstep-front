@@ -33,6 +33,7 @@ import ProductIRLLooks from '~/components/ProductIRLLooks';
 import KitEntretientCTA from '~/components/KitEntretientCTA';
 import FAQ from '~/components/FAQ';
 import NeufVsSS from '~/components/ComparatifNeufVsSS';
+import CarteAuthenticite from '~/components/CarteAuthenticite';
 
 export const meta: MetaFunction<typeof loader> = ({data, location}) => {
   return [{title: `Hydrogen | ${data?.product.title ?? ''}`}];
@@ -171,6 +172,9 @@ export default function Product() {
         </section>
         <section id="faq">
           <FAQ answers={[]} />
+        </section>
+        <section id="carte-authenticite">
+          <CarteAuthenticite />
         </section>
       </div>
     </>

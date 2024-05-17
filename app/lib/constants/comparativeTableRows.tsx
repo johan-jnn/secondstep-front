@@ -1,5 +1,7 @@
-import {CashEuroIcon, CheckIcon, XIcon} from '@shopify/polaris-icons';
+import {CheckIcon, XIcon} from '@shopify/polaris-icons';
 import Icon from '~/components/Icon';
+import CarteAuthenticite from '~/assets/carte_authenticite.png';
+import France from '~/assets/svg/france.svg';
 
 interface comparativeRow {
   title: JSX.Element | string;
@@ -33,21 +35,9 @@ export const comparativeRows: comparativeRow[] = [
         <b>Economique,</b> bon pour tes finances
       </>
     ),
-    ss: (
-      <>
-        <Icon icon={CashEuroIcon} />
-        <Icon icon={CashEuroIcon} />
-      </>
-    ),
-    sm: <Icon icon={CashEuroIcon} />,
-    an: (
-      <>
-        <Icon icon={CashEuroIcon} />
-        <Icon icon={CashEuroIcon} />
-        <Icon icon={CashEuroIcon} />
-        <Icon icon={CashEuroIcon} />
-      </>
-    ),
+    ss: <div className="deviseSigns">€€</div>,
+    sm: <div className="deviseSigns">€</div>,
+    an: <div className="deviseSigns">€€€€</div>,
   },
   {
     title: (
@@ -65,7 +55,7 @@ export const comparativeRows: comparativeRow[] = [
         Carte <b>authentification certifiée</b>
       </>
     ),
-    ss: '<IMAGE CARTE AUTHENTICITE>',
+    ss: <img src={CarteAuthenticite} alt="Carte d'authenticité" />,
     sm: <Icon icon={XIcon} />,
     an: <Icon icon={XIcon} />,
   },
@@ -85,7 +75,7 @@ export const comparativeRows: comparativeRow[] = [
         Concept et <b>marque française</b>
       </>
     ),
-    ss: '<IMAGE FRANCE>',
+    ss: <img src={France} alt="Forme de la france" />,
     sm: <Icon icon={XIcon} />,
     an: <Icon icon={XIcon} />,
   },

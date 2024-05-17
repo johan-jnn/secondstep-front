@@ -1,7 +1,7 @@
 .neufVsSS {
   display: flex;
   align-items: stretch;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 15px;
   background-color: var(--color-darkwhite);
   padding: 15px 0;
@@ -66,6 +66,7 @@
         &:nth-of-type(2) {
           border: 0 solid var(--color-primary);
           border-width: 2.5px 2.5px 0;
+          background-color: var(--color-white);
         }
         border-radius: 20px 20px 0 0;
         text-wrap: nowrap;
@@ -93,8 +94,10 @@
       font-size: 12px;
       border: 0 solid transparent;
       border-width: 0 15px;
+      $row-height: 45px;
 
       > tr {
+        height: $row-height;
         &:not(:last-of-type) {
           border: 0 solid var(--color-grey);
           border-bottom-width: 1.5px;
@@ -102,14 +105,18 @@
 
         > th {
           text-wrap: nowrap;
-          padding: 0 10px;
+          padding: 5px 10px;
         }
 
         > td {
-          padding: 5px 10px;
+          $vertical-padding: 5px;
+          padding: $vertical-padding 10px;
+          max-width: 150px;
+
           &:nth-of-type(1) {
             border: 0 solid var(--color-primary);
             border-width: 0 2.5px;
+            background-color: var(--color-white);
           }
           > .contentWrapper {
             display: flex;
@@ -117,9 +124,17 @@
             justify-content: center;
             text-align: center;
             > .icon {
-              height: 35px;
+              height: $row-height - $vertical-padding * 2;
               aspect-ratio: 1 / 1;
             }
+            img {
+              height: $row-height - $vertical-padding * 2;
+            }
+          }
+
+          .deviseSigns {
+            font-weight: 900;
+            font-size: 15px;
           }
         }
       }

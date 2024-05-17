@@ -46,11 +46,14 @@ a {
   &:not(:has(> button)):hover {
     text-decoration: underline;
   }
+  &:has(> button) {
+    display: inline-block;
+  }
 }
 
 
 button {
-  font-family: 'Anton', Arial, Helvetica, sans-serif;
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
   font-weight: 500;
   
   padding: 15px;
@@ -62,6 +65,9 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  background-color: var(--color-black);
+  color: var(--color-white);
 }
 
 hr {
