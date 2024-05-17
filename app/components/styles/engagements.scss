@@ -71,16 +71,17 @@
   }
 
   .banner-engagements {
-    margin-left: 8%;
     > h1 {
       font-size: 1.5em; 
     }  
   }
   
   .banner-rate {
-    margin-left: 8%;
   > h3 {
     font-size: 1rem; /* Réduction de la taille du titre */
+  }
+  > img{
+    width: 100%;
   }
 }
 }
@@ -93,6 +94,9 @@
     grid-template-areas: 
     'l1 l3'
     'l2 l4';
+
+    grid-template-columns: 50% 50%;
+    place-content: center;
   }
 
   .banner-engagements > h1 {
@@ -104,16 +108,31 @@
   }
 
   .banner-engagements {
+    display: grid;
     margin-left: 8%;
-    > h1 {
-      font-size: 1.5em; 
-    }  
   }
   
   .banner-rate {
+    > img{
+      width: 50%;
+    }
     margin-left: 8%;
   > h3 {
     font-size: 1rem; /* Réduction de la taille du titre */
   }
 }
+}
+
+@media (max-width: 750px) {
+  .banner-informations{
+    padding: 10%;
+  }
+
+  .banner-rate{
+    margin-left: 10%;
+  }
+
+  .banner-engagements{
+    margin-left: 10%;
+  }
 }
