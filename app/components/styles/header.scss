@@ -4,7 +4,7 @@
 * --------------------------------------------------
 */
 
-$header-height: 50px;
+$header-height: 75px;
 $icons-height: calc($header-height / 1.75);
 $cartBadge-height: calc($icons-height / 2.25);
 
@@ -16,6 +16,7 @@ $cartBadge-height: calc($icons-height / 2.25);
   height: var(--header-height);
   padding: 0 30px;
   position: sticky;
+  gap: 15px;
   top: 0;
   z-index: 20;
   font-family: 'Manrope';
@@ -27,11 +28,13 @@ $cartBadge-height: calc($icons-height / 2.25);
 
   > a {
     height: 100%;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    max-width: 50%;
 
     img {
       height: 65%;
+      width: 100%;
     }
   }
 }
