@@ -134,5 +134,15 @@
 
   .banner-engagements{
     margin-left: 10%;
+    > h1{
+      font-size: 1rem;
+    }
+    > p{
+      font-size: 0.9rem;
+    }
+  }
+
+  .certifications > div > p{
+    display: none;
   }
 }

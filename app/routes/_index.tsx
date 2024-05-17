@@ -7,7 +7,6 @@ import ProductCard, {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
 import {COLLECTION_FRAGMENT} from './collections._index';
 import HeroBanner from '~/components/HeroBanner';
 import Engagements from '~/components/Engagements';
-import HomePageCollectionCTA from '~/components/HomePageCollectionCTA';
 import ProductGrid from '~/components/ProductGrid';
 import VideoCards from '~/components/VideoCards';
 import RestoredProduct from '~/components/RestoredProduct';

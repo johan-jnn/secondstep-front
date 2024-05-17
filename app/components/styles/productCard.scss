@@ -102,3 +102,10 @@ $card-border-radius: 5px;
     }
   }
 }
+
+
+@media (max-width: 560px){
+  .product-card > .top > .brand {
+    width: 30px;
+  }
+}
