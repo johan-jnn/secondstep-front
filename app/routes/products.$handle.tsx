@@ -206,7 +206,7 @@ function Infos({product}: {product: ProductFragment}) {
         ))}
       </section>
       <hr />
-      <section className="certification">
+      <section id="certification">
         <Certification />
       </section>
     </div>
