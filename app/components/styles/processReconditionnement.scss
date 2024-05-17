@@ -112,8 +112,9 @@ $y-marges: 20px;
     grid-area: illustration;
 
     > img {
-      height: 100%;
       width: 100%;
+      height: 100%;
+      aspect-ratio: 2 / 1;
       object-fit: cover;
     }
 

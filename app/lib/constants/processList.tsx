@@ -71,7 +71,7 @@ export const processList: ProcessItem[] = [
     title: 'Confiance',
     icon: SunIcon,
     illustrations: {
-      img: 'https://cdn.shopify.com/s/files/1/0761/3231/9561/files/mobile_v2-min.jpg?v=1702912975',
+      img: 'https://cdn.shopify.com/s/files/1/0761/3231/9561/products/67dbd09523c1ac7ac2587d2c37ed0e31.jpg?v=1701432095',
     },
     descriptions: (
       <>
