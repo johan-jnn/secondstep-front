@@ -32,12 +32,100 @@
 
         > div{
             display: flex;
-            justify-content: space-evenly;
+            justify-content: center;
+            gap: 4%;
             margin-top: 3%;
             color: var(--color-primary)
         }
     }
     > .restoredProduct-right{
         width: 100%;
+    }
+}
+
+@media (max-width:1250px){
+    .restoredProduct{
+        display: grid;
+        > .restoredProduct-left{
+            display: flex; 
+            flex-direction: column;
+            > p{
+                margin-top: 0;
+                font-size: 0.9rem;
+            }
+            > h1{
+                grid-area: title;
+            }
+            > .text{
+                grid-area: text;
+            }
+
+            > .sub{
+                grid-area: sub;
+            }
+
+            > .rec{
+                grid-area: rec;
+            }
+            > a > button{
+                margin: 0 auto;
+                font-size: 0.8rem;
+                aspect-ratio:0;
+                padding: 1.5%;
+                width: 80%;
+            }
+        }
+    }
+}
+
+
+
+@media (max-width:870px){
+    .restoredProduct{
+        display: grid;
+        > .restoredProduct-left{
+            display: flex;
+            flex-direction: column;
+            > p{
+                margin-top: 2%;
+                font-size: 0.9rem;
+            }
+            > h1{
+                grid-area: title;
+            }
+            > .text{
+                grid-area: text;
+            }
+
+            > .sub{
+                grid-area: sub;
+            }
+
+            > .rec{
+                grid-area: rec;
+                margin: 0 auto;
+            }
+            > a > button{
+                margin: 0 auto;
+                font-size: 0.8rem;
+                width: 70%;
+            }
+        }
+    }
+}
+
+@media (max-width:870px){
+    .restoredProduct{
+        padding: 5% 2%;
+    }
+    .restoredProduct-left{
+        padding: 0 5%;
+    }
+    .rec{
+        text-align: center;
+        font-size: 0.9rem;
+    }
+    .restoredProduct > .restoredProduct-left > div{
+        gap: 0;
     }
 }

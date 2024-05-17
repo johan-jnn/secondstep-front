@@ -77,6 +77,42 @@
                 text-transform: uppercase;
                 cursor: default;
             }
+            > div{
+                display: grid;
+                width: 100%;
+            }
         }
+    }
+}
+
+@media (max-width:1170px){
+    .collection-BA{
+        padding: 3%;
+        display: grid;
+        grid-template-columns: 80%;
+        gap: 10px;
+    }
+    .collection-BA-card{
+        margin: 0;
+        aspect-ratio: 0;
+        > div{
+            > img{
+                aspect-ratio: 0;
+            }
+            > .after-bottom{
+                > div{
+                    width: 40%;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:600px){
+    .collection-BA{
+        padding: 3%;
+        display: grid;
+        grid-template-columns: 100%;
+        gap: 10px;
     }
 }

@@ -13,8 +13,10 @@ export default function RestoredProduct({
     <div className="restoredProduct">
       <div className="restoredProduct-left">
         <h1> Nos Dernières paires restaurées</h1>
-        <p>Chez SecondStep nous prennons à coeur notre mission</p>
-        <p>
+        <p className="text">
+          Chez SecondStep nous prennons à coeur notre mission
+        </p>
+        <p className="sub">
           Lorem ipsum dolar Lorem ipsum dolar Lorem ipsum dolar Lorem ipsum
           dolar
         </p>
@@ -33,7 +35,7 @@ export default function RestoredProduct({
               fill="var(--color-primary)"
             />
           </svg>
-          <p>Reconditionnées et certifiées par nos experts</p>
+          <p className="rec">Reconditionnées et certifiées par nos experts</p>
         </div>
       </div>
       <div className="restoredProduct-Right">
