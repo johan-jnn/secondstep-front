@@ -9,7 +9,9 @@
  * ```
  */
 
+import {XIcon} from '@shopify/polaris-icons';
 import '../styles/aside.scss';
+import Icon from './Icon';
 export function Aside({
   children,
   heading,
@@ -43,7 +45,7 @@ function CloseAside() {
   return (
     /* eslint-disable-next-line jsx-a11y/anchor-is-valid */
     <a className="close" href="#" onChange={() => history.go(-1)}>
-      &times;
+      <Icon icon={XIcon} />
     </a>
   );
 }

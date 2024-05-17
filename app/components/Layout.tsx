@@ -10,6 +10,7 @@ import {
   PredictiveSearchResults,
 } from '~/components/Search';
 import marquisContent from '~/lib/constants/marquis.json';
+import CollectionAsideContent from './CollectionsAsideContent';
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
@@ -31,6 +32,7 @@ export function Layout({
       <CartAside cart={cart} />
       <SearchAside />
       <MobileMenuAside menu={header?.menu} shop={header?.shop} />
+      <CollectionAside />
       {header && (
         <Header
           marquisTexts={marquisContent}
@@ -115,7 +117,17 @@ function MobileMenuAside({
           viewport="mobile"
           primaryDomainUrl={shop.primaryDomain.url}
         />
+        <hr />
+        <CollectionAsideContent />
       </Aside>
     )
+  );
+}
+
+function CollectionAside() {
+  return (
+    <Aside id="collection-aside" heading="MENU">
+      <CollectionAsideContent />
+    </Aside>
   );
 }

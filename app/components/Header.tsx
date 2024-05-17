@@ -4,7 +4,12 @@ import type {HeaderQuery} from 'storefrontapi.generated';
 import type {LayoutProps} from './Layout';
 import {useRootLoaderData} from '~/lib/root-data';
 import './styles/header.scss';
-import {OrderIcon, PersonIcon, SearchIcon} from '@shopify/polaris-icons';
+import {
+  MenuIcon,
+  OrderIcon,
+  PersonIcon,
+  SearchIcon,
+} from '@shopify/polaris-icons';
 import Icon from './Icon';
 import Banner from '../assets/banner.svg';
 
@@ -34,6 +39,9 @@ export function Header({
           primaryDomainUrl={shop.primaryDomain.url}
         />
         <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+        <a href="#collection-aside">
+          <Icon icon={MenuIcon} />
+        </a>
       </header>
     </>
   );
@@ -140,7 +148,7 @@ function LogInIcon() {
 function HeaderMenuMobileToggle() {
   return (
     <a className="header-menu-mobile-toggle" href="#mobile-menu-aside">
-      <h3>☰</h3>
+      <Icon icon={MenuIcon} />
     </a>
   );
 }

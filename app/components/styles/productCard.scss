@@ -54,7 +54,9 @@ $card-border-radius: 5px;
       position: absolute;
       bottom: 5%;
       right: 5%;
-      width: 50px;
+      width: 35px;
+      display: grid;
+      place-content: center;
       > img {
         width: 100%;
       }
