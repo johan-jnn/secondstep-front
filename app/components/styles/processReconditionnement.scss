@@ -1,4 +1,4 @@
-$bg: var(--color-light);
+$bg: var(--color-darkwhite);
 $barConstantSize: 5px;
 $y-marges: 20px;
 .reconditionnementProcess {
@@ -14,7 +14,7 @@ $y-marges: 20px;
   width: 100%;
   margin: 10px 0;
 
-  background-color: var(--color-darkwhite);
+  background-color: $bg;
 
   > .progressbar {
     position: relative;
