@@ -17,6 +17,7 @@ import PressSection from '~/components/PressSection';
 import OpinionSection from '~/components/OpinionSection';
 import HistoryCarousel from '~/components/HistoryCarousel';
 import FAQ from '~/components/FAQ';
+import CarteAuthenticite from '~/components/CarteAuthenticite';
 export const meta: MetaFunction = () => {
   return [{title: 'Second Step | Home'}];
 };
@@ -55,6 +56,7 @@ export default function Homepage() {
       <OpinionSection />
       <HistoryCarousel />
       <FAQ />
+      <CarteAuthenticite />
     </div>
   );
 }

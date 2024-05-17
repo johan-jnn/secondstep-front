@@ -13,7 +13,7 @@
         justify-content: flex-end;
         > button{
             color: var(--color-light);
-            width: 7%;
+            width: 100px;
             background-color: var(--color-dark);
             font-family: 'Manrope';
             
@@ -124,3 +124,62 @@
     }
   }
 }
+
+@media (max-width: 1270px) {
+  .brand-img-grid .brand-img-grid-bottom {
+    grid-template-rows: repeat(3, 100px); /* Modification de la hauteur des lignes */
+    grid-template-columns: repeat(4, 160px); /* Modification de la largeur des colonnes */
+    gap: 15px;
+    > a > div > h2 {
+      font-size: 1.3rem; /* Ajustement de la taille du texte */
+    }
+  }
+  .brand-img-grid .brand-img-grid-top > a > button {
+    width: 80px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 870px) {
+  .brand-img-grid .brand-img-grid-bottom {
+    grid-template-rows: repeat(3, 80px); /* Réduction de la hauteur des lignes */
+    grid-template-columns: repeat(4, 120px); /* Réduction de la largeur des colonnes */
+    gap:10px;
+    > a > div > h2 {
+      font-size: 1rem; /* Ajustement de la taille du texte */
+    }
+  }
+  .brand-img-grid .brand-img-grid-top > a > button {
+    height: 25px;
+  }
+}
+
+@media (max-width: 675px) {
+  .brand-img-grid .brand-img-grid-bottom {
+    grid-template-rows: repeat(3, 60px); /* Réduction de la hauteur des lignes */
+    grid-template-columns: repeat(4, 100px); /* Réduction de la largeur des colonnes */
+    gap: 5px;
+    > a > div > h2 {
+      font-size: 1rem; /* Ajustement de la taille du texte */
+    }
+    > a > div > p{
+      font-size: 0.7rem; 
+    }
+  }
+  .brand-img-grid .brand-img-grid-top > a > button {
+    height: 25px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .brand-img-grid .brand-img-grid-bottom {
+    grid-template-rows: repeat(3, 40px); /* Réduction de la hauteur des lignes */
+    grid-template-columns: repeat(4, 80px); /* Réduction de la largeur des colonnes */
+    gap: 5px;
+    > a > div > h2 {
+      font-size: 0.8rem; /* Ajustement de la taille du texte */
+    }
+  }
+}
+
