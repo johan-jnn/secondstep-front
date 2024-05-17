@@ -1,6 +1,10 @@
 import {Await} from '@remix-run/react';
 import {Suspense} from 'react';
-import type {CartApiQueryFragment, HeaderQuery} from 'storefrontapi.generated';
+import type {
+  CartApiQueryFragment,
+  CollectionMenuQuery,
+  HeaderQuery,
+} from 'storefrontapi.generated';
 import {Aside} from '~/components/Aside';
 import {Footer, type footerMenus} from '~/components/Footer';
 import {Header, HeaderMenu} from '~/components/Header';
@@ -10,6 +14,9 @@ import {
   PredictiveSearchResults,
 } from '~/components/Search';
 import marquisContent from '~/lib/constants/marquis.json';
+import CollectionAsideContent, {
+  type CollectionAsideContentProps,
+} from './CollectionsAsideContent';
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
@@ -17,6 +24,7 @@ export type LayoutProps = {
   footerMenus: Promise<footerMenus>;
   header: HeaderQuery;
   isLoggedIn: Promise<boolean>;
+  collectionMenu: CollectionMenuQuery;
 };
 
 export function Layout({
@@ -25,12 +33,22 @@ export function Layout({
   footerMenus,
   header,
   isLoggedIn,
+  collectionMenu,
 }: LayoutProps) {
   return (
     <>
       <CartAside cart={cart} />
       <SearchAside />
-      <MobileMenuAside menu={header?.menu} shop={header?.shop} />
+      {collectionMenu.menu && (
+        <>
+          <MobileMenuAside
+            menu={header?.menu}
+            shop={header?.shop}
+            collectionMenu={collectionMenu.menu}
+          />
+          <CollectionAside collectionMenu={collectionMenu.menu} />
+        </>
+      )}
       {header && (
         <Header
           marquisTexts={marquisContent}
@@ -102,9 +120,11 @@ function SearchAside() {
 function MobileMenuAside({
   menu,
   shop,
+  collectionMenu,
 }: {
   menu: HeaderQuery['menu'];
   shop: HeaderQuery['shop'];
+  collectionMenu: CollectionAsideContentProps['menu'];
 }) {
   return (
     menu &&
@@ -115,7 +135,21 @@ function MobileMenuAside({
           viewport="mobile"
           primaryDomainUrl={shop.primaryDomain.url}
         />
+        <hr />
+        <CollectionAsideContent menu={collectionMenu} />
       </Aside>
     )
+  );
+}
+
+function CollectionAside({
+  collectionMenu,
+}: {
+  collectionMenu: CollectionAsideContentProps['menu'];
+}) {
+  return (
+    <Aside id="collection-aside" heading={collectionMenu.title}>
+      <CollectionAsideContent menu={collectionMenu} />
+    </Aside>
   );
 }

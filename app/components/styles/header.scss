@@ -36,8 +36,8 @@ $cartBadge-height: calc($icons-height / 2.25);
   }
 }
 
-.header-menu-mobile-toggle {
-  @media (min-width: 730px) {
+@media (min-width: 730px) {
+  .header-menu-mobile-toggle {
     display: none;
   }
 }
@@ -55,8 +55,10 @@ $cartBadge-height: calc($icons-height / 2.25);
   @media screen and (min-width: 1000px) {
     gap: 3rem;
   }
-
-  @media (max-width: 730px) {
+}
+@media (max-width: 730px) {
+  .collectionOpenner,
+  .header-menu-desktop {
     display: none;
   }
 }

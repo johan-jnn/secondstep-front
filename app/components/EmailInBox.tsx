@@ -8,6 +8,7 @@ export default function EmailInbox({caption}: {caption?: string}) {
         name="email"
         id="email"
         placeholder={caption || 'Enter your email here!'}
+        required
       />
       <button type="submit">Souscrire</button>
     </form>
