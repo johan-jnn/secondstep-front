@@ -33,6 +33,7 @@
   > .content {
     padding: 25px 0;
     display: flex;
+    align-items: flex-start;
     flex-direction: column;
     max-width: 50%;
     z-index: 0;
@@ -60,6 +61,7 @@
     flex-direction: column;
     > .content {
         text-align: right;
+        align-items: flex-end;
         max-width: unset;
         > a {
             margin: 10px auto;

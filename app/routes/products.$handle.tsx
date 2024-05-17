@@ -171,7 +171,7 @@ export default function Product() {
           <NeufVsSS />
         </section>
         <section id="faq">
-          <FAQ answers={[]} />
+          <FAQ />
         </section>
         <section id="carte-authenticite">
           <CarteAuthenticite />

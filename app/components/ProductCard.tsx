@@ -47,11 +47,16 @@ export default function ProductCard({
 
   const fakeReviewsLength = useRef(Math.floor(Math.random() * 25) + 5);
   const maxScore = 1;
+  // = 60% du meilleur score au minimum
+  const fakeMinScore = (75 / 100) * maxScore;
   const reviewsAverage = useRef(
     new Array(fakeReviewsLength.current)
       .fill(null)
-      .reduce((pre: number, _) => pre + Math.random() * maxScore, 0) /
-      fakeReviewsLength.current,
+      .reduce(
+        (pre: number, _) =>
+          pre + fakeMinScore + Math.random() * (maxScore - fakeMinScore),
+        0,
+      ) / fakeReviewsLength.current,
   );
   return (
     <Link className="product-card" to={`/products/${handle}`} key={id}>
