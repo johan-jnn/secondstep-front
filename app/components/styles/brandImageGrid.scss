@@ -127,8 +127,8 @@
 
 @media (max-width: 1270px) {
   .brand-img-grid .brand-img-grid-bottom {
-    grid-template-rows: repeat(3, 100px); /* Modification de la hauteur des lignes */
-    grid-template-columns: repeat(4, 160px); /* Modification de la largeur des colonnes */
+    grid-template-rows: repeat(3, 120px); /* Modification de la hauteur des lignes */
+    grid-template-columns: repeat(4, 180px); /* Modification de la largeur des colonnes */
     gap: 15px;
     > a > div > h2 {
       font-size: 1.3rem; /* Ajustement de la taille du texte */
@@ -140,10 +140,10 @@
   }
 }
 
-@media (max-width: 870px) {
+@media (max-width: 955px) {
   .brand-img-grid .brand-img-grid-bottom {
-    grid-template-rows: repeat(3, 80px); /* Réduction de la hauteur des lignes */
-    grid-template-columns: repeat(4, 120px); /* Réduction de la largeur des colonnes */
+    grid-template-rows: repeat(3, 100px); /* Réduction de la hauteur des lignes */
+    grid-template-columns: repeat(4, 140px); /* Réduction de la largeur des colonnes */
     gap:10px;
     > a > div > h2 {
       font-size: 1rem; /* Ajustement de la taille du texte */
@@ -154,10 +154,20 @@
   }
 }
 
-@media (max-width: 675px) {
+@media (max-width: 745px) {
   .brand-img-grid .brand-img-grid-bottom {
-    grid-template-rows: repeat(3, 60px); /* Réduction de la hauteur des lignes */
-    grid-template-columns: repeat(4, 100px); /* Réduction de la largeur des colonnes */
+    display: grid;
+    height: max-content;
+    place-content: center;
+    grid-template-areas:
+      'img1 img4'
+      'img2 img4' 
+      'img3 img5'
+      'img6 img6'
+      'img7 img8' 
+      'img7 img8';
+    grid-template-rows: repeat(6, 120px); /* Réduction de la hauteur des lignes */
+    grid-template-columns: repeat(2, 160px); /* Réduction de la largeur des colonnes */
     gap: 5px;
     > a > div > h2 {
       font-size: 1rem; /* Ajustement de la taille du texte */
@@ -172,14 +182,4 @@
   }
 }
 
-@media (max-width: 520px) {
-  .brand-img-grid .brand-img-grid-bottom {
-    grid-template-rows: repeat(3, 40px); /* Réduction de la hauteur des lignes */
-    grid-template-columns: repeat(4, 80px); /* Réduction de la largeur des colonnes */
-    gap: 5px;
-    > a > div > h2 {
-      font-size: 0.8rem; /* Ajustement de la taille du texte */
-    }
-  }
-}
 
