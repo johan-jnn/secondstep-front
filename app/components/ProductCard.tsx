@@ -5,7 +5,7 @@ import type {ProductCardFragment} from 'storefrontapi.generated';
 import './styles/productCard.scss';
 import Price from './Price';
 import Stars from './Stars';
-import BrandLogo, {type ValidLogos} from './BrandLogo';
+import BrandLogo, {type ValidBrands} from './BrandLogo';
 import getProductTitleAndSub from '~/lib/productTitles';
 import {useRef} from 'react';
 
@@ -71,9 +71,7 @@ export default function ProductCard({
           <p>{availableForSale ? 'En stock' : 'Epuisé'}</p>
         </div>
         <div className="brand">
-          <BrandLogo
-            logo={vendor.toLowerCase().replaceAll(' ', '_') as ValidLogos}
-          />
+          <BrandLogo brand={vendor as ValidBrands} />
         </div>
       </div>
       <div className="bottom">

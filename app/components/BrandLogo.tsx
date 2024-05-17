@@ -1,13 +1,9 @@
-export type ValidLogos = 'nike' | 'new_balance' | 'adidas' | 'air_jordan';
+export type ValidBrands = 'Nike' | 'New Balance' | 'adidas' | 'Air Jordan';
 
 export interface BrandLogoProps {
-  logo: ValidLogos;
+  brand: ValidBrands;
 }
 export default function BrandLogo(props: BrandLogoProps) {
-  return (
-    <img
-      src={`/brands_icons/${props.logo}.svg?url`}
-      alt={`Logo of ${props.logo}`}
-    />
-  );
+  const logo = props.brand.toLowerCase().replaceAll(' ', '_');
+  return <img src={`/brands_icons/${logo}.svg?url`} alt={`Logo of ${logo}`} />;
 }

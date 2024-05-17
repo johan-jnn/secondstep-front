@@ -6,7 +6,7 @@ import type {
   PredictivePageFragment,
   PredictiveArticleFragment,
 } from 'storefrontapi.generated';
-import algoliasearch from 'algoliasearch/lite';
+import * as algoliasearch from 'algoliasearch/lite';
 
 // ! En environnement de développement, algoliasearch est `undefined`
 // console.log(algoliasearch);

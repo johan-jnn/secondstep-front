@@ -17,6 +17,7 @@ import PressSection from '~/components/PressSection';
 import OpinionSection from '~/components/OpinionSection';
 import HistoryCarousel from '~/components/HistoryCarousel';
 import FAQ from '~/components/FAQ';
+import CollectionCard from '~/components/CollectionCard';
 export const meta: MetaFunction = () => {
   return [{title: 'Second Step | Home'}];
 };
@@ -38,7 +39,7 @@ export default function Homepage() {
       <HeroBanner />
       <div className="homepage-featured-collection">
         {data.featuredCollection.map((collection) => (
-          <HomePageCollectionCTA key={collection.id} collection={collection} />
+          <CollectionCard key={collection.id} collection={collection} />
         ))}
       </div>
       <Engagements />

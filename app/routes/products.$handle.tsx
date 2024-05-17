@@ -25,7 +25,7 @@ import {getVariantUrl} from '~/lib/variants';
 import ProductForm from '~/components/ProductForm';
 import getProductTitleAndSub from '~/lib/productTitles';
 import Certification from '~/components/Certification';
-import BrandLogo, {type ValidLogos} from '~/components/BrandLogo';
+import BrandLogo, {type ValidBrands} from '~/components/BrandLogo';
 import Button from '~/components/Button';
 import TrustPilotReviews from '~/components/trustPilotReviews';
 import ProcessReconditionnement from '~/components/ProcessReconditionnement';
@@ -189,7 +189,7 @@ function Infos({product}: {product: ProductFragment}) {
     marque: (
       <>
         <p>{product.vendor.toUpperCase()}</p>
-        <BrandLogo logo={brand as ValidLogos} />
+        <BrandLogo brand={brand as ValidBrands} />
       </>
     ),
     modèle: <p>{subtitle}</p>,
