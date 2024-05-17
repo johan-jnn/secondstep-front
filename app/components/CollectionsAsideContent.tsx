@@ -27,7 +27,14 @@ function CollectionItem({item}: {item: CollectionItem}) {
   if (!resource) return;
 
   return (
-    <Link to={`/collections/${resource?.handle}`} className="collectionItem">
+    <Link
+      to={`/collections/${resource?.handle}`}
+      className="collectionItem"
+      onClick={(ev) => {
+        // close the aside
+        window.location.href = ev.currentTarget.href;
+      }}
+    >
       {resource.image && <Image data={resource.image} />}
       <h4>{title}</h4>
     </Link>
