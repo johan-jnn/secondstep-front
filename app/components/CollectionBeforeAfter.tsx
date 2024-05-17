@@ -37,7 +37,9 @@ function BACard({product}: BACardProps) {
         <div className="after-bottom">
           <p>After</p>
           &nbsp;&nbsp;
-          <Banner color="var(--color-light)" />
+          <div>
+            <Banner color="var(--color-light)" />
+          </div>
         </div>
       </div>
     </div>
