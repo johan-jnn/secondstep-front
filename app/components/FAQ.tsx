@@ -37,7 +37,7 @@ function FAQItem({question, answer, link}: FAQItemProps) {
       {isOpen && (
         <div className="answer">
           {answer.map((paragraph, index) => (
-            <React.Fragment key={index}>
+            <React.Fragment key={paragraph}>
               <p>{paragraph}</p>
               {index !== answer.length - 1 && <br />}{' '}
               {/* Ajout de <br /> si ce n'est pas le dernier paragraphe */}
@@ -92,9 +92,9 @@ export default function FAQ() {
       </div>
       <div className="faq-questions">
         <h1>Question Fréquentes</h1>
-        {faqList.map((faq, index) => (
+        {faqList.map((faq) => (
           <FAQItem
-            key={index}
+            key={faq.question}
             question={faq.question}
             answer={faq.answer}
             link={faq.link}

@@ -51,7 +51,7 @@ interface ItemProps {
 }
 function CertificationItem(props: ItemProps) {
   return (
-    <li>
+    <div className="certifications">
       <div className="topline">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -64,16 +64,18 @@ function CertificationItem(props: ItemProps) {
             fill="var(--color-primary)"
           />
         </svg>
-        <h3>{props.title}</h3>
       </div>
-      <p>
-        {props.description}
-        {props.link && (
-          <>
-            ... <a href={props.link || '?'}>En savoir plus</a>
-          </>
-        )}
-      </p>
-    </li>
+      <div className="text">
+        <h3>{props.title}</h3>
+        <p>
+          {props.description}
+          {props.link && (
+            <>
+              ... <a href={props.link || '?'}>En savoir plus</a>
+            </>
+          )}
+        </p>
+      </div>
+    </div>
   );
 }

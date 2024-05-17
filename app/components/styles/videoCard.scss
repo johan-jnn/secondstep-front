@@ -32,3 +32,49 @@
     }
   }
 }
+
+
+@media (max-width: 1110px) {
+    .VideoCard{
+      > .VideoCard-top {
+        > h3{
+          font-size: 2rem;
+        }
+        > .videoButton {
+          width: 20%;
+        }
+    }
+    > .VideoCard-bottom{
+      > h4 {
+        font-size: 1rem;
+      }
+      > p{
+        font-size: 0.7rem;
+      }
+    }
+}
+}
+
+@media (max-width: 930px) {
+  .VideoCard{
+    aspect-ratio: 1/1;
+    width: 30%;
+  }
+}
+
+@media (max-width: 750px) {
+  .VideoCard{
+    width: 100%;
+    aspect-ratio: 1/0.5;
+    > .VideoCard-top {
+      justify-content: space-between;
+      margin: 0% 2%;
+      > h3{
+        font-size: 2rem;
+      }
+      > .videoButton {
+        width: 10%;
+      }
+  }
+  }
+}
