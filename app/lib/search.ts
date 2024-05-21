@@ -1,10 +1,10 @@
 import type {
   PredictiveQueryFragment,
-  SearchProductFragment,
   PredictiveProductFragment,
   PredictiveCollectionFragment,
   PredictivePageFragment,
   PredictiveArticleFragment,
+  SearchQuery,
 } from 'storefrontapi.generated';
 import algoliasearch from 'algoliasearch';
 
@@ -17,7 +17,7 @@ import algoliasearch from 'algoliasearch';
 export function applyTrackingParams(
   resource:
     | PredictiveQueryFragment
-    | SearchProductFragment
+    | SearchQuery['products']['nodes'][number]
     | PredictiveProductFragment
     | PredictiveCollectionFragment
     | PredictiveArticleFragment

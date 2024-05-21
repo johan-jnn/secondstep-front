@@ -6,7 +6,7 @@ import {
   type FormProps,
 } from '@remix-run/react';
 import {Image, Money, Pagination} from '@shopify/hydrogen';
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, type FormEvent} from 'react';
 import {applyTrackingParams} from '~/lib/search';
 import '../styles/search.scss';
 
@@ -15,7 +15,11 @@ import type {
   PredictiveCollectionFragment,
   PredictiveArticleFragment,
   SearchQuery,
+  ProductCardFragment,
 } from 'storefrontapi.generated';
+import ProductCard from './ProductCard';
+import ProductGrid from './ProductGrid';
+import LoadMore from './loadMoreContent';
 
 type PredicticeSearchResultItemImage =
   | PredictiveCollectionFragment['image']
@@ -64,44 +68,6 @@ export const NO_PREDICTIVE_SEARCH_RESULTS: NormalizedPredictiveSearchResults = [
   {type: 'pages', items: []},
   {type: 'articles', items: []},
 ];
-
-export function SearchForm({searchTerm}: {searchTerm: string}) {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  // focus the input when cmd+k is pressed
-  useEffect(() => {
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'k' && event.metaKey) {
-        event.preventDefault();
-        inputRef.current?.focus();
-      }
-
-      if (event.key === 'Escape') {
-        inputRef.current?.blur();
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
-
-  return (
-    <Form method="get">
-      <input
-        defaultValue={searchTerm}
-        name="q"
-        placeholder="Search…"
-        ref={inputRef}
-        type="search"
-      />
-      &nbsp;
-      <button type="submit">Search</button>
-    </Form>
-  );
-}
 
 export function SearchResults({
   results,
@@ -162,51 +128,19 @@ function SearchResultsProductsGrid({
       <h2>Products</h2>
       <Pagination connection={products}>
         {({nodes, isLoading, NextLink, PreviousLink}) => {
-          const ItemsMarkup = nodes.map((product) => {
-            const trackingParams = applyTrackingParams(
-              product,
-              `q=${encodeURIComponent(searchTerm)}`,
-            );
-
-            return (
-              <div className="search-results-item" key={product.id}>
-                <Link
-                  prefetch="intent"
-                  to={`/products/${product.handle}${trackingParams}`}
-                >
-                  {product.variants.nodes[0].image && (
-                    <Image
-                      data={product.variants.nodes[0].image}
-                      alt={product.title}
-                      width={50}
-                    />
-                  )}
-                  <div>
-                    <p>{product.title}</p>
-                    <small>
-                      <Money data={product.variants.nodes[0].price} />
-                    </small>
-                  </div>
-                </Link>
-              </div>
-            );
-          });
           return (
             <div>
-              <div>
-                <PreviousLink>
-                  {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
-                </PreviousLink>
-              </div>
-              <div>
-                {ItemsMarkup}
-                <br />
-              </div>
-              <div>
-                <NextLink>
-                  {isLoading ? 'Loading...' : <span>Load more ↓</span>}
-                </NextLink>
-              </div>
+              <LoadMore
+                direction="previous"
+                isLoading={isLoading}
+                link={PreviousLink}
+              />
+              <ProductGrid products={nodes} />
+              <LoadMore
+                direction="more"
+                isLoading={isLoading}
+                link={NextLink}
+              />
             </div>
           );
         }}
@@ -257,7 +191,7 @@ export function NoSearchResults() {
 }
 
 type ChildrenRenderProps = {
-  fetchResults: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  fetchResults: (event: FormEvent<HTMLFormElement>) => void;
   fetcher: ReturnType<typeof useFetcher<NormalizedPredictiveSearchResults>>;
   inputRef: React.MutableRefObject<HTMLInputElement | null>;
 };
@@ -284,9 +218,12 @@ export function PredictiveSearchForm({
   });
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  function fetchResults(event: React.ChangeEvent<HTMLInputElement>) {
+  function fetchResults(event: FormEvent<HTMLFormElement>) {
     const searchAction = action ?? '/api/predictive-search';
-    const newSearchTerm = event.target.value || '';
+    const {currentTarget} = event;
+    if (!currentTarget) return;
+    const form = new FormData(currentTarget as HTMLFormElement);
+    const newSearchTerm = form.get('q')?.toString() || '';
     const localizedAction = params.locale
       ? `/${params.locale}${searchAction}`
       : searchAction;

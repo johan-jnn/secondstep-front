@@ -2,7 +2,9 @@ import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, type MetaFunction} from '@remix-run/react';
 import {getPaginationVariables} from '@shopify/hydrogen';
 
-import {SearchForm, SearchResults, NoSearchResults} from '~/components/Search';
+import {SearchResults, NoSearchResults} from '~/components/Search';
+import SearchForm from '~/components/searchForm';
+import {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
 
 export const meta: MetaFunction = () => {
   return [{title: `Hydrogen | Search`}];
@@ -53,7 +55,16 @@ export default function SearchPage() {
   return (
     <div className="search">
       <h1>Search</h1>
-      <SearchForm searchTerm={searchTerm} />
+      <SearchForm
+        current={{
+          q: searchTerm,
+        }}
+        options={{
+          brands: ['Nike'],
+          colors: [],
+          sizes: [35, 39, 40, '42 1/4'],
+        }}
+      />
       {!searchTerm || !searchResults.totalResults ? (
         <NoSearchResults />
       ) : (
@@ -67,42 +78,6 @@ export default function SearchPage() {
 }
 
 const SEARCH_QUERY = `#graphql
-  fragment SearchProduct on Product {
-    __typename
-    handle
-    id
-    publishedAt
-    title
-    trackingParameters
-    vendor
-    variants(first: 1) {
-      nodes {
-        id
-        image {
-          url
-          altText
-          width
-          height
-        }
-        price {
-          amount
-          currencyCode
-        }
-        compareAtPrice {
-          amount
-          currencyCode
-        }
-        selectedOptions {
-          name
-          value
-        }
-        product {
-          handle
-          title
-        }
-      }
-    }
-  }
   fragment SearchPage on Page {
      __typename
      handle
@@ -138,7 +113,9 @@ const SEARCH_QUERY = `#graphql
     ) {
       nodes {
         ...on Product {
-          ...SearchProduct
+          __typename
+          trackingParameters
+          ...ProductCard
         }
       }
       pageInfo {
@@ -171,4 +148,6 @@ const SEARCH_QUERY = `#graphql
       }
     }
   }
+
+  ${PRODUCT_CARD_FRAGMENT}
 ` as const;

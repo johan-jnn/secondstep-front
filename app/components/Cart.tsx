@@ -6,6 +6,7 @@ import {useVariantUrl} from '~/lib/variants';
 import CartLineItem from 'app/components/CartProductCard';
 import '../styles/cart.scss';
 import Price from './Price';
+import Button from './Button';
 
 type CartLine = CartApiQueryFragment['lines']['nodes'][0];
 
@@ -121,10 +122,7 @@ export function CartEmpty({
   return (
     <div hidden={hidden}>
       <br />
-      <p>
-        Looks like you haven&rsquo;t added anything yet, let&rsquo;s get you
-        started!
-      </p>
+      <p>Vous n&apos;avez encore rien ajouté à votre panier.</p>
       <br />
       <Link
         to="/collections"
@@ -134,7 +132,7 @@ export function CartEmpty({
           }
         }}
       >
-        <button className="cart-empty-button">Continue shopping &rarr;</button>
+        <Button type="primary" text="Continuer vos achats" />
       </Link>
     </div>
   );

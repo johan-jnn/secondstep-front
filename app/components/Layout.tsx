@@ -17,6 +17,7 @@ import marquisContent from '~/lib/constants/marquis.json';
 import CollectionAsideContent, {
   type CollectionAsideContentProps,
 } from './CollectionsAsideContent';
+import SearchForm from './searchForm';
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
@@ -90,24 +91,11 @@ function SearchAside() {
         <PredictiveSearchForm>
           {({fetchResults, inputRef}) => (
             <div>
-              <input
-                name="q"
+              <SearchForm
                 onChange={fetchResults}
                 onFocus={fetchResults}
-                placeholder="Search"
-                ref={inputRef}
-                type="search"
+                inputRef={inputRef}
               />
-              &nbsp;
-              <button
-                onClick={() => {
-                  window.location.href = inputRef?.current?.value
-                    ? `/search?q=${inputRef.current.value}`
-                    : `/search`;
-                }}
-              >
-                Search
-              </button>
             </div>
           )}
         </PredictiveSearchForm>
