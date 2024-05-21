@@ -16,8 +16,8 @@ export default function HistoryCarousel() {
       <div className="history-carousel-sub">
         <Swiper
           modules={[Virtual, Navigation]}
-          slidesPerView={3}
-          centeredSlides={true}
+          slidesPerView={4}
+          centeredSlides={false}
           spaceBetween={50}
           navigation={true}
           breakpoints={{
@@ -38,7 +38,7 @@ export default function HistoryCarousel() {
               spaceBetween: 0,
             },
             1200: {
-              slidesPerView: 3,
+              slidesPerView: 4,
               spaceBetween: 100,
             },
           }}

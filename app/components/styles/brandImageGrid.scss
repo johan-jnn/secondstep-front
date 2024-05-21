@@ -50,9 +50,11 @@
       width: 100%;
       border: solid 1px;
       border-radius: 10px;
+      transition: transform 0.3s ease;
     }
-    .img1, .img2, .img3, .img4, .img5, .img6, .img7, .img8:hover{
+    .img1:hover, .img2:hover, .img3:hover, .img4:hover, .img5:hover, .img6:hover, .img7:hover, .img8:hover{
       opacity: 0.8;
+      transform: scale(1.02);
     }
   } 
 }

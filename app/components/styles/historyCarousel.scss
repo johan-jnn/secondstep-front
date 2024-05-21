@@ -12,7 +12,7 @@
     > .history-carousel-sub{
       margin: 0 auto;
       background-color: transparent;
-      width: 900px;
+      width: 1200px;
     }
 }
 
@@ -61,6 +61,14 @@
     opacity: 0.7;
   }
 
+
+  @media (max-width : 1200px) {
+    .history-carousel{
+      > .history-carousel-sub{
+          width: 900px;
+      }
+    }
+  }
 
   @media (max-width : 1090px) {
     .history-carousel{

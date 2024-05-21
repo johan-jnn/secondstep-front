@@ -646,6 +646,23 @@ export type CollectionQuery = {
   >;
 };
 
+export type DropProductQueryQueryVariables = StorefrontAPI.Exact<{
+  [key: string]: never;
+}>;
+
+export type DropProductQueryQuery = {
+  collection?: StorefrontAPI.Maybe<
+    Pick<
+      StorefrontAPI.Collection,
+      'id' | 'title' | 'handle' | 'description'
+    > & {
+      image?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Image, 'id' | 'url' | 'altText' | 'width' | 'height'>
+      >;
+    }
+  >;
+};
+
 export type CollectionFragment = Pick<
   StorefrontAPI.Collection,
   'id' | 'title' | 'handle' | 'description'
@@ -1198,6 +1215,10 @@ interface GeneratedQueryTypes {
   '#graphql\n  #graphql\nfragment ProductCard on Product {\n  id\n  title\n  handle\n  priceRange {\n    minVariantPrice {\n      amount\n      currencyCode\n    }\n  }\n  featuredImage {\n    url\n    altText\n  }\n  availableForSale\n  vendor\n}\n  query Collection(\n    $handle: String!\n    $country: CountryCode\n    $language: LanguageCode\n    $first: Int\n    $last: Int\n    $startCursor: String\n    $endCursor: String\n  ) @inContext(country: $country, language: $language) {\n    collection(handle: $handle) {\n      id\n      handle\n      title\n      description\n      products(\n        first: $first,\n        last: $last,\n        before: $startCursor,\n        after: $endCursor\n      ) {\n        nodes {\n          ...ProductCard\n        }\n        pageInfo {\n          hasPreviousPage\n          hasNextPage\n          endCursor\n          startCursor\n        }\n      }\n    }\n  }\n': {
     return: CollectionQuery;
     variables: CollectionQueryVariables;
+  };
+  '#graphql\n  #graphql\n  fragment Collection on Collection {\n    id\n    title\n    handle\n    description\n    image {\n      id\n      url\n      altText\n      width\n      height\n    }\n  }\n  query DropProductQuery {\n    collection(handle: "Drop") {\n      ...Collection\n    }\n  }\n': {
+    return: DropProductQueryQuery;
+    variables: DropProductQueryQueryVariables;
   };
   '#graphql\n  #graphql\n  fragment Collection on Collection {\n    id\n    title\n    handle\n    description\n    image {\n      id\n      url\n      altText\n      width\n      height\n    }\n  }\n  query StoreCollections(\n    $country: CountryCode\n    $endCursor: String\n    $first: Int\n    $language: LanguageCode\n    $last: Int\n    $startCursor: String\n  ) @inContext(country: $country, language: $language) {\n    collections(\n      first: $first,\n      last: $last,\n      before: $startCursor,\n      after: $endCursor\n    ) {\n      nodes {\n        ...Collection\n      }\n      pageInfo {\n        hasNextPage\n        hasPreviousPage\n        startCursor\n        endCursor\n      }\n    }\n  }\n': {
     return: StoreCollectionsQuery;
