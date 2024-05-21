@@ -9,7 +9,6 @@ import './styles/historyCarousel.scss';
 
 // Importez votre JSON
 import data from '../lib/constants/historyCarousel.json';
-
 export default function HistoryCarousel() {
   return (
     <div className="history-carousel">
@@ -17,11 +16,32 @@ export default function HistoryCarousel() {
       <div className="history-carousel-sub">
         <Swiper
           modules={[Virtual, Navigation]}
-          slidesPerView={4}
-          centeredSlides={false}
-          spaceBetween={30}
+          slidesPerView={3}
+          centeredSlides={true}
+          spaceBetween={50}
           navigation={true}
-          virtual
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            620: {
+              slidesPerView: 1,
+              spaceBetween: 30,
+            },
+            710: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            1090: {
+              slidesPerView: 2,
+              spaceBetween: 0,
+            },
+            1200: {
+              slidesPerView: 3,
+              spaceBetween: 100,
+            },
+          }}
         >
           {data.History.map((item, index) => (
             <SwiperSlide key={index}>

@@ -32,3 +32,11 @@
         }
     }
 }
+
+@media (max-width: 920px) {
+    .press-section > 
+    .press-section-container{
+        display: flex;
+        flex-direction: column;
+    }
+}

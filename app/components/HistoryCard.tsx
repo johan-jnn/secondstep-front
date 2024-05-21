@@ -22,7 +22,8 @@ export default function HistoryCard({
     <div className="history-card">
       <div className="history-card-top">
         <img src={imgsrc} alt="" />
-        <p>{section}</p>
+        <p className="section">{section}</p>
+        <p className="hide-more">Lire Plus</p>
       </div>
       <div className="history-card-bottom">
         <p className="history-card-bottom-date">{date}</p>

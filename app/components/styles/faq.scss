@@ -87,3 +87,40 @@
         font-weight: 100;
     }
 }
+
+
+@media (max-width: 1150px){
+    .faq{
+        display: grid;
+        justify-content: center;
+        grid-template-areas: 
+        'socials' 
+        'faq';
+        grid-template-columns: 90%;
+        padding-bottom: 2%;
+    }
+    .faq-item{
+        > .question{
+            > p{
+                width: 80%;
+            }
+            > a{
+                width: 30px;
+            }
+        } 
+}
+}
+
+@media (max-width: 515px){
+    .faq-socials{
+        grid-template-columns: 90%;
+        > .faq-socials-min{
+            font-size: 0.9rem;
+        }
+        > .faq-socials-min:hover{
+            color: var(--color-dark);
+            border: solid 1px var(--color-dark);
+        }
+    
+    }
+}
