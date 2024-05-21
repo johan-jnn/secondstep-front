@@ -2,6 +2,7 @@
     background-color: var(--color-darkwhite);
     padding: 1%;
     display: grid;
+    width: 100%;
     > h1{
       width: 70%;
       margin: 0 auto;
@@ -11,7 +12,7 @@
     > .history-carousel-sub{
       margin: 0 auto;
       background-color: transparent;
-      width: 70%;
+      width: 900px;
     }
 }
 
@@ -26,7 +27,6 @@
     font-size: 18px;
     background: transparent;
   
-    /* Center slide text vertically */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,33 +40,40 @@
   }
   
   .swiper-button-prev {
+    aspect-ratio: 1/1;
     scale: 0.6;
     border: solid 1px ;
-    color: var(--color-dark);
-    background-color: var(--color-light);
-    padding: 3% 1.5%;
-    border-radius: 10px;
+    color: var(--color-light);
+    background-color: var(--color-dark);
+    padding: 4% 2.7%;
+    border-radius: 50px;
+    opacity: 0.7;
   }
 
   .swiper-button-next {
     scale: 0.6;
+    aspect-ratio: 1/1;
     border: solid 1px ;
-    color: var(--color-dark);
-    background-color: var(--color-light);
-    padding: 3% 1.5%;
-    border-radius: 10px;
+    color: var(--color-light);
+    background-color: var(--color-dark);
+    padding: 4% 2.7%;
+    border-radius: 50px;
+    opacity: 0.7;
   }
 
-  @keyframes pulse {
-    0% {
-      color: var(--color-dark);
+
+  @media (max-width : 1090px) {
+    .history-carousel{
+      > .history-carousel-sub{
+          width: 700px;
+      }
     }
-  
-    70% {
-      color: var(--color-light);
-    }
-  
-    100% {
-      color: var(--color-dark);
+  }
+
+  @media (max-width : 710px) {
+    .history-carousel{
+      > .history-carousel-sub{
+          width: 500px;
+      }
     }
   }

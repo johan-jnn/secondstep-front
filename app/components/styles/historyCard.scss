@@ -3,6 +3,8 @@
     aspect-ratio: 0.6/1;
     background-color: var(--color-light);
     border-radius: 15px;
+    min-height: 500px;
+    height: 500px;
     > div{
         display: grid;
         justify-content: center;
@@ -16,7 +18,7 @@
             border-radius: 15px 15px 0px 0px;
         }
 
-        > p{
+        > .section{
             position: absolute;
             z-index: 10;
             color: var(--color-dark);
@@ -27,9 +29,24 @@
             right: 0;
             margin: 5%;
         }
+
+        > .hide-more{
+            display: none;
+            position: absolute;
+            z-index: 10;
+            color: var(--color-light);
+            border-radius: 5px;
+            font-size: 0.9rem;
+            padding: 5px 10px;
+            left: 0;
+            text-decoration: underline;
+            font-weight: bold;
+            margin: 5%;
+        }
     }
 
     > .history-card-bottom{
+        position: relative;
         display: grid;
         > .history-card-bottom-date{
             color: var(--color-grey);
@@ -72,4 +89,53 @@
   -webkit-line-clamp: 3; /* Nombre de lignes avant troncature */
   -webkit-box-orient: vertical;
   max-width: 95%;
+  }
+
+
+  @media (max-width : 1090px) {
+    .history-card{
+        margin: 50px 0px;
+        aspect-ratio: 1/1;
+        width: 250px;
+        min-height: 200px;
+        height: 400px;
+        > .history-card-top{
+            height: 220px;
+            position: relative;
+            > img{
+                aspect-ratio: 1/0.5;
+                object-fit: cover;
+                width: 100%;
+                border-radius: 15px 15px 0px 0px;
+            }
+
+            > .hide-more{
+                display: flex;
+            }
+        }
+        > .history-card-bottom{
+            > a{
+                display: none;
+            }
+        }
+    }
+  }
+
+  @media (max-width : 750px) {
+    .history-card{
+        aspect-ratio: 1/1;
+        width: 250px;
+        min-height: 200px;
+        height: 300px;
+        > .history-card-top{
+            height: 120px;
+            position: relative;
+            > img{
+                aspect-ratio: 1/0.5;
+                object-fit: cover;
+                width: 100%;
+                border-radius: 15px 15px 0px 0px;
+            }
+    }
+    }
   }
