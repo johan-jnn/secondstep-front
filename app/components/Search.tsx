@@ -240,22 +240,7 @@ export function PredictiveSearchForm({
     inputRef?.current?.setAttribute('type', 'search');
   }, []);
 
-  return (
-    <fetcher.Form
-      {...props}
-      className={className}
-      onSubmit={(event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        if (!inputRef?.current || inputRef.current.value === '') {
-          return;
-        }
-        inputRef.current.blur();
-      }}
-    >
-      {children({fetchResults, inputRef, fetcher})}
-    </fetcher.Form>
-  );
+  return children({fetchResults, inputRef, fetcher});
 }
 
 export function PredictiveSearchResults() {

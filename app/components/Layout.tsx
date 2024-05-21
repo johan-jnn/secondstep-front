@@ -90,13 +90,11 @@ function SearchAside() {
         <br />
         <PredictiveSearchForm>
           {({fetchResults, inputRef}) => (
-            <div>
-              <SearchForm
-                onChange={fetchResults}
-                onFocus={fetchResults}
-                inputRef={inputRef}
-              />
-            </div>
+            <SearchForm
+              onChange={fetchResults}
+              onFocus={fetchResults}
+              inputRef={inputRef}
+            />
           )}
         </PredictiveSearchForm>
         <PredictiveSearchResults />

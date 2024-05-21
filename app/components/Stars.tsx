@@ -74,19 +74,15 @@ export interface StarProps {
 export function Star({filledPourcent, background, foreground}: StarProps) {
   const gradientID = `stargradient_${Math.floor(filledPourcent * 100)}`;
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 32 32"
+      key={gradientID}
+    >
       <defs>
         <linearGradient id={gradientID}>
-          <stop
-            offset={`${filledPourcent}%`}
-            stopColor={foreground}
-            key={`fg_stop_${gradientID}`}
-          />
-          <stop
-            offset={`${filledPourcent}%`}
-            stopColor={background}
-            key={`bg_stop_${gradientID}`}
-          />
+          <stop offset={`${filledPourcent}%`} stopColor={foreground} />
+          <stop offset={`${filledPourcent}%`} stopColor={background} />
         </linearGradient>
       </defs>
       <path

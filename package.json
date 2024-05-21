@@ -27,6 +27,7 @@
     "isbot": "^3.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-double-range-slider": "^3.0.1",
     "react-responsive-carousel": "^3.2.23",
     "react-slick": "^0.30.2",
     "saas": "^1.0.0",

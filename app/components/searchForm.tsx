@@ -12,6 +12,9 @@ import {
   type FormEventHandler,
   type Ref,
 } from 'react';
+import {RangeSlider} from 'react-double-range-slider';
+import 'react-double-range-slider/dist/cjs/index.css';
+import Price from './Price';
 
 export interface searchOptions {
   brands: ValidBrands[];
@@ -38,6 +41,10 @@ export default function SearchForm({
   onFocus,
   onSubmit,
 }: SearchFromProps) {
+  const defaultPriceRange = [0, 200];
+  const [minPrice, setMinPrice] = useState(defaultPriceRange[0].toString());
+  const [maxPrice, setMaxPrice] = useState(defaultPriceRange[1].toString());
+
   return (
     <form
       className="searchForm"
@@ -67,11 +74,11 @@ export default function SearchForm({
       </div>
       {options && (
         <ul className="filters">
-          <Filter name="Marques">
+          <Filter name="Marques" className="brands">
             <>
               {multipleCheckboxEntry(options.brands, 'brand').map(
-                ({initial, input}) => (
-                  <label htmlFor={input.props.id} key={input.props.name}>
+                ({initial, input, key}) => (
+                  <label htmlFor={key} key={key}>
                     {input}
                     {initial}
                   </label>
@@ -79,11 +86,11 @@ export default function SearchForm({
               )}
             </>
           </Filter>
-          <Filter name="Tailles">
+          <Filter name="Tailles" className="sizes">
             <>
               {multipleCheckboxEntry(options.sizes, 'size').map(
-                ({initial, input}) => (
-                  <label htmlFor={input.props.id} key={input.props.name}>
+                ({initial, input, key}) => (
+                  <label htmlFor={key} key={key}>
                     {input}
                     {initial}
                   </label>
@@ -91,16 +98,78 @@ export default function SearchForm({
               )}
             </>
           </Filter>
-          <Filter name="Couleurs">
+          <Filter name="Couleurs" className="colors">
             <>
               {multipleCheckboxEntry(options.colors, 'color').map(
-                ({initial, input}) => (
-                  <label htmlFor={input.props.id} key={input.props.name}>
+                ({initial, input, key}) => (
+                  <label htmlFor={key} key={key}>
                     {input}
                     {initial}
                   </label>
                 ),
               )}
+            </>
+          </Filter>
+          <Filter name="Prix" className="price_range">
+            <>
+              <p>
+                De{' '}
+                <Price
+                  value={{
+                    amount: minPrice.toString(),
+                    currencyCode: 'EUR',
+                  }}
+                  decimals={0}
+                />
+                {' à '}
+                <Price
+                  value={{
+                    amount: maxPrice.toString(),
+                    currencyCode: 'EUR',
+                  }}
+                  decimals={0}
+                />
+              </p>
+
+              <RangeSlider
+                value={{
+                  min: defaultPriceRange[0],
+                  max: defaultPriceRange[1],
+                }}
+                onChange={(v) => {
+                  setMinPrice(v.min);
+                  setMaxPrice(v.max);
+                }}
+                tooltipVisibility="hover"
+              />
+            </>
+          </Filter>
+          <Filter name="Coupe" className="cut">
+            <>
+              {multipleCheckboxEntry(
+                ['Coupe basse', 'Coupe mi-haute', 'Coupe haute'],
+                'cut',
+              ).map(({initial, input, key}) => (
+                <label htmlFor={key} key={key}>
+                  {input}
+                  {initial}
+                </label>
+              ))}
+            </>
+          </Filter>
+          <Filter name="Trier par" className="sort">
+            <>
+              {[
+                'Tendances',
+                'Nouveautés',
+                'Prix décroissants',
+                'Prix croissant',
+              ].map((value) => (
+                <label htmlFor={value} key={value}>
+                  <input type="radio" name="sort" id={value} value={value} />
+                  {value}
+                </label>
+              ))}
             </>
           </Filter>
         </ul>
@@ -111,10 +180,12 @@ export default function SearchForm({
 
 interface FilterProps {
   name: string;
+  className?: string;
   children: JSX.Element;
 }
-function Filter({name, children}: FilterProps) {
+function Filter({name, children, className}: FilterProps) {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <li data-open={isOpen || null}>
       <button
@@ -130,7 +201,7 @@ function Filter({name, children}: FilterProps) {
           }}
         />
       </button>
-      <div className="content">
+      <div className={`content ${className}`}>
         <hr />
         {children}
       </div>
@@ -141,18 +212,17 @@ function Filter({name, children}: FilterProps) {
 function multipleCheckboxEntry<T extends string | number>(
   values: T[],
   name: string,
-): {initial: T; input: JSX.Element}[] {
-  return values.map((initial, index) => ({
-    initial,
-    input: (
-      <>
-        <input
-          type="checkbox"
-          name={`${name}.${index}`}
-          id={`${name}_${index}`}
-          value={initial}
-        />
-      </>
-    ),
-  }));
+): {initial: T; key: string; input: JSX.Element}[] {
+  return values.map((initial, index) => {
+    const key = `${name}_${index}`;
+    return {
+      initial,
+      key,
+      input: (
+        <>
+          <input type="checkbox" name={key} id={key} value={initial} />
+        </>
+      ),
+    };
+  });
 }

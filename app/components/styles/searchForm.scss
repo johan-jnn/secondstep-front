@@ -3,7 +3,7 @@
   grid-template-areas:
     'title'
     'query';
-  grid-template-columns: max-content auto;
+  grid-template-columns: auto 1fr;
   align-items: center;
   padding: 15px;
   gap: 20px;
@@ -42,18 +42,20 @@
     border-radius: 10px;
 
     > li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
       > .heading {
-        all: unset;
-        
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 10px 15px;
+        padding: 20px 15px;
         gap: 10px;
-
+        background-color: transparent;
         width: 100%;
-
-        cursor: pointer;
+        color: var(--color-black);
+        font-size: 16px;
 
         > h4 {
           text-transform: uppercase;
@@ -67,24 +69,66 @@
 
       > .content {
         max-height: 0;
-        transition: max-height 0.25s;
-        overflow-y: hidden;
+        max-width: 0;
+        padding: 0;
+        width: 100%;
+        transition: 0.25s;
+        overflow: hidden;
+
+        .double-range-slider-container {
+          margin: 20px;
+        }
 
         > hr {
           background-color: var(--color-black);
-          opacity: .25;
+          opacity: 0.25;
           height: 2px;
+        }
+
+        > label {
+          margin: 10px;
+          display: block;
+          cursor: pointer;
+
+          transition: 0.25s;
+
+          > input {
+            display: none;
+          }
+
+          &:has(> input:checked) {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+          }
+        }
+
+        &.sizes label {
+          display: inline-grid;
+          padding: 5px;
+          background-color: var(--color-darkwhite);
+          border: 1px solid var(--color-grey);
+          aspect-ratio: 2 / 1;
+          height: 30px;
+          place-content: center;
+          border-radius: 5px;
+        }
+        &.colors label {
+          display: inline-block;
         }
       }
 
       &[data-open] {
         > .heading {
+          padding-bottom: 0;
           > .icon {
             rotate: 180deg;
           }
         }
         > .content {
-          max-height: 100%;
+          max-height: 50vh;
+          max-width: 500px;
+          padding: 10px;
+          padding-top: 0;
         }
       }
     }
@@ -97,6 +141,14 @@
 
     > .queryAndSubmit {
       flex-direction: row;
+    }
+
+    @media screen and (max-width: 850px) {
+      grid-template-areas:
+        'title'
+        'query'
+        'filters';
+      grid-template-columns: 1fr;
     }
   }
 }

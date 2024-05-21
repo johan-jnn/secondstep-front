@@ -30,7 +30,7 @@ body {
     sans-serif;
   line-height: 1.4;
   min-height: 100vh;
-  background-color: var(--color-light);
+  background-color: var(--color-darkwhite);
 }
 
 @for $i from 1 to 6 {
@@ -109,16 +109,13 @@ ul {
   padding: 0;
 }
 
-li {
-  margin-bottom: 0.5rem;
-}
-
 dl {
   margin: 0.5rem 0;
 }
 
 code {
-  background: #ddd;
+  background: var(--color-lightblack);
+  color: var(--color-darkwhite);
   border-radius: 4px;
   font-family: monospace;
   padding: 0.25rem;
