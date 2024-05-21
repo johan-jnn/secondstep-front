@@ -18,30 +18,25 @@ export default function HistoryCarousel() {
           modules={[Virtual, Navigation]}
           slidesPerView={3}
           centeredSlides={true}
-          spaceBetween={100}
+          spaceBetween={50}
           navigation={true}
           breakpoints={{
-            // when window width is >= 320px
             320: {
               slidesPerView: 1,
               spaceBetween: 20,
             },
-            // when window width is >= 480px
-            480: {
-              slidesPerView: 2,
+            620: {
+              slidesPerView: 1,
               spaceBetween: 30,
             },
-            // when window width is >= 768px
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 40,
+            710: {
+              slidesPerView: 2,
+              spaceBetween: 10,
             },
-            // when window width is >= 1024px
-            1024: {
-              slidesPerView: 3,
-              spaceBetween: 50,
+            1090: {
+              slidesPerView: 2,
+              spaceBetween: 0,
             },
-            // when window width is >= 1200px
             1200: {
               slidesPerView: 3,
               spaceBetween: 100,
