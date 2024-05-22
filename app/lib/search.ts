@@ -9,10 +9,13 @@ import type {
 import algoliasearch from 'algoliasearch';
 
 // ! En environnement de développement, algoliasearch est `undefined`
-// console.log(algoliasearch);
-
-// const search = algoliasearch('SDF2554WHI', '3dc97f4efed43e70ceb2e3dd520399aa');
-// console.log(search);
+if (algoliasearch?.name) {
+  console.log('>> ALGOLIA SEARCH IS NOW AVAILABLE');
+  // const search = algoliasearch('SDF2554WHI', '3dc97f4efed43e70ceb2e3dd520399aa');
+  // console.log(search);
+} else {
+  console.error('!! ALGOLIA SEARCH IS NOT AVAILABLE !!');
+}
 
 export function applyTrackingParams(
   resource:

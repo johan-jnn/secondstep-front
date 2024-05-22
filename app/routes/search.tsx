@@ -58,8 +58,6 @@ export async function loader({request, context}: LoaderFunctionArgs) {
         },
       ]
     : [];
-  console.log(priceFilter[0].price);
-  
   const {errors, ...data} = await context.storefront.query(SEARCH_QUERY, {
     variables: {
       query: filters.q,
