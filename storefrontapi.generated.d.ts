@@ -1115,6 +1115,11 @@ export type SearchQueryVariables = StorefrontAPI.Exact<{
   startCursor?: StorefrontAPI.InputMaybe<
     StorefrontAPI.Scalars['String']['input']
   >;
+  filters?: StorefrontAPI.InputMaybe<
+    Array<StorefrontAPI.ProductFilter> | StorefrontAPI.ProductFilter
+  >;
+  sortType?: StorefrontAPI.InputMaybe<StorefrontAPI.SearchSortKeys>;
+  reverse?: StorefrontAPI.InputMaybe<StorefrontAPI.Scalars['Boolean']['input']>;
 }>;
 
 export type SearchQuery = {
@@ -1244,7 +1249,7 @@ interface GeneratedQueryTypes {
     return: ProductQuery;
     variables: ProductQueryVariables;
   };
-  '#graphql\n  fragment SearchPage on Page {\n     __typename\n     handle\n    id\n    title\n    trackingParameters\n  }\n  fragment SearchArticle on Article {\n    __typename\n    handle\n    id\n    title\n    trackingParameters\n  }\n  query search(\n    $country: CountryCode\n    $endCursor: String\n    $first: Int\n    $language: LanguageCode\n    $last: Int\n    $query: String!\n    $startCursor: String\n  ) @inContext(country: $country, language: $language) {\n    products: search(\n      query: $query,\n      unavailableProducts: HIDE,\n      types: [PRODUCT],\n      first: $first,\n      sortKey: RELEVANCE,\n      last: $last,\n      before: $startCursor,\n      after: $endCursor\n    ) {\n      nodes {\n        ...on Product {\n          __typename\n          trackingParameters\n          ...ProductCard\n        }\n      }\n      pageInfo {\n        hasNextPage\n        hasPreviousPage\n        startCursor\n        endCursor\n      }\n    }\n    pages: search(\n      query: $query,\n      types: [PAGE],\n      first: 10\n    ) {\n      nodes {\n        ...on Page {\n          ...SearchPage\n        }\n      }\n    }\n    articles: search(\n      query: $query,\n      types: [ARTICLE],\n      first: 10\n    ) {\n      nodes {\n        ...on Article {\n          ...SearchArticle\n        }\n      }\n    }\n  }\n\n  #graphql\nfragment ProductCard on Product {\n  id\n  title\n  handle\n  priceRange {\n    minVariantPrice {\n      amount\n      currencyCode\n    }\n  }\n  featuredImage {\n    url\n    altText\n  }\n  availableForSale\n  vendor\n}\n': {
+  '#graphql\n  fragment SearchPage on Page {\n     __typename\n     handle\n    id\n    title\n    trackingParameters\n  }\n  fragment SearchArticle on Article {\n    __typename\n    handle\n    id\n    title\n    trackingParameters\n  }\n  query search(\n    $country: CountryCode\n    $endCursor: String\n    $first: Int\n    $language: LanguageCode\n    $last: Int\n    $query: String!\n    $startCursor: String\n    $filters: [ProductFilter!]\n    $sortType: SearchSortKeys = RELEVANCE\n    $reverse: Boolean\n  ) @inContext(country: $country, language: $language) {\n    products: search(\n      query: $query,\n      unavailableProducts: HIDE,\n      types: [PRODUCT],\n      first: $first,\n      sortKey: $sortType,\n      reverse: $reverse,\n      last: $last,\n      before: $startCursor,\n      after: $endCursor\n      productFilters: $filters\n    ) {\n      nodes {\n        ...on Product {\n          __typename\n          trackingParameters\n          ...ProductCard\n        }\n      }\n      pageInfo {\n        hasNextPage\n        hasPreviousPage\n        startCursor\n        endCursor\n      }\n    }\n    pages: search(\n      query: $query,\n      types: [PAGE],\n      first: 10\n    ) {\n      nodes {\n        ...on Page {\n          ...SearchPage\n        }\n      }\n    }\n    articles: search(\n      query: $query,\n      types: [ARTICLE],\n      first: 10\n    ) {\n      nodes {\n        ...on Article {\n          ...SearchArticle\n        }\n      }\n    }\n  }\n\n  #graphql\nfragment ProductCard on Product {\n  id\n  title\n  handle\n  priceRange {\n    minVariantPrice {\n      amount\n      currencyCode\n    }\n  }\n  featuredImage {\n    url\n    altText\n  }\n  availableForSale\n  vendor\n}\n': {
     return: SearchQuery;
     variables: SearchQueryVariables;
   };

@@ -3,28 +3,32 @@ import Button from './Button';
 import Icon from './Icon';
 import type {ValidBrands} from './BrandLogo';
 import './styles/searchForm.scss';
-import {
-  ElementRef,
-  useState,
-  type ChangeEvent,
-  type FocusEvent,
-  type FormEvent,
-  type FormEventHandler,
-  type Ref,
-} from 'react';
+import {useState, type FormEventHandler, type Ref} from 'react';
 import {RangeSlider} from 'react-double-range-slider';
 import 'react-double-range-slider/dist/cjs/index.css';
 import Price from './Price';
 
+export enum sortType {
+  'Tendances',
+  'Nouveautés',
+  'Prix décroissants',
+  'Prix croissant',
+}
 export interface searchOptions {
   brands: ValidBrands[];
   sizes: (number | string)[];
   colors: string[];
+  cuts: string[];
+  prices: {
+    min: number;
+    max: number;
+  };
 }
 
 export interface SearchFromProps {
   current?: {
     q?: string;
+    sort?: sortType;
   } & {[key in keyof searchOptions]?: searchOptions[key]};
   options?: searchOptions;
   inputRef?: Ref<HTMLInputElement>;
@@ -41,9 +45,16 @@ export default function SearchForm({
   onFocus,
   onSubmit,
 }: SearchFromProps) {
-  const defaultPriceRange = [0, 200];
-  const [minPrice, setMinPrice] = useState(defaultPriceRange[0].toString());
-  const [maxPrice, setMaxPrice] = useState(defaultPriceRange[1].toString());
+  const defaultPriceRange = [
+    options?.prices.min || 0,
+    options?.prices.max || 9999,
+  ];
+  const [minPrice, setMinPrice] = useState(
+    current?.prices?.min || defaultPriceRange[0],
+  );
+  const [maxPrice, setMaxPrice] = useState(
+    current?.prices?.max || defaultPriceRange[1],
+  );
 
   return (
     <form
@@ -76,42 +87,50 @@ export default function SearchForm({
         <ul className="filters">
           <Filter name="Marques" className="brands">
             <>
-              {multipleCheckboxEntry(options.brands, 'brand').map(
-                ({initial, input, key}) => (
-                  <label htmlFor={key} key={key}>
-                    {input}
-                    {initial}
-                  </label>
-                ),
-              )}
+              {multipleCheckboxEntry(
+                options.brands,
+                'brands',
+                current?.brands,
+              ).map(({initial, input, key}) => (
+                <label htmlFor={key} key={key}>
+                  {input}
+                  {initial}
+                </label>
+              ))}
             </>
           </Filter>
           <Filter name="Tailles" className="sizes">
             <>
-              {multipleCheckboxEntry(options.sizes, 'size').map(
-                ({initial, input, key}) => (
-                  <label htmlFor={key} key={key}>
-                    {input}
-                    {initial}
-                  </label>
-                ),
-              )}
+              {multipleCheckboxEntry(
+                options.sizes,
+                'sizes',
+                current?.sizes,
+              ).map(({initial, input, key}) => (
+                <label htmlFor={key} key={key}>
+                  {input}
+                  {initial}
+                </label>
+              ))}
             </>
           </Filter>
           <Filter name="Couleurs" className="colors">
             <>
-              {multipleCheckboxEntry(options.colors, 'color').map(
-                ({initial, input, key}) => (
-                  <label htmlFor={key} key={key}>
-                    {input}
-                    {initial}
-                  </label>
-                ),
-              )}
+              {multipleCheckboxEntry(
+                options.colors,
+                'colors',
+                current?.colors,
+              ).map(({initial, input, key}) => (
+                <label htmlFor={key} key={key}>
+                  {input}
+                  {initial}
+                </label>
+              ))}
             </>
           </Filter>
           <Filter name="Prix" className="price_range">
             <>
+              <input type="hidden" name="prices_min" value={minPrice} />
+              <input type="hidden" name="prices_max" value={maxPrice} />
               <p>
                 De{' '}
                 <Price
@@ -136,9 +155,11 @@ export default function SearchForm({
                   min: defaultPriceRange[0],
                   max: defaultPriceRange[1],
                 }}
+                from={minPrice}
+                to={maxPrice}
                 onChange={(v) => {
-                  setMinPrice(v.min);
-                  setMaxPrice(v.max);
+                  setMinPrice(parseFloat(v.min));
+                  setMaxPrice(parseFloat(v.max));
                 }}
                 tooltipVisibility="hover"
               />
@@ -148,7 +169,8 @@ export default function SearchForm({
             <>
               {multipleCheckboxEntry(
                 ['Coupe basse', 'Coupe mi-haute', 'Coupe haute'],
-                'cut',
+                'cuts',
+                current?.cuts,
               ).map(({initial, input, key}) => (
                 <label htmlFor={key} key={key}>
                   {input}
@@ -159,17 +181,24 @@ export default function SearchForm({
           </Filter>
           <Filter name="Trier par" className="sort">
             <>
-              {[
-                'Tendances',
-                'Nouveautés',
-                'Prix décroissants',
-                'Prix croissant',
-              ].map((value) => (
-                <label htmlFor={value} key={value}>
-                  <input type="radio" name="sort" id={value} value={value} />
-                  {value}
-                </label>
-              ))}
+              {Object.values(sortType).map(
+                (value) =>
+                  typeof value === 'string' && (
+                    <label htmlFor={value} key={value}>
+                      <input
+                        type="radio"
+                        name="sort"
+                        id={value}
+                        value={sortType[value as keyof typeof sortType]}
+                        defaultChecked={
+                          current?.sort !== undefined &&
+                          value === sortType[current?.sort]
+                        }
+                      />
+                      {value}
+                    </label>
+                  ),
+              )}
             </>
           </Filter>
         </ul>
@@ -211,18 +240,76 @@ function Filter({name, children, className}: FilterProps) {
 
 function multipleCheckboxEntry<T extends string | number>(
   values: T[],
-  name: string,
+  name: keyof searchOptions,
+  selectedValues?: T[],
 ): {initial: T; key: string; input: JSX.Element}[] {
   return values.map((initial, index) => {
     const key = `${name}_${index}`;
+
     return {
       initial,
       key,
       input: (
         <>
-          <input type="checkbox" name={key} id={key} value={initial} />
+          <input
+            type="checkbox"
+            name={key}
+            id={key}
+            value={initial}
+            defaultChecked={!!selectedValues?.find((val) => val == initial)}
+          />
         </>
       ),
     };
   });
+}
+
+export type searchParserResult = NonNullable<SearchFromProps['current']>;
+export function searchParser(search: string) {
+  const result: searchParserResult = {};
+  const params = new URLSearchParams(search);
+
+  for (const key of Array.from(params.keys())) {
+    const keyValue = params.get(key);
+    if (!keyValue) continue;
+
+    const [keyName, keyIndex, ...keyInfos] = key.split('_') as [
+      keyof searchParserResult,
+      string,
+      ...string[],
+    ];
+
+    switch (keyName) {
+      case 'sizes':
+      case 'colors':
+      case 'brands':
+      case 'cuts': {
+        if (!result[keyName]) result[keyName] = [];
+        //@ts-ignore -- Expect to be a valid key value
+        result[keyName].push(keyValue);
+        break;
+      }
+      case 'q': {
+        result['q'] = keyValue;
+        break;
+      }
+      case 'prices': {
+        if (!result['prices'])
+          result['prices'] = {
+            min: 0,
+            max: Infinity,
+          };
+        result['prices'][keyIndex as 'min' | 'max'] = parseInt(keyValue);
+        break;
+      }
+      case 'sort': {
+        result['sort'] = parseInt(keyValue);
+        break;
+      }
+      default:
+        break;
+    }
+  }
+
+  return result;
 }
