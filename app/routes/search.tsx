@@ -3,8 +3,9 @@ import {useLoaderData, type MetaFunction} from '@remix-run/react';
 import {getPaginationVariables} from '@shopify/hydrogen';
 
 import {SearchResults, NoSearchResults} from '~/components/Search';
-import SearchForm from '~/components/searchForm';
+import SearchForm, {searchParser, sortType} from '~/components/searchForm';
 import {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
+import type {ProductFilter} from '@shopify/hydrogen/storefront-api-types';
 
 export const meta: MetaFunction = () => {
   return [{title: `Hydrogen | Search`}];
@@ -12,20 +13,57 @@ export const meta: MetaFunction = () => {
 
 export async function loader({request, context}: LoaderFunctionArgs) {
   const url = new URL(request.url);
-  const searchParams = new URLSearchParams(url.search);
-  const variables = getPaginationVariables(request, {pageBy: 8});
-  const searchTerm = String(searchParams.get('q') || '');
-
-  if (!searchTerm) {
+  const filters = searchParser(url.search);
+  if (!filters.q) {
     return {
       searchResults: {results: null, totalResults: 0},
-      searchTerm,
+      filters,
     };
   }
 
+  const variables: {[key: string]: any} = getPaginationVariables(request, {
+    pageBy: 8,
+  });
+
+  if (filters.sort) {
+    if (filters.sort === sortType['Prix croissant']) {
+      variables['sortType'] = 'PRICE';
+    } else if (filters.sort === sortType['Prix décroissants']) {
+      variables['sortType'] = 'PRICE';
+      variables['reverse'] = true;
+    } else {
+      variables['sortType'] = 'RELEVANCE';
+    }
+  }
+
+  const brandFilters =
+    filters.brands?.map((brand): ProductFilter => ({productVendor: brand})) ||
+    [];
+  const sizesFilters =
+    filters.sizes?.map(
+      (size): ProductFilter => ({
+        variantOption: {
+          name: 'size',
+          value: size.toString(),
+        },
+      }),
+    ) || [];
+  const priceFilter: ProductFilter[] = filters.prices
+    ? [
+        {
+          price: {
+            min: filters.prices.min,
+            max: filters.prices.max,
+          },
+        },
+      ]
+    : [];
+  console.log(priceFilter[0].price);
+  
   const {errors, ...data} = await context.storefront.query(SEARCH_QUERY, {
     variables: {
-      query: searchTerm,
+      query: filters.q,
+      filters: [...brandFilters, ...sizesFilters, ...priceFilter],
       ...variables,
     },
   });
@@ -44,34 +82,34 @@ export async function loader({request, context}: LoaderFunctionArgs) {
   };
 
   return defer({
-    searchTerm,
+    filters,
     searchResults,
   });
 }
 
 export default function SearchPage() {
-  const {searchTerm, searchResults} = useLoaderData<typeof loader>();
+  const {filters, searchResults} = useLoaderData<typeof loader>();
 
   return (
     <div className="search">
       <h1>Search</h1>
       <SearchForm
-        current={{
-          q: searchTerm,
-        }}
+        current={filters}
         options={{
           brands: ['Nike'],
           colors: [],
           sizes: [35, 39, 40, '42 1/4'],
+          cuts: [],
+          prices: {
+            min: 0,
+            max: 200,
+          },
         }}
       />
-      {!searchTerm || !searchResults.totalResults ? (
+      {!filters || !searchResults.totalResults ? (
         <NoSearchResults />
       ) : (
-        <SearchResults
-          results={searchResults.results}
-          searchTerm={searchTerm}
-        />
+        <SearchResults results={searchResults.results} filters={filters} />
       )}
     </div>
   );
@@ -100,16 +138,21 @@ const SEARCH_QUERY = `#graphql
     $last: Int
     $query: String!
     $startCursor: String
+    $filters: [ProductFilter!]
+    $sortType: SearchSortKeys = RELEVANCE
+    $reverse: Boolean
   ) @inContext(country: $country, language: $language) {
     products: search(
       query: $query,
       unavailableProducts: HIDE,
       types: [PRODUCT],
       first: $first,
-      sortKey: RELEVANCE,
+      sortKey: $sortType,
+      reverse: $reverse,
       last: $last,
       before: $startCursor,
       after: $endCursor
+      productFilters: $filters
     ) {
       nodes {
         ...on Product {
