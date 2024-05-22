@@ -14,7 +14,7 @@ import ProductCard, {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
 import LoadMore from '~/components/loadMoreContent';
 import ProductGrid from '~/components/ProductGrid';
 import DropBanner from '~/components/dropBanner';
-
+import FeaturedCardCollection from '~/components/FeaturedCardCollection';
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Hydrogen | ${data?.collection.title ?? ''} Collection`}];
 };
@@ -48,20 +48,39 @@ export async function loader({request, params, context}: LoaderFunctionArgs) {
     });
   }
 
-  return json({collection, dropCollection});
+  const description = collection.description;
+
+  const featuredCollectionResponse = await storefront.query(
+    FEATURED_COLLECTION_QUERY,
+    {
+      variables: {handle: description},
+    },
+  );
+
+  const featuredCollection = featuredCollectionResponse.collection;
+
+  return json({collection, dropCollection, featuredCollection});
 }
 
 export default function Collection() {
-  const {collection, dropCollection} = useLoaderData<typeof loader>();
+  const {collection, dropCollection, featuredCollection} =
+    useLoaderData<typeof loader>();
 
   return (
     <div className="collection">
       <h1>{collection.title}</h1>
       <DropBanner
         image={dropCollection?.image?.url}
-        handle={dropCollection?.handle}
+        handle={featuredCollection?.handle}
         description={dropCollection?.description}
       />
+      {featuredCollection && (
+        <FeaturedCardCollection
+          image={featuredCollection?.image?.url}
+          handle={featuredCollection?.handle}
+          title={featuredCollection?.title}
+        />
+      )}
       <Pagination connection={collection.products}>
         {({nodes, isLoading, PreviousLink, NextLink}) => (
           <>
@@ -120,6 +139,15 @@ const DROP_PRODUCT_QUERY = `#graphql
   ${COLLECTION_FRAGMENT}
   query DropProductQuery {
     collection(handle: "Drop") {
+      ...Collection
+    }
+  }
+` as const;
+
+const FEATURED_COLLECTION_QUERY = `#graphql
+  ${COLLECTION_FRAGMENT}
+  query FeaturedCollectionQuery($handle: String!) {
+    collection(handle: $handle) {
       ...Collection
     }
   }

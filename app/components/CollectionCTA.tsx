@@ -14,7 +14,6 @@ export default function CollectionCTA({collection}: CollectionCTAProps) {
       }}
     >
       <h3>{collection.title}</h3>
-      <p>{collection.description}</p>
 
       <Link to={`/collections/${collection.handle}`}>
         Shopper ma paire &gt;
