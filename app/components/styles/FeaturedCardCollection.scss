@@ -1,8 +1,20 @@
 .featured-card {
-    aspect-ratio: 1/0.6;
-    display: grid;
-    place-content: center;
-    > a > .featured-card-item{
+    padding: 1% 4.7%;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    transition: scale 0.15s;
+    &:hover {
+        scale: 1.05;
+      }
+    > a {
+        border: solid 1px var(--color-grey);
+        background-color: var(--color-darkwhite);
+        border-radius: 5px;
+    > .featured-card-item{
         position: relative;
         > img{
             width: 100%;
@@ -12,7 +24,8 @@
             position: absolute;
             top : 0; 
             left : 0;
+            margin: 3% 2%;
         }
-    }
+    }}
   }
   

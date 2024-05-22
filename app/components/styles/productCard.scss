@@ -31,6 +31,7 @@ $card-border-radius: 5px;
     border-radius: calc($card-border-radius / 1.5);
     flex-grow: 1;
     border: 1px solid var(--color-grey);
+    filter: drop-shadow(-2px 4px 10px #e2e2e2);
 
     > .stock {
       position: absolute;
@@ -46,7 +47,7 @@ $card-border-radius: 5px;
       height: 100%;
       aspect-ratio: 1.8 / 2;
       object-fit: contain;
-      filter: drop-shadow(-2px 4px 10px #e2e2e2);
+      
       background-color: #f2f2f2;
     }
 

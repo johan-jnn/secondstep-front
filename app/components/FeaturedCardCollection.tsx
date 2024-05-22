@@ -2,9 +2,9 @@ import {Link} from 'react-router-dom';
 import './styles/FeaturedCardCollection.scss';
 
 type InfoCardProps = {
-  image: string | undefined;
-  handle: string | undefined;
-  title: string | undefined;
+  image?: string | undefined;
+  handle?: string | undefined;
+  title?: string | undefined;
 };
 
 export default function FeaturedCardCollection({

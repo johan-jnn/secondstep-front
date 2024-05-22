@@ -16,3 +16,25 @@
         grid-template-columns: 1fr;
     }
 }
+
+
+.productLine{
+    padding-top: 25px;
+    padding-bottom: 25px;
+    display: grid;
+    row-gap: 25px;
+    grid-template-areas: "img img prod prod";
+    grid-template-columns: 50% auto auto;
+    > li {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+    @media screen and (max-width: 850px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media screen and (max-width: 470px) {
+        grid-template-columns: 1fr;
+    }
+}

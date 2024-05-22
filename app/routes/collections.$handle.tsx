@@ -8,13 +8,16 @@ import {
   Money,
 } from '@shopify/hydrogen';
 import {COLLECTION_FRAGMENT} from './collections._index';
-import type {ProductCardFragment} from 'storefrontapi.generated';
+import type {
+  CollectionFragment,
+  ProductCardFragment,
+} from 'storefrontapi.generated';
 import {useVariantUrl} from '~/lib/variants';
 import ProductCard, {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
 import LoadMore from '~/components/loadMoreContent';
 import ProductGrid from '~/components/ProductGrid';
 import DropBanner from '~/components/dropBanner';
-import FeaturedCardCollection from '~/components/FeaturedCardCollection';
+import {Not} from '~/lib/types';
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Hydrogen | ${data?.collection.title ?? ''} Collection`}];
 };
@@ -49,21 +52,26 @@ export async function loader({request, params, context}: LoaderFunctionArgs) {
   }
 
   const description = collection.description;
-
-  const featuredCollectionResponse = await storefront.query(
-    FEATURED_COLLECTION_QUERY,
-    {
-      variables: {handle: description},
-    },
+  const collectionNames = description.split(',');
+  const featuredCollections = await Promise.all(
+    collectionNames.map(async (name) => {
+      const featuredCollectionResponse = await storefront.query(
+        FEATURED_COLLECTION_QUERY,
+        {
+          variables: {handle: name},
+        },
+      );
+      return featuredCollectionResponse.collection;
+    }),
+  ).then((collections) =>
+    collections.filter((c): c is Not<typeof c, null> => c !== null),
   );
 
-  const featuredCollection = featuredCollectionResponse.collection;
-
-  return json({collection, dropCollection, featuredCollection});
+  return json({collection, dropCollection, featuredCollections});
 }
 
 export default function Collection() {
-  const {collection, dropCollection, featuredCollection} =
+  const {collection, dropCollection, featuredCollections} =
     useLoaderData<typeof loader>();
 
   return (
@@ -71,16 +79,9 @@ export default function Collection() {
       <h1>{collection.title}</h1>
       <DropBanner
         image={dropCollection?.image?.url}
-        handle={featuredCollection?.handle}
+        handle={dropCollection?.handle}
         description={dropCollection?.description}
       />
-      {featuredCollection && (
-        <FeaturedCardCollection
-          image={featuredCollection?.image?.url}
-          handle={featuredCollection?.handle}
-          title={featuredCollection?.title}
-        />
-      )}
       <Pagination connection={collection.products}>
         {({nodes, isLoading, PreviousLink, NextLink}) => (
           <>
@@ -89,7 +90,7 @@ export default function Collection() {
               isLoading={isLoading}
               link={PreviousLink}
             />
-            <ProductGrid products={nodes} />
+            <ProductGrid products={nodes} collections={featuredCollections} />
             <br />
             <LoadMore direction="more" isLoading={isLoading} link={NextLink} />
           </>
