@@ -57,7 +57,6 @@ export default function Collection() {
   return (
     <div className="collection">
       <h1>{collection.title}</h1>
-      <p className="collection-description">{collection.description}</p>
       <DropBanner
         image={dropCollection?.image?.url}
         handle={dropCollection?.handle}
@@ -77,12 +76,6 @@ export default function Collection() {
           </>
         )}
       </Pagination>
-      <div className="drop-collection">
-        <h2>Drop Collection</h2>
-        <p className="drop-collection-description">
-          {dropCollection?.image?.url}
-        </p>
-      </div>
     </div>
   );
 }
