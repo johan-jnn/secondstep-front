@@ -1,0 +1,34 @@
+.contact-component{
+    padding: 50px 100px;
+    display: flex;
+    gap: 5%;
+    > .contact-card{
+        border: solid 1px var(--color-grey);
+        border-radius: 10px;
+        background-color: var(--color-darkwhite);
+        transition: transform 0.3s ease;
+        box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
+        &:hover{
+            opacity: 0.8;
+            transform: scale(1.02);
+            border: solid 1px var(--color-primary);
+        }
+        > .top{
+            padding: 10px 50px;
+            display: grid;
+            grid-template-areas: 
+            'logo text arrow';
+            place-content: center;
+            text-align: center;
+            font-weight: 200;
+            grid-template-columns: 10% 80% 10%;
+            grid-template-rows: 90%;
+            font-size: 1.2rem;
+            color: var(--color-primary);
+        }
+        > p{
+            padding: 10px 50px;
+            font-size: 1.2rem;
+        }
+    }
+}
