@@ -2,7 +2,7 @@ import '../styles/pages.scss';
 import image1 from 'app/assets/history-img.png';
 import image2 from 'app/assets/Nousdecimg2.png';
 import image3 from 'app/assets/equipe-full.png';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 export default function NousDecouvrirPage() {
   return (
     <div className="nous-dec">
