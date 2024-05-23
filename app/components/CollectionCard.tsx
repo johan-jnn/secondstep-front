@@ -11,7 +11,7 @@ export interface CollectionCardProps {
 export default function CollectionCard({collection}: CollectionCardProps) {
   const [min, max] = [7, 45];
   const fakeViewLength = useRef((min + Math.random() * (max - min)).toFixed(2));
-  const {featuredImage, vendor} = collection.products.nodes[0];
+  const firstNode = collection.products.nodes[0];
   const showFeaturedImage = ![
     'Nike',
     'New Balance',
@@ -24,8 +24,8 @@ export default function CollectionCard({collection}: CollectionCardProps) {
         <p>{collection.title}</p>
         <span className="views">{fakeViewLength.current}M vues</span>
       </div>
-      {showFeaturedImage && featuredImage ? (
-        <Image src={featuredImage.url} width={'unset'} />
+      {showFeaturedImage && firstNode?.featuredImage ? (
+        <Image src={firstNode.featuredImage.url} width={'unset'} />
       ) : (
         <Image src={collection.image?.url} width={'unset'} />
       )}
