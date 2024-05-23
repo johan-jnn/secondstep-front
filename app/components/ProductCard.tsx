@@ -29,9 +29,11 @@ fragment ProductCard on Product {
     url
     altText
   }
-  metafields(identifiers: {key: "custom"}) {
+  metafields(identifiers: {key: "custom.titres"}) {
+    id
     key
     value
+    type
   }
   availableForSale
   vendor
