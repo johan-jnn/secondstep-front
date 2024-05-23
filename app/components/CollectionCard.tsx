@@ -27,7 +27,7 @@ export default function CollectionCard({collection}: CollectionCardProps) {
       {showFeaturedImage && featuredImage ? (
         <Image src={featuredImage.url} width={'unset'} />
       ) : (
-        <BrandLogo brand={vendor as ValidBrands} />
+        <Image src={collection.image?.url} width={'unset'} />
       )}
     </Link>
   );

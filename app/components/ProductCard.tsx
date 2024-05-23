@@ -8,6 +8,7 @@ import Stars from './Stars';
 import BrandLogo, {type ValidBrands} from './BrandLogo';
 import getProductTitleAndSub from '~/lib/productTitles';
 import {useRef} from 'react';
+import Product from '~/routes/products.$handle';
 
 export interface ProductCardProps {
   informations: ProductCardFragment;
@@ -28,6 +29,10 @@ fragment ProductCard on Product {
     url
     altText
   }
+  metafields(identifiers: {key: "custom"}) {
+    key
+    value
+  }
   availableForSale
   vendor
 }`;
@@ -37,14 +42,14 @@ export default function ProductCard({
     availableForSale,
     handle,
     priceRange,
-    title: productTitle,
+    title,
+    metafields,
     vendor,
     featuredImage,
     id,
   },
 }: ProductCardProps) {
-  const {title, subtitle} = getProductTitleAndSub(productTitle);
-
+  const subtitle = metafields.find((meta) => meta?.key === 'titres');
   const fakeReviewsLength = useRef(Math.floor(Math.random() * 25) + 5);
   const maxScore = 1;
   // = 60% du meilleur score au minimum
@@ -76,7 +81,7 @@ export default function ProductCard({
       </div>
       <div className="bottom">
         <h3>{title}</h3>
-        <p>{subtitle}</p>
+        <p>{subtitle?.value}</p>
         <div className="price">
           {'Dès '}
           <span>

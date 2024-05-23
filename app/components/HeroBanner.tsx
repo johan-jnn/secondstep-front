@@ -10,7 +10,7 @@ function HeroPageBanner() {
     <div className="hero-banner">
       <div
         className="hero-banner-img"
-        style={{backgroundImage: `url('/app/assets/hp-banner.png')`}}
+        style={{backgroundImage: `url('app/assets/bannière janvier v2.png')`}}
       >
         <div className="hero-banner-text">
           <Timer targetDate={targetDate} />
