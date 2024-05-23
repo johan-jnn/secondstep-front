@@ -64,6 +64,17 @@ export const COLLECTION_FRAGMENT = `#graphql
       width
       height
     }
+    products(first: 1) {
+      nodes {
+        featuredImage {
+          url
+          altText
+          src
+          id
+        }
+        vendor
+      }
+    }
   }`;
 const COLLECTIONS_QUERY = `#graphql
   ${COLLECTION_FRAGMENT}

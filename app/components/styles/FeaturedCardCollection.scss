@@ -14,9 +14,12 @@
         border: solid 1px var(--color-grey);
         background-color: var(--color-darkwhite);
         border-radius: 5px;
+        height: 100%;
+            width: 100%;
     > .featured-card-item{
         position: relative;
         > img{
+            height: 100%;
             width: 100%;
             object-fit: cover;
         }

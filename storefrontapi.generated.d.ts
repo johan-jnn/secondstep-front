@@ -250,6 +250,18 @@ export type CollectionMenuQuery = {
                   'id' | 'url' | 'altText' | 'width' | 'height'
                 >
               >;
+              products: {
+                nodes: Array<
+                  Pick<StorefrontAPI.Product, 'vendor'> & {
+                    featuredImage?: StorefrontAPI.Maybe<
+                      Pick<
+                        StorefrontAPI.Image,
+                        'url' | 'altText' | 'src' | 'id'
+                      >
+                    >;
+                  }
+                >;
+              };
             }
           >;
         }
@@ -313,6 +325,15 @@ export type FeaturedCollectionQuery = {
             'id' | 'url' | 'altText' | 'width' | 'height'
           >
         >;
+        products: {
+          nodes: Array<
+            Pick<StorefrontAPI.Product, 'vendor'> & {
+              featuredImage?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.Image, 'url' | 'altText' | 'src' | 'id'>
+              >;
+            }
+          >;
+        };
       }
     >;
   };
@@ -659,6 +680,15 @@ export type DropProductQueryQuery = {
       image?: StorefrontAPI.Maybe<
         Pick<StorefrontAPI.Image, 'id' | 'url' | 'altText' | 'width' | 'height'>
       >;
+      products: {
+        nodes: Array<
+          Pick<StorefrontAPI.Product, 'vendor'> & {
+            featuredImage?: StorefrontAPI.Maybe<
+              Pick<StorefrontAPI.Image, 'url' | 'altText' | 'src' | 'id'>
+            >;
+          }
+        >;
+      };
     }
   >;
 };
@@ -676,6 +706,15 @@ export type FeaturedCollectionQueryQuery = {
       image?: StorefrontAPI.Maybe<
         Pick<StorefrontAPI.Image, 'id' | 'url' | 'altText' | 'width' | 'height'>
       >;
+      products: {
+        nodes: Array<
+          Pick<StorefrontAPI.Product, 'vendor'> & {
+            featuredImage?: StorefrontAPI.Maybe<
+              Pick<StorefrontAPI.Image, 'url' | 'altText' | 'src' | 'id'>
+            >;
+          }
+        >;
+      };
     }
   >;
 };
@@ -687,6 +726,15 @@ export type CollectionFragment = Pick<
   image?: StorefrontAPI.Maybe<
     Pick<StorefrontAPI.Image, 'id' | 'url' | 'altText' | 'width' | 'height'>
   >;
+  products: {
+    nodes: Array<
+      Pick<StorefrontAPI.Product, 'vendor'> & {
+        featuredImage?: StorefrontAPI.Maybe<
+          Pick<StorefrontAPI.Image, 'url' | 'altText' | 'src' | 'id'>
+        >;
+      }
+    >;
+  };
 };
 
 export type StoreCollectionsQueryVariables = StorefrontAPI.Exact<{
@@ -715,6 +763,15 @@ export type StoreCollectionsQuery = {
             'id' | 'url' | 'altText' | 'width' | 'height'
           >
         >;
+        products: {
+          nodes: Array<
+            Pick<StorefrontAPI.Product, 'vendor'> & {
+              featuredImage?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.Image, 'url' | 'altText' | 'src' | 'id'>
+              >;
+            }
+          >;
+        };
       }
     >;
     pageInfo: Pick<
@@ -1194,7 +1251,7 @@ interface GeneratedQueryTypes {
     return: FooterQuery;
     variables: FooterQueryVariables;
   };
-  '#graphql\nquery CollectionMenu(\n  $handle: String!\n) {\n  menu(handle: $handle) {\n    items {\n      title\n      id\n      resource {\n        ... on Collection {\n          ...Collection\n        }\n      }\n    }\n    title\n  }\n}\n#graphql\n  fragment Collection on Collection {\n    id\n    title\n    handle\n    description\n    image {\n      id\n      url\n      altText\n      width\n      height\n    }\n  }\n': {
+  '#graphql\nquery CollectionMenu(\n  $handle: String!\n) {\n  menu(handle: $handle) {\n    items {\n      title\n      id\n      resource {\n        ... on Collection {\n          ...Collection\n        }\n      }\n    }\n    title\n  }\n}\n#graphql\n  fragment Collection on Collection {\n    id\n    title\n    handle\n    description\n    image {\n      id\n      url\n      altText\n      width\n      height\n    }\n    products(first: 1) {\n      nodes {\n        featuredImage {\n          url\n          altText\n          src\n          id\n        }\n        vendor\n      }\n    }\n  }\n': {
     return: CollectionMenuQuery;
     variables: CollectionMenuQueryVariables;
   };
@@ -1206,7 +1263,7 @@ interface GeneratedQueryTypes {
     return: SitemapQuery;
     variables: SitemapQueryVariables;
   };
-  '#graphql\n  #graphql\n  fragment Collection on Collection {\n    id\n    title\n    handle\n    description\n    image {\n      id\n      url\n      altText\n      width\n      height\n    }\n  }\n  query FeaturedCollection($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    collections(first: 4, sortKey: UPDATED_AT, reverse: true) {\n      nodes {\n        ...Collection\n      }\n    }\n  }\n': {
+  '#graphql\n  #graphql\n  fragment Collection on Collection {\n    id\n    title\n    handle\n    description\n    image {\n      id\n      url\n      altText\n      width\n      height\n    }\n    products(first: 1) {\n      nodes {\n        featuredImage {\n          url\n          altText\n          src\n          id\n        }\n        vendor\n      }\n    }\n  }\n  query FeaturedCollection($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    collections(first: 4, sortKey: UPDATED_AT, reverse: true) {\n      nodes {\n        ...Collection\n      }\n    }\n  }\n': {
     return: FeaturedCollectionQuery;
     variables: FeaturedCollectionQueryVariables;
   };
@@ -1238,15 +1295,15 @@ interface GeneratedQueryTypes {
     return: CollectionQuery;
     variables: CollectionQueryVariables;
   };
-  '#graphql\n  #graphql\n  fragment Collection on Collection {\n    id\n    title\n    handle\n    description\n    image {\n      id\n      url\n      altText\n      width\n      height\n    }\n  }\n  query DropProductQuery {\n    collection(handle: "Drop") {\n      ...Collection\n    }\n  }\n': {
+  '#graphql\n  #graphql\n  fragment Collection on Collection {\n    id\n    title\n    handle\n    description\n    image {\n      id\n      url\n      altText\n      width\n      height\n    }\n    products(first: 1) {\n      nodes {\n        featuredImage {\n          url\n          altText\n          src\n          id\n        }\n        vendor\n      }\n    }\n  }\n  query DropProductQuery {\n    collection(handle: "Drop") {\n      ...Collection\n    }\n  }\n': {
     return: DropProductQueryQuery;
     variables: DropProductQueryQueryVariables;
   };
-  '#graphql\n  #graphql\n  fragment Collection on Collection {\n    id\n    title\n    handle\n    description\n    image {\n      id\n      url\n      altText\n      width\n      height\n    }\n  }\n  query FeaturedCollectionQuery($handle: String!) {\n    collection(handle: $handle) {\n      ...Collection\n    }\n  }\n': {
+  '#graphql\n  #graphql\n  fragment Collection on Collection {\n    id\n    title\n    handle\n    description\n    image {\n      id\n      url\n      altText\n      width\n      height\n    }\n    products(first: 1) {\n      nodes {\n        featuredImage {\n          url\n          altText\n          src\n          id\n        }\n        vendor\n      }\n    }\n  }\n  query FeaturedCollectionQuery($handle: String!) {\n    collection(handle: $handle) {\n      ...Collection\n    }\n  }\n': {
     return: FeaturedCollectionQueryQuery;
     variables: FeaturedCollectionQueryQueryVariables;
   };
-  '#graphql\n  #graphql\n  fragment Collection on Collection {\n    id\n    title\n    handle\n    description\n    image {\n      id\n      url\n      altText\n      width\n      height\n    }\n  }\n  query StoreCollections(\n    $country: CountryCode\n    $endCursor: String\n    $first: Int\n    $language: LanguageCode\n    $last: Int\n    $startCursor: String\n  ) @inContext(country: $country, language: $language) {\n    collections(\n      first: $first,\n      last: $last,\n      before: $startCursor,\n      after: $endCursor\n    ) {\n      nodes {\n        ...Collection\n      }\n      pageInfo {\n        hasNextPage\n        hasPreviousPage\n        startCursor\n        endCursor\n      }\n    }\n  }\n': {
+  '#graphql\n  #graphql\n  fragment Collection on Collection {\n    id\n    title\n    handle\n    description\n    image {\n      id\n      url\n      altText\n      width\n      height\n    }\n    products(first: 1) {\n      nodes {\n        featuredImage {\n          url\n          altText\n          src\n          id\n        }\n        vendor\n      }\n    }\n  }\n  query StoreCollections(\n    $country: CountryCode\n    $endCursor: String\n    $first: Int\n    $language: LanguageCode\n    $last: Int\n    $startCursor: String\n  ) @inContext(country: $country, language: $language) {\n    collections(\n      first: $first,\n      last: $last,\n      before: $startCursor,\n      after: $endCursor\n    ) {\n      nodes {\n        ...Collection\n      }\n      pageInfo {\n        hasNextPage\n        hasPreviousPage\n        startCursor\n        endCursor\n      }\n    }\n  }\n': {
     return: StoreCollectionsQuery;
     variables: StoreCollectionsQueryVariables;
   };
