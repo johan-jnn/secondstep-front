@@ -13,11 +13,13 @@ export default function CollectionCTA({collection}: CollectionCTAProps) {
         backgroundImage: `url(${collection.image?.url})`,
       }}
     >
-      <h3>{collection.title}</h3>
+      <div>
+        <h3>{collection.title}</h3>
 
-      <Link to={`/collections/${collection.handle}`}>
-        Shopper ma paire &gt;
-      </Link>
+        <Link to={`/collections/${collection.handle}`}>
+          Shopper ma paire &gt;
+        </Link>
+      </div>
     </div>
   );
 }

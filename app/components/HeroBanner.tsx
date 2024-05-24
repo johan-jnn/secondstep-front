@@ -13,7 +13,9 @@ function HeroPageBanner() {
         style={{backgroundImage: `url('app/assets/bannière janvier v2.png')`}}
       >
         <div className="hero-banner-text">
-          <Timer targetDate={targetDate} />
+          <div className="hero-banner-timer">
+            <Timer targetDate={targetDate} />
+          </div>
           <h1 className="hero-banner-title">C&apos;est la lucky week</h1>
           <button className="hero-banner-btn">
             SHOPPER MA PAIRE MAINTENANT

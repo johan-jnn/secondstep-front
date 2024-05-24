@@ -15,9 +15,15 @@
 }
 .hero-banner-text{
     margin-top: 50%;
-    color: white;
     text-align: center;
     padding-bottom: 8%;
+    color: var(--color-dark);
+    > .hero-banner-timer{
+        background-color: var(--color-light);
+    }
+    > h1{
+        background-color: var(--color-light);
+    }
 }
 .hero-banner-clock{
     font-size: 4rem;

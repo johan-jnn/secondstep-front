@@ -28,8 +28,8 @@
       'img1 img4 img6 img6'
       'img2 img4 img7 img8'
       'img3 img5 img7 img8';
-    grid-template-rows: repeat(3,140px);
-    grid-template-columns: repeat(4,240px);
+    grid-template-rows: repeat(3,180px);
+    grid-template-columns: repeat(4,280px);
     gap: 20px;
     @for $i from 1 to 9 {
       > a:nth-of-type(#{$i}) {
@@ -44,6 +44,8 @@
       }
     }
     .img1, .img2, .img3, .img4, .img5, .img6, .img7, .img8 {
+      color : var(--color-light);
+      text-decoration-color: var(--color-light);
       display: grid;
       place-content: center;
       place-items: center;
@@ -51,6 +53,9 @@
       border: solid 1px;
       border-radius: 10px;
       transition: transform 0.3s ease;
+      background-Size: cover;
+      background-Position: center;
+      background-Repeat: no-repeat;
     }
     .img1:hover, .img2:hover, .img3:hover, .img4:hover, .img5:hover, .img6:hover, .img7:hover, .img8:hover{
       opacity: 0.8;

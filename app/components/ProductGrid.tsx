@@ -46,12 +46,14 @@ export interface ProductLineProps {
 
 export function ProductLineWithCollection(props: ProductLineProps) {
   return (
-    <ul className="productLine collection">
-      <FeaturedCardCollection
-        image={props.collection?.image?.url}
-        title={props.collection?.title}
-        handle={props.collection?.handle}
-      />
+    <ul className="productLine">
+      <div className="featured-collection-section">
+        <FeaturedCardCollection
+          image={props.collection?.image?.url}
+          title={props.collection?.title}
+          handle={props.collection?.handle}
+        />
+      </div>
       {props.products.map((product) => (
         <li key={product.id}>
           <ProductCard informations={product} />
