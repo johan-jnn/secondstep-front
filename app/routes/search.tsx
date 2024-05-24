@@ -14,15 +14,10 @@ export const meta: MetaFunction = () => {
 export async function loader({request, context}: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const filters = searchParser(url.search);
-  if (!filters.q) {
-    return {
-      searchResults: {results: null, totalResults: 0},
-      filters,
-    };
-  }
+  filters.q ??= ' ';
 
   const variables: {[key: string]: any} = getPaginationVariables(request, {
-    pageBy: 8,
+    pageBy: 20,
   });
 
   if (filters.sort) {
@@ -102,7 +97,6 @@ export async function loader({request, context}: LoaderFunctionArgs) {
 
 export default function SearchPage() {
   const {filters, searchResults} = useLoaderData<typeof loader>();
-
   return (
     <div className="search">
       <h1>Search</h1>

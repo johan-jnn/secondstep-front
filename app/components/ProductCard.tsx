@@ -84,6 +84,9 @@ export default function ProductCard({
       len: parsed.length,
     };
   }
+
+  const fastdelivery =
+    metafields.find((meta) => meta?.key === 'fastdelivery')?.value === 'true';
   return (
     <Link className="product-card" to={`/products/${handle}`} key={id}>
       <div className="top">
@@ -92,10 +95,18 @@ export default function ProductCard({
           alt={featuredImage?.altText || `Cover image for ${title}`}
           sizes="250"
         />
-        <div className="stock">
-          <Pastille color={availableForSale ? 'green' : 'yellow'} />
-          <p>{availableForSale ? 'En stock' : 'Epuisé'}</p>
-        </div>
+        <ul className="pastilles">
+          <li>
+            <Pastille color={availableForSale ? 'green' : 'yellow'} />
+            <p>{availableForSale ? 'En stock' : 'Epuisé'}</p>
+          </li>
+          {fastdelivery && (
+            <li>
+              <Pastille color="var(--color-primary)" />
+              <p>Livraison 24h/48h</p>
+            </li>
+          )}
+        </ul>
         <div className="brand">
           <BrandLogo brand={vendor as ValidBrands} />
         </div>
