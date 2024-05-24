@@ -21,7 +21,14 @@ export interface ProductFormProps {
 }
 
 export default function ProductForm({product}: ProductFormProps) {
-  const {title, subtitle} = getProductTitleAndSub(product.title);
+  const metatTitles = product.metafields.find((meta) => meta?.key === 'titres');
+  const titles = metatTitles
+    ? (JSON.parse(metatTitles.value) as string[])
+    : Object.values(getProductTitleAndSub(product.title));
+
+  const fastDeliveryAvailable =
+    product.metafields.find((meta) => meta?.key === 'fastdelivery')?.value ===
+    'true';
   if (!product.selectedVariant)
     product.selectedVariant = product.variants.nodes.find(
       (p) => p.availableForSale,
@@ -41,8 +48,8 @@ export default function ProductForm({product}: ProductFormProps) {
   return (
     <CartForm route="/cart" action={CartForm.ACTIONS.LinesAdd} inputs={{lines}}>
       <div id="productForm">
-        <h3>{title}</h3>
-        <p>{subtitle}</p>
+        <h3>{titles[0]}</h3>
+        <p>{titles[1]}</p>
 
         <section id="price">
           {product.selectedVariant.compareAtPrice && (
@@ -131,24 +138,26 @@ export default function ProductForm({product}: ProductFormProps) {
                   }}
                 />
               </label>
-              <label htmlFor="fastDelivery">
-                <div className="title">
-                  <input
-                    type="radio"
-                    name="fastDelivery"
-                    id="fastDelivery"
-                    onChange={() => setFastDelivery(true)}
+              {fastDeliveryAvailable && (
+                <label htmlFor="fastDelivery">
+                  <div className="title">
+                    <input
+                      type="radio"
+                      name="fastDelivery"
+                      id="fastDelivery"
+                      onChange={() => setFastDelivery(true)}
+                    />
+                    <Icon icon={DeliveryIcon} />
+                    Livraison express - <b>24/48h</b>
+                  </div>
+                  <Price
+                    value={{
+                      amount: '9.90',
+                      currencyCode: 'EUR',
+                    }}
                   />
-                  <Icon icon={DeliveryIcon} />
-                  Livraison express - <b>24/48h</b>
-                </div>
-                <Price
-                  value={{
-                    amount: '9.90',
-                    currencyCode: 'EUR',
-                  }}
-                />
-              </label>
+                </label>
+              )}
             </section>
           </>
         )}

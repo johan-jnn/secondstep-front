@@ -4,7 +4,7 @@ import {Link} from '@remix-run/react';
 import type {ProductCardFragment} from 'storefrontapi.generated';
 import './styles/productCard.scss';
 import Price from './Price';
-import Stars, {StarsProps} from './Stars';
+import Stars, {type StarsProps} from './Stars';
 import BrandLogo, {type ValidBrands} from './BrandLogo';
 import getProductTitleAndSub from '~/lib/productTitles';
 import {useRef} from 'react';
@@ -56,7 +56,10 @@ export default function ProductCard({
     id,
   },
 }: ProductCardProps) {
-  const subtitle = metafields.find((meta) => meta?.key === 'titres');
+  const metatTitles = metafields.find((meta) => meta?.key === 'titres');
+  const titles = metatTitles
+    ? (JSON.parse(metatTitles.value) as string[])
+    : Object.values(getProductTitleAndSub(title));
 
   let reviewsData: {props: StarsProps; len: number} | null = null;
   const notes = metafields.find((meta) => meta?.key === 'notes');
@@ -81,6 +84,9 @@ export default function ProductCard({
       len: parsed.length,
     };
   }
+
+  const fastdelivery =
+    metafields.find((meta) => meta?.key === 'fastdelivery')?.value === 'true';
   return (
     <Link className="product-card" to={`/products/${handle}`} key={id}>
       <div className="top">
@@ -89,17 +95,25 @@ export default function ProductCard({
           alt={featuredImage?.altText || `Cover image for ${title}`}
           sizes="250"
         />
-        <div className="stock">
-          <Pastille color={availableForSale ? 'green' : 'yellow'} />
-          <p>{availableForSale ? 'En stock' : 'Epuisé'}</p>
-        </div>
+        <ul className="pastilles">
+          <li>
+            <Pastille color={availableForSale ? 'green' : 'yellow'} />
+            <p>{availableForSale ? 'En stock' : 'Epuisé'}</p>
+          </li>
+          {fastdelivery && (
+            <li>
+              <Pastille color="var(--color-primary)" />
+              <p>Livraison 24h/48h</p>
+            </li>
+          )}
+        </ul>
         <div className="brand">
           <BrandLogo brand={vendor as ValidBrands} />
         </div>
       </div>
       <div className="bottom">
-        <h3>{title}</h3>
-        <p>{subtitle?.value}</p>
+        <h3>{titles[0]}</h3>
+        <p>{titles[1]}</p>
         <div className="price">
           {'Dès '}
           <span>

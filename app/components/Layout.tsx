@@ -18,6 +18,7 @@ import CollectionAsideContent, {
   type CollectionAsideContentProps,
 } from './CollectionsAsideContent';
 import SearchForm from './searchForm';
+import type {MetaFunction} from '@shopify/remix-oxygen';
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;

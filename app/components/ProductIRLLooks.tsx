@@ -9,24 +9,28 @@ export interface ProductIRLLooksProps {
 }
 
 export default function ProductIRLLooks({product}: ProductIRLLooksProps) {
+  const looksMetafield = product.metafields.find(
+    (meta) => meta?.key === 'looks',
+  );
   const picturesList: {
     image: URL;
     post: URL;
     postID: string;
   }[] = [];
-  if (product.instagramPosts?.type === 'list.url') {
-    const urls = JSON.parse(product.instagramPosts.value) as string[];
-    for (const url of urls) {
-      const post = new URL(url, 'https://www.instagram.com/');
-      const postID = /\/p\/(.+?)(?:\/|$)/.exec(post.pathname)?.[1];
-      if (!postID) continue;
+  // ! Instagram CDN API doesn't allow to get its content be on a different website.
+  // if (looksMetafield) {
+  //   const urls = JSON.parse(looksMetafield.value) as string[];
+  //   for (const url of urls) {
+  //     const post = new URL(url, 'https://www.instagram.com/');
+  //     const postID = /\/p\/(.+?)(?:\/|$)/.exec(post.pathname)?.[1];
+  //     if (!postID) continue;
 
-      const image = new URL(post.toString());
-      image.pathname = (post.pathname + '/media/?size=l').replaceAll('//', '/');
+  //     const image = new URL(post.toString());
+  //     image.pathname = (post.pathname + '/media/').replaceAll('//', '/');
 
-      picturesList.push({post, image, postID});
-    }
-  }
+  //     picturesList.push({post, image, postID});
+  //   }
+  // }
   return (
     <div className="bestLooks">
       <div className="heading">
@@ -64,8 +68,8 @@ export default function ProductIRLLooks({product}: ProductIRLLooksProps) {
         <ul className="galery">
           {picturesList.map(({image, post, postID}) => (
             <li key={postID}>
-              <Link to={post} target="_blank">
-                <Image
+              <Link to={post.toString()} target="_blank">
+                <img
                   src={image.toString()}
                   alt={`First media of the post ${postID}`}
                 />

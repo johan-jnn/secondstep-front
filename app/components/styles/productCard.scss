@@ -18,6 +18,7 @@ $card-border-radius: 5px;
 
   border-radius: $card-border-radius;
 
+  will-change: scale;
   transition: scale 0.15s;
 
   &:hover {
@@ -33,21 +34,24 @@ $card-border-radius: 5px;
     border: 1px solid var(--color-grey);
     filter: drop-shadow(-2px 4px 10px #e2e2e2);
 
-    > .stock {
+    > .pastilles {
       position: absolute;
       bottom: 5%;
       left: 5%;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1em;
+      > li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1em;
+        margin: 5px 0;
+      }
     }
 
     > img {
       height: 100%;
       aspect-ratio: 1.8 / 2;
       object-fit: contain;
-      
+
       background-color: #f2f2f2;
     }
 
@@ -100,14 +104,13 @@ $card-border-radius: 5px;
       height: 100%;
       display: flex;
       align-items: baseline;
-      font-size: .9em;
+      font-size: 0.9em;
       gap: 5px;
     }
   }
 }
 
-
-@media (max-width: 560px){
+@media (max-width: 560px) {
   .product-card > .top > .brand {
     width: 30px;
   }

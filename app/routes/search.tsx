@@ -14,15 +14,10 @@ export const meta: MetaFunction = () => {
 export async function loader({request, context}: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const filters = searchParser(url.search);
-  if (!filters.q) {
-    return {
-      searchResults: {results: null, totalResults: 0},
-      filters,
-    };
-  }
+  filters.q ??= ' ';
 
   const variables: {[key: string]: any} = getPaginationVariables(request, {
-    pageBy: 8,
+    pageBy: 20,
   });
 
   if (filters.sort) {
@@ -36,6 +31,16 @@ export async function loader({request, context}: LoaderFunctionArgs) {
     }
   }
 
+  const colorFilters =
+    filters.colors?.map(
+      (color): ProductFilter => ({
+        productMetafield: {
+          key: 'couleurs',
+          namespace: 'custom',
+          value: color,
+        },
+      }),
+    ) || [];
   const brandFilters =
     filters.brands?.map((brand): ProductFilter => ({productVendor: brand})) ||
     [];
@@ -61,7 +66,12 @@ export async function loader({request, context}: LoaderFunctionArgs) {
   const {errors, ...data} = await context.storefront.query(SEARCH_QUERY, {
     variables: {
       query: filters.q,
-      filters: [...brandFilters, ...sizesFilters, ...priceFilter],
+      filters: [
+        ...brandFilters,
+        ...sizesFilters,
+        ...priceFilter,
+        ...colorFilters,
+      ],
       ...variables,
     },
   });
@@ -87,7 +97,6 @@ export async function loader({request, context}: LoaderFunctionArgs) {
 
 export default function SearchPage() {
   const {filters, searchResults} = useLoaderData<typeof loader>();
-
   return (
     <div className="search">
       <h1>Search</h1>
