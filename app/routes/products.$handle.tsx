@@ -116,7 +116,6 @@ function redirectToFirstVariant({
 
 export default function Product() {
   const {product} = useLoaderData<typeof loader>();
-
   return (
     <>
       <div className="product">
@@ -215,32 +214,37 @@ function Infos({product}: {product: ProductFragment}) {
 
 function Galery(props: {images: ProductFragment['images']}) {
   const [currentIndex, setCurrentIndex] = useState(0);
-
   return (
     <div id="galery">
-      <div id="viewer">
-        <Image
-          src={props.images.nodes[currentIndex].url}
-          alt={
-            props.images.nodes[currentIndex].altText ||
-            `${currentIndex}rd preview of the product`
-          }
-        />
-      </div>
-      <div id="selectorWrapper">
-        <ul id="selector">
-          {props.images.nodes.map(({url, altText}, index) => (
-            <li key={url} data-selected={+(index === currentIndex)}>
-              <button type="button" onClick={() => setCurrentIndex(index)}>
-                <Image
-                  src={url}
-                  alt={altText || `Select the ${index + 1}rd preview.`}
-                />
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {props.images.nodes.length ? (
+        <>
+          <div id="viewer">
+            <Image
+              src={props.images.nodes[currentIndex].url}
+              alt={
+                props.images.nodes[currentIndex].altText ||
+                `${currentIndex}rd preview of the product`
+              }
+            />
+          </div>
+          <div id="selectorWrapper">
+            <ul id="selector">
+              {props.images.nodes.map(({url, altText}, index) => (
+                <li key={url} data-selected={+(index === currentIndex)}>
+                  <button type="button" onClick={() => setCurrentIndex(index)}>
+                    <Image
+                      src={url}
+                      alt={altText || `Select the ${index + 1}rd preview.`}
+                    />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      ) : (
+        <p>L&apos;article ne contient pas d&apos;image...</p>
+      )}
     </div>
   );
 }
@@ -283,7 +287,7 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
   }
 ` as const;
 
-const METAFIELD_FRAGMENT = `#graphql
+export const METAFIELD_FRAGMENT = `#graphql
 fragment MetaFieldInfo on Metafield {
   key
   value
@@ -317,10 +321,13 @@ const PRODUCT_FRAGMENT = `#graphql
       name
       values
     }
-    color: metafield(key: "color", namespace: "custom") {
-      ...MetaFieldInfo
-    }
-    instagramPosts: metafield(key: "instagram_post", namespace: "custom") {
+    metafields(identifiers: [
+      {key: "titres", namespace: "custom"},
+      {key: "notes", namespace: "custom"},
+      {key: "looks", namespace: "custom"},
+      {key: "couleur", namespace: "custom"},
+      {key: "fastdelivery", namespace: "custom"}
+    ]) {
       ...MetaFieldInfo
     }
     images(first: 50) {
