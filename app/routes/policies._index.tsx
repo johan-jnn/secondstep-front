@@ -1,5 +1,6 @@
 import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, Link} from '@remix-run/react';
+import '../styles/policies.scss';
 
 export async function loader({context}: LoaderFunctionArgs) {
   const data = await context.storefront.query(POLICIES_QUERY);
@@ -22,7 +23,7 @@ export default function Policies() {
         {policies.map((policy) => {
           if (!policy) return null;
           return (
-            <fieldset key={policy.id}>
+            <fieldset key={policy.id} className="policies-index">
               <Link to={`/policies/${policy.handle}`}>{policy.title}</Link>
             </fieldset>
           );

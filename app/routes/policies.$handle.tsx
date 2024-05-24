@@ -1,6 +1,7 @@
 import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {Link, useLoaderData, type MetaFunction} from '@remix-run/react';
 import {type Shop} from '@shopify/hydrogen/storefront-api-types';
+import '../styles/policies.scss';
 
 type SelectedPolicies = keyof Pick<
   Shop,
@@ -48,12 +49,14 @@ export default function Policy() {
     <div className="policy">
       <br />
       <br />
-      <div>
+      <div className="policy-btn">
         <Link to="/policies">← Back to Policies</Link>
       </div>
       <br />
       <h1>{policy.title}</h1>
-      <div dangerouslySetInnerHTML={{__html: policy.body}} />
+      <div className="policy-body">
+        <div dangerouslySetInnerHTML={{__html: policy.body}} />
+      </div>
     </div>
   );
 }
