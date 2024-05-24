@@ -13,6 +13,7 @@ export default function Banner(props: BannerProps) {
       style={{
         backgroundColor: props.background,
       }}
+      className="banner-logo"
     >
       <g
         transform="translate(0.000000,600.000000) scale(0.100000,-0.100000)"

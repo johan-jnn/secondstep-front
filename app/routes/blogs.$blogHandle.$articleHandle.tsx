@@ -1,6 +1,7 @@
 import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, type MetaFunction} from '@remix-run/react';
 import {Image} from '@shopify/hydrogen';
+import {Link} from 'react-router-dom';
 import '../styles/blog.$articlehandle.scss';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
@@ -39,18 +40,32 @@ export default function Article() {
 
   return (
     <div className="article">
-      <h1>
-        {title}
-        <span>
-          {publishedDate} &middot; {author?.name}
-        </span>
-      </h1>
-
-      {image && <Image data={image} sizes="90vw" loading="eager" />}
+      <h1>Blog</h1>
+      <div
+        className="article-header"
+        style={{
+          backgroundImage: `url(${image?.url})`,
+        }}
+      >
+        <div>
+          <h2 className="titre">{title}</h2>
+          <span>
+            {publishedDate} &middot; {author?.name}
+          </span>
+        </div>
+      </div>
       <div
         dangerouslySetInnerHTML={{__html: contentHtml}}
         className="article"
       />
+      <div className="article-bottom">
+        <Link to="/">
+          <p>Retour à l&apos;acceuil</p>
+        </Link>
+        <Link to="/blogs/infos">
+          <p>Voir plus de Blogs</p>
+        </Link>
+      </div>
     </div>
   );
 }
