@@ -18,6 +18,7 @@ $card-border-radius: 5px;
 
   border-radius: $card-border-radius;
 
+  will-change: scale;
   transition: scale 0.15s;
 
   &:hover {

@@ -4,7 +4,7 @@ import {Link} from '@remix-run/react';
 import type {ProductCardFragment} from 'storefrontapi.generated';
 import './styles/productCard.scss';
 import Price from './Price';
-import Stars, {StarsProps} from './Stars';
+import Stars, {type StarsProps} from './Stars';
 import BrandLogo, {type ValidBrands} from './BrandLogo';
 import getProductTitleAndSub from '~/lib/productTitles';
 import {useRef} from 'react';
@@ -56,7 +56,10 @@ export default function ProductCard({
     id,
   },
 }: ProductCardProps) {
-  const subtitle = metafields.find((meta) => meta?.key === 'titres');
+  const metatTitles = metafields.find((meta) => meta?.key === 'titres');
+  const titles = metatTitles
+    ? (JSON.parse(metatTitles.value) as string[])
+    : Object.values(getProductTitleAndSub(title));
 
   let reviewsData: {props: StarsProps; len: number} | null = null;
   const notes = metafields.find((meta) => meta?.key === 'notes');
@@ -98,8 +101,8 @@ export default function ProductCard({
         </div>
       </div>
       <div className="bottom">
-        <h3>{title}</h3>
-        <p>{subtitle?.value}</p>
+        <h3>{titles[0]}</h3>
+        <p>{titles[1]}</p>
         <div className="price">
           {'Dès '}
           <span>

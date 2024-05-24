@@ -1,4 +1,9 @@
-export type ValidBrands = 'Nike' | 'New Balance' | 'adidas' | 'Air Jordan';
+export type ValidBrands =
+  | 'Nike'
+  | 'New Balance'
+  | 'Adidas'
+  | 'Air Jordan'
+  | 'Salomon';
 
 export interface BrandLogoProps {
   brand: ValidBrands;

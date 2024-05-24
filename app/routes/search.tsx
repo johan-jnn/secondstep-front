@@ -36,6 +36,16 @@ export async function loader({request, context}: LoaderFunctionArgs) {
     }
   }
 
+  const colorFilters =
+    filters.colors?.map(
+      (color): ProductFilter => ({
+        productMetafield: {
+          key: 'couleurs',
+          namespace: 'custom',
+          value: color,
+        },
+      }),
+    ) || [];
   const brandFilters =
     filters.brands?.map((brand): ProductFilter => ({productVendor: brand})) ||
     [];
@@ -61,7 +71,12 @@ export async function loader({request, context}: LoaderFunctionArgs) {
   const {errors, ...data} = await context.storefront.query(SEARCH_QUERY, {
     variables: {
       query: filters.q,
-      filters: [...brandFilters, ...sizesFilters, ...priceFilter],
+      filters: [
+        ...brandFilters,
+        ...sizesFilters,
+        ...priceFilter,
+        ...colorFilters,
+      ],
       ...variables,
     },
   });

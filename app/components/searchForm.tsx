@@ -3,7 +3,12 @@ import Button from './Button';
 import Icon from './Icon';
 import type {ValidBrands} from './BrandLogo';
 import './styles/searchForm.scss';
-import {useState, type FormEventHandler, type Ref} from 'react';
+import {
+  type CSSProperties,
+  useState,
+  type FormEventHandler,
+  type Ref,
+} from 'react';
 import {RangeSlider} from 'react-double-range-slider';
 import 'react-double-range-slider/dist/cjs/index.css';
 import Price from './Price';
@@ -120,7 +125,15 @@ export default function SearchForm({
                 'colors',
                 current?.colors,
               ).map(({initial, input, key}) => (
-                <label htmlFor={key} key={key}>
+                <label
+                  htmlFor={key}
+                  key={key}
+                  style={
+                    {
+                      '--color': initial,
+                    } as CSSProperties
+                  }
+                >
                   {input}
                   {initial}
                 </label>
