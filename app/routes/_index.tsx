@@ -14,10 +14,11 @@ import BrandImageGrid from '~/components/BrandImageGrid';
 import Passionate from '~/components/PassionateSection';
 import PressSection from '~/components/PressSection';
 import OpinionSection from '~/components/OpinionSection';
-import HistoryCarousel from '~/components/HistoryCarousel';
 import FAQ from '~/components/FAQ';
 import CarteAuthenticite from '~/components/CarteAuthenticite';
+import BlogCarousel from '~/components/BlogCarousel';
 import CollectionCard from '~/components/CollectionCard';
+
 export const meta: MetaFunction = () => {
   return [{title: 'Second Step | Home'}];
 };
@@ -29,7 +30,25 @@ export async function loader({context}: LoaderFunctionArgs) {
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
   const restoredProducts = storefront.query(RESTORED_PRODUCT_QUERRY);
 
-  return defer({featuredCollection, recommendedProducts, restoredProducts});
+  const blogHandle = 'infos';
+  const paginationVariables = {first: 6};
+  const blogData = await storefront.query(BLOGS_QUERY, {
+    variables: {
+      blogHandle,
+      ...paginationVariables,
+    },
+  });
+
+  if (!blogData.blog?.articles) {
+    throw new Response('No articles found', {status: 404});
+  }
+
+  return defer({
+    featuredCollection,
+    recommendedProducts,
+    restoredProducts,
+    blogArticles: blogData.blog.articles.nodes,
+  });
 }
 
 export default function Homepage() {
@@ -54,7 +73,7 @@ export default function Homepage() {
       <Passionate />
       <PressSection />
       <OpinionSection />
-      <HistoryCarousel />
+      <BlogCarousel articles={data.blogArticles} />
       <FAQ />
       <CarteAuthenticite />
     </div>
@@ -116,4 +135,65 @@ query RestoredShoes {
       }
     }
   }
-  `;
+`;
+
+export const ARTICLE_ITEM_FRAGMENT = `#graphql
+  fragment ArticleItemBlog on Article {
+    author: authorV2 {
+      name
+    }
+    contentHtml
+    handle
+    tags
+    id
+    image {
+      id
+      altText
+      url
+      width
+      height
+    }
+    publishedAt
+    title
+    blog {
+      handle
+    }
+  }
+` as const;
+
+const BLOGS_QUERY = `#graphql
+  ${ARTICLE_ITEM_FRAGMENT}
+  query CarouselBlog(
+    $language: LanguageCode
+    $blogHandle: String!
+    $first: Int
+    $last: Int
+    $startCursor: String
+    $endCursor: String
+  ) @inContext(language: $language) {
+    blog(handle: $blogHandle) {
+      title
+      seo {
+        title
+        description
+      }
+      articles(
+        first: $first,
+        last: $last,
+        before: $startCursor,
+        after: $endCursor
+      ) {
+        nodes {
+          ...ArticleItemBlog
+        }
+        pageInfo {
+          hasPreviousPage
+          hasNextPage
+          hasNextPage
+          endCursor
+          startCursor
+        }
+      }
+    }
+  }
+` as const;
