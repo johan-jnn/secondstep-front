@@ -4,11 +4,11 @@ import {Link} from '@remix-run/react';
 import type {ProductCardFragment} from 'storefrontapi.generated';
 import './styles/productCard.scss';
 import Price from './Price';
-import Stars from './Stars';
+import Stars, {StarsProps} from './Stars';
 import BrandLogo, {type ValidBrands} from './BrandLogo';
 import getProductTitleAndSub from '~/lib/productTitles';
 import {useRef} from 'react';
-import Product from '~/routes/products.$handle';
+import Product, {METAFIELD_FRAGMENT} from '~/routes/products.$handle';
 
 export interface ProductCardProps {
   informations: ProductCardFragment;
@@ -29,15 +29,20 @@ fragment ProductCard on Product {
     url
     altText
   }
-  metafields(identifiers: {key: "custom.titres"}) {
-    id
-    key
-    value
-    type
+  metafields(identifiers: [
+    {key: "titres", namespace: "custom"},
+    {key: "notes", namespace: "custom"},
+    {key: "looks", namespace: "custom"},
+    {key: "couleur", namespace: "custom"},
+    {key: "fastdelivery", namespace: "custom"}
+  ]) {
+    ...MetaFieldInfo
   }
   availableForSale
   vendor
-}`;
+}
+${METAFIELD_FRAGMENT}
+`;
 
 export default function ProductCard({
   informations: {
@@ -52,19 +57,30 @@ export default function ProductCard({
   },
 }: ProductCardProps) {
   const subtitle = metafields.find((meta) => meta?.key === 'titres');
-  const fakeReviewsLength = useRef(Math.floor(Math.random() * 25) + 5);
-  const maxScore = 1;
-  // = 60% du meilleur score au minimum
-  const fakeMinScore = (75 / 100) * maxScore;
-  const reviewsAverage = useRef(
-    new Array(fakeReviewsLength.current)
-      .fill(null)
-      .reduce(
-        (pre: number, _) =>
-          pre + fakeMinScore + Math.random() * (maxScore - fakeMinScore),
-        0,
-      ) / fakeReviewsLength.current,
-  );
+
+  let reviewsData: {props: StarsProps; len: number} | null = null;
+  const notes = metafields.find((meta) => meta?.key === 'notes');
+  if (notes) {
+    const parsed = JSON.parse(notes.value) as {
+      value: string;
+      scale_min: string;
+      scale_max: string;
+    }[];
+    const max = 100;
+
+    const value = parsed.reduce((average, review) => {
+      const scale_min = parseFloat(review.scale_min) * max,
+        scale_max = parseFloat(review.scale_max) * max,
+        value = parseFloat(review.value) * max;
+      const note = ((value - scale_min) / (scale_max - scale_min)) * max;
+      return ((average || note) + note) / 2;
+    }, 0);
+
+    reviewsData = {
+      props: {max, value},
+      len: parsed.length,
+    };
+  }
   return (
     <Link className="product-card" to={`/products/${handle}`} key={id}>
       <div className="top">
@@ -91,16 +107,12 @@ export default function ProductCard({
           </span>
         </div>
         <div className="rating">
-          <Stars
-            max={maxScore}
-            value={reviewsAverage.current}
-            stars={5}
-            colors={{
-              foreground: 'var(--color-dark)',
-            }}
-            key={id}
-          />
-          <span className="reviewsCount">({fakeReviewsLength.current})</span>
+          {reviewsData && (
+            <>
+              <Stars {...reviewsData.props} />
+              <span className="reviewsCount">({reviewsData.len})</span>
+            </>
+          )}
         </div>
       </div>
     </Link>
