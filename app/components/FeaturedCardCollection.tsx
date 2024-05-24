@@ -15,8 +15,12 @@ export default function FeaturedCardCollection({
   return (
     <div className="featured-card">
       <Link to={`/collections/${handle}`}>
-        <div className="featured-card-item">
-          <img src={image} alt={image} />
+        <div
+          className="featured-card-item"
+          style={{
+            backgroundImage: `url(${image})`,
+          }}
+        >
           <div className="featured-card-text">
             <h1>{title}</h1>
             <p>Collection spéciale {title}</p>

@@ -12,22 +12,30 @@
       }
     > a {
         border: solid 1px var(--color-grey);
-        background-color: var(--color-darkwhite);
         border-radius: 5px;
         height: 100%;
-            width: 100%;
+        width: 100%;
     > .featured-card-item{
+        box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
         position: relative;
-        > img{
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-        }
+        background-Size: cover;
+        background-Position: center;
+        background-Repeat: no-repeat;
+        height: 100%;
         > .featured-card-text{
+            color: var(--color-light);
             position: absolute;
             top : 0; 
             left : 0;
-            margin: 3% 2%;
+            margin: 5%;
+            > h1{
+                font-size: 3rem;
+            }
+            @media (max-width: 470px){
+                > h1{
+                    font-size: 2rem;
+                } 
+            }
         }
     }}
   }
