@@ -2,8 +2,8 @@ import {Link} from 'react-router-dom';
 import './styles/historyCard.scss';
 
 interface HistoryCardProps {
-  imgsrc: string;
-  section: string;
+  imgsrc: string | undefined;
+  section?: string | undefined;
   date: string;
   text: string;
   sub: string;
@@ -20,8 +20,12 @@ export default function HistoryCard({
 }: HistoryCardProps) {
   return (
     <div className="history-card">
-      <div className="history-card-top">
-        <img src={imgsrc} alt="" />
+      <div
+        className="history-card-top"
+        style={{
+          backgroundImage: `url(${imgsrc})`,
+        }}
+      >
         <p className="section">{section}</p>
         <p className="hide-more">Lire Plus</p>
       </div>

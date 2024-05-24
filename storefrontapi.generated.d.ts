@@ -487,6 +487,63 @@ export type RestoredShoesQuery = {
   >;
 };
 
+export type ArticleItemBlogFragment = Pick<
+  StorefrontAPI.Article,
+  'contentHtml' | 'handle' | 'tags' | 'id' | 'publishedAt' | 'title'
+> & {
+  author?: StorefrontAPI.Maybe<Pick<StorefrontAPI.ArticleAuthor, 'name'>>;
+  image?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.Image, 'id' | 'altText' | 'url' | 'width' | 'height'>
+  >;
+  blog: Pick<StorefrontAPI.Blog, 'handle'>;
+};
+
+export type CarouselBlogQueryVariables = StorefrontAPI.Exact<{
+  language?: StorefrontAPI.InputMaybe<StorefrontAPI.LanguageCode>;
+  blogHandle: StorefrontAPI.Scalars['String']['input'];
+  first?: StorefrontAPI.InputMaybe<StorefrontAPI.Scalars['Int']['input']>;
+  last?: StorefrontAPI.InputMaybe<StorefrontAPI.Scalars['Int']['input']>;
+  startCursor?: StorefrontAPI.InputMaybe<
+    StorefrontAPI.Scalars['String']['input']
+  >;
+  endCursor?: StorefrontAPI.InputMaybe<
+    StorefrontAPI.Scalars['String']['input']
+  >;
+}>;
+
+export type CarouselBlogQuery = {
+  blog?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.Blog, 'title'> & {
+      seo?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.Seo, 'title' | 'description'>
+      >;
+      articles: {
+        nodes: Array<
+          Pick<
+            StorefrontAPI.Article,
+            'contentHtml' | 'handle' | 'tags' | 'id' | 'publishedAt' | 'title'
+          > & {
+            author?: StorefrontAPI.Maybe<
+              Pick<StorefrontAPI.ArticleAuthor, 'name'>
+            >;
+            image?: StorefrontAPI.Maybe<
+              Pick<
+                StorefrontAPI.Image,
+                'id' | 'altText' | 'url' | 'width' | 'height'
+              >
+            >;
+            blog: Pick<StorefrontAPI.Blog, 'handle'>;
+          }
+        >;
+        pageInfo: Pick<
+          StorefrontAPI.PageInfo,
+          'hasPreviousPage' | 'hasNextPage' | 'endCursor' | 'startCursor'
+        >;
+      };
+    }
+  >;
+};
+
 export type PredictiveArticleFragment = {__typename: 'Article'} & Pick<
   StorefrontAPI.Article,
   'id' | 'title' | 'handle' | 'trackingParameters'
@@ -1407,9 +1464,13 @@ interface GeneratedQueryTypes {
     return: RecommendedProductsQuery;
     variables: RecommendedProductsQueryVariables;
   };
-  '#graphql\n#graphql\nfragment ProductCard on Product {\n  id\n  title\n  handle\n  priceRange {\n    minVariantPrice {\n      amount\n      currencyCode\n    }\n  }\n  featuredImage {\n    url\n    altText\n  }\n  metafields(identifiers: [\n    {key: "titres", namespace: "custom"},\n    {key: "notes", namespace: "custom"},\n    {key: "looks", namespace: "custom"},\n    {key: "couleur", namespace: "custom"},\n    {key: "fastdelivery", namespace: "custom"}\n  ]) {\n    ...MetaFieldInfo\n  }\n  availableForSale\n  vendor\n}\n#graphql\nfragment MetaFieldInfo on Metafield {\n  key\n  value\n  type\n  id\n  references(first: 8) {\n    nodes {\n      __typename\n      ... on MediaImage {\n        id\n        image {\n          altText\n          id\n          src\n        }\n      }\n    }\n  }\n}\n\n\nquery RestoredShoes {\n    collection(handle: "Yeezy") {\n      description\n      products(first: 3) {\n        nodes{\n            ...ProductCard\n        }\n      }\n    }\n  }\n  ': {
+  '#graphql\n#graphql\nfragment ProductCard on Product {\n  id\n  title\n  handle\n  priceRange {\n    minVariantPrice {\n      amount\n      currencyCode\n    }\n  }\n  featuredImage {\n    url\n    altText\n  }\n  metafields(identifiers: [\n    {key: "titres", namespace: "custom"},\n    {key: "notes", namespace: "custom"},\n    {key: "looks", namespace: "custom"},\n    {key: "couleur", namespace: "custom"},\n    {key: "fastdelivery", namespace: "custom"}\n  ]) {\n    ...MetaFieldInfo\n  }\n  availableForSale\n  vendor\n}\n#graphql\nfragment MetaFieldInfo on Metafield {\n  key\n  value\n  type\n  id\n  references(first: 8) {\n    nodes {\n      __typename\n      ... on MediaImage {\n        id\n        image {\n          altText\n          id\n          src\n        }\n      }\n    }\n  }\n}\n\n\nquery RestoredShoes {\n    collection(handle: "Yeezy") {\n      description\n      products(first: 3) {\n        nodes{\n            ...ProductCard\n        }\n      }\n    }\n  }\n': {
     return: RestoredShoesQuery;
     variables: RestoredShoesQueryVariables;
+  };
+  '#graphql\n  #graphql\n  fragment ArticleItemBlog on Article {\n    author: authorV2 {\n      name\n    }\n    contentHtml\n    handle\n    tags\n    id\n    image {\n      id\n      altText\n      url\n      width\n      height\n    }\n    publishedAt\n    title\n    blog {\n      handle\n    }\n  }\n\n  query CarouselBlog(\n    $language: LanguageCode\n    $blogHandle: String!\n    $first: Int\n    $last: Int\n    $startCursor: String\n    $endCursor: String\n  ) @inContext(language: $language) {\n    blog(handle: $blogHandle) {\n      title\n      seo {\n        title\n        description\n      }\n      articles(\n        first: $first,\n        last: $last,\n        before: $startCursor,\n        after: $endCursor\n      ) {\n        nodes {\n          ...ArticleItemBlog\n        }\n        pageInfo {\n          hasPreviousPage\n          hasNextPage\n          hasNextPage\n          endCursor\n          startCursor\n        }\n      }\n    }\n  }\n': {
+    return: CarouselBlogQuery;
+    variables: CarouselBlogQueryVariables;
   };
   '#graphql\n  fragment PredictiveArticle on Article {\n    __typename\n    id\n    title\n    handle\n    image {\n      url\n      altText\n      width\n      height\n    }\n    trackingParameters\n  }\n  fragment PredictiveCollection on Collection {\n    __typename\n    id\n    title\n    handle\n    image {\n      url\n      altText\n      width\n      height\n    }\n    trackingParameters\n  }\n  fragment PredictivePage on Page {\n    __typename\n    id\n    title\n    handle\n    trackingParameters\n  }\n  fragment PredictiveProduct on Product {\n    __typename\n    id\n    title\n    handle\n    trackingParameters\n    variants(first: 1) {\n      nodes {\n        id\n        image {\n          url\n          altText\n          width\n          height\n        }\n        price {\n          amount\n          currencyCode\n        }\n      }\n    }\n  }\n  fragment PredictiveQuery on SearchQuerySuggestion {\n    __typename\n    text\n    styledText\n    trackingParameters\n  }\n  query predictiveSearch(\n    $country: CountryCode\n    $language: LanguageCode\n    $limit: Int!\n    $limitScope: PredictiveSearchLimitScope!\n    $searchTerm: String!\n    $types: [PredictiveSearchType!]\n  ) @inContext(country: $country, language: $language) {\n    predictiveSearch(\n      limit: $limit,\n      limitScope: $limitScope,\n      query: $searchTerm,\n      types: $types,\n    ) {\n      articles {\n        ...PredictiveArticle\n      }\n      collections {\n        ...PredictiveCollection\n      }\n      pages {\n        ...PredictivePage\n      }\n      products {\n        ...PredictiveProduct\n      }\n      queries {\n        ...PredictiveQuery\n      }\n    }\n  }\n': {
     return: PredictiveSearchQuery;

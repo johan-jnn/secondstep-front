@@ -1,5 +1,5 @@
 .brand-img-grid {
-    padding: 2%;
+  padding: 2%;
   display: grid;
   width: 100%;
   height: max-content;
@@ -7,17 +7,16 @@
   > .brand-img-grid-top {
     padding-right: 8%;
     padding-bottom: 2%;
-    > a{
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        > button{
-            color: var(--color-light);
-            width: 100px;
-            background-color: var(--color-dark);
-            font-family: 'Manrope';
-            
-        }
+    > a {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      > button {
+        color: var(--color-light);
+        width: 100px;
+        background-color: var(--color-dark);
+        font-family: 'Manrope';
+      }
     }
   }
   .brand-img-grid-bottom {
@@ -28,8 +27,8 @@
       'img1 img4 img6 img6'
       'img2 img4 img7 img8'
       'img3 img5 img7 img8';
-    grid-template-rows: repeat(3,180px);
-    grid-template-columns: repeat(4,280px);
+    grid-template-rows: repeat(3, 200px);
+    grid-template-columns: repeat(4, 300px);
     gap: 20px;
     @for $i from 1 to 9 {
       > a:nth-of-type(#{$i}) {
@@ -39,12 +38,19 @@
     > a > div {
       height: 100%;
       background-color: var(--color-light);
-      > h2{
+      > h2 {
         text-transform: uppercase;
       }
     }
-    .img1, .img2, .img3, .img4, .img5, .img6, .img7, .img8 {
-      color : var(--color-light);
+    .img1,
+    .img2,
+    .img3,
+    .img4,
+    .img5,
+    .img6,
+    .img7,
+    .img8 {
+      color: var(--color-light);
       text-decoration-color: var(--color-light);
       display: grid;
       place-content: center;
@@ -53,21 +59,51 @@
       border: solid 1px;
       border-radius: 10px;
       transition: transform 0.3s ease;
-      background-Size: cover;
-      background-Position: center;
-      background-Repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
-    .img1:hover, .img2:hover, .img3:hover, .img4:hover, .img5:hover, .img6:hover, .img7:hover, .img8:hover{
+    .img1:hover,
+    .img2:hover,
+    .img3:hover,
+    .img4:hover,
+    .img5:hover,
+    .img6:hover,
+    .img7:hover,
+    .img8:hover {
       opacity: 0.8;
       transform: scale(1.02);
     }
-  } 
+  }
 }
 
-@media (max-width: 1270px) {
+@media (max-width: 1500px) {
   .brand-img-grid .brand-img-grid-bottom {
-    grid-template-rows: repeat(3, 120px); /* Modification de la hauteur des lignes */
-    grid-template-columns: repeat(4, 180px); /* Modification de la largeur des colonnes */
+    grid-template-rows: repeat(
+      3,
+      170px
+    ); /* Modification de la hauteur des lignes */
+    grid-template-columns: repeat(
+      4,
+      230px
+    ); /* Modification de la largeur des colonnes */
+    gap: 15px;
+    > a > div > h2 {
+      font-size: 1.3rem; /* Ajustement de la taille du texte */
+    }
+  }
+}
+
+@media (max-width: 1300px) {
+  .brand-img-grid .brand-img-grid-bottom {
+    grid-template-rows: repeat(
+      3,
+      120px
+    ); /* Modification de la hauteur des lignes */
+    grid-template-columns: repeat(
+      4,
+      180px
+    ); /* Modification de la largeur des colonnes */
     gap: 15px;
     > a > div > h2 {
       font-size: 1.3rem; /* Ajustement de la taille du texte */
@@ -81,9 +117,15 @@
 
 @media (max-width: 955px) {
   .brand-img-grid .brand-img-grid-bottom {
-    grid-template-rows: repeat(3, 100px); /* Réduction de la hauteur des lignes */
-    grid-template-columns: repeat(4, 140px); /* Réduction de la largeur des colonnes */
-    gap:10px;
+    grid-template-rows: repeat(
+      3,
+      100px
+    ); /* Réduction de la hauteur des lignes */
+    grid-template-columns: repeat(
+      4,
+      140px
+    ); /* Réduction de la largeur des colonnes */
+    gap: 10px;
     > a > div > h2 {
       font-size: 1rem; /* Ajustement de la taille du texte */
     }
@@ -100,19 +142,25 @@
     place-content: center;
     grid-template-areas:
       'img1 img4'
-      'img2 img4' 
+      'img2 img4'
       'img3 img5'
       'img6 img6'
-      'img7 img8' 
+      'img7 img8'
       'img7 img8';
-    grid-template-rows: repeat(6, 120px); /* Réduction de la hauteur des lignes */
-    grid-template-columns: repeat(2, 160px); /* Réduction de la largeur des colonnes */
+    grid-template-rows: repeat(
+      6,
+      160px
+    ); /* Réduction de la hauteur des lignes */
+    grid-template-columns: repeat(
+      2,
+      300px
+    ); /* Réduction de la largeur des colonnes */
     gap: 5px;
     > a > div > h2 {
       font-size: 1rem; /* Ajustement de la taille du texte */
     }
-    > a > div > p{
-      font-size: 0.7rem; 
+    > a > div > p {
+      font-size: 0.7rem;
     }
   }
   .brand-img-grid .brand-img-grid-top > a > button {
@@ -121,4 +169,28 @@
   }
 }
 
+@media (max-width: 645px) {
+  .brand-img-grid .brand-img-grid-bottom {
+    grid-template-rows: repeat(
+      6,
+      120px
+    ); /* Réduction de la hauteur des lignes */
+    grid-template-columns: repeat(
+      2,
+      200px
+    ); /* Réduction de la largeur des colonnes */
+  }
+}
 
+@media (max-width: 420px) {
+  .brand-img-grid .brand-img-grid-bottom {
+    grid-template-rows: repeat(
+      6,
+      100px
+    ); /* Réduction de la hauteur des lignes */
+    grid-template-columns: repeat(
+      2,
+      160px
+    ); /* Réduction de la largeur des colonnes */
+  }
+}
