@@ -45,4 +45,20 @@
     &:hover {
         scale: 1.05;
     }
+
+    @media (max-width:460px){
+        aspect-ratio: 2.7/1;
+    }
+    @media (max-width:394px){
+        aspect-ratio: 2.4/1;
+        gap: 25px;
+        > .content{
+            > p{
+                font-size: 0.9rem;
+            }
+        }
+        > img{
+            height: 60%;
+        }
+    }
 }
