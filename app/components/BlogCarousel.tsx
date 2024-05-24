@@ -1,10 +1,10 @@
-import {Virtual, Navigation} from 'swiper/modules';
+import {Virtual, Navigation, Pagination} from 'swiper/modules';
 import {Swiper, SwiperSlide} from 'swiper/react';
-import HistoryCard from './HistoryCard';
+import BlogCard from './BlogCard';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import './styles/historyCarousel.scss';
+import './styles/blogCarousel.scss';
 import type {ArticleItemBlogFragment} from 'storefrontapi.generated';
 
 type BlogCarouselProps = {
@@ -17,10 +17,11 @@ export default function BlogCarousel({articles}: BlogCarouselProps) {
       <h1>Histoires de Sneakers</h1>
       <div className="history-carousel-sub">
         <Swiper
-          modules={[Virtual, Navigation]}
+          modules={[Virtual, Navigation, Pagination]}
           slidesPerView={4}
           centeredSlides={false}
           spaceBetween={50}
+          pagination={{clickable: true}}
           navigation={true}
           breakpoints={{
             320: {
@@ -47,7 +48,7 @@ export default function BlogCarousel({articles}: BlogCarouselProps) {
         >
           {articles?.map((article) => (
             <SwiperSlide key={article.id}>
-              <HistoryCard
+              <BlogCard
                 imgsrc={article.image?.url}
                 section={article.tags[0]}
                 date={new Intl.DateTimeFormat('fr', {

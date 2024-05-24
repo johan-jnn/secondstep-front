@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
-import './styles/historyCard.scss';
+import './styles/blogCard.scss';
 
-interface HistoryCardProps {
+interface BlogCardProps {
   imgsrc: string | undefined;
   section?: string | undefined;
   date: string;
@@ -10,14 +10,14 @@ interface HistoryCardProps {
   link: string;
 }
 
-export default function HistoryCard({
+export default function BlogCard({
   imgsrc,
   section,
   date,
   text,
   sub,
   link,
-}: HistoryCardProps) {
+}: BlogCardProps) {
   return (
     <div className="history-card">
       <div
@@ -27,7 +27,9 @@ export default function HistoryCard({
         }}
       >
         <p className="section">{section}</p>
-        <p className="hide-more">Lire Plus</p>
+        <Link to={link}>
+          <p className="hide-more">Lire Plus</p>
+        </Link>
       </div>
       <div className="history-card-bottom">
         <p className="history-card-bottom-date">{date}</p>
