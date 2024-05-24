@@ -1,0 +1,122 @@
+@import './colors';
+@import './_fonts';
+
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-primary: #{$primary};
+
+  --color-white: #{$white};
+  --color-black: #{$black};
+
+  --color-lightblack: #{$light_black};
+  --color-darkwhite: #{$dark_white};
+
+  --color-grey: #{$grey};
+
+  --color-green: #{$green};
+  --color-yellow: #{$yellow};
+}
+
+body {
+  font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+    sans-serif;
+  line-height: 1.4;
+  min-height: 100vh;
+  background-color: var(--color-darkwhite);
+}
+
+@for $i from 1 to 6 {
+  h#{$i} {
+    font-family: 'Anton', Arial, Helvetica, sans-serif;
+    font-weight: 500;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  &:not(:has(> button)):hover {
+    text-decoration: underline;
+  }
+  &:has(> button) {
+    display: inline-block;
+  }
+}
+
+
+button {
+  font-family: 'Manrope', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 12.5px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+hr {
+  margin: 10px 0;
+  border: none;
+  height: 2.5px;
+  background-color: var(--color-primary);
+  border-radius: 999px;
+}
+
+pre {
+  white-space: pre-wrap;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+}
+
+input {
+  border-radius: 4px;
+  border: 1px solid #000;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.25rem;
+  padding: 0.5rem;
+}
+
+legend {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+dl {
+  margin: 0.5rem 0;
+}
+
+code {
+  background: var(--color-lightblack);
+  color: var(--color-darkwhite);
+  border-radius: 4px;
+  font-family: monospace;
+  padding: 0.25rem;
+}
