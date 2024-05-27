@@ -13,17 +13,16 @@
     object-fit: cover;
     background-position: center;
 }
+.hero-banner-content{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 8%;
+}
 .hero-banner-text{
     margin-top: 50%;
     text-align: center;
-    padding-bottom: 8%;
     color: var(--color-dark);
-    > .hero-banner-timer{
-        background-color: var(--color-light);
-    }
-    > h1{
-        background-color: var(--color-light);
-    }
 }
 .hero-banner-clock{
     font-size: 4rem;
@@ -36,8 +35,6 @@
     margin-top: 15%;
     padding: 3%;
     width: 100%;
-    background-color: black;
-    color: white;
     border:none;
     border-radius: 3px;
     font-weight: 600;

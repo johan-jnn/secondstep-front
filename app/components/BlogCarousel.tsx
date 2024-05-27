@@ -6,7 +6,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './styles/blogCarousel.scss';
 import type {ArticleItemBlogFragment} from 'storefrontapi.generated';
-
+import {getContentOfFirstParagraph} from 'app/lib/htmlStringExtractor';
 type BlogCarouselProps = {
   articles?: ArticleItemBlogFragment[];
 };
@@ -57,7 +57,7 @@ export default function BlogCarousel({articles}: BlogCarouselProps) {
                   day: 'numeric',
                 }).format(new Date(article.publishedAt))}
                 text={article.title}
-                sub={article.title}
+                sub={getContentOfFirstParagraph(article.contentHtml)}
                 link={`/blogs/${article.blog.handle}/${article.handle}`}
               />
             </SwiperSlide>

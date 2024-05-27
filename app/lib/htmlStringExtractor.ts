@@ -1,7 +1,7 @@
 export function getContentOfFirstParagraph(dom: string) {
   const content = /<(?<tag>p).*?>(?<content>.*?)<\/\k<tag>>/.exec(dom)?.groups
     ?.content;
-  if (!content) return null;
+  if (!content) return undefined;
 
   return content;
 }

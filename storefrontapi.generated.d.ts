@@ -498,6 +498,21 @@ export type ArticleItemBlogFragment = Pick<
   blog: Pick<StorefrontAPI.Blog, 'handle'>;
 };
 
+export type MetaObjectFieldsFragment = Pick<StorefrontAPI.Metaobject, 'id'> & {
+  fields: Array<
+    Pick<StorefrontAPI.MetaobjectField, 'value' | 'key' | 'type'> & {
+      reference?: StorefrontAPI.Maybe<
+        | Pick<StorefrontAPI.Collection, 'id' | 'handle'>
+        | {
+            image?: StorefrontAPI.Maybe<
+              Pick<StorefrontAPI.Image, 'altText' | 'url'>
+            >;
+          }
+      >;
+    }
+  >;
+};
+
 export type MetaobjectquerryQueryVariables = StorefrontAPI.Exact<{
   [key: string]: never;
 }>;
@@ -505,7 +520,18 @@ export type MetaobjectquerryQueryVariables = StorefrontAPI.Exact<{
 export type MetaobjectquerryQuery = {
   metaobject?: StorefrontAPI.Maybe<
     Pick<StorefrontAPI.Metaobject, 'id'> & {
-      fields: Array<Pick<StorefrontAPI.MetaobjectField, 'value' | 'type'>>;
+      fields: Array<
+        Pick<StorefrontAPI.MetaobjectField, 'value' | 'key' | 'type'> & {
+          reference?: StorefrontAPI.Maybe<
+            | Pick<StorefrontAPI.Collection, 'id' | 'handle'>
+            | {
+                image?: StorefrontAPI.Maybe<
+                  Pick<StorefrontAPI.Image, 'altText' | 'url'>
+                >;
+              }
+          >;
+        }
+      >;
     }
   >;
 };
@@ -1480,7 +1506,7 @@ interface GeneratedQueryTypes {
     return: RestoredShoesQuery;
     variables: RestoredShoesQueryVariables;
   };
-  '#graphql\nquery metaobjectquerry {\n  metaobject(handle: {handle: "lucky-week", type: "hero_header"}) {\n    fields {\n      value\n      type\n    }\n    id\n  }\n}\n': {
+  '#graphql\n  #graphql\n  fragment MetaObjectFields on Metaobject {\n    fields {\n      value\n      key\n      reference {\n        ... on MediaImage {\n          image {\n            altText\n            url\n          }\n        }\n        ... on Collection {\n          id\n          handle\n        }\n      }\n      type\n    }\n    id\n  }\n\n  query metaobjectquerry {\n    metaobject(handle: {handle: "home-page", type: "hero_header"}) {\n      ...MetaObjectFields\n    }\n  }\n': {
     return: MetaobjectquerryQuery;
     variables: MetaobjectquerryQueryVariables;
   };

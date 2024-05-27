@@ -29,7 +29,7 @@ export async function loader({context}: LoaderFunctionArgs) {
   const featuredCollection = collections.nodes;
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
   const restoredProducts = storefront.query(RESTORED_PRODUCT_QUERRY);
-  const metaObject = storefront.query(METAOBJECTQUERRY);
+  const metaObject = await storefront.query(METAOBJECTQUERRY);
   const blogHandle = 'infos';
   const paginationVariables = {first: 6};
   const blogData = await storefront.query(BLOGS_QUERY, {
@@ -54,10 +54,11 @@ export async function loader({context}: LoaderFunctionArgs) {
 
 export default function Homepage() {
   const data = useLoaderData<typeof loader>();
-  console.log(data.metaObject);
   return (
     <div className="home">
-      <HeroBanner />
+      {data.metaObject?.metaobject ? (
+        <HeroBanner metaObject={data.metaObject.metaobject} />
+      ) : null}
       <div className="homepage-featured-collection">
         {data.featuredCollection.map((collection) => (
           <CollectionCard key={collection.id} collection={collection} />
@@ -163,16 +164,36 @@ export const ARTICLE_ITEM_FRAGMENT = `#graphql
   }
 ` as const;
 
-export const METAOBJECTQUERRY = `#graphql
-query metaobjectquerry {
-  metaobject(handle: {handle: "lucky-week", type: "hero_header"}) {
+export const METAOBJECT_FRAGMENT = `#graphql
+  fragment MetaObjectFields on Metaobject {
     fields {
       value
+      key
+      reference {
+        ... on MediaImage {
+          image {
+            altText
+            url
+          }
+        }
+        ... on Collection {
+          id
+          handle
+        }
+      }
       type
     }
     id
   }
-}
+` as const;
+
+const METAOBJECTQUERRY = `#graphql
+  ${METAOBJECT_FRAGMENT}
+  query metaobjectquerry {
+    metaobject(handle: {handle: "home-page", type: "hero_header"}) {
+      ...MetaObjectFields
+    }
+  }
 ` as const;
 
 const BLOGS_QUERY = `#graphql
