@@ -1,0 +1,37 @@
+.bestLooks {
+    margin: 15px 0;
+    border-radius: 10px;
+    background-color: var(--color-darkwhite);
+    padding: 15px;
+
+    .heading {
+        position: relative;
+        font-size: 12.5px;
+        margin-bottom: 15px;
+
+        > h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        > p {
+            max-width: 50%;
+        }
+
+        > a {
+            position: absolute;
+            bottom: 0;
+            right: 5px;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    }
+
+    > .noGalery {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

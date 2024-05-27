@@ -1,0 +1,9 @@
+.stars-rating {
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  > svg {
+    height: 130%;
+  }
+}

@@ -1,0 +1,131 @@
+.restoredProduct{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-darkwhite);
+    padding: 2%;
+    > .restoredProduct-left{
+        margin-right: 3%;
+        width: 100%;
+        display: grid;
+        place-content: center;
+        > h1{
+            text-transform: uppercase;
+        }
+        > p{
+            margin-top: 10%;
+        }
+        > a{
+            margin-top: 3%;
+            > button{
+                left: 0;
+                background-color: var(--color-primary);
+                color: var(--color-light);
+                text-transform: uppercase;
+                font-size: 1rem;
+                font-weight: 100;
+                letter-spacing: 1.5px;
+                width: 100%;
+                padding: 3%;
+            }
+        }
+
+        > div{
+            display: flex;
+            justify-content: center;
+            gap: 4%;
+            margin-top: 3%;
+            color: var(--color-primary)
+        }
+    }
+    > .restoredProduct-right{
+        width: 100%;
+    }
+}
+
+@media (max-width:1250px){
+    .restoredProduct{
+        display: grid;
+        > .restoredProduct-left{
+            display: flex; 
+            flex-direction: column;
+            > p{
+                margin-top: 0;
+                font-size: 0.9rem;
+            }
+            > h1{
+                grid-area: title;
+            }
+            > .text{
+                grid-area: text;
+            }
+
+            > .sub{
+                grid-area: sub;
+            }
+
+            > .rec{
+                grid-area: rec;
+            }
+            > a > button{
+                margin: 0 auto;
+                font-size: 0.8rem;
+                aspect-ratio:0;
+                padding: 1.5%;
+                width: 80%;
+            }
+        }
+    }
+}
+
+
+
+@media (max-width:870px){
+    .restoredProduct{
+        display: grid;
+        > .restoredProduct-left{
+            display: flex;
+            flex-direction: column;
+            > p{
+                margin-top: 2%;
+                font-size: 0.9rem;
+            }
+            > h1{
+                grid-area: title;
+            }
+            > .text{
+                grid-area: text;
+            }
+
+            > .sub{
+                grid-area: sub;
+            }
+
+            > .rec{
+                grid-area: rec;
+                margin: 0 auto;
+            }
+            > a > button{
+                margin: 0 auto;
+                font-size: 0.8rem;
+                width: 70%;
+            }
+        }
+    }
+}
+
+@media (max-width:870px){
+    .restoredProduct{
+        padding: 5% 2%;
+    }
+    .restoredProduct-left{
+        padding: 0 5%;
+    }
+    .rec{
+        text-align: center;
+        font-size: 0.9rem;
+    }
+    .restoredProduct > .restoredProduct-left > div{
+        gap: 0;
+    }
+}

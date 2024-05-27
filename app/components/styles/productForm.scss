@@ -1,0 +1,223 @@
+#productForm {
+  border: 1px solid var(--color-grey);
+  border-radius: 5px;
+  padding: 20px;
+  background-color: var(--color-white);
+  min-width: 350px;
+
+  > section {
+    padding: 0;
+  }
+
+  > button {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  > #price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > .priceDisplay {
+      text-align: center;
+      display: grid;
+      place-items: center;
+
+      p {
+        font-size: 20px;
+        font-weight: 900;
+      }
+      span {
+        font-size: 10px;
+      }
+
+      &#neuf {
+        color: var(--color-grey);
+        p {
+          text-decoration: line-through;
+        }
+        & + hr {
+          height: 30px;
+          width: 1.5px;
+          background-color: var(--color-grey);
+          border: none;
+          border-radius: 999px;
+        }
+      }
+      &#ss_price {
+        color: var(--color-primary);
+
+        span {
+          display: flex;
+          align-items: center;
+          gap: 0.5em;
+
+          > svg {
+            height: 1em;
+          }
+        }
+      }
+    }
+    > #priceDiff {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      padding: 2.5px 7.5px;
+      border-radius: 2.5px;
+      font-size: 10px;
+    }
+  }
+
+  > hr {
+    margin: {
+      left: auto;
+      right: auto;
+    }
+    width: 75%;
+    display: block;
+    background-color: var(--color-grey);
+    height: 1px;
+  }
+
+  > #taille {
+    > .heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      > a {
+        font-size: 12.5px;
+        text-decoration: underline;
+      }
+    }
+
+    > .liv48h {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 10px;
+      margin: 15px 0;
+    }
+
+    > #tailleGrid {
+      min-height: 75px;
+      max-height: 150px;
+      overflow-y: scroll;
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      gap: 10px;
+      padding-right: 5px;
+
+      > li {
+        width: 100%;
+        height: 45px;
+        border: 1px solid var(--color-grey);
+        border-radius: 2.5px;
+        margin: 0;
+
+        &[data-selected='true'] {
+          border-color: var(--color-primary);
+          border-width: 2px;
+        }
+
+        > * {
+          height: 100%;
+          width: 100%;
+          padding: 2.5px 0;
+          display: block;
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+          flex-direction: column;
+          > .variantName {
+            font-size: 14px;
+          }
+        }
+
+        > a {
+          position: relative;
+          > .liv48h {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 0.75em;
+          }
+
+          > .variantPrice {
+            font-size: 12.5px;
+            font-weight: 900;
+            color: var(--color-primary);
+          }
+        }
+        > .soldout {
+          cursor: not-allowed;
+          color: var(--color-grey);
+          overflow: hidden;
+          position: relative;
+
+          &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: 1.5px;
+            width: 200%;
+            background-color: var(--color-grey);
+
+            transform-origin: center center;
+            translate: -50% -50%;
+            rotate: -30deg;
+          }
+
+          > .soldout_sub {
+            font-size: 12.5px;
+          }
+        }
+      }
+    }
+  }
+
+  > #livraison {
+    padding: 2.5px 5px;
+    > label {
+      display: flex;
+      align-items: center;
+      margin: 5px 0;
+      padding: 5px 10px;
+      color: var(--color-lightblack);
+      border: 2.5px solid var(--color-lightblack);
+      accent-color: var(--color-lightblack);
+      
+      border-radius: 10px;
+      font-size: .8em;
+      cursor: pointer;
+
+      &[for="fastDelivery"] {
+        color: var(--color-primary);
+        border-color: var(--color-primary);
+        accent-color: var(--color-primary);
+      }
+
+      > .title {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+
+        > input {
+          margin: 0;
+          margin-right: 5px;
+        }
+        > .icon {
+          $icon-size: 20px;
+          height: $icon-size;
+          width: $icon-size;
+          margin-right: 5px;
+          svg path {
+            fill: var(--color-primary);
+          }
+        }
+      }
+    }
+  }
+}

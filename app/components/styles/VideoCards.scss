@@ -1,0 +1,27 @@
+.video-cards{
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap : 2%; 
+    padding: 2%;
+    margin-left: 10% auto;
+  }
+
+  @media (max-width: 750px) {
+    .video-cards{
+      display: grid;
+      grid-template-columns: 70%;
+      place-content: center;
+      padding-bottom: 10%;
+    }
+  }
+  
+  @media (max-width: 550px) {
+    .video-cards{
+      display: grid;
+      grid-template-columns: 90%;
+      place-content: center;
+    }
+  }
+  
+  
