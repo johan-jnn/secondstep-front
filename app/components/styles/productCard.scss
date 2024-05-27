@@ -1,0 +1,117 @@
+$card-aspect-ratio: #{1.3 / 2};
+$card-height: auto;
+$card-border-radius: 5px;
+
+.product-card {
+  background-color: transparent;
+  height: $card-height;
+  width: 85%;
+  aspect-ratio: $card-aspect-ratio;
+  padding: 7.5px;
+  font-size: calc($card-height / 15);
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  row-gap: 5px;
+
+  border-radius: $card-border-radius;
+
+  will-change: scale;
+  transition: scale 0.15s;
+
+  &:hover {
+    text-decoration: inherit;
+    scale: 1.05;
+  }
+
+  > .top {
+    position: relative;
+    background-color: transparent;
+    border-radius: calc($card-border-radius / 1.5);
+    flex-grow: 1;
+    border: 1px solid var(--color-grey);
+    filter: drop-shadow(-2px 4px 10px #e2e2e2);
+
+    > .pastilles {
+      position: absolute;
+      bottom: 5%;
+      left: 5%;
+      > li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1em;
+        margin: 5px 0;
+      }
+    }
+
+    > img {
+      height: 100%;
+      aspect-ratio: 1.8 / 2;
+      object-fit: contain;
+
+      background-color: #f2f2f2;
+    }
+
+    > .brand {
+      position: absolute;
+      bottom: 5%;
+      right: 5%;
+      width: 35px;
+      display: grid;
+      place-content: center;
+      > img {
+        width: 100%;
+      }
+    }
+  }
+  > .bottom {
+    display: grid;
+    grid-template-areas:
+      'title price'
+      'sub sub'
+      'rate rate';
+    grid-template-rows: auto max-content 15%;
+    row-gap: 5px;
+    margin-top: 2%;
+    align-items: baseline;
+
+    > h3 {
+      grid-area: title;
+      font-size: 1.2em;
+      text-transform: uppercase;
+    }
+    > h4 {
+      grid-area: sub;
+      font-size: 0.9em;
+      font-weight: normal;
+    }
+    > .price {
+      grid-area: price;
+      font-size: 1em;
+      width: 100%;
+      text-align: right;
+
+      > span {
+        font-weight: bold;
+      }
+    }
+    > .rating {
+      grid-area: rate;
+      padding-right: 25%;
+      height: 100%;
+      display: flex;
+      align-items: baseline;
+      font-size: 0.9em;
+      gap: 5px;
+    }
+  }
+}
+
+@media (max-width: 560px) {
+  .product-card > .top > .brand {
+    width: 30px;
+  }
+}

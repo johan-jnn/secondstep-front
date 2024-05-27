@@ -1,0 +1,28 @@
+$iconWidth: 15px;
+$iconMarginRight: 5px;
+
+.certificationItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  > .topline {
+    display: flex;
+    align-items: center;
+    gap: $iconMarginRight;
+
+    > h3 {
+      font-size: 15px;
+    }
+    > svg {
+      width: $iconWidth;
+    }
+  }
+  > p {
+    font-size: 12.5px;
+    padding: 0 ($iconWidth + $iconMarginRight);
+    a {
+      font-weight: 800;
+      text-decoration: underline;
+    }
+  }
+}

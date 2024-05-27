@@ -1,0 +1,181 @@
+$bg: var(--color-darkwhite);
+$barConstantSize: 5px;
+$y-marges: 20px;
+.reconditionnementProcess {
+  display: grid;
+  grid-template-columns: 75px 1fr 45%;
+  grid-template-rows: 100%;
+  grid-template-areas: 'progressbar content illustration';
+
+  gap: 15px;
+  background-color: $bg;
+  aspect-ratio: 2.5 / 1;
+  height: 400px;
+  width: 100%;
+  margin: 10px 0;
+
+  background-color: $bg;
+
+  > .progressbar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    grid-area: progressbar;
+    margin: $y-marges 0;
+
+    > .bubble {
+      $size: 25px;
+      width: $size;
+      height: $size;
+      display: grid;
+      place-content: center;
+      border-radius: 50%;
+      background-color: var(--color-grey);
+      font-weight: 700;
+      color: $bg;
+      border: 2.5px solid $bg;
+      z-index: 2;
+      transition: background-color 0.25s;
+      &[data-filled] {
+        background-color: var(--color-primary);
+      }
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      translate: -50% 0;
+      width: $barConstantSize;
+    }
+    &::before {
+      background-color: var(--color-grey);
+      height: 100%;
+    }
+    &::after {
+      transition: height 0.25s;
+      height: var(--progress);
+      background-color: var(--color-primary);
+    }
+  }
+
+  > .content {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    grid-area: content;
+    margin: $y-marges 0;
+
+    > .heading {
+      display: flex;
+      align-items: center;
+      color: var(--color-primary);
+
+      > .icon {
+        height: 50px;
+
+        svg path {
+          fill: var(--color-primary);
+        }
+      }
+
+      > h3 {
+        font-size: 30px;
+        text-transform: uppercase;
+      }
+    }
+    > p {
+      margin: 10px 0;
+      font-size: 12.5px;
+    }
+
+    > .navigation {
+      width: 100%;
+      flex-grow: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 10px;
+      button {
+        max-width: 100px;
+        height: 50px;
+      }
+    }
+  }
+
+  > .illustration {
+    position: relative;
+    grid-area: illustration;
+
+    > img {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 2 / 1;
+      object-fit: cover;
+    }
+
+    > .videoButton {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 75px;
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  @media screen and (max-width: 950px) {
+    grid-template-areas:
+      'content illustration'
+      'progressbar progressbar';
+    grid-template-columns: auto 45%;
+    grid-template-rows: 1fr 75px;
+    margin: 15px 0;
+    aspect-ratio: unset;
+    max-height: unset;
+
+    > .progressbar {
+      flex-direction: row;
+      margin: 0 $y-marges;
+
+      &::before,
+      &::after {
+        top: 50%;
+        left: 0;
+        translate: 0 -50%;
+        height: $barConstantSize;
+      }
+      &::before {
+        width: 100%;
+      }
+      &::after {
+        transition: width 0.25s;
+        width: var(--progress);
+      }
+    }
+    > .content {
+      margin-left: $y-marges;
+    }
+  }
+  @media screen and (max-width: 675px) {
+    grid-template-areas:
+      'progressbar'
+      'content'
+      'illustration';
+    grid-template-columns: 100%;
+    grid-template-rows: 75px auto 45%;
+    height: 80vh;
+    padding: calc($y-marges / 2);
+
+    > * {
+      margin: 0 !important;
+    }
+
+    > .content {
+      min-height: unset;
+    }
+  }
+}
