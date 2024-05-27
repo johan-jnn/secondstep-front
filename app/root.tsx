@@ -18,8 +18,6 @@ import appStyles from './styles/app.scss?url';
 import {Layout} from '~/components/Layout';
 import type {footerMenus} from './components/Footer';
 import {COLLECTION_FRAGMENT} from './routes/collections._index';
-import {PRODUCT_CARD_FRAGMENT} from './components/ProductCard';
-import {getContentOfFirst} from './lib/htmlStringExtractor';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -114,17 +112,6 @@ export async function loader({context}: LoaderFunctionArgs) {
 export default function App() {
   const nonce = useNonce();
   const data = useLoaderData<typeof loader>();
-
-  getContentOfFirst(
-    'p',
-    `
-    <h1>Hello</h1>
-
-    <p>Bonjour <span>tt le monde</span></span>
-    <p>Nop !!</p>
-  
-  `,
-  );
 
   return (
     <html lang="fr">
