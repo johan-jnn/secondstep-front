@@ -498,6 +498,18 @@ export type ArticleItemBlogFragment = Pick<
   blog: Pick<StorefrontAPI.Blog, 'handle'>;
 };
 
+export type MetaobjectquerryQueryVariables = StorefrontAPI.Exact<{
+  [key: string]: never;
+}>;
+
+export type MetaobjectquerryQuery = {
+  metaobject?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.Metaobject, 'id'> & {
+      fields: Array<Pick<StorefrontAPI.MetaobjectField, 'value' | 'type'>>;
+    }
+  >;
+};
+
 export type CarouselBlogQueryVariables = StorefrontAPI.Exact<{
   language?: StorefrontAPI.InputMaybe<StorefrontAPI.LanguageCode>;
   blogHandle: StorefrontAPI.Scalars['String']['input'];
@@ -1467,6 +1479,10 @@ interface GeneratedQueryTypes {
   '#graphql\n#graphql\nfragment ProductCard on Product {\n  id\n  title\n  handle\n  priceRange {\n    minVariantPrice {\n      amount\n      currencyCode\n    }\n  }\n  featuredImage {\n    url\n    altText\n  }\n  metafields(identifiers: [\n    {key: "titres", namespace: "custom"},\n    {key: "notes", namespace: "custom"},\n    {key: "looks", namespace: "custom"},\n    {key: "couleur", namespace: "custom"},\n    {key: "fastdelivery", namespace: "custom"}\n  ]) {\n    ...MetaFieldInfo\n  }\n  availableForSale\n  vendor\n}\n#graphql\nfragment MetaFieldInfo on Metafield {\n  key\n  value\n  type\n  id\n  references(first: 8) {\n    nodes {\n      __typename\n      ... on MediaImage {\n        id\n        image {\n          altText\n          id\n          src\n        }\n      }\n    }\n  }\n}\n\n\nquery RestoredShoes {\n    collection(handle: "Yeezy") {\n      description\n      products(first: 3) {\n        nodes{\n            ...ProductCard\n        }\n      }\n    }\n  }\n': {
     return: RestoredShoesQuery;
     variables: RestoredShoesQueryVariables;
+  };
+  '#graphql\nquery metaobjectquerry {\n  metaobject(handle: {handle: "lucky-week", type: "hero_header"}) {\n    fields {\n      value\n      type\n    }\n    id\n  }\n}\n': {
+    return: MetaobjectquerryQuery;
+    variables: MetaobjectquerryQueryVariables;
   };
   '#graphql\n  #graphql\n  fragment ArticleItemBlog on Article {\n    author: authorV2 {\n      name\n    }\n    contentHtml\n    handle\n    tags\n    id\n    image {\n      id\n      altText\n      url\n      width\n      height\n    }\n    publishedAt\n    title\n    blog {\n      handle\n    }\n  }\n\n  query CarouselBlog(\n    $language: LanguageCode\n    $blogHandle: String!\n    $first: Int\n    $last: Int\n    $startCursor: String\n    $endCursor: String\n  ) @inContext(language: $language) {\n    blog(handle: $blogHandle) {\n      title\n      seo {\n        title\n        description\n      }\n      articles(\n        first: $first,\n        last: $last,\n        before: $startCursor,\n        after: $endCursor\n      ) {\n        nodes {\n          ...ArticleItemBlog\n        }\n        pageInfo {\n          hasPreviousPage\n          hasNextPage\n          hasNextPage\n          endCursor\n          startCursor\n        }\n      }\n    }\n  }\n': {
     return: CarouselBlogQuery;

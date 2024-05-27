@@ -29,7 +29,7 @@ export async function loader({context}: LoaderFunctionArgs) {
   const featuredCollection = collections.nodes;
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
   const restoredProducts = storefront.query(RESTORED_PRODUCT_QUERRY);
-
+  const metaObject = storefront.query(METAOBJECTQUERRY);
   const blogHandle = 'infos';
   const paginationVariables = {first: 6};
   const blogData = await storefront.query(BLOGS_QUERY, {
@@ -48,11 +48,13 @@ export async function loader({context}: LoaderFunctionArgs) {
     recommendedProducts,
     restoredProducts,
     blogArticles: blogData.blog.articles.nodes,
+    metaObject,
   });
 }
 
 export default function Homepage() {
   const data = useLoaderData<typeof loader>();
+  console.log(data.metaObject);
   return (
     <div className="home">
       <HeroBanner />
@@ -159,6 +161,18 @@ export const ARTICLE_ITEM_FRAGMENT = `#graphql
       handle
     }
   }
+` as const;
+
+export const METAOBJECTQUERRY = `#graphql
+query metaobjectquerry {
+  metaobject(handle: {handle: "lucky-week", type: "hero_header"}) {
+    fields {
+      value
+      type
+    }
+    id
+  }
+}
 ` as const;
 
 const BLOGS_QUERY = `#graphql

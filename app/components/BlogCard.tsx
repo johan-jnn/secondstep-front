@@ -6,7 +6,7 @@ interface BlogCardProps {
   section?: string | undefined;
   date: string;
   text: string;
-  sub: string;
+  sub: string | undefined;
   link: string;
 }
 
