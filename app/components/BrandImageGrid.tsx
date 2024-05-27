@@ -1,13 +1,14 @@
 import './styles/brandImageGrid.scss';
 import {Link} from 'react-router-dom';
-import img1 from 'app/assets/brandgridimages/dunklow.jpg';
-import img2 from 'app/assets/brandgridimages/travis.jpg';
-import img3 from 'app/assets/brandgridimages/NB2002.jpg';
-import img4 from 'app/assets/brandgridimages/j1long.jpg';
-import img5 from 'app/assets/brandgridimages/AF1.jpg';
-import img6 from 'app/assets/brandgridimages/YeezyLarge.jpg';
-import img7 from 'app/assets/brandgridimages/Yeezy.jpg';
-import img8 from 'app/assets/brandgridimages/j4.jpg';
+import img1 from 'app/assets/brandgridimages/dunklow.webp';
+import img2 from 'app/assets/brandgridimages/travis.webp';
+import img3 from 'app/assets/brandgridimages/NB2002.webp';
+import img4 from 'app/assets/brandgridimages/j1long.webp';
+import img5 from 'app/assets/brandgridimages/AF1.webp';
+import img6 from 'app/assets/brandgridimages/YeezyLarge.webp';
+import img7 from 'app/assets/brandgridimages/Yeezy.webp';
+import img8 from 'app/assets/brandgridimages/j4.webp';
+
 export default function BrandImageGrid() {
   return (
     <div className="brand-img-grid">
