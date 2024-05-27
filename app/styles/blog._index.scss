@@ -1,20 +1,34 @@
-/*
-* --------------------------------------------------
-* routes/blog._index.tsx
-* --------------------------------------------------
-*/
 .blog-grid {
+  display: grid;
+  grid-gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(var(--grid-item-width), 1fr));
+  margin: 2%;
+  > .blog-index-links {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    > a {
+      color: var(--color-primary);
+    }
+  }
+}
+
+.blog-article-image {
+  aspect-ratio: 3/2;
+  display: block;
+  object-fit: cover;
+}
+
+.blog-article-image img {
+  height: 100%;
+}
+
+
+.blogs{
+  > .blogs-grid{
     display: grid;
-    grid-gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(var(--grid-item-width), 1fr));
-    margin-bottom: 2rem;
+    place-content: center;
+    text-align: center;
+    font-size: 2rem;
   }
-  
-  .blog-article-image {
-    aspect-ratio: 3/2;
-    display: block;
-  }
-  
-  .blog-article-image img {
-    height: 100%;
-  }
+}
