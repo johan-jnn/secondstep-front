@@ -10,7 +10,9 @@ export default async function handleRequest(
   responseHeaders: Headers,
   remixContext: EntryContext,
 ) {
-  const {nonce, header, NonceProvider} = createContentSecurityPolicy();
+  const {nonce, header, NonceProvider} = createContentSecurityPolicy({
+    connectSrc: ['wss://massive-moral-sturgeon.ngrok-free.app:*'],
+  });
 
   const body = await renderToReadableStream(
     <NonceProvider>

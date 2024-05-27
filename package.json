@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "link": "shopify hydrogen link",
     "deploy": "shopify hydrogen deploy",
-    "codegen": "shopify hydrogen codegen"
+    "codegen": "shopify hydrogen codegen",
+    "ngrok": "ngrok http --domain=massive-moral-sturgeon.ngrok-free.app 3000"
   },
   "prettier": "@shopify/prettier-config",
   "dependencies": {
