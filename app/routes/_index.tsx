@@ -22,6 +22,7 @@ import FAQ from '~/components/FAQ';
 import CarteAuthenticite from '~/components/CarteAuthenticite';
 import BlogCarousel from '~/components/BlogCarousel';
 import CollectionCard from '~/components/CollectionCard';
+import FeaturedCollection from '~/components/FeaturedCollection';
 import {Not} from '~/lib/types';
 
 export const meta: MetaFunction = () => {
@@ -102,7 +103,7 @@ export default function Homepage() {
         })}
       </div>
       <Engagements />
-      <RecommendedProducts products={featuredProducts} />
+      <FeaturedCollection products={featuredProducts} />
       <VideoCards />
       <Await resolve={data.restoredProducts}>
         {({collection}) =>
@@ -116,21 +117,6 @@ export default function Homepage() {
       <BlogCarousel articles={data.blogArticles} />
       <FAQ />
       <CarteAuthenticite />
-    </div>
-  );
-}
-
-function RecommendedProducts({products}: {products: ProductCardFragment[]}) {
-  return (
-    <div className="recommended-products">
-      <h2>Nos meilleures ventes</h2>
-      <p>Attention ca part un peu (beaucoup) vite</p>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Await resolve={products}>
-          <ProductGrid products={products} />
-        </Await>
-      </Suspense>
-      <br />
     </div>
   );
 }
