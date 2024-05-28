@@ -2,7 +2,11 @@ import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link, type MetaFunction} from '@remix-run/react';
 import {Suspense} from 'react';
 import '../styles/app.scss';
-import type {RecommendedProductsQuery} from 'storefrontapi.generated';
+import type {
+  CollectionFragment,
+  ProductCardFragment,
+  RecommendedProductsQuery,
+} from 'storefrontapi.generated';
 import ProductCard, {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
 import {COLLECTION_FRAGMENT} from './collections._index';
 import HeroBanner from '~/components/HeroBanner';
@@ -18,6 +22,8 @@ import FAQ from '~/components/FAQ';
 import CarteAuthenticite from '~/components/CarteAuthenticite';
 import BlogCarousel from '~/components/BlogCarousel';
 import CollectionCard from '~/components/CollectionCard';
+import FeaturedCollection from '~/components/FeaturedCollection';
+import {Not} from '~/lib/types';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Second Step | Home'}];
@@ -25,11 +31,15 @@ export const meta: MetaFunction = () => {
 
 export async function loader({context}: LoaderFunctionArgs) {
   const {storefront} = context;
-  const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
-  const featuredCollection = collections.nodes;
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
   const restoredProducts = storefront.query(RESTORED_PRODUCT_QUERRY);
   const metaObject = await storefront.query(METAOBJECTQUERRY);
+  const featuredCollectionsData = await storefront.query(
+    FEATURED_COLLECTION_QUERY_META,
+  );
+  const featuredProductsData = await storefront.query(
+    FEATURED_PRODUCTS_QUERY_META,
+  );
   const blogHandle = 'infos';
   const paginationVariables = {first: 6};
   const blogData = await storefront.query(BLOGS_QUERY, {
@@ -44,28 +54,56 @@ export async function loader({context}: LoaderFunctionArgs) {
   }
 
   return defer({
-    featuredCollection,
     recommendedProducts,
     restoredProducts,
     blogArticles: blogData.blog.articles.nodes,
     metaObject,
+    featuredCollections: featuredCollectionsData.metaobjects.nodes,
+    featuredProducts: featuredProductsData.metaobjects.nodes,
   });
 }
 
 export default function Homepage() {
   const data = useLoaderData<typeof loader>();
+  const featuredCollections = data.featuredCollections;
+  const featuredProducts = data.featuredProducts
+    .map((metaObject) => {
+      const featuredField = metaObject.fields.find(
+        (field) => field.key === 'featured_products',
+      );
+      return featuredField ? featuredField.reference : null;
+    })
+    .filter(
+      (reference): reference is NonNullable<typeof reference> =>
+        reference !== null,
+    );
+
   return (
     <div className="home">
       {data.metaObject?.metaobject ? (
         <HeroBanner metaObject={data.metaObject.metaobject} />
       ) : null}
       <div className="homepage-featured-collection">
-        {data.featuredCollection.map((collection) => (
-          <CollectionCard key={collection.id} collection={collection} />
-        ))}
+        {featuredCollections.map((metaObject) => {
+          if (
+            metaObject.fields.find((f) => f.key === 'home-page-use')?.value !==
+            'true'
+          )
+            return null;
+          const collection = metaObject.fields.find(
+            (field) => field.key === 'featured_collection',
+          )?.reference;
+          if (!collection) return null;
+          return (
+            <CollectionCard
+              key={metaObject.id}
+              collection={collection as CollectionFragment}
+            />
+          );
+        })}
       </div>
       <Engagements />
-      <RecommendedProducts products={data.recommendedProducts} />
+      <FeaturedCollection products={featuredProducts} />
       <VideoCards />
       <Await resolve={data.restoredProducts}>
         {({collection}) =>
@@ -82,37 +120,6 @@ export default function Homepage() {
     </div>
   );
 }
-
-function RecommendedProducts({
-  products,
-}: {
-  products: Promise<RecommendedProductsQuery>;
-}) {
-  return (
-    <div className="recommended-products">
-      <h2>Nos meilleures ventes</h2>
-      <p>Attention ca part un peu (beaucoup) vite</p>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Await resolve={products}>
-          {({products}) => <ProductGrid products={products.nodes} />}
-        </Await>
-      </Suspense>
-      <br />
-    </div>
-  );
-}
-
-const FEATURED_COLLECTION_QUERY = `#graphql
-  ${COLLECTION_FRAGMENT}
-  query FeaturedCollection($country: CountryCode, $language: LanguageCode)
-    @inContext(country: $country, language: $language) {
-    collections(first: 4, sortKey: UPDATED_AT, reverse: true) {
-      nodes {
-        ...Collection
-      }
-    }
-  }
-` as const;
 
 const RECOMMENDED_PRODUCTS_QUERY = `#graphql
   ${PRODUCT_CARD_FRAGMENT}
@@ -138,7 +145,68 @@ query RestoredShoes {
       }
     }
   }
-`;
+` as const;
+
+export const METAOBJECT_FRAGMENT = `#graphql
+  ${COLLECTION_FRAGMENT}
+  fragment MetaObjectFields on Metaobject {
+    fields {
+      value
+      key
+      reference {
+        ... on MediaImage {
+          image {
+            altText
+            url
+          }
+        }
+        ... on Collection {
+          ...Collection
+        }
+      }
+      type
+    }
+    id
+  }
+` as const;
+
+const METAOBJECTQUERRY = `#graphql
+  ${METAOBJECT_FRAGMENT}
+  query metaobjectquerry {
+    metaobject(handle: {handle: "home-page", type: "hero_header"}) {
+      ...MetaObjectFields
+    }
+  }
+` as const;
+
+const FEATURED_COLLECTION_QUERY_META = `#graphql
+${METAOBJECT_FRAGMENT}
+query FeaturedCollectionsquerry {
+  metaobjects(type: "featured_collections", first: 50) {
+    nodes {
+      ...MetaObjectFields
+    }
+  }
+}
+` as const;
+
+const FEATURED_PRODUCTS_QUERY_META = `#graphql
+${PRODUCT_CARD_FRAGMENT}
+query FeaturedProductsquerry {
+  metaobjects(type: "featured_products", first: 5) {
+    nodes {
+      fields {
+        reference {
+          ... on Product {
+            ...ProductCard
+          }
+        }
+        key
+      }
+    }
+  }
+}
+` as const;
 
 export const ARTICLE_ITEM_FRAGMENT = `#graphql
   fragment ArticleItemBlog on Article {
@@ -160,38 +228,6 @@ export const ARTICLE_ITEM_FRAGMENT = `#graphql
     title
     blog {
       handle
-    }
-  }
-` as const;
-
-export const METAOBJECT_FRAGMENT = `#graphql
-  fragment MetaObjectFields on Metaobject {
-    fields {
-      value
-      key
-      reference {
-        ... on MediaImage {
-          image {
-            altText
-            url
-          }
-        }
-        ... on Collection {
-          id
-          handle
-        }
-      }
-      type
-    }
-    id
-  }
-` as const;
-
-const METAOBJECTQUERRY = `#graphql
-  ${METAOBJECT_FRAGMENT}
-  query metaobjectquerry {
-    metaobject(handle: {handle: "home-page", type: "hero_header"}) {
-      ...MetaObjectFields
     }
   }
 ` as const;

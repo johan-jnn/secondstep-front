@@ -18,7 +18,6 @@ const getFieldValue = (metaObject: MetaObjectFieldsFragment, key: string) => {
 function HeroPageBanner({metaObject}: HeroPageBannerProps) {
   //Title
   const title = getFieldValue(metaObject, 'title');
-
   //Date
   const dateField = metaObject.fields.find(
     (field) => field.key === 'countdown',
