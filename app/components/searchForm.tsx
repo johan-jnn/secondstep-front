@@ -11,6 +11,7 @@ import {
 } from 'react';
 import {RangeSlider} from 'react-double-range-slider';
 import 'react-double-range-slider/dist/cjs/index.css';
+import './styles/sliders.scss';
 import Price from './Price';
 
 export enum sortType {
@@ -174,7 +175,6 @@ export default function SearchForm({
                   setMinPrice(parseFloat(v.min));
                   setMaxPrice(parseFloat(v.max));
                 }}
-                tooltipVisibility="hover"
               />
             </>
           </Filter>

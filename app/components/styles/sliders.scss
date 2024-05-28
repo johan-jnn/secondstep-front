@@ -1,0 +1,25 @@
+.double-range-slider-container {
+  height: unset;
+}
+
+.double-range-slider-track {
+  cursor: pointer;
+  background-color: var(--color-primary);
+}
+.double-range-slider-ball {
+  background-color: var(--color-white);
+  outline: var(--color-primary) 3.5px solid;
+  z-index: 2;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  translate: 50% -50%;
+  cursor: ew-resize;
+}
+
+.double-range-slider-rail {
+  cursor: pointer;
+  background-color: var(--color-grey);
+}
