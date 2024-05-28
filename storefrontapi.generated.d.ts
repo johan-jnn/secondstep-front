@@ -336,38 +336,6 @@ export type SitemapQuery = {
   };
 };
 
-export type FeaturedCollectionQueryVariables = StorefrontAPI.Exact<{
-  country?: StorefrontAPI.InputMaybe<StorefrontAPI.CountryCode>;
-  language?: StorefrontAPI.InputMaybe<StorefrontAPI.LanguageCode>;
-}>;
-
-export type FeaturedCollectionQuery = {
-  collections: {
-    nodes: Array<
-      Pick<
-        StorefrontAPI.Collection,
-        'id' | 'title' | 'handle' | 'description'
-      > & {
-        image?: StorefrontAPI.Maybe<
-          Pick<
-            StorefrontAPI.Image,
-            'id' | 'url' | 'altText' | 'width' | 'height'
-          >
-        >;
-        products: {
-          nodes: Array<
-            Pick<StorefrontAPI.Product, 'vendor'> & {
-              featuredImage?: StorefrontAPI.Maybe<
-                Pick<StorefrontAPI.Image, 'url' | 'altText' | 'src' | 'id'>
-              >;
-            }
-          >;
-        };
-      }
-    >;
-  };
-};
-
 export type RecommendedProductsQueryVariables = StorefrontAPI.Exact<{
   country?: StorefrontAPI.InputMaybe<StorefrontAPI.CountryCode>;
   language?: StorefrontAPI.InputMaybe<StorefrontAPI.LanguageCode>;
@@ -487,22 +455,30 @@ export type RestoredShoesQuery = {
   >;
 };
 
-export type ArticleItemBlogFragment = Pick<
-  StorefrontAPI.Article,
-  'contentHtml' | 'handle' | 'tags' | 'id' | 'publishedAt' | 'title'
-> & {
-  author?: StorefrontAPI.Maybe<Pick<StorefrontAPI.ArticleAuthor, 'name'>>;
-  image?: StorefrontAPI.Maybe<
-    Pick<StorefrontAPI.Image, 'id' | 'altText' | 'url' | 'width' | 'height'>
-  >;
-  blog: Pick<StorefrontAPI.Blog, 'handle'>;
-};
-
 export type MetaObjectFieldsFragment = Pick<StorefrontAPI.Metaobject, 'id'> & {
   fields: Array<
     Pick<StorefrontAPI.MetaobjectField, 'value' | 'key' | 'type'> & {
       reference?: StorefrontAPI.Maybe<
-        | Pick<StorefrontAPI.Collection, 'id' | 'handle'>
+        | (Pick<
+            StorefrontAPI.Collection,
+            'id' | 'title' | 'handle' | 'description'
+          > & {
+            image?: StorefrontAPI.Maybe<
+              Pick<
+                StorefrontAPI.Image,
+                'id' | 'url' | 'altText' | 'width' | 'height'
+              >
+            >;
+            products: {
+              nodes: Array<
+                Pick<StorefrontAPI.Product, 'vendor'> & {
+                  featuredImage?: StorefrontAPI.Maybe<
+                    Pick<StorefrontAPI.Image, 'url' | 'altText' | 'src' | 'id'>
+                  >;
+                }
+              >;
+            };
+          })
         | {
             image?: StorefrontAPI.Maybe<
               Pick<StorefrontAPI.Image, 'altText' | 'url'>
@@ -523,7 +499,29 @@ export type MetaobjectquerryQuery = {
       fields: Array<
         Pick<StorefrontAPI.MetaobjectField, 'value' | 'key' | 'type'> & {
           reference?: StorefrontAPI.Maybe<
-            | Pick<StorefrontAPI.Collection, 'id' | 'handle'>
+            | (Pick<
+                StorefrontAPI.Collection,
+                'id' | 'title' | 'handle' | 'description'
+              > & {
+                image?: StorefrontAPI.Maybe<
+                  Pick<
+                    StorefrontAPI.Image,
+                    'id' | 'url' | 'altText' | 'width' | 'height'
+                  >
+                >;
+                products: {
+                  nodes: Array<
+                    Pick<StorefrontAPI.Product, 'vendor'> & {
+                      featuredImage?: StorefrontAPI.Maybe<
+                        Pick<
+                          StorefrontAPI.Image,
+                          'url' | 'altText' | 'src' | 'id'
+                        >
+                      >;
+                    }
+                  >;
+                };
+              })
             | {
                 image?: StorefrontAPI.Maybe<
                   Pick<StorefrontAPI.Image, 'altText' | 'url'>
@@ -534,6 +532,130 @@ export type MetaobjectquerryQuery = {
       >;
     }
   >;
+};
+
+export type FeaturedCollectionsquerryQueryVariables = StorefrontAPI.Exact<{
+  [key: string]: never;
+}>;
+
+export type FeaturedCollectionsquerryQuery = {
+  metaobjects: {
+    nodes: Array<
+      Pick<StorefrontAPI.Metaobject, 'id'> & {
+        fields: Array<
+          Pick<StorefrontAPI.MetaobjectField, 'value' | 'key' | 'type'> & {
+            reference?: StorefrontAPI.Maybe<
+              | (Pick<
+                  StorefrontAPI.Collection,
+                  'id' | 'title' | 'handle' | 'description'
+                > & {
+                  image?: StorefrontAPI.Maybe<
+                    Pick<
+                      StorefrontAPI.Image,
+                      'id' | 'url' | 'altText' | 'width' | 'height'
+                    >
+                  >;
+                  products: {
+                    nodes: Array<
+                      Pick<StorefrontAPI.Product, 'vendor'> & {
+                        featuredImage?: StorefrontAPI.Maybe<
+                          Pick<
+                            StorefrontAPI.Image,
+                            'url' | 'altText' | 'src' | 'id'
+                          >
+                        >;
+                      }
+                    >;
+                  };
+                })
+              | {
+                  image?: StorefrontAPI.Maybe<
+                    Pick<StorefrontAPI.Image, 'altText' | 'url'>
+                  >;
+                }
+            >;
+          }
+        >;
+      }
+    >;
+  };
+};
+
+export type FeaturedProductsquerryQueryVariables = StorefrontAPI.Exact<{
+  [key: string]: never;
+}>;
+
+export type FeaturedProductsquerryQuery = {
+  metaobjects: {
+    nodes: Array<{
+      fields: Array<
+        Pick<StorefrontAPI.MetaobjectField, 'key'> & {
+          reference?: StorefrontAPI.Maybe<
+            Pick<
+              StorefrontAPI.Product,
+              'id' | 'title' | 'handle' | 'availableForSale' | 'vendor'
+            > & {
+              priceRange: {
+                minVariantPrice: Pick<
+                  StorefrontAPI.MoneyV2,
+                  'amount' | 'currencyCode'
+                >;
+              };
+              featuredImage?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.Image, 'url' | 'altText'>
+              >;
+              metafields: Array<
+                StorefrontAPI.Maybe<
+                  Pick<
+                    StorefrontAPI.Metafield,
+                    'key' | 'value' | 'type' | 'id'
+                  > & {
+                    references?: StorefrontAPI.Maybe<{
+                      nodes: Array<
+                        | {
+                            __typename:
+                              | 'Collection'
+                              | 'GenericFile'
+                              | 'Metaobject'
+                              | 'Model3d'
+                              | 'Page'
+                              | 'Product'
+                              | 'ProductVariant'
+                              | 'Video';
+                          }
+                        | ({__typename: 'MediaImage'} & Pick<
+                            StorefrontAPI.MediaImage,
+                            'id'
+                          > & {
+                              image?: StorefrontAPI.Maybe<
+                                Pick<
+                                  StorefrontAPI.Image,
+                                  'altText' | 'id' | 'src'
+                                >
+                              >;
+                            })
+                      >;
+                    }>;
+                  }
+                >
+              >;
+            }
+          >;
+        }
+      >;
+    }>;
+  };
+};
+
+export type ArticleItemBlogFragment = Pick<
+  StorefrontAPI.Article,
+  'contentHtml' | 'handle' | 'tags' | 'id' | 'publishedAt' | 'title'
+> & {
+  author?: StorefrontAPI.Maybe<Pick<StorefrontAPI.ArticleAuthor, 'name'>>;
+  image?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.Image, 'id' | 'altText' | 'url' | 'width' | 'height'>
+  >;
+  blog: Pick<StorefrontAPI.Blog, 'handle'>;
 };
 
 export type CarouselBlogQueryVariables = StorefrontAPI.Exact<{
@@ -1494,10 +1616,6 @@ interface GeneratedQueryTypes {
     return: SitemapQuery;
     variables: SitemapQueryVariables;
   };
-  '#graphql\n  #graphql\n  fragment Collection on Collection {\n    id\n    title\n    handle\n    description\n    image {\n      id\n      url\n      altText\n      width\n      height\n    }\n    products(first: 1) {\n      nodes {\n        featuredImage {\n          url\n          altText\n          src\n          id\n        }\n        vendor\n      }\n    }\n  }\n  query FeaturedCollection($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    collections(first: 4, sortKey: UPDATED_AT, reverse: true) {\n      nodes {\n        ...Collection\n      }\n    }\n  }\n': {
-    return: FeaturedCollectionQuery;
-    variables: FeaturedCollectionQueryVariables;
-  };
   '#graphql\n  #graphql\nfragment ProductCard on Product {\n  id\n  title\n  handle\n  priceRange {\n    minVariantPrice {\n      amount\n      currencyCode\n    }\n  }\n  featuredImage {\n    url\n    altText\n  }\n  metafields(identifiers: [\n    {key: "titres", namespace: "custom"},\n    {key: "notes", namespace: "custom"},\n    {key: "looks", namespace: "custom"},\n    {key: "couleur", namespace: "custom"},\n    {key: "fastdelivery", namespace: "custom"}\n  ]) {\n    ...MetaFieldInfo\n  }\n  availableForSale\n  vendor\n}\n#graphql\nfragment MetaFieldInfo on Metafield {\n  key\n  value\n  type\n  id\n  references(first: 8) {\n    nodes {\n      __typename\n      ... on MediaImage {\n        id\n        image {\n          altText\n          id\n          src\n        }\n      }\n    }\n  }\n}\n\n\n  query RecommendedProducts ($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    products(first: 4, sortKey: UPDATED_AT, reverse: true) {\n      nodes {\n        ...ProductCard\n      }\n    }\n  }\n': {
     return: RecommendedProductsQuery;
     variables: RecommendedProductsQueryVariables;
@@ -1506,9 +1624,17 @@ interface GeneratedQueryTypes {
     return: RestoredShoesQuery;
     variables: RestoredShoesQueryVariables;
   };
-  '#graphql\n  #graphql\n  fragment MetaObjectFields on Metaobject {\n    fields {\n      value\n      key\n      reference {\n        ... on MediaImage {\n          image {\n            altText\n            url\n          }\n        }\n        ... on Collection {\n          id\n          handle\n        }\n      }\n      type\n    }\n    id\n  }\n\n  query metaobjectquerry {\n    metaobject(handle: {handle: "home-page", type: "hero_header"}) {\n      ...MetaObjectFields\n    }\n  }\n': {
+  '#graphql\n  #graphql\n  #graphql\n  fragment Collection on Collection {\n    id\n    title\n    handle\n    description\n    image {\n      id\n      url\n      altText\n      width\n      height\n    }\n    products(first: 1) {\n      nodes {\n        featuredImage {\n          url\n          altText\n          src\n          id\n        }\n        vendor\n      }\n    }\n  }\n  fragment MetaObjectFields on Metaobject {\n    fields {\n      value\n      key\n      reference {\n        ... on MediaImage {\n          image {\n            altText\n            url\n          }\n        }\n        ... on Collection {\n          ...Collection\n        }\n      }\n      type\n    }\n    id\n  }\n\n  query metaobjectquerry {\n    metaobject(handle: {handle: "home-page", type: "hero_header"}) {\n      ...MetaObjectFields\n    }\n  }\n': {
     return: MetaobjectquerryQuery;
     variables: MetaobjectquerryQueryVariables;
+  };
+  '#graphql\n#graphql\n  #graphql\n  fragment Collection on Collection {\n    id\n    title\n    handle\n    description\n    image {\n      id\n      url\n      altText\n      width\n      height\n    }\n    products(first: 1) {\n      nodes {\n        featuredImage {\n          url\n          altText\n          src\n          id\n        }\n        vendor\n      }\n    }\n  }\n  fragment MetaObjectFields on Metaobject {\n    fields {\n      value\n      key\n      reference {\n        ... on MediaImage {\n          image {\n            altText\n            url\n          }\n        }\n        ... on Collection {\n          ...Collection\n        }\n      }\n      type\n    }\n    id\n  }\n\nquery FeaturedCollectionsquerry {\n  metaobjects(type: "featured_collections", first: 50) {\n    nodes {\n      ...MetaObjectFields\n    }\n  }\n}\n': {
+    return: FeaturedCollectionsquerryQuery;
+    variables: FeaturedCollectionsquerryQueryVariables;
+  };
+  '#graphql\n#graphql\nfragment ProductCard on Product {\n  id\n  title\n  handle\n  priceRange {\n    minVariantPrice {\n      amount\n      currencyCode\n    }\n  }\n  featuredImage {\n    url\n    altText\n  }\n  metafields(identifiers: [\n    {key: "titres", namespace: "custom"},\n    {key: "notes", namespace: "custom"},\n    {key: "looks", namespace: "custom"},\n    {key: "couleur", namespace: "custom"},\n    {key: "fastdelivery", namespace: "custom"}\n  ]) {\n    ...MetaFieldInfo\n  }\n  availableForSale\n  vendor\n}\n#graphql\nfragment MetaFieldInfo on Metafield {\n  key\n  value\n  type\n  id\n  references(first: 8) {\n    nodes {\n      __typename\n      ... on MediaImage {\n        id\n        image {\n          altText\n          id\n          src\n        }\n      }\n    }\n  }\n}\n\n\nquery FeaturedProductsquerry {\n  metaobjects(type: "featured_products", first: 5) {\n    nodes {\n      fields {\n        reference {\n          ... on Product {\n            ...ProductCard\n          }\n        }\n        key\n      }\n    }\n  }\n}\n': {
+    return: FeaturedProductsquerryQuery;
+    variables: FeaturedProductsquerryQueryVariables;
   };
   '#graphql\n  #graphql\n  fragment ArticleItemBlog on Article {\n    author: authorV2 {\n      name\n    }\n    contentHtml\n    handle\n    tags\n    id\n    image {\n      id\n      altText\n      url\n      width\n      height\n    }\n    publishedAt\n    title\n    blog {\n      handle\n    }\n  }\n\n  query CarouselBlog(\n    $language: LanguageCode\n    $blogHandle: String!\n    $first: Int\n    $last: Int\n    $startCursor: String\n    $endCursor: String\n  ) @inContext(language: $language) {\n    blog(handle: $blogHandle) {\n      title\n      seo {\n        title\n        description\n      }\n      articles(\n        first: $first,\n        last: $last,\n        before: $startCursor,\n        after: $endCursor\n      ) {\n        nodes {\n          ...ArticleItemBlog\n        }\n        pageInfo {\n          hasPreviousPage\n          hasNextPage\n          hasNextPage\n          endCursor\n          startCursor\n        }\n      }\n    }\n  }\n': {
     return: CarouselBlogQuery;
