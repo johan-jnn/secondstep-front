@@ -123,6 +123,7 @@ function MobileMenuAside({
           primaryDomainUrl={shop.primaryDomain.url}
         />
         <hr />
+        <SearchForm />
         <CollectionAsideContent menu={collectionMenu} />
       </Aside>
     )

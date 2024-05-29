@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import {calculateDate} from '~/lib/time';
-
+import './styles/heroBanner.scss';
 interface TimerProps {
   targetDate: Date;
 }
