@@ -1,46 +1,84 @@
-.hero-banner{
-    background-color: var(--color-darkwhite);
-    width: 100%;
+.hero-banner {
+  background-color: var(--color-darkwhite);
+  width: 100%;
+  padding: 0px 65px 0px 65px;
+  @media (max-width: 800px) {
+    padding: 0px 20px 0px 20px;
+  }
 }
-.hero-banner-img{
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    width: 95%;
+.hero-banner-img {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 500px;
+  margin: 0 auto;
+  border-radius: 10px;
+  object-fit: cover;
+  background-position: center;
+}
+.hero-banner-content {
+  width: 765px;
+  height: 275px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 8%;
+  @media (max-width: 800px) {
+    width: 100%;
     height: 100%;
-    margin: 0 auto;
-    border-radius: 10px;
-    object-fit: cover;
-    background-position: center;
+    padding-top: 175px;
+    grid-template-columns: 300px;
+  }
 }
-.hero-banner-content{
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 8%;
+.hero-banner-text {
+  text-align: center;
 }
-.hero-banner-text{
-    margin-top: 50%;
-    text-align: center;
-    color: var(--color-dark);
+
+.timer {
+  > h1 {
+    font-size: 55px;
+    letter-spacing: 5px;
+    @media (max-width: 800px) {
+      font-size: 30px;
+      letter-spacing: 2px;
+    }
+  }
 }
-.hero-banner-clock{
-    font-size: 4rem;
+
+.hero-banner-title {
+  text-transform: uppercase;
+  font-family: 'Bebas';
+  font-weight: bold;
+  padding-top: 24px;
+  font-size: 55px;
+  @media (max-width: 800px) {
+    font-size: 30px;
+    padding-top:15px;
+  }
 }
-.hero-banner-title{
-    text-transform: uppercase;
-    font-weight: bold;
-}
-.hero-banner-btn{
-    margin-top: 15%;
-    padding: 3%;
-    width: 100%;
-    border:none;
-    border-radius: 3px;
-    font-weight: 600;
-}
-.hero-banner-sub{
+.hero-banner-btn {
+  margin-top: 15%;
+  padding: 10px 40px;
+  width: 350px;
+  border: none;
+  border-radius: 3px;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-family: 'Bebas';
+  font-size: 20px;
+  @media (max-width: 800px) {
     margin-top: 5%;
-    font-size: 0.9rem;
-    font-weight: 100;
+    width: 100%;
+    padding: 15px 0px;
+  }
+}
+.hero-banner-sub {
+  margin-top: 5%;
+  font-size: 0.9rem;
+  font-weight: 100;
+  text-align: center;
+  @media (max-width: 800px) {
+    margin-top: 5%;
+  }
 }

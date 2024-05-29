@@ -9,16 +9,16 @@ $iconMarginRight: 5px;
     display: flex;
     align-items: center;
     gap: $iconMarginRight;
-
-    > h3 {
-      font-size: 15px;
-    }
-    > svg {
-      width: $iconWidth;
-    }
+    margin-top: 4px;
   }
-  > p {
-    font-size: 12.5px;
+  > .text {
+    > h3 {
+      font-size: 26px;
+    }
+
+    > p {
+      font-size: 16px;
+    }
     padding: 0 ($iconWidth + $iconMarginRight);
     a {
       font-weight: 800;
