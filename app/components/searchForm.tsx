@@ -13,6 +13,9 @@ import {RangeSlider} from 'react-double-range-slider';
 import 'react-double-range-slider/dist/cjs/index.css';
 import './styles/sliders.scss';
 import Price from './Price';
+import DoubleRangedSlider from './doubleRangedSlider';
+import searchOptionsValues from '~/lib/constants/searchOptionsValues';
+import colors from '~/lib/constants/colors.json';
 
 export enum sortType {
   'Tendances',
@@ -23,7 +26,7 @@ export enum sortType {
 export interface searchOptions {
   brands: ValidBrands[];
   sizes: (number | string)[];
-  colors: string[];
+  colors: {name: string; code: string}[];
   cuts: string[];
   prices: {
     min: number;
@@ -36,7 +39,7 @@ export interface SearchFromProps {
     q?: string;
     sort?: sortType;
   } & {[key in keyof searchOptions]?: searchOptions[key]};
-  options?: searchOptions;
+  options?: searchOptions | 'default';
   inputRef?: Ref<HTMLInputElement>;
   onChange?: FormEventHandler<HTMLFormElement>;
   onFocus?: FormEventHandler<HTMLFormElement>;
@@ -51,6 +54,8 @@ export default function SearchForm({
   onFocus,
   onSubmit,
 }: SearchFromProps) {
+  if (options === 'default') options = searchOptionsValues;
+
   const defaultPriceRange = [
     options?.prices.min || 0,
     options?.prices.max || 9999,
@@ -122,29 +127,27 @@ export default function SearchForm({
           <Filter name="Couleurs" className="colors">
             <>
               {multipleCheckboxEntry(
-                options.colors,
+                options.colors.map((c) => [c.name, c.code]),
                 'colors',
-                current?.colors,
+                current?.colors?.map((c) => [c.name, c.code]),
               ).map(({initial, input, key}) => (
                 <label
                   htmlFor={key}
                   key={key}
                   style={
                     {
-                      '--color': initial,
+                      '--color': initial[1],
                     } as CSSProperties
                   }
                 >
                   {input}
-                  {initial}
+                  {initial[0]}
                 </label>
               ))}
             </>
           </Filter>
           <Filter name="Prix" className="price_range">
             <>
-              <input type="hidden" name="prices_min" value={minPrice} />
-              <input type="hidden" name="prices_max" value={maxPrice} />
               <p>
                 De{' '}
                 <Price
@@ -164,16 +167,24 @@ export default function SearchForm({
                 />
               </p>
 
-              <RangeSlider
-                value={{
-                  min: defaultPriceRange[0],
-                  max: defaultPriceRange[1],
+              <DoubleRangedSlider
+                min={defaultPriceRange[0]}
+                max={defaultPriceRange[1]}
+                default={{
+                  start: minPrice,
+                  end: maxPrice,
                 }}
-                from={minPrice}
-                to={maxPrice}
-                onChange={(v) => {
-                  setMinPrice(parseFloat(v.min));
-                  setMaxPrice(parseFloat(v.max));
+                form={{
+                  start_input_name: 'prices_min',
+                  end_input_name: 'prices_max',
+                }}
+                onUpdate={(values) => {
+                  setMinPrice(values.start);
+                  setMaxPrice(values.end);
+                }}
+                onChange={(values) => {
+                  setMinPrice(values.start);
+                  setMaxPrice(values.end);
                 }}
               />
             </>
@@ -245,19 +256,23 @@ function Filter({name, children, className}: FilterProps) {
       </button>
       <div className={`content ${className}`}>
         <hr />
-        {children}
+        <div className="wrapper">{children}</div>
       </div>
     </li>
   );
 }
 
-function multipleCheckboxEntry<T extends string | number>(
+function multipleCheckboxEntry<
+  T extends string | number | [string | number, string | number],
+>(
   values: T[],
   name: keyof searchOptions,
   selectedValues?: T[],
 ): {initial: T; key: string; input: JSX.Element}[] {
   return values.map((initial, index) => {
     const key = `${name}_${index}`;
+    const getValue = (input: T): string | number =>
+      input instanceof Array ? input[1] : input;
 
     return {
       initial,
@@ -268,8 +283,12 @@ function multipleCheckboxEntry<T extends string | number>(
             type="checkbox"
             name={key}
             id={key}
-            value={initial}
-            defaultChecked={!!selectedValues?.find((val) => val == initial)}
+            value={getValue(initial)}
+            defaultChecked={
+              !!selectedValues?.find(
+                (val) => getValue(val) == getValue(initial),
+              )
+            }
           />
         </>
       ),
@@ -294,7 +313,6 @@ export function searchParser(search: string) {
 
     switch (keyName) {
       case 'sizes':
-      case 'colors':
       case 'brands':
       case 'cuts': {
         if (!result[keyName]) result[keyName] = [];
@@ -302,6 +320,12 @@ export function searchParser(search: string) {
         result[keyName].push(keyValue);
         break;
       }
+      case 'colors':
+        if (!result.colors) result.colors = [];
+        const color = colors.find((c) => c.code === keyValue);
+        if (!color) break;
+        result.colors.push(color);
+        break;
       case 'q': {
         result['q'] = keyValue;
         break;

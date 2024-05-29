@@ -74,23 +74,21 @@
         width: 100%;
         transition: 0.25s;
         overflow: hidden;
-
-        .double-range-slider-container {
-          margin: 20px;
-        }
+        display: grid;
+        grid-template-rows: 2px 1fr;
+        gap: 10px;
 
         > hr {
           background-color: var(--color-black);
           opacity: 0.25;
-          height: 2px;
+          margin: 0;
         }
 
-        > label {
-          margin: 10px;
+        label {
           display: block;
           cursor: pointer;
 
-          transition: 0.25s;
+          transition: 0.15s;
 
           > input {
             display: none;
@@ -102,18 +100,39 @@
           }
         }
 
-        &.sizes label {
-          display: inline-grid;
-          padding: 5px;
-          background-color: var(--color-darkwhite);
-          border: 1px solid var(--color-grey);
-          aspect-ratio: 2 / 1;
-          height: 30px;
-          place-content: center;
-          border-radius: 5px;
+        &.sizes .wrapper {
+          overflow-y: scroll;
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 15px;
+
+          label {
+            display: inline-grid;
+            padding: 2.5px 0;
+            background-color: var(--color-white);
+            color: var(--color-grey);
+            border: 1px solid var(--color-grey);
+            width: 50px;
+            aspect-ratio: 1.75 / 1;
+            place-content: center;
+            border-radius: 5px;
+            &:has(> input:checked) {
+              background-color: var(--color-darkwhite);
+              color: var(--color-primary);
+              border-color: var(--color-primary);
+              font-weight: 700;
+            }
+          }
         }
-        &.colors label {
-          display: inline-block;
+        &.colors .wrapper {
+          overflow-y: scroll;
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 15px;
+          
+          label {
+            display: inline-block;
+          }
         }
       }
 
@@ -128,7 +147,6 @@
           max-height: 25vh;
           max-width: 500px;
           padding: 10px;
-          padding-top: 0;
         }
       }
     }
