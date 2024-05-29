@@ -13,10 +13,10 @@ function Engagements() {
         <h3>Nous sommes notés 4.3/5 sur</h3>
         <img src="app/assets/Trustpilot.png" alt="google rating" />
       </div>
-      <div>
+      <div className="engagements-cards">
         <CarteAuthenticite />
       </div>
-      <div>
+      <div className="engagements-cards">
         <Reconditionnement />
       </div>
     </div>

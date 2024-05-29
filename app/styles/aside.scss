@@ -12,6 +12,9 @@ aside {
   right: calc(-1 * var(--aside-width));
   top: 0;
   transition: transform 200ms ease-in-out;
+  @media (max-width:800px){
+    left: calc(-1 * var(--aside-width));;
+  }
 }
 
 aside header {
@@ -105,4 +108,7 @@ aside li {
 /* reveal aside */
 .overlay:target aside {
   transform: translateX(calc(var(--aside-width) * -1));
+  @media (max-width:800px){
+    transform: translateX(calc(var(--aside-width) * 1));
+  }
 }

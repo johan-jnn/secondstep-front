@@ -39,6 +39,7 @@ export function Header({
           primaryDomainUrl={shop.primaryDomain.url}
         />
         <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+        <HeaderMenuMobile isLoggedIn={isLoggedIn} cart={cart} />
       </header>
     </>
   );
@@ -124,7 +125,12 @@ function HeaderCtas({
 }: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
   return (
     <nav className="header-ctas" role="navigation">
-      <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
+      <NavLink
+        prefetch="intent"
+        to="/account"
+        style={activeLinkStyle}
+        className="login-section"
+      >
         <Suspense fallback="Sign in">
           <Await resolve={isLoggedIn} errorElement="Sign in">
             {(isLoggedIn) => (isLoggedIn ? <LogInIcon /> : <LogInIcon />)}
@@ -138,6 +144,21 @@ function HeaderCtas({
       </a>
       <HeaderMenuMobileToggle />
     </nav>
+  );
+}
+
+export function HeaderMenuMobile({
+  isLoggedIn,
+  cart,
+}: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
+  return (
+    <div className="header-mobile">
+      <HeaderMenuMobileToggle />
+      <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
+        <img src={Banner} alt="Bannière SecondStep" className="header_Logo" />
+      </NavLink>
+      <CartToggle cart={cart} />
+    </div>
   );
 }
 
@@ -155,7 +176,7 @@ function HeaderMenuMobileToggle() {
 
 function SearchToggle() {
   return (
-    <a href="#search-aside">
+    <a href="#search-aside" className="search-toggle">
       <Icon icon={SearchIcon} />
     </a>
   );
@@ -172,11 +193,13 @@ function CartBadge({count}: {count: number}) {
 
 function CartToggle({cart}: Pick<HeaderProps, 'cart'>) {
   return (
-    <Suspense fallback={<CartBadge count={0} />}>
-      <Await resolve={cart}>
-        {(cart) => <CartBadge count={cart?.totalQuantity || 0} />}
-      </Await>
-    </Suspense>
+    <div className="cart-section">
+      <Suspense fallback={<CartBadge count={0} />}>
+        <Await resolve={cart}>
+          {(cart) => <CartBadge count={cart?.totalQuantity || 0} />}
+        </Await>
+      </Suspense>
+    </div>
   );
 }
 

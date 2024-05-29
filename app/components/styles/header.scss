@@ -25,7 +25,9 @@ $cartBadge-height: calc($icons-height / 2.25);
   nav .icon {
     height: $icons-height;
   }
-
+  > .header-mobile {
+    display: none;
+  }
   > a {
     height: 100%;
     display: flex;
@@ -37,9 +39,59 @@ $cartBadge-height: calc($icons-height / 2.25);
       width: 100%;
     }
   }
+  @media (max-width: 800px) {
+    padding: 10px;
+    > a {
+      display: none;
+    }
+    > .header-ctas {
+      display: none;
+    }
+    > .header-mobile {
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      place-content: center;
+      grid-template-areas: 'menu logo cart';
+      grid-template-columns: 50px 1fr 50px;
+      grid-template-rows: 40px;
+      gap: 10%;
+      > a {
+        padding: 0 10px;
+        > img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+      > .header-menu-mobile-toggle {
+        margin: auto 0;
+        height: 100%;
+        width: 100%;
+        > .icon {
+          aspect-ratio: 1/1;
+          height: 100%;
+        }
+      }
+      @media(max-width: 500px){
+        grid-template-columns: 40px 1fr 40px;
+        > .cart-section{
+          height: 100%;
+          width: 100%;
+          > .cartOpenner{
+            height: 100%;
+            width: 100%;
+            > .icon{
+              aspect-ratio: 1/1;
+              height: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
-@media (min-width: 730px) {
+@media (min-width: 800px) {
   .header-menu-mobile-toggle {
     display: none;
   }
@@ -59,7 +111,7 @@ $cartBadge-height: calc($icons-height / 2.25);
     gap: 3rem;
   }
 }
-@media (max-width: 730px) {
+@media (max-width: 800px) {
   .collectionOpenner,
   .header-menu-desktop {
     display: none;
