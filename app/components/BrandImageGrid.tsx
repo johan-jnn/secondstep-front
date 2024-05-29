@@ -13,6 +13,7 @@ export default function BrandImageGrid() {
   return (
     <div className="brand-img-grid">
       <div className="brand-img-grid-top">
+        <h2>Nos Collections</h2>
         <Link to="/collections">
           <button>Voir tout</button>
         </Link>

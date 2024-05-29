@@ -3,12 +3,25 @@
   display: grid;
   width: 100%;
   height: max-content;
+  padding: 50px 65px 50px 65px;
+  @media (max-width:900px){
+    padding: 50px 25px 50px 25px;
+  }
   background-color: var(--color-darkwhite);
   > .brand-img-grid-top {
-    padding-right: 8%;
     padding-bottom: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    > h2{
+      font-size: 40px;
+      min-width: max-content;
+      @media (max-width:900px){
+        text-align: center;
+        width: 100%;
+      }
+    }
     > a {
-      width: 100%;
       display: flex;
       justify-content: flex-end;
       > button {
@@ -16,6 +29,9 @@
         width: 100px;
         background-color: var(--color-dark);
         font-family: 'Manrope';
+      }
+      @media (max-width:900px){
+        display: none;
       }
     }
   }

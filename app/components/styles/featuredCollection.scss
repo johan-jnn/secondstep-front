@@ -2,6 +2,9 @@
     height: 100%;
     padding: 10% 0%;
     padding: 50px 65px 50px 65px;
+    @media (max-width:800px) {
+      padding: 2%;
+    }
     background-color: white;
     gap: 50px;
     > h2 {
