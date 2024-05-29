@@ -141,6 +141,7 @@ export default function SearchForm({
                   }
                 >
                   {input}
+                  <span className="preview"></span>
                   {initial[0]}
                 </label>
               ))}
@@ -150,21 +151,25 @@ export default function SearchForm({
             <>
               <p>
                 De{' '}
-                <Price
-                  value={{
-                    amount: minPrice.toString(),
-                    currencyCode: 'EUR',
-                  }}
-                  decimals={0}
-                />
+                <span className="price">
+                  <Price
+                    value={{
+                      amount: minPrice.toString(),
+                      currencyCode: 'EUR',
+                    }}
+                    decimals={0}
+                  />
+                </span>
                 {' à '}
-                <Price
-                  value={{
-                    amount: maxPrice.toString(),
-                    currencyCode: 'EUR',
-                  }}
-                  decimals={0}
-                />
+                <span className="price">
+                  <Price
+                    value={{
+                      amount: maxPrice.toString(),
+                      currencyCode: 'EUR',
+                    }}
+                    decimals={0}
+                  />
+                </span>
               </p>
 
               <DoubleRangedSlider
