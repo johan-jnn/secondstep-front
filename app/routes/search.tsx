@@ -37,7 +37,7 @@ export async function loader({request, context}: LoaderFunctionArgs) {
         productMetafield: {
           key: 'couleurs',
           namespace: 'custom',
-          value: color,
+          value: color.code,
         },
       }),
     ) || [];
@@ -97,22 +97,11 @@ export async function loader({request, context}: LoaderFunctionArgs) {
 
 export default function SearchPage() {
   const {filters, searchResults} = useLoaderData<typeof loader>();
+
   return (
     <div className="search">
       <h1>Search</h1>
-      <SearchForm
-        current={filters}
-        options={{
-          brands: ['Nike'],
-          colors: [],
-          sizes: [35, 39, 40, '42 1/4'],
-          cuts: [],
-          prices: {
-            min: 0,
-            max: 200,
-          },
-        }}
-      />
+      <SearchForm current={filters} options={'default'} />
       {!filters || !searchResults.totalResults ? (
         <NoSearchResults />
       ) : (
