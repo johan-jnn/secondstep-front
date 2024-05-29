@@ -90,7 +90,11 @@ export default function ProductForm({product}: ProductFormProps) {
           )}
         </section>
 
-        <hr />
+        <PriceButton
+          caption="Ajouter au panier"
+          btnType="submit"
+          price={product.selectedVariant.price}
+        />
 
         <section id="taille">
           <div className="heading">
@@ -116,57 +120,49 @@ export default function ProductForm({product}: ProductFormProps) {
           />
         </section>
 
-        {!selectedVariant.currentlyNotInStock && (
-          <>
-            <hr />
-            <section id="livraison">
-              <label htmlFor="normalDelivery">
-                <div className="title">
-                  <input
-                    type="radio"
-                    name="fastDelivery"
-                    id="normalDelivery"
-                    onChange={() => setFastDelivery(false)}
-                    defaultChecked
-                  />
-                  Livraison standard offerte - <b>5/15j</b>
-                </div>
-                <Price
-                  value={{
-                    amount: '0',
-                    currencyCode: 'EUR',
-                  }}
-                />
-              </label>
-              {fastDeliveryAvailable && (
-                <label htmlFor="fastDelivery">
-                  <div className="title">
-                    <input
-                      type="radio"
-                      name="fastDelivery"
-                      id="fastDelivery"
-                      onChange={() => setFastDelivery(true)}
-                    />
-                    <Icon icon={DeliveryIcon} />
-                    Livraison express - <b>24/48h</b>
-                  </div>
-                  <Price
-                    value={{
-                      amount: '9.90',
-                      currencyCode: 'EUR',
-                    }}
-                  />
-                </label>
-              )}
-            </section>
-          </>
-        )}
+        <hr />
 
-        <PriceButton
-          caption="Ajouter au panier"
-          btnType="submit"
-          price={product.selectedVariant.price}
-        />
+        <section id="livraison">
+          <label htmlFor="normalDelivery">
+            <div className="title">
+              <input
+                type="radio"
+                name="fastDelivery"
+                id="normalDelivery"
+                onChange={() => setFastDelivery(false)}
+                defaultChecked
+              />
+              Livraison standard offerte - <b>5/15j</b>
+            </div>
+            <Price
+              value={{
+                amount: '0',
+                currencyCode: 'EUR',
+              }}
+            />
+          </label>
+
+          {fastDeliveryAvailable && (
+            <label htmlFor="fastDelivery">
+              <div className="title">
+                <input
+                  type="radio"
+                  name="fastDelivery"
+                  id="fastDelivery"
+                  onChange={() => setFastDelivery(true)}
+                />
+                <Icon icon={DeliveryIcon} />
+                Livraison express - <b>24/48h</b>
+              </div>
+              <Price
+                value={{
+                  amount: '9.90',
+                  currencyCode: 'EUR',
+                }}
+              />
+            </label>
+          )}
+        </section>
       </div>
     </CartForm>
   );
