@@ -25,8 +25,8 @@
     &::-webkit-slider-runnable-track {
       height: 100%;
     }
-    &::-webkit-slider-thumb {
-      translate: 0 (-$half_thumb_size + calc($slider-track-height / 2));
+
+    @mixin slideThumbStyle {
       background-color: var(--color-primary);
       outline: calc($thumb_size / 5) solid var(--color-white);
       height: $thumb_size;
@@ -36,7 +36,25 @@
       cursor: ew-resize;
     }
 
+    &::-moz-range-thumb {
+      @include slideThumbStyle;
+    }
+    &::-webkit-slider-thumb {
+      @include slideThumbStyle;
+      translate: 0 (-$half_thumb_size + calc($slider-track-height / 2));
+    }
+
     &:first-of-type {
+      &::-moz-range-progress {
+        background-color: var(--color-grey);
+        border-radius: 999px 0 0 999px;
+        height: 100%;
+      }
+      &::-moz-range-track {
+        background-color: var(--color-primary);
+        border-radius: 999px 0 0 999px;
+        height: 100%;
+      }
       &::-webkit-slider-runnable-track {
         border-radius: 999px 0 0 999px;
         background: linear-gradient(
@@ -47,6 +65,16 @@
       }
     }
     &:last-of-type {
+      &::-moz-range-progress {
+        background-color: var(--color-primary);
+        border-radius: 0 999px 999px 0;
+        height: 100%;
+      }
+      &::-moz-range-track {
+        background-color: var(--color-grey);
+        border-radius: 0 999px 999px 0;
+        height: 100%;
+      }
       &::-webkit-slider-runnable-track {
         border-radius: 0 999px 999px 0;
         background: linear-gradient(

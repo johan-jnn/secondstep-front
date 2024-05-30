@@ -23,6 +23,8 @@ export default function BlogCarousel({articles}: BlogCarouselProps) {
           spaceBetween={50}
           pagination={{clickable: true}}
           navigation={true}
+          loop={true}
+          grabCursor={true}
           breakpoints={{
             320: {
               slidesPerView: 1,

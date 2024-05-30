@@ -58,11 +58,12 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        {comparativeRows.map(({title, an, sm, ss}) => (
-          <tr key={title.toString()}>
+        {comparativeRows.map(({title, an, sm, ss, handle}) => (
+          <tr key={handle}>
             <th scope="row">{title}</th>
-            {[ss, sm, an].map((content) => (
-              <td key={content.toString()}>
+            {[ss, sm, an].map((content, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <td key={handle + index}>
                 <div className="contentWrapper">{content}</div>
               </td>
             ))}
