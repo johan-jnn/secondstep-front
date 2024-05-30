@@ -11,6 +11,7 @@ export default function Passionate() {
       <div className="card">
         <div className="content">
           <h1>Une Histoire de Passionnés</h1>
+          <br />
           <p>
             Depuis nos modestes débuts en tant que passionnés de sneakers, nous
             avons toujours été fascinés par la richesse de l&apos;histoire que
@@ -19,11 +20,12 @@ export default function Passionate() {
             pour objectif principal de redonner une nouvelle vie à ces sneakers
             plaines de caractère.
           </p>
+          <br />
           <p>
             Chaque paire que nous acquérons raconte une histoire unique,
             qu&apos;il s&apos;agisse d&apos;une édition limitée qui a marqué une
             époque ou d&apos;un modèle classique qui a accompagné des
-            générations de sneakerheads
+            générations de sneakerheads.
           </p>
           <Link to="/pages/nous-d-couvrir">
             <button>Découvrir la team</button>
