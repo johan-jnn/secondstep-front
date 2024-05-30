@@ -2,6 +2,7 @@
   display: grid;
   padding: 2% 5%;
   gap: 2%;
+  background-color: var(--color-light);
   grid-template-areas: 'socials faq';
   grid-template-columns: 40% 60%;
   align-items: center;
