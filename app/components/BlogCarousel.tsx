@@ -20,31 +20,27 @@ export default function BlogCarousel({articles}: BlogCarouselProps) {
           modules={[Virtual, Navigation, Pagination]}
           slidesPerView={4}
           centeredSlides={false}
-          spaceBetween={50}
+          spaceBetween={10}
           pagination={{clickable: true}}
           navigation={true}
           loop={true}
           grabCursor={true}
           breakpoints={{
-            320: {
-              slidesPerView: 1,
-              spaceBetween: 20,
-            },
-            620: {
+            300: {
               slidesPerView: 1,
               spaceBetween: 30,
             },
-            710: {
+            800: {
               slidesPerView: 2,
               spaceBetween: 10,
             },
-            1090: {
-              slidesPerView: 2,
-              spaceBetween: 0,
+            1050: {
+              slidesPerView: 3,
+              spaceBetween: 10,
             },
             1200: {
               slidesPerView: 4,
-              spaceBetween: 100,
+              spaceBetween: 10,
             },
           }}
         >

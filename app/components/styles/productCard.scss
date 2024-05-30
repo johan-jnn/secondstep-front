@@ -5,11 +5,10 @@ $card-border-radius: 5px;
 .product-card {
   background-color: transparent;
   height: $card-height;
-  width: 85%;
+  width: 100%;
   aspect-ratio: $card-aspect-ratio;
   padding: 7.5px;
   font-size: calc($card-height / 15);
-
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -49,9 +48,9 @@ $card-border-radius: 5px;
 
     > img {
       height: 100%;
+      width: 100%;
       aspect-ratio: 1.8 / 2;
       object-fit: contain;
-
       background-color: #f2f2f2;
     }
 
@@ -107,48 +106,6 @@ $card-border-radius: 5px;
       align-items: baseline;
       font-size: 0.9em;
       gap: 5px;
-    }
-  }
-}
-
-@media (max-width: 800px) {
-  .product-card{
-    width: 100%;
-    > .bottom{
-      > h3{
-        font-size: 1rem;
-      }
-      > p{
-        font-size: 1rem;
-      }
-      > .price{
-        font-size: 1rem;
-      }
-    }
-  }
-}
-
-@media (max-width: 560px) {
-  .product-card > .top > .brand {
-    width: 30px;
-  }
-  .product-card{
-    width: 100%;
-    > .top{
-      height: 200px;
-    }
-    > .bottom{
-      height: 80px;
-      > h3{
-        font-size: 1rem;
-      }
-      > p{
-        font-size: 0.8rem;
-        width: 100%;
-      }
-      > .price{
-        font-size: 0.8rem;
-      }
     }
   }
 }
