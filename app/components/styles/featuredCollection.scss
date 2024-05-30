@@ -34,10 +34,15 @@
       padding: 0%;
       > .swiper-pagination {
         display: block;
+        
       }
       > .swiper-button-next, .swiper-button-prev {
         display: none;
       }
     }
   }
+}
+
+.swiper-pagination-bullet-active{
+  background-color: var(--color-dark);
 }
