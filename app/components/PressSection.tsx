@@ -36,6 +36,7 @@ export default function PressSection() {
           spaceBetween={30}
           pagination={{clickable: true}}
           navigation={true}
+          loop={true}
         >
           <SwiperSlide>
             <PressCard
