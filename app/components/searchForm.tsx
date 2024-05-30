@@ -211,7 +211,7 @@ export default function SearchForm({
           <Filter name="Trier par" className="sort">
             <>
               {Object.values(sortType).map(
-                (value) =>
+                (value, index) =>
                   typeof value === 'string' && (
                     <label htmlFor={value} key={value}>
                       <input
@@ -220,8 +220,9 @@ export default function SearchForm({
                         id={value}
                         value={sortType[value as keyof typeof sortType]}
                         defaultChecked={
-                          current?.sort !== undefined &&
-                          value === sortType[current?.sort]
+                          current?.sort !== undefined
+                            ? value === sortType[current?.sort]
+                            : !index
                         }
                       />
                       {value}
