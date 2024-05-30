@@ -4,13 +4,12 @@
   padding: 50px 65px 50px 65px;
   display: grid;
   grid-template-areas: 'col2 col1';
-  grid-template-columns: repeat(2, 640px);
-  grid-template-rows: repeat(1, 400px);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(1, 1fr);
   justify-content: center;
   gap: 32px;
   > .card {
     grid-area: col1;
-    aspect-ratio: 7/5;
     background-color: var(--color-light);
     width: 100%;
     height: 100%;
@@ -42,7 +41,6 @@
   > .passionate-section-img {
     grid-area: col2;
     height: 100%;
-    aspect-ratio: 7/5;
     border-radius: 15px;
     width: 100%;
     > img {
@@ -56,7 +54,6 @@
 
 @media (max-width: 1350px) {
   .passionate-section {
-    grid-template-columns: repeat(2, 450px);
     grid-template-rows: repeat(1, 1fr);
     > .card > .content {
       > h1 {
@@ -64,42 +61,7 @@
         font-size: 30px;
       }
       > p {
-        font-size: 16px;
-      }
-    }
-  }
-}
-
-@media (max-width: 1010px) {
-  .passionate-section {
-    padding: 50px 20px 50px 20px;
-    display: grid;
-    grid-template-areas:
-      'col2'
-      'col1';
-    grid-template-columns: 100% 0%;
-    grid-template-rows: repeat(2, 350px);
-    gap: 0%;
-    > .card {
-      border-radius: 0px 0px 10px 10px;
-      border: 0px;
-      text-align: center;
-      > .content {
-        > p {
-          font-size: 14px;
-        }
-        > a {
-          width: 100%;
-          > button {
-            padding: 20px 100px;
-            margin: 5% auto;
-          }
-        }
-      }
-    }
-    > .passionate-section-img {
-      > img {
-        border-radius: 10px 10px 0px 0px;
+        font-size: 14px;
       }
     }
   }
@@ -107,32 +69,55 @@
 
 @media (max-width: 800px) {
   .passionate-section {
+    padding: 50px 20px 50px 20px;
     display: grid;
-    grid-template-rows: 300px 350px;
+    grid-template-areas:
+      'col2'
+      'col1';
+    gap: 0%;
+    grid-template-rows: 280px 1fr;
+    grid-template-columns: repeat(1, 1fr);
+    > .passionate-section-img {
+      > img {
+        border-radius: 10px 10px 0px 0px;
+        border: solid 1px var(--color-grey);
+        border-bottom: 0;
+      }
+    }
+    > .card {
+      border-radius: 0px 0px 10px 10px;
+      border-top: 0;
+      padding: 25px 15px 25px 15px;
+    }
     > .card > h1 {
       font-size: 2rem;
     }
     > .card > .content > p {
       font-size: 12px;
     }
-    > .card > a > button {
-      aspect-ratio: 0;
-      width: 120%;
-      padding: 10%;
+    > .card > .content > p:last-of-type {
+      display: none;
     }
-  }
-}
-
-@media (max-width: 620px) {
-  .passionate-section {
-    display: grid;
-    grid-template-rows: 300px 300px;
+    > .card > .content > a {
+      width: 100%;
+      padding: 20px 0px 0px 0px;
+      > button {
+        margin: 0 auto;
+      }
+    }
   }
 }
 
 @media (max-width: 500px) {
   .passionate-section {
-    display: grid;
-    grid-template-rows: 300px 350px;
+    > .card > .content > p {
+      font-size: 12px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      line-height: 1.5;
+      max-height: calc(1.5em * 3);
+    }
   }
 }

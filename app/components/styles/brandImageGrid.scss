@@ -4,8 +4,8 @@
   width: 100%;
   height: max-content;
   padding: 50px 65px 50px 65px;
-  @media (max-width:900px){
-    padding: 50px 25px 50px 25px;
+  @media (max-width:800px){
+    padding: 50px 20px 50px 20px;
   }
   background-color: var(--color-darkwhite);
   > .brand-img-grid-top {
@@ -44,7 +44,7 @@
       'img2 img4 img7 img8'
       'img3 img5 img7 img8';
     grid-template-rows: repeat(3, 200px);
-    grid-template-columns: repeat(4, 300px);
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     @for $i from 1 to 9 {
       > a:nth-of-type(#{$i}) {
@@ -101,15 +101,15 @@
   .brand-img-grid .brand-img-grid-bottom {
     grid-template-rows: repeat(
       3,
-      170px
+      200px
     ); /* Modification de la hauteur des lignes */
     grid-template-columns: repeat(
       4,
-      230px
+      1fr
     ); /* Modification de la largeur des colonnes */
     gap: 15px;
     > a > div > h2 {
-      font-size: 1.3rem; /* Ajustement de la taille du texte */
+      font-size: 30px; /* Ajustement de la taille du texte */
     }
   }
 }
@@ -118,15 +118,15 @@
   .brand-img-grid .brand-img-grid-bottom {
     grid-template-rows: repeat(
       3,
-      120px
+      200px
     ); /* Modification de la hauteur des lignes */
     grid-template-columns: repeat(
       4,
-      180px
+      1fr
     ); /* Modification de la largeur des colonnes */
     gap: 15px;
     > a > div > h2 {
-      font-size: 1.3rem; /* Ajustement de la taille du texte */
+      font-size: 30px; /* Ajustement de la taille du texte */
     }
   }
   .brand-img-grid .brand-img-grid-top > a > button {
@@ -139,11 +139,11 @@
   .brand-img-grid .brand-img-grid-bottom {
     grid-template-rows: repeat(
       3,
-      100px
+      150px
     ); /* Réduction de la hauteur des lignes */
     grid-template-columns: repeat(
       4,
-      140px
+      1fr
     ); /* Réduction de la largeur des colonnes */
     gap: 10px;
     > a > div > h2 {
@@ -173,14 +173,14 @@
     ); /* Réduction de la hauteur des lignes */
     grid-template-columns: repeat(
       2,
-      300px
+      1fr
     ); /* Réduction de la largeur des colonnes */
     gap: 5px;
     > a > div > h2 {
-      font-size: 1rem; /* Ajustement de la taille du texte */
+      font-size: 30px; /* Ajustement de la taille du texte */
     }
     > a > div > p {
-      font-size: 0.7rem;
+      font-size: 16px;
     }
   }
   .brand-img-grid .brand-img-grid-top > a > button {
@@ -197,12 +197,12 @@
     ); /* Réduction de la hauteur des lignes */
     grid-template-columns: repeat(
       2,
-      200px
+      1fr
     ); /* Réduction de la largeur des colonnes */
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 520px) {
   .brand-img-grid .brand-img-grid-bottom {
     grid-template-rows: repeat(
       6,
@@ -210,7 +210,7 @@
     ); /* Réduction de la hauteur des lignes */
     grid-template-columns: repeat(
       2,
-      160px
+      1fr
     ); /* Réduction de la largeur des colonnes */
   }
 }
