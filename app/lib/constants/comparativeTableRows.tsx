@@ -17,6 +17,7 @@ interface comparativeRow {
    * Achat Neuf
    */
   an: JSX.Element | string;
+  handle: string;
 }
 export const comparativeRows: comparativeRow[] = [
   {
@@ -28,6 +29,7 @@ export const comparativeRows: comparativeRow[] = [
     ss: <Icon icon={CheckIcon} />,
     sm: <Icon icon={CheckIcon} />,
     an: <Icon icon={XIcon} />,
+    handle: 'ecologique',
   },
   {
     title: (
@@ -38,6 +40,7 @@ export const comparativeRows: comparativeRow[] = [
     ss: <div className="deviseSigns">€€</div>,
     sm: <div className="deviseSigns">€</div>,
     an: <div className="deviseSigns">€€€€</div>,
+    handle: 'economique',
   },
   {
     title: (
@@ -48,6 +51,7 @@ export const comparativeRows: comparativeRow[] = [
     ss: <Icon icon={CheckIcon} />,
     sm: <Icon icon={CheckIcon} />,
     an: <Icon icon={XIcon} />,
+    handle: 'rare',
   },
   {
     title: (
@@ -58,6 +62,7 @@ export const comparativeRows: comparativeRow[] = [
     ss: <img src={CarteAuthenticite} alt="Carte d'authenticité" />,
     sm: <Icon icon={XIcon} />,
     an: <Icon icon={XIcon} />,
+    handle: 'authentifiees',
   },
   {
     title: (
@@ -68,6 +73,7 @@ export const comparativeRows: comparativeRow[] = [
     ss: 'Par nos experts sneakers artists',
     sm: <Icon icon={XIcon} />,
     an: <Icon icon={XIcon} />,
+    handle: 'reconditionnees',
   },
   {
     title: (
@@ -78,5 +84,6 @@ export const comparativeRows: comparativeRow[] = [
     ss: <img src={France} alt="Forme de la france" />,
     sm: <Icon icon={XIcon} />,
     an: <Icon icon={XIcon} />,
+    handle: 'conceptuel',
   },
 ];

@@ -3,7 +3,8 @@ export type ValidBrands =
   | 'New Balance'
   | 'Adidas'
   | 'Air Jordan'
-  | 'Salomon';
+  | 'Salomon'
+  | 'Second Step';
 
 export interface BrandLogoProps {
   brand: ValidBrands;
