@@ -34,6 +34,11 @@ import KitEntretientCTA from '~/components/KitEntretientCTA';
 import FAQ from '~/components/FAQ';
 import NeufVsSS from '~/components/ComparatifNeufVsSS';
 import CarteAuthenticite from '~/components/CarteAuthenticite';
+import ProductGrid from '~/components/ProductGrid';
+import {
+  PRODUCT_CARD_FRAGMENT,
+  PRODUCT_FRAGMENT,
+} from '~/lib/constants/fragments';
 
 export const meta: MetaFunction<typeof loader> = ({data, location}) => {
   return [{title: `Hydrogen | ${data?.product.title ?? ''}`}];
@@ -59,7 +64,6 @@ export async function loader({params, request, context}: LoaderFunctionArgs) {
     throw new Error('Expected product handle to be defined');
   }
 
-  // await the query for the critical product data
   const {product} = await storefront.query(PRODUCT_QUERY, {
     variables: {handle, selectedOptions},
   });
@@ -67,6 +71,15 @@ export async function loader({params, request, context}: LoaderFunctionArgs) {
   if (!product?.id) {
     throw new Response(null, {status: 404});
   }
+
+  const {productRecommendations} = await storefront.query(
+    PRODUCT_RECOMMENDATION_QUERY,
+    {
+      variables: {
+        productId: product.id,
+      },
+    },
+  );
 
   const firstVariant = product.variants.nodes[0];
   const firstVariantIsDefault = Boolean(
@@ -86,7 +99,7 @@ export async function loader({params, request, context}: LoaderFunctionArgs) {
     }
   }
 
-  return defer({product});
+  return defer({product, productRecommendations});
 }
 
 function redirectToFirstVariant({
@@ -115,7 +128,7 @@ function redirectToFirstVariant({
 }
 
 export default function Product() {
-  const {product} = useLoaderData<typeof loader>();
+  const {product, productRecommendations} = useLoaderData<typeof loader>();
   return (
     <>
       <div className="product">
@@ -125,6 +138,12 @@ export default function Product() {
           <ProductForm product={product} />
         </div>
       </div>
+      {productRecommendations && (
+        <>
+          <h2>Nous vous recommendons également :</h2>
+          <ProductGrid products={productRecommendations.slice(0, 4)} />
+        </>
+      )}
       <div className="extra">
         <aside className="menu">
           <ul>
@@ -249,110 +268,6 @@ function Galery(props: {images: ProductFragment['images']}) {
   );
 }
 
-const PRODUCT_VARIANT_FRAGMENT = `#graphql
-  fragment ProductVariant on ProductVariant {
-    availableForSale
-    compareAtPrice {
-      amount
-      currencyCode
-    }
-    id
-    image {
-      __typename
-      id
-      url
-      altText
-      width
-      height
-    }
-    price {
-      amount
-      currencyCode
-    }
-    product {
-      title
-      handle
-    }
-    selectedOptions {
-      name
-      value
-    }
-    currentlyNotInStock
-    sku
-    title
-    price {
-      amount
-      currencyCode
-    }
-  }
-` as const;
-
-export const METAFIELD_FRAGMENT = `#graphql
-fragment MetaFieldInfo on Metafield {
-  key
-  value
-  type
-  id
-  references(first: 8) {
-    nodes {
-      __typename
-      ... on MediaImage {
-        id
-        image {
-          altText
-          id
-          src
-        }
-      }
-    }
-  }
-}
-`;
-
-const PRODUCT_FRAGMENT = `#graphql
-  fragment Product on Product {
-    id
-    title
-    vendor
-    handle
-    descriptionHtml
-    description
-    options {
-      name
-      values
-    }
-    metafields(identifiers: [
-      {key: "titres", namespace: "custom"},
-      {key: "notes", namespace: "custom"},
-      {key: "looks", namespace: "custom"},
-      {key: "couleur", namespace: "custom"},
-      {key: "fastdelivery", namespace: "custom"}
-    ]) {
-      ...MetaFieldInfo
-    }
-    images(first: 50) {
-      nodes {
-        url
-        altText
-      }
-    }
-    selectedVariant: variantBySelectedOptions(selectedOptions: $selectedOptions, ignoreUnknownOptions: true, caseInsensitiveMatch: true) {
-      ...ProductVariant
-    }
-    variants(first: 250) {
-      nodes {
-        ...ProductVariant
-      }
-    }
-    seo {
-      description
-      title
-    }
-  }
-  ${PRODUCT_VARIANT_FRAGMENT}
-  ${METAFIELD_FRAGMENT}
-` as const;
-
 const PRODUCT_QUERY = `#graphql
   query Product(
     $country: CountryCode
@@ -366,3 +281,14 @@ const PRODUCT_QUERY = `#graphql
   }
   ${PRODUCT_FRAGMENT}
 ` as const;
+
+const PRODUCT_RECOMMENDATION_QUERY = `#graphql
+query Recommendations(
+  $productId: ID!
+) {
+  productRecommendations(productId: $productId) {
+    ...ProductCard
+  }
+}
+${PRODUCT_CARD_FRAGMENT}
+`;

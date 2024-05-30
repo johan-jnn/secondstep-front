@@ -7,8 +7,6 @@ import type {
   ProductCardFragment,
   RecommendedProductsQuery,
 } from 'storefrontapi.generated';
-import ProductCard, {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
-import {COLLECTION_FRAGMENT} from './collections._index';
 import HeroBanner from '~/components/HeroBanner';
 import Engagements from '~/components/Engagements';
 import ProductGrid from '~/components/ProductGrid';
@@ -24,6 +22,11 @@ import BlogCarousel from '~/components/BlogCarousel';
 import CollectionCard from '~/components/CollectionCard';
 import FeaturedCollection from '~/components/FeaturedCollection';
 import {Not} from '~/lib/types';
+import {
+  ARTICLE_ITEM_FRAGMENT,
+  COLLECTION_FRAGMENT,
+  PRODUCT_CARD_FRAGMENT,
+} from '~/lib/constants/fragments';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Second Step | Home'}];
@@ -31,7 +34,7 @@ export const meta: MetaFunction = () => {
 
 export async function loader({context}: LoaderFunctionArgs) {
   const {storefront} = context;
-  const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
+  // const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
   const restoredProducts = storefront.query(RESTORED_PRODUCT_QUERRY);
   const metaObject = await storefront.query(METAOBJECTQUERRY);
   const featuredCollectionsData = await storefront.query(
@@ -54,7 +57,7 @@ export async function loader({context}: LoaderFunctionArgs) {
   }
 
   return defer({
-    recommendedProducts,
+    // recommendedProducts,
     restoredProducts,
     blogArticles: blogData.blog.articles.nodes,
     metaObject,
@@ -206,30 +209,6 @@ query FeaturedProductsquerry {
     }
   }
 }
-` as const;
-
-export const ARTICLE_ITEM_FRAGMENT = `#graphql
-  fragment ArticleItemBlog on Article {
-    author: authorV2 {
-      name
-    }
-    contentHtml
-    handle
-    tags
-    id
-    image {
-      id
-      altText
-      url
-      width
-      height
-    }
-    publishedAt
-    title
-    blog {
-      handle
-    }
-  }
 ` as const;
 
 const BLOGS_QUERY = `#graphql

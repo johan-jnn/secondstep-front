@@ -8,41 +8,11 @@ import Stars, {type StarsProps} from './Stars';
 import BrandLogo, {type ValidBrands} from './BrandLogo';
 import getProductTitleAndSub from '~/lib/productTitles';
 import {useRef} from 'react';
-import Product, {METAFIELD_FRAGMENT} from '~/routes/products.$handle';
+import Product from '~/routes/products.$handle';
 
 export interface ProductCardProps {
   informations: ProductCardFragment;
 }
-
-export const PRODUCT_CARD_FRAGMENT = `#graphql
-fragment ProductCard on Product {
-  id
-  title
-  handle
-  priceRange {
-    minVariantPrice {
-      amount
-      currencyCode
-    }
-  }
-  featuredImage {
-    url
-    altText
-  }
-  metafields(identifiers: [
-    {key: "titres", namespace: "custom"},
-    {key: "notes", namespace: "custom"},
-    {key: "looks", namespace: "custom"},
-    {key: "couleur", namespace: "custom"},
-    {key: "fastdelivery", namespace: "custom"}
-  ]) {
-    ...MetaFieldInfo
-  }
-  availableForSale
-  vendor
-}
-${METAFIELD_FRAGMENT}
-`;
 
 export default function ProductCard({
   informations: {

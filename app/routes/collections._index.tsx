@@ -5,6 +5,7 @@ import type {CollectionFragment} from 'storefrontapi.generated';
 import '../styles/collections._index.scss';
 import CollectionCTA from '~/components/CollectionCTA';
 import LoadMore from '~/components/loadMoreContent';
+import {COLLECTION_FRAGMENT} from '~/lib/constants/fragments';
 
 export async function loader({context, request}: LoaderFunctionArgs) {
   const paginationVariables = getPaginationVariables(request, {
@@ -51,31 +52,6 @@ function CollectionsGrid({collections}: {collections: CollectionFragment[]}) {
   );
 }
 
-export const COLLECTION_FRAGMENT = `#graphql
-  fragment Collection on Collection {
-    id
-    title
-    handle
-    description
-    image {
-      id
-      url
-      altText
-      width
-      height
-    }
-    products(first: 1) {
-      nodes {
-        featuredImage {
-          url
-          altText
-          src
-          id
-        }
-        vendor
-      }
-    }
-  }`;
 const COLLECTIONS_QUERY = `#graphql
   ${COLLECTION_FRAGMENT}
   query StoreCollections(
