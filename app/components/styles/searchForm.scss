@@ -61,6 +61,7 @@
         width: 100%;
         color: var(--color-black);
         font-size: 16px;
+        transition: padding .25s;
 
         > h4 {
           text-transform: uppercase;

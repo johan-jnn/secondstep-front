@@ -10,6 +10,6 @@ export default {
   cuts: [],
   prices: {
     min: 0,
-    max: 750,
+    max: 1700,
   },
 } satisfies searchOptions;

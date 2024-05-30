@@ -10,6 +10,8 @@ import {
   ChatIcon,
   ChevronRightIcon,
   PersonFilledIcon,
+  CaretDownIcon,
+  ExternalIcon,
 } from '@shopify/polaris-icons';
 
 interface FAQItemProps {
@@ -28,19 +30,17 @@ function FAQItem({question, answer, link}: FAQItemProps) {
 
   return (
     <div className="faq-item">
-      <div className="question">
+      <Link to={link || ''} className="question" onClick={toggleAnswer}>
         <p>{question}</p>
-        <Link to={link || ''} className="faq-link" onClick={toggleAnswer}>
-          <Icon icon={PlusIcon} />
-        </Link>
-      </div>
+        <Icon icon={link ? ExternalIcon : CaretDownIcon} />
+      </Link>
       {isOpen && (
         <div className="answer">
           {answer.map((paragraph, index) => (
             <React.Fragment key={paragraph}>
               <p>{paragraph}</p>
-              {index !== answer.length - 1 && <br />}{' '}
               {/* Ajout de <br /> si ce n'est pas le dernier paragraphe */}
+              {index !== answer.length - 1 && <br />}{' '}
             </React.Fragment>
           ))}
         </div>
@@ -60,19 +60,25 @@ export default function FAQ() {
           <p>La team est là pour vous aider !</p>
         </div>
         <a href="mailto:contact@second-step.fr" className="faq-socials-min">
-          <Icon icon={EmailIcon} customStyling={{fill: 'var(--color-grey)'}} />
+          <Icon
+            icon={ChevronRightIcon}
+            customStyling={{fill: 'var(--color)'}}
+          />
           <p>Mail : contact@second-step.fr</p>
           <Icon
             icon={ChevronRightIcon}
-            customStyling={{fill: 'var(--color-grey)'}}
+            customStyling={{fill: 'var(--color)'}}
           />
         </a>
         <a href="whatsapp://send?phone=0785838528" className="faq-socials-min">
-          <Icon icon={ChatIcon} customStyling={{fill: 'var(--color-grey)'}} />
+          <Icon
+            icon={ChevronRightIcon}
+            customStyling={{fill: 'var(--color)'}}
+          />
           <p>Chat WhatsApp : 07 85 83 85 28</p>
           <Icon
             icon={ChevronRightIcon}
-            customStyling={{fill: 'var(--color-grey)'}}
+            customStyling={{fill: 'var(--color)'}}
           />
         </a>
         <a
@@ -80,13 +86,13 @@ export default function FAQ() {
           className="faq-socials-min"
         >
           <Icon
-            icon={LogoInstagramIcon}
-            customStyling={{fill: 'var(--color-grey)'}}
+            icon={ChevronRightIcon}
+            customStyling={{fill: 'var(--color)'}}
           />
           <p>Instagram : @secondstep.fr</p>
           <Icon
             icon={ChevronRightIcon}
-            customStyling={{fill: 'var(--color-grey)'}}
+            customStyling={{fill: 'var(--color)'}}
           />
         </a>
       </div>
