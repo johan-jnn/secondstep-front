@@ -17,7 +17,7 @@ import appStyles from './styles/app.scss?url';
 
 import {Layout} from '~/components/Layout';
 import type {footerMenus} from './components/Footer';
-import {COLLECTION_FRAGMENT} from './routes/collections._index';
+import {COLLECTION_FRAGMENT} from './lib/constants/fragments';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations

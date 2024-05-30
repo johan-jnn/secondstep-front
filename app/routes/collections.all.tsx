@@ -2,11 +2,12 @@ import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, type MetaFunction} from '@remix-run/react';
 import {Pagination, getPaginationVariables} from '@shopify/hydrogen';
 import type {ProductCardFragment} from 'storefrontapi.generated';
-import ProductCard, {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
+import ProductCard from '~/components/ProductCard';
 import '../styles/collections.$handle.scss';
 import ProductGrid from '~/components/ProductGrid';
 import Button from '~/components/Button';
 import LoadMore from '~/components/loadMoreContent';
+import {PRODUCT_CARD_FRAGMENT} from '~/lib/constants/fragments';
 
 export const meta: MetaFunction<typeof loader> = () => {
   return [{title: `Hydrogen | Products`}];

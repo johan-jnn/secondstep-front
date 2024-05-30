@@ -4,8 +4,8 @@ import {getPaginationVariables} from '@shopify/hydrogen';
 
 import {SearchResults, NoSearchResults} from '~/components/Search';
 import SearchForm, {searchParser, sortType} from '~/components/searchForm';
-import {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
 import type {ProductFilter} from '@shopify/hydrogen/storefront-api-types';
+import {PRODUCT_CARD_FRAGMENT} from '~/lib/constants/fragments';
 
 export const meta: MetaFunction = () => {
   return [{title: `Hydrogen | Search`}];

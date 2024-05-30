@@ -7,17 +7,22 @@ import {
   Image,
   Money,
 } from '@shopify/hydrogen';
-import {COLLECTION_FRAGMENT} from './collections._index';
 import type {
   CollectionFragment,
   ProductCardFragment,
 } from 'storefrontapi.generated';
 import {useVariantUrl} from '~/lib/variants';
-import ProductCard, {PRODUCT_CARD_FRAGMENT} from '~/components/ProductCard';
 import LoadMore from '~/components/loadMoreContent';
 import ProductGrid from '~/components/ProductGrid';
 import DropBanner from '~/components/dropBanner';
-import {Not} from '~/lib/types';
+import SearchForm from '~/components/searchForm';
+import searchOptionsValues from '~/lib/constants/searchOptionsValues';
+import type {Not} from '~/lib/types';
+import type {ValidBrands} from '~/components/BrandLogo';
+import {
+  COLLECTION_FRAGMENT,
+  PRODUCT_CARD_FRAGMENT,
+} from '~/lib/constants/fragments';
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Hydrogen | ${data?.collection.title ?? ''} Collection`}];
 };
@@ -74,6 +79,7 @@ export default function Collection() {
   const {collection, dropCollection, featuredCollections} =
     useLoaderData<typeof loader>();
 
+  const vendors = new Set(collection.products.nodes.map((p) => p.vendor));
   return (
     <div className="collection">
       <h1>{collection.title}</h1>
@@ -81,6 +87,13 @@ export default function Collection() {
         image={dropCollection?.image?.url}
         handle={dropCollection?.handle}
         description={dropCollection?.description}
+      />
+      <SearchForm
+        options={searchOptionsValues}
+        current={{
+          brands: Array.from(vendors) as ValidBrands[],
+          q: collection.title,
+        }}
       />
       <Pagination connection={collection.products}>
         {({nodes, isLoading, PreviousLink, NextLink}) => (
