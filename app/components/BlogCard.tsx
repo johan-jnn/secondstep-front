@@ -27,9 +27,6 @@ export default function BlogCard({
         }}
       >
         <p className="section">{section}</p>
-        <Link to={link}>
-          <p className="hide-more">Lire Plus</p>
-        </Link>
       </div>
       <div className="history-card-bottom">
         <p className="history-card-bottom-date">{date}</p>

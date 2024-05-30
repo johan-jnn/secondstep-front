@@ -38,30 +38,30 @@ export default function FeaturedCollection({
           <Swiper
             modules={[Virtual, Navigation, Pagination]}
             slidesPerView={4}
-            centeredSlides={true}
-            spaceBetween={50}
+            centeredSlides={false}
+            spaceBetween={10}
             pagination={{clickable: true}}
             navigation={true}
             breakpoints={{
               320: {
-                slidesPerView: 2,
-                spaceBetween: 20,
+                slidesPerView: 1,
+                spaceBetween: 10,
               },
               620: {
                 slidesPerView: 2,
-                spaceBetween: 30,
-              },
-              710: {
-                slidesPerView: 2,
                 spaceBetween: 10,
               },
-              1090: {
+              740: {
                 slidesPerView: 3,
-                spaceBetween: 0,
+                spaceBetween: 10,
               },
-              1200: {
+              1115: {
+                slidesPerView: 3,
+                spaceBetween: 10,
+              },
+              1250: {
                 slidesPerView: 4,
-                spaceBetween: 100,
+                spaceBetween: 10,
               },
             }}
           >
