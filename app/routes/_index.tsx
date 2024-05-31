@@ -43,17 +43,15 @@ export async function loader({context}: LoaderFunctionArgs) {
     FEATURED_PRODUCTS_QUERY_META,
   );
 
-  const blogHandle = 'infos';
-  const paginationVariables = {first: 6};
   const blogData = await storefront.query(BLOGS_QUERY, {
     variables: {
-      blogHandle,
-      ...paginationVariables,
+      blogHandle: 'infos',
+      first: 6,
     },
   });
 
   if (!blogData.blog?.articles) {
-    throw new Response('No articles found', {status: 404});
+    throw new Response('No articles found', {status: 500});
   }
 
   return defer({
@@ -72,7 +70,7 @@ export default function Homepage() {
   const featuredProducts = data.featuredProducts
     .map((metaObject) => {
       const featuredField = metaObject.fields.find(
-        (field) => field.key === 'featured_products',
+        (field) => field.key === 'produit',
       );
       return featuredField ? featuredField.reference : null;
     })
@@ -106,7 +104,9 @@ export default function Homepage() {
         })}
       </div>
       <Engagements />
-      <FeaturedCollection products={featuredProducts} />
+      {!!featuredProducts.length && (
+        <FeaturedCollection products={featuredProducts} />
+      )}
       <VideoCards />
       <Await resolve={data.restoredProducts}>
         {({collection}) =>
