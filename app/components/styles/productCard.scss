@@ -17,21 +17,16 @@ $card-border-radius: 5px;
 
   border-radius: $card-border-radius;
 
-  will-change: scale;
-  transition: scale 0.15s;
-
-  &:hover {
-    text-decoration: inherit;
-    scale: 1.05;
-  }
-
   > .top {
     position: relative;
     background-color: transparent;
     border-radius: calc($card-border-radius / 1.5);
     flex-grow: 1;
     border: 1px solid var(--color-grey);
-    filter: drop-shadow(-2px 4px 10px #e2e2e2);
+    box-shadow: 0 5px 10px -5px var(--color-grey);
+    overflow: hidden;
+
+    transition: .15s;
 
     > .pastilles {
       position: absolute;
@@ -52,6 +47,8 @@ $card-border-radius: 5px;
       aspect-ratio: 1.8 / 2;
       object-fit: contain;
       background-color: #f2f2f2;
+
+      transition: scale .15s;
     }
 
     > .brand {
@@ -83,7 +80,7 @@ $card-border-radius: 5px;
       font-size: 20px;
       text-transform: uppercase;
     }
-    > h4 {
+    > p {
       grid-area: sub;
       font-size: 14px;
       font-weight: normal;
@@ -107,6 +104,19 @@ $card-border-radius: 5px;
       font-size: 0.9em;
       gap: 5px;
     }
+  }
+
+
+  &:hover {
+    text-decoration: inherit;
+    > .top {
+      border-color: var(--color-primary);
+      box-shadow: 0 5px 10px 0 var(--color-grey);
+      > img {
+        scale: 1.05;
+      }
+    }
+    color: var(--color-primary);
   }
 }
 

@@ -1,25 +1,32 @@
-$iconWidth: 15px;
+$iconHeight: 20px;
 $iconMarginRight: 5px;
 
 .certificationItem {
   display: flex;
   align-items: flex-start;
   gap: 15px;
+  margin: 10px 0;
+  max-width: 350px;
+
   > .topline {
     display: flex;
     align-items: center;
     gap: $iconMarginRight;
-    margin-top: 4px;
+
+    > svg {
+      height: $iconHeight;
+      width: $iconHeight;
+    }
   }
+
   > .text {
     > h3 {
-      font-size: 26px;
+      font-size: $iconHeight;
+      line-height: $iconHeight;
     }
-
     > p {
-      font-size: 16px;
+      font-size: calc($iconHeight / 1.35);
     }
-    padding: 0 ($iconWidth + $iconMarginRight);
     a {
       font-weight: 800;
       text-decoration: underline;

@@ -6,6 +6,7 @@ import {SearchResults, NoSearchResults} from '~/components/Search';
 import SearchForm, {searchParser, sortType} from '~/components/searchForm';
 import type {ProductFilter} from '@shopify/hydrogen/storefront-api-types';
 import {PRODUCT_CARD_FRAGMENT} from '~/lib/constants/fragments';
+import type {SearchQuery} from 'storefrontapi.generated';
 
 export const meta: MetaFunction = () => {
   return [{title: `Hydrogen | Search`}];
@@ -63,18 +64,21 @@ export async function loader({request, context}: LoaderFunctionArgs) {
         },
       ]
     : [];
-  const {errors, ...data} = await context.storefront.query(SEARCH_QUERY, {
-    variables: {
-      query: filters.q,
-      filters: [
-        ...brandFilters,
-        ...sizesFilters,
-        ...priceFilter,
-        ...colorFilters,
-      ],
-      ...variables,
+  const {errors, ...data} = await context.storefront.query<SearchQuery>(
+    SEARCH_QUERY,
+    {
+      variables: {
+        query: filters.q,
+        filters: [
+          ...brandFilters,
+          ...sizesFilters,
+          ...priceFilter,
+          ...colorFilters,
+        ],
+        ...variables,
+      },
     },
-  });
+  );
 
   if (!data) {
     throw new Error('No search data returned from Shopify API');
@@ -112,20 +116,6 @@ export default function SearchPage() {
 }
 
 const SEARCH_QUERY = `#graphql
-  fragment SearchPage on Page {
-     __typename
-     handle
-    id
-    title
-    trackingParameters
-  }
-  fragment SearchArticle on Article {
-    __typename
-    handle
-    id
-    title
-    trackingParameters
-  }
   query search(
     $country: CountryCode
     $endCursor: String
@@ -164,29 +154,6 @@ const SEARCH_QUERY = `#graphql
         endCursor
       }
     }
-    pages: search(
-      query: $query,
-      types: [PAGE],
-      first: 10
-    ) {
-      nodes {
-        ...on Page {
-          ...SearchPage
-        }
-      }
-    }
-    articles: search(
-      query: $query,
-      types: [ARTICLE],
-      first: 10
-    ) {
-      nodes {
-        ...on Article {
-          ...SearchArticle
-        }
-      }
-    }
   }
-
   ${PRODUCT_CARD_FRAGMENT}
 ` as const;

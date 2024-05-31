@@ -139,10 +139,10 @@ export default function Product() {
         </div>
       </div>
       {productRecommendations && (
-        <>
+        <div className="recommendations">
           <h2>Nous vous recommendons également :</h2>
           <ProductGrid products={productRecommendations.slice(0, 4)} />
-        </>
+        </div>
       )}
       <div className="extra">
         <aside className="menu">

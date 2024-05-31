@@ -8,6 +8,10 @@ $header-height: 75px;
 $icons-height: calc($header-height / 2.25);
 $cartBadge-height: calc($icons-height / 2.25);
 
+:root {
+  scroll-padding-top: $header-height;
+}
+
 .header {
   align-items: center;
   justify-content: space-between;

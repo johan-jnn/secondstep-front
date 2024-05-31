@@ -34,7 +34,6 @@ export const meta: MetaFunction = () => {
 
 export async function loader({context}: LoaderFunctionArgs) {
   const {storefront} = context;
-  // const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
   const restoredProducts = storefront.query(RESTORED_PRODUCT_QUERRY);
   const metaObject = await storefront.query(METAOBJECTQUERRY);
   const featuredCollectionsData = await storefront.query(
@@ -43,6 +42,7 @@ export async function loader({context}: LoaderFunctionArgs) {
   const featuredProductsData = await storefront.query(
     FEATURED_PRODUCTS_QUERY_META,
   );
+
   const blogHandle = 'infos';
   const paginationVariables = {first: 6};
   const blogData = await storefront.query(BLOGS_QUERY, {
@@ -57,7 +57,6 @@ export async function loader({context}: LoaderFunctionArgs) {
   }
 
   return defer({
-    // recommendedProducts,
     restoredProducts,
     blogArticles: blogData.blog.articles.nodes,
     metaObject,
@@ -68,6 +67,7 @@ export async function loader({context}: LoaderFunctionArgs) {
 
 export default function Homepage() {
   const data = useLoaderData<typeof loader>();
+
   const featuredCollections = data.featuredCollections;
   const featuredProducts = data.featuredProducts
     .map((metaObject) => {

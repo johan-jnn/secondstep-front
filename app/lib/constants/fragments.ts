@@ -190,13 +190,9 @@ export const ORDER_ITEM_FRAGMENT = `#graphql
       currencyCode
     }
     financialStatus
-    fulfillments(first: 1) {
-      nodes {
-        status
-      }
-    }
+    fulfillmentStatus
     id
-    number
+    orderNumber
     processedAt
   }
 ` as const;
@@ -241,7 +237,7 @@ export const CUSTOMER_FRAGMENT = `#graphql
       }
     }
   }
-  fragment Address on CustomerAddress {
+  fragment Address on MailingAddress {
     id
     formatted
     firstName
@@ -249,10 +245,27 @@ export const CUSTOMER_FRAGMENT = `#graphql
     company
     address1
     address2
-    territoryCode
-    zoneCode
+    countryCode
+    provinceCode
     city
     zip
-    phoneNumber
+    phone
   }
 ` as const;
+
+export const ARTICLE_FRAGMENT = `#graphql
+fragment SearchPage on Page {
+  __typename
+  handle
+ id
+ title
+ trackingParameters
+}
+fragment SearchArticle on Article {
+ __typename
+ handle
+ id
+ title
+ trackingParameters
+}
+`;

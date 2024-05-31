@@ -197,7 +197,9 @@ export function GrilleTaille(props: GrilleTailleProps) {
                     <Pastille color="var(--color-primary)" />
                   </div>
                 )}
-                <p className="variantName">{info.title}</p>
+                <p className="variantName">
+                  {info.title.match(/.+\d/)?.[0] || info.title}
+                </p>
                 <p className="variantPrice">
                   <Price value={info.price} decimals={0} />
                 </p>
@@ -206,7 +208,9 @@ export function GrilleTaille(props: GrilleTailleProps) {
           ) : (
             <>
               <div className="soldout">
-                <p className="variantName">{info.title}</p>
+                <p className="variantName">
+                  {info.title.match(/.+\d/)?.[0] || info.title}
+                </p>
                 <p className="soldout_sub">Epuisé</p>
               </div>
             </>
