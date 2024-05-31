@@ -176,7 +176,11 @@ function HeaderMenuMobileToggle() {
 
 function SearchToggle() {
   return (
-    <a href="#search-aside" className="search-toggle">
+    <a
+      href="#search-aside"
+      className="search-toggle"
+      title="Recherche ta prochaine paire !"
+    >
       <Icon icon={SearchIcon} />
     </a>
   );

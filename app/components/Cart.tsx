@@ -132,7 +132,7 @@ export function CartEmpty({
           }
         }}
       >
-        <Button type="primary" text="Continuer vos achats" />
+        <Button type="primary" text="Commencer vos achats" />
       </Link>
     </div>
   );
