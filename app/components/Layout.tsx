@@ -42,14 +42,11 @@ export function Layout({
       <CartAside cart={cart} />
       <SearchAside />
       {collectionMenu.menu && (
-        <>
-          <MobileMenuAside
-            menu={header?.menu}
-            shop={header?.shop}
-            collectionMenu={collectionMenu.menu}
-          />
-          <CollectionAside collectionMenu={collectionMenu.menu} />
-        </>
+        <MobileMenuAside
+          menu={header?.menu}
+          shop={header?.shop}
+          collectionMenu={collectionMenu.menu}
+        />
       )}
       {header && (
         <Header
@@ -127,17 +124,5 @@ function MobileMenuAside({
         <CollectionAsideContent menu={collectionMenu} />
       </Aside>
     )
-  );
-}
-
-function CollectionAside({
-  collectionMenu,
-}: {
-  collectionMenu: CollectionAsideContentProps['menu'];
-}) {
-  return (
-    <Aside id="collection-aside" heading={collectionMenu.title}>
-      <CollectionAsideContent menu={collectionMenu} />
-    </Aside>
   );
 }
