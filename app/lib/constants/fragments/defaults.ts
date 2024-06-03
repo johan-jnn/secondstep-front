@@ -182,74 +182,29 @@ export const ARTICLE_ITEM_FRAGMENT = `#graphql
   }
 ` as const;
 
-// https://shopify.dev/docs/api/customer/latest/objects/Order
-export const ORDER_ITEM_FRAGMENT = `#graphql
-  fragment OrderItem on Order {
-    totalPrice {
-      amount
-      currencyCode
-    }
-    financialStatus
-    fulfillmentStatus
+export const MENU_FRAGMENT = `#graphql
+  fragment MenuItem on MenuItem {
     id
-    orderNumber
-    processedAt
+    resourceId
+    tags
+    title
+    type
+    url
   }
-` as const;
-
-// https://shopify.dev/docs/api/customer/latest/objects/Customer
-export const CUSTOMER_ORDERS_FRAGMENT = `#graphql
-  fragment CustomerOrders on Customer {
-    orders(
-      sortKey: PROCESSED_AT,
-      reverse: true,
-      first: $first,
-      last: $last,
-      before: $startCursor,
-      after: $endCursor
-    ) {
-      nodes {
-        ...OrderItem
-      }
-      pageInfo {
-        hasPreviousPage
-        hasNextPage
-        endCursor
-        startCursor
-      }
+  fragment ChildMenuItem on MenuItem {
+    ...MenuItem
+  }
+  fragment ParentMenuItem on MenuItem {
+    ...MenuItem
+    items {
+      ...ChildMenuItem
     }
   }
-  ${ORDER_ITEM_FRAGMENT}
-` as const;
-
-// NOTE: https://shopify.dev/docs/api/customer/latest/objects/Customer
-export const CUSTOMER_FRAGMENT = `#graphql
-  fragment Customer on Customer {
+  fragment Menu on Menu {
     id
-    firstName
-    lastName
-    defaultAddress {
-      ...Address
+    items {
+      ...ParentMenuItem
     }
-    addresses(first: 6) {
-      nodes {
-        ...Address
-      }
-    }
-  }
-  fragment Address on MailingAddress {
-    id
-    formatted
-    firstName
-    lastName
-    company
-    address1
-    address2
-    countryCode
-    provinceCode
-    city
-    zip
-    phone
   }
 ` as const;
 
@@ -268,4 +223,4 @@ fragment SearchArticle on Article {
  title
  trackingParameters
 }
-`;
+` as const;

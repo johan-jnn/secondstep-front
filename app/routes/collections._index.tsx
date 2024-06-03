@@ -5,7 +5,7 @@ import type {CollectionFragment} from 'storefrontapi.generated';
 import '../styles/collections._index.scss';
 import CollectionCTA from '~/components/CollectionCTA';
 import LoadMore from '~/components/loadMoreContent';
-import {COLLECTION_FRAGMENT} from '~/lib/constants/fragments';
+import {COLLECTION_FRAGMENT} from '~/lib/constants/fragments/defaults';
 
 export async function loader({context, request}: LoaderFunctionArgs) {
   const paginationVariables = getPaginationVariables(request, {

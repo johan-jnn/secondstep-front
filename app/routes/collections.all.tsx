@@ -7,7 +7,7 @@ import '../styles/collections.$handle.scss';
 import ProductGrid from '~/components/ProductGrid';
 import Button from '~/components/Button';
 import LoadMore from '~/components/loadMoreContent';
-import {PRODUCT_CARD_FRAGMENT} from '~/lib/constants/fragments';
+import {PRODUCT_CARD_FRAGMENT} from '~/lib/constants/fragments/defaults';
 
 export const meta: MetaFunction<typeof loader> = () => {
   return [{title: `Hydrogen | Products`}];

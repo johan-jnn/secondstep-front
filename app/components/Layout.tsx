@@ -1,10 +1,6 @@
 import {Await} from '@remix-run/react';
 import {Suspense} from 'react';
-import type {
-  CartApiQueryFragment,
-  CollectionMenuQuery,
-  HeaderQuery,
-} from 'storefrontapi.generated';
+import type {CartApiQueryFragment, HeaderQuery} from 'storefrontapi.generated';
 import {Aside} from '~/components/Aside';
 import {Footer, type footerMenus} from '~/components/Footer';
 import {Header, HeaderMenu} from '~/components/Header';
@@ -15,7 +11,6 @@ import {
 } from '~/components/Search';
 import marquisContent from '~/lib/constants/marquis.json';
 import SearchForm from './searchForm';
-import type {MetaFunction} from '@shopify/remix-oxygen';
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;

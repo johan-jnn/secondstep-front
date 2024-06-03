@@ -24,7 +24,7 @@ import {
   ARTICLE_ITEM_FRAGMENT,
   COLLECTION_FRAGMENT,
   PRODUCT_CARD_FRAGMENT,
-} from '~/lib/constants/fragments';
+} from '~/lib/constants/fragments/defaults';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Second Step | Home'}];

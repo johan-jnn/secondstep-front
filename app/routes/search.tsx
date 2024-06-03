@@ -5,7 +5,7 @@ import {getPaginationVariables} from '@shopify/hydrogen';
 import {SearchResults, NoSearchResults} from '~/components/Search';
 import SearchForm, {searchParser, sortType} from '~/components/searchForm';
 import type {ProductFilter} from '@shopify/hydrogen/storefront-api-types';
-import {PRODUCT_CARD_FRAGMENT} from '~/lib/constants/fragments';
+import {PRODUCT_CARD_FRAGMENT} from '~/lib/constants/fragments/defaults';
 import type {SearchQuery} from 'storefrontapi.generated';
 
 export const meta: MetaFunction = () => {

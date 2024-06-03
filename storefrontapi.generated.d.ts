@@ -199,6 +199,54 @@ export type ArticleItemBlogFragment = Pick<
   blog: Pick<StorefrontAPI.Blog, 'handle'>;
 };
 
+export type MenuItemFragment = Pick<
+  StorefrontAPI.MenuItem,
+  'id' | 'resourceId' | 'tags' | 'title' | 'type' | 'url'
+>;
+
+export type ChildMenuItemFragment = Pick<
+  StorefrontAPI.MenuItem,
+  'id' | 'resourceId' | 'tags' | 'title' | 'type' | 'url'
+>;
+
+export type ParentMenuItemFragment = Pick<
+  StorefrontAPI.MenuItem,
+  'id' | 'resourceId' | 'tags' | 'title' | 'type' | 'url'
+> & {
+  items: Array<
+    Pick<
+      StorefrontAPI.MenuItem,
+      'id' | 'resourceId' | 'tags' | 'title' | 'type' | 'url'
+    >
+  >;
+};
+
+export type MenuFragment = Pick<StorefrontAPI.Menu, 'id'> & {
+  items: Array<
+    Pick<
+      StorefrontAPI.MenuItem,
+      'id' | 'resourceId' | 'tags' | 'title' | 'type' | 'url'
+    > & {
+      items: Array<
+        Pick<
+          StorefrontAPI.MenuItem,
+          'id' | 'resourceId' | 'tags' | 'title' | 'type' | 'url'
+        >
+      >;
+    }
+  >;
+};
+
+export type SearchPageFragment = {__typename: 'Page'} & Pick<
+  StorefrontAPI.Page,
+  'handle' | 'id' | 'title' | 'trackingParameters'
+>;
+
+export type SearchArticleFragment = {__typename: 'Article'} & Pick<
+  StorefrontAPI.Article,
+  'handle' | 'id' | 'title' | 'trackingParameters'
+>;
+
 export type MoneyFragment = Pick<
   StorefrontAPI.MoneyV2,
   'currencyCode' | 'amount'
@@ -304,44 +352,6 @@ export type CartApiQueryFragment = Pick<
   >;
 };
 
-export type MenuItemFragment = Pick<
-  StorefrontAPI.MenuItem,
-  'id' | 'resourceId' | 'tags' | 'title' | 'type' | 'url'
->;
-
-export type ChildMenuItemFragment = Pick<
-  StorefrontAPI.MenuItem,
-  'id' | 'resourceId' | 'tags' | 'title' | 'type' | 'url'
->;
-
-export type ParentMenuItemFragment = Pick<
-  StorefrontAPI.MenuItem,
-  'id' | 'resourceId' | 'tags' | 'title' | 'type' | 'url'
-> & {
-  items: Array<
-    Pick<
-      StorefrontAPI.MenuItem,
-      'id' | 'resourceId' | 'tags' | 'title' | 'type' | 'url'
-    >
-  >;
-};
-
-export type MenuFragment = Pick<StorefrontAPI.Menu, 'id'> & {
-  items: Array<
-    Pick<
-      StorefrontAPI.MenuItem,
-      'id' | 'resourceId' | 'tags' | 'title' | 'type' | 'url'
-    > & {
-      items: Array<
-        Pick<
-          StorefrontAPI.MenuItem,
-          'id' | 'resourceId' | 'tags' | 'title' | 'type' | 'url'
-        >
-      >;
-    }
-  >;
-};
-
 export type ShopFragment = Pick<
   StorefrontAPI.Shop,
   'id' | 'name' | 'description'
@@ -357,6 +367,7 @@ export type ShopFragment = Pick<
 export type HeaderQueryVariables = StorefrontAPI.Exact<{
   country?: StorefrontAPI.InputMaybe<StorefrontAPI.CountryCode>;
   headerMenuHandle: StorefrontAPI.Scalars['String']['input'];
+  headerSubMenuHandle: StorefrontAPI.Scalars['String']['input'];
   language?: StorefrontAPI.InputMaybe<StorefrontAPI.LanguageCode>;
 }>;
 
@@ -370,6 +381,23 @@ export type HeaderQuery = {
     }>;
   };
   menu?: StorefrontAPI.Maybe<
+    Pick<StorefrontAPI.Menu, 'id'> & {
+      items: Array<
+        Pick<
+          StorefrontAPI.MenuItem,
+          'id' | 'resourceId' | 'tags' | 'title' | 'type' | 'url'
+        > & {
+          items: Array<
+            Pick<
+              StorefrontAPI.MenuItem,
+              'id' | 'resourceId' | 'tags' | 'title' | 'type' | 'url'
+            >
+          >;
+        }
+      >;
+    }
+  >;
+  submenu?: StorefrontAPI.Maybe<
     Pick<StorefrontAPI.Menu, 'id'> & {
       items: Array<
         Pick<
@@ -407,46 +435,6 @@ export type FooterQuery = {
               StorefrontAPI.MenuItem,
               'id' | 'resourceId' | 'tags' | 'title' | 'type' | 'url'
             >
-          >;
-        }
-      >;
-    }
-  >;
-};
-
-export type CollectionMenuQueryVariables = StorefrontAPI.Exact<{
-  handle: StorefrontAPI.Scalars['String']['input'];
-}>;
-
-export type CollectionMenuQuery = {
-  menu?: StorefrontAPI.Maybe<
-    Pick<StorefrontAPI.Menu, 'title'> & {
-      items: Array<
-        Pick<StorefrontAPI.MenuItem, 'title' | 'id'> & {
-          resource?: StorefrontAPI.Maybe<
-            Pick<
-              StorefrontAPI.Collection,
-              'id' | 'title' | 'handle' | 'description'
-            > & {
-              image?: StorefrontAPI.Maybe<
-                Pick<
-                  StorefrontAPI.Image,
-                  'id' | 'url' | 'altText' | 'width' | 'height'
-                >
-              >;
-              products: {
-                nodes: Array<
-                  Pick<StorefrontAPI.Product, 'vendor'> & {
-                    featuredImage?: StorefrontAPI.Maybe<
-                      Pick<
-                        StorefrontAPI.Image,
-                        'url' | 'altText' | 'src' | 'id'
-                      >
-                    >;
-                  }
-                >;
-              };
-            }
           >;
         }
       >;
@@ -1545,16 +1533,6 @@ export type RecommendationsQuery = {
   >;
 };
 
-export type SearchPageFragment = {__typename: 'Page'} & Pick<
-  StorefrontAPI.Page,
-  'handle' | 'id' | 'title' | 'trackingParameters'
->;
-
-export type SearchArticleFragment = {__typename: 'Article'} & Pick<
-  StorefrontAPI.Article,
-  'handle' | 'id' | 'title' | 'trackingParameters'
->;
-
 export type SearchQueryVariables = StorefrontAPI.Exact<{
   country?: StorefrontAPI.InputMaybe<StorefrontAPI.CountryCode>;
   endCursor?: StorefrontAPI.InputMaybe<
@@ -1631,36 +1609,16 @@ export type SearchQuery = {
       'hasNextPage' | 'hasPreviousPage' | 'startCursor' | 'endCursor'
     >;
   };
-  pages: {
-    nodes: Array<
-      {__typename: 'Page'} & Pick<
-        StorefrontAPI.Page,
-        'handle' | 'id' | 'title' | 'trackingParameters'
-      >
-    >;
-  };
-  articles: {
-    nodes: Array<
-      {__typename: 'Article'} & Pick<
-        StorefrontAPI.Article,
-        'handle' | 'id' | 'title' | 'trackingParameters'
-      >
-    >;
-  };
 };
 
 interface GeneratedQueryTypes {
-  '#graphql\n  fragment Shop on Shop {\n    id\n    name\n    description\n    primaryDomain {\n      url\n    }\n    brand {\n      logo {\n        image {\n          url\n        }\n      }\n    }\n  }\n  query Header(\n    $country: CountryCode\n    $headerMenuHandle: String!\n    $language: LanguageCode\n  ) @inContext(language: $language, country: $country) {\n    shop {\n      ...Shop\n    }\n    menu(handle: $headerMenuHandle) {\n      ...Menu\n    }\n  }\n  #graphql\n  fragment MenuItem on MenuItem {\n    id\n    resourceId\n    tags\n    title\n    type\n    url\n  }\n  fragment ChildMenuItem on MenuItem {\n    ...MenuItem\n  }\n  fragment ParentMenuItem on MenuItem {\n    ...MenuItem\n    items {\n      ...ChildMenuItem\n    }\n  }\n  fragment Menu on Menu {\n    id\n    items {\n      ...ParentMenuItem\n    }\n  }\n\n': {
+  '#graphql\n  fragment Shop on Shop {\n    id\n    name\n    description\n    primaryDomain {\n      url\n    }\n    brand {\n      logo {\n        image {\n          url\n        }\n      }\n    }\n  }\n  query Header(\n    $country: CountryCode\n    $headerMenuHandle: String!\n    $headerSubMenuHandle: String!\n    $language: LanguageCode\n  ) @inContext(language: $language, country: $country) {\n    shop {\n      ...Shop\n    }\n    menu: menu(handle: $headerMenuHandle) {\n      ...Menu\n    }\n    submenu: menu(handle: $headerSubMenuHandle) {\n      ...Menu\n    }\n  }\n  #graphql\n  fragment MenuItem on MenuItem {\n    id\n    resourceId\n    tags\n    title\n    type\n    url\n  }\n  fragment ChildMenuItem on MenuItem {\n    ...MenuItem\n  }\n  fragment ParentMenuItem on MenuItem {\n    ...MenuItem\n    items {\n      ...ChildMenuItem\n    }\n  }\n  fragment Menu on Menu {\n    id\n    items {\n      ...ParentMenuItem\n    }\n  }\n\n': {
     return: HeaderQuery;
     variables: HeaderQueryVariables;
   };
   '#graphql\n  query Footer(\n    $country: CountryCode\n    $menuName: String!\n    $language: LanguageCode\n  ) @inContext(language: $language, country: $country) {\n    menu(handle: $menuName) {\n      ...Menu\n    }\n  }\n  #graphql\n  fragment MenuItem on MenuItem {\n    id\n    resourceId\n    tags\n    title\n    type\n    url\n  }\n  fragment ChildMenuItem on MenuItem {\n    ...MenuItem\n  }\n  fragment ParentMenuItem on MenuItem {\n    ...MenuItem\n    items {\n      ...ChildMenuItem\n    }\n  }\n  fragment Menu on Menu {\n    id\n    items {\n      ...ParentMenuItem\n    }\n  }\n\n': {
     return: FooterQuery;
     variables: FooterQueryVariables;
-  };
-  '#graphql\nquery CollectionMenu(\n  $handle: String!\n) {\n  menu(handle: $handle) {\n    items {\n      title\n      id\n      resource {\n        ... on Collection {\n          ...Collection\n        }\n      }\n    }\n    title\n  }\n}\n#graphql\n  fragment Collection on Collection {\n    id\n    title\n    handle\n    description\n    image {\n      id\n      url\n      altText\n      width\n      height\n    }\n    products(first: 1) {\n      nodes {\n        featuredImage {\n          url\n          altText\n          src\n          id\n        }\n        vendor\n      }\n    }\n  }\n': {
-    return: CollectionMenuQuery;
-    variables: CollectionMenuQueryVariables;
   };
   '#graphql\n  query StoreRobots($country: CountryCode, $language: LanguageCode)\n   @inContext(country: $country, language: $language) {\n    shop {\n      id\n    }\n  }\n': {
     return: StoreRobotsQuery;
@@ -1686,7 +1644,7 @@ interface GeneratedQueryTypes {
     return: FeaturedCollectionsquerryQuery;
     variables: FeaturedCollectionsquerryQueryVariables;
   };
-  '#graphql\n#graphql\nfragment ProductCard on Product {\n  id\n  title\n  handle\n  priceRange {\n    minVariantPrice {\n      amount\n      currencyCode\n    }\n  }\n  featuredImage {\n    url\n    altText\n  }\n  metafields(identifiers: [\n    {key: "titres", namespace: "custom"},\n    {key: "notes", namespace: "custom"},\n    {key: "looks", namespace: "custom"},\n    {key: "couleur", namespace: "custom"},\n    {key: "fastdelivery", namespace: "custom"}\n  ]) {\n    ...MetaFieldInfo\n  }\n  availableForSale\n  vendor\n}\n#graphql\nfragment MetaFieldInfo on Metafield {\n  key\n  value\n  type\n  id\n  references(first: 8) {\n    nodes {\n      __typename\n      ... on MediaImage {\n        id\n        image {\n          altText\n          id\n          src\n        }\n      }\n    }\n  }\n}\n\n\nquery FeaturedProductsquerry {\n  metaobjects(type: "featured_products", first: 5) {\n    nodes {\n      fields {\n        reference {\n          ... on Product {\n            ...ProductCard\n          }\n        }\n        key\n      }\n    }\n  }\n}\n': {
+  '#graphql\n  #graphql\nfragment ProductCard on Product {\n  id\n  title\n  handle\n  priceRange {\n    minVariantPrice {\n      amount\n      currencyCode\n    }\n  }\n  featuredImage {\n    url\n    altText\n  }\n  metafields(identifiers: [\n    {key: "titres", namespace: "custom"},\n    {key: "notes", namespace: "custom"},\n    {key: "looks", namespace: "custom"},\n    {key: "couleur", namespace: "custom"},\n    {key: "fastdelivery", namespace: "custom"}\n  ]) {\n    ...MetaFieldInfo\n  }\n  availableForSale\n  vendor\n}\n#graphql\nfragment MetaFieldInfo on Metafield {\n  key\n  value\n  type\n  id\n  references(first: 8) {\n    nodes {\n      __typename\n      ... on MediaImage {\n        id\n        image {\n          altText\n          id\n          src\n        }\n      }\n    }\n  }\n}\n\n\n  query FeaturedProductsquerry {\n    metaobjects(type: "featured_products", first: 50) {\n      nodes {\n        fields {\n          reference {\n            ... on Product {\n              ...ProductCard\n            }\n          }\n          key\n        }\n      }\n    }\n  }\n': {
     return: FeaturedProductsquerryQuery;
     variables: FeaturedProductsquerryQueryVariables;
   };
@@ -1750,7 +1708,7 @@ interface GeneratedQueryTypes {
     return: RecommendationsQuery;
     variables: RecommendationsQueryVariables;
   };
-  '#graphql\n  fragment SearchPage on Page {\n     __typename\n     handle\n    id\n    title\n    trackingParameters\n  }\n  fragment SearchArticle on Article {\n    __typename\n    handle\n    id\n    title\n    trackingParameters\n  }\n  query search(\n    $country: CountryCode\n    $endCursor: String\n    $first: Int\n    $language: LanguageCode\n    $last: Int\n    $query: String!\n    $startCursor: String\n    $filters: [ProductFilter!]\n    $sortType: SearchSortKeys = RELEVANCE\n    $reverse: Boolean\n  ) @inContext(country: $country, language: $language) {\n    products: search(\n      query: $query,\n      unavailableProducts: HIDE,\n      types: [PRODUCT],\n      first: $first,\n      sortKey: $sortType,\n      reverse: $reverse,\n      last: $last,\n      before: $startCursor,\n      after: $endCursor\n      productFilters: $filters\n    ) {\n      nodes {\n        ...on Product {\n          __typename\n          trackingParameters\n          ...ProductCard\n        }\n      }\n      pageInfo {\n        hasNextPage\n        hasPreviousPage\n        startCursor\n        endCursor\n      }\n    }\n    pages: search(\n      query: $query,\n      types: [PAGE],\n      first: 10\n    ) {\n      nodes {\n        ...on Page {\n          ...SearchPage\n        }\n      }\n    }\n    articles: search(\n      query: $query,\n      types: [ARTICLE],\n      first: 10\n    ) {\n      nodes {\n        ...on Article {\n          ...SearchArticle\n        }\n      }\n    }\n  }\n\n  #graphql\nfragment ProductCard on Product {\n  id\n  title\n  handle\n  priceRange {\n    minVariantPrice {\n      amount\n      currencyCode\n    }\n  }\n  featuredImage {\n    url\n    altText\n  }\n  metafields(identifiers: [\n    {key: "titres", namespace: "custom"},\n    {key: "notes", namespace: "custom"},\n    {key: "looks", namespace: "custom"},\n    {key: "couleur", namespace: "custom"},\n    {key: "fastdelivery", namespace: "custom"}\n  ]) {\n    ...MetaFieldInfo\n  }\n  availableForSale\n  vendor\n}\n#graphql\nfragment MetaFieldInfo on Metafield {\n  key\n  value\n  type\n  id\n  references(first: 8) {\n    nodes {\n      __typename\n      ... on MediaImage {\n        id\n        image {\n          altText\n          id\n          src\n        }\n      }\n    }\n  }\n}\n\n\n': {
+  '#graphql\n  query search(\n    $country: CountryCode\n    $endCursor: String\n    $first: Int\n    $language: LanguageCode\n    $last: Int\n    $query: String!\n    $startCursor: String\n    $filters: [ProductFilter!]\n    $sortType: SearchSortKeys = RELEVANCE\n    $reverse: Boolean\n  ) @inContext(country: $country, language: $language) {\n    products: search(\n      query: $query,\n      unavailableProducts: HIDE,\n      types: [PRODUCT],\n      first: $first,\n      sortKey: $sortType,\n      reverse: $reverse,\n      last: $last,\n      before: $startCursor,\n      after: $endCursor\n      productFilters: $filters\n    ) {\n      nodes {\n        ...on Product {\n          __typename\n          trackingParameters\n          ...ProductCard\n        }\n      }\n      pageInfo {\n        hasNextPage\n        hasPreviousPage\n        startCursor\n        endCursor\n      }\n    }\n  }\n  #graphql\nfragment ProductCard on Product {\n  id\n  title\n  handle\n  priceRange {\n    minVariantPrice {\n      amount\n      currencyCode\n    }\n  }\n  featuredImage {\n    url\n    altText\n  }\n  metafields(identifiers: [\n    {key: "titres", namespace: "custom"},\n    {key: "notes", namespace: "custom"},\n    {key: "looks", namespace: "custom"},\n    {key: "couleur", namespace: "custom"},\n    {key: "fastdelivery", namespace: "custom"}\n  ]) {\n    ...MetaFieldInfo\n  }\n  availableForSale\n  vendor\n}\n#graphql\nfragment MetaFieldInfo on Metafield {\n  key\n  value\n  type\n  id\n  references(first: 8) {\n    nodes {\n      __typename\n      ... on MediaImage {\n        id\n        image {\n          altText\n          id\n          src\n        }\n      }\n    }\n  }\n}\n\n\n': {
     return: SearchQuery;
     variables: SearchQueryVariables;
   };
