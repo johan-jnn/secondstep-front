@@ -14,9 +14,9 @@ export default function CollectionCard({collection}: CollectionCardProps) {
   const firstNode = collection.products.nodes[0];
   const showFeaturedImage = ![
     'Nike',
-    'New Balance',
+    'New-Balance',
     'Adidas',
-    'Air Jordan',
+    'Air-Jordan',
   ].includes(collection.title);
   return (
     <Link to={`/collections/${collection.handle}`} className="collectionCard">

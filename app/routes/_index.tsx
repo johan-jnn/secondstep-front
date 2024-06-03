@@ -196,7 +196,7 @@ query FeaturedCollectionsquerry {
 const FEATURED_PRODUCTS_QUERY_META = `#graphql
 ${PRODUCT_CARD_FRAGMENT}
 query FeaturedProductsquerry {
-  metaobjects(type: "featured_products", first: 5) {
+  metaobjects(type: "featured_products", first: 50) {
     nodes {
       fields {
         reference {
