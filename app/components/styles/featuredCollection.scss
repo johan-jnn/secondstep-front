@@ -1,6 +1,6 @@
 .featuredCollection {
     height: 100%;
-    padding: 50px 0px 50px 0px;
+    padding: 50px 65px 50px 65px;
     @media (max-width:800px) {
       padding: 50px 20px 50px 20px;
     }
@@ -8,12 +8,10 @@
     > h2 {
       text-transform: uppercase;
       font-weight: 100;
-      padding: 0px 65px 0px 65px;
       font-size: 40px;
     }
     > p{
       font-size: 18px;
-      padding: 0px 65px 0px 65px;
     }
     @media (max-width:800px) {
       padding: 50px 20px 50px 20px;
