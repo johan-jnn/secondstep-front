@@ -32,6 +32,8 @@ export async function loader({request, context}: LoaderFunctionArgs) {
     }
   }
 
+  // todo --> Filtrer par type de livraison
+
   const colorFilters =
     filters.colors?.map(
       (color): ProductFilter => ({
@@ -101,7 +103,6 @@ export async function loader({request, context}: LoaderFunctionArgs) {
 
 export default function SearchPage() {
   const {filters, searchResults} = useLoaderData<typeof loader>();
-
   return (
     <div className="search">
       <h1>Search</h1>

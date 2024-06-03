@@ -46,22 +46,22 @@ export default function FeaturedCollection({
               320: {
                 slidesPerView: 1,
                 spaceBetween: 10,
+                slidesPerGroup: 1,
               },
               620: {
                 slidesPerView: 2,
                 spaceBetween: 10,
+                slidesPerGroup: 2,
               },
               740: {
                 slidesPerView: 3,
                 spaceBetween: 10,
-              },
-              1115: {
-                slidesPerView: 3,
-                spaceBetween: 10,
+                slidesPerGroup: 3,
               },
               1250: {
                 slidesPerView: 4,
                 spaceBetween: 10,
+                slidesPerGroup: 4,
               },
             }}
           >

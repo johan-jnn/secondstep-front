@@ -23,6 +23,10 @@ export enum sortType {
   'Prix décroissants',
   'Prix croissant',
 }
+export enum deliveryType {
+  'Normal',
+  'Fast',
+}
 export interface searchOptions {
   brands: ValidBrands[];
   sizes: (number | string)[];
@@ -38,6 +42,7 @@ export interface SearchFromProps {
   current?: {
     q?: string;
     sort?: sortType;
+    delivery?: (typeof deliveryType)[];
   } & {[key in keyof searchOptions]?: searchOptions[key]};
   options?: searchOptions | 'default';
   inputRef?: Ref<HTMLInputElement>;
@@ -196,10 +201,24 @@ export default function SearchForm({
           </Filter>
           <Filter name="Coupe" className="cut">
             <>
+              {multipleCheckboxEntry(options.cuts, 'cuts', current?.cuts).map(
+                ({initial, input, key}) => (
+                  <label htmlFor={key} key={key}>
+                    {input}
+                    {initial}
+                  </label>
+                ),
+              )}
+            </>
+          </Filter>
+          <Filter name="Livraison" className="delivery">
+            <>
               {multipleCheckboxEntry(
-                ['Coupe basse', 'Coupe mi-haute', 'Coupe haute'],
-                'cuts',
-                current?.cuts,
+                Object.values(deliveryType).filter(
+                  (v) => typeof v === 'string',
+                ),
+                'delivery',
+                current?.delivery as string[] | undefined,
               ).map(({initial, input, key}) => (
                 <label htmlFor={key} key={key}>
                   {input}
@@ -272,7 +291,7 @@ function multipleCheckboxEntry<
   T extends string | number | [string | number, string | number],
 >(
   values: T[],
-  name: keyof searchOptions,
+  name: keyof NonNullable<SearchFromProps['current']>,
   selectedValues?: T[],
 ): {initial: T; key: string; input: JSX.Element}[] {
   return values.map((initial, index) => {
@@ -320,7 +339,8 @@ export function searchParser(search: string) {
     switch (keyName) {
       case 'sizes':
       case 'brands':
-      case 'cuts': {
+      case 'cuts':
+      case 'delivery': {
         if (!result[keyName]) result[keyName] = [];
         //@ts-ignore -- Expect to be a valid key value
         result[keyName].push(keyValue);

@@ -4,8 +4,7 @@ import {Suspense} from 'react';
 import '../styles/app.scss';
 import type {
   CollectionFragment,
-  ProductCardFragment,
-  RecommendedProductsQuery,
+  FeaturedProductsquerryQuery,
 } from 'storefrontapi.generated';
 import HeroBanner from '~/components/HeroBanner';
 import Engagements from '~/components/Engagements';
@@ -38,9 +37,10 @@ export async function loader({context}: LoaderFunctionArgs) {
   const featuredCollectionsData = await storefront.query(
     FEATURED_COLLECTION_QUERY_META,
   );
-  const featuredProductsData = await storefront.query(
-    FEATURED_PRODUCTS_QUERY_META,
-  );
+  const featuredProductsData =
+    await storefront.query<FeaturedProductsquerryQuery>(
+      FEATURED_PRODUCTS_QUERY_META,
+    );
 
   const blogData = await storefront.query(BLOGS_QUERY, {
     variables: {
@@ -83,7 +83,7 @@ export default function Homepage() {
       {data.metaObject?.metaobject ? (
         <HeroBanner metaObject={data.metaObject.metaobject} />
       ) : null}
-      {/*<div className="homepage-featured-collection">
+      <div className="homepage-featured-collection">
         {featuredCollections.map((metaObject) => {
           if (
             metaObject.fields.find((f) => f.key === 'home-page-use')?.value !==
@@ -101,7 +101,7 @@ export default function Homepage() {
             />
           );
         })}
-      </div>*/}
+      </div>
 
       {!!featuredProducts.length && (
         <FeaturedCollection products={featuredProducts} />
@@ -192,21 +192,21 @@ query FeaturedCollectionsquerry {
 ` as const;
 
 const FEATURED_PRODUCTS_QUERY_META = `#graphql
-${PRODUCT_CARD_FRAGMENT}
-query FeaturedProductsquerry {
-  metaobjects(type: "featured_products", first: 50) {
-    nodes {
-      fields {
-        reference {
-          ... on Product {
-            ...ProductCard
+  ${PRODUCT_CARD_FRAGMENT}
+  query FeaturedProductsquerry {
+    metaobjects(type: "featured_products", first: 50) {
+      nodes {
+        fields {
+          reference {
+            ... on Product {
+              ...ProductCard
+            }
           }
+          key
         }
-        key
       }
     }
   }
-}
 ` as const;
 
 const BLOGS_QUERY = `#graphql
