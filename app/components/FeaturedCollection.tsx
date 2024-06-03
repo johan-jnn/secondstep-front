@@ -18,7 +18,7 @@ export default function FeaturedCollection({
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 1200);
+      setIsMobile(window.innerWidth < 3000);
     };
 
     handleResize(); // Check initial size
@@ -62,6 +62,10 @@ export default function FeaturedCollection({
                 slidesPerView: 4,
                 spaceBetween: 10,
                 slidesPerGroup: 4,
+              },
+              1900: {
+                slidesPerView: 5,
+                spaceBetween: 10,
               },
             }}
           >
