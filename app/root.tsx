@@ -77,13 +77,6 @@ export async function loader({context}: LoaderFunctionArgs) {
     infos: await getFooterMenu('footer_infos'),
   }))();
 
-  const collectionMenu = await storefront.query(COLLECTION_MENU_QUERY, {
-    cache: storefront.CacheLong(),
-    variables: {
-      handle: 'collection-menu',
-    },
-  });
-
   // await the header query (above the fold)
   const headerPromise = storefront.query(HEADER_QUERY, {
     cache: storefront.CacheLong(),
@@ -97,7 +90,6 @@ export async function loader({context}: LoaderFunctionArgs) {
       cart: cartPromise,
       footerMenus,
       header: await headerPromise,
-      collectionMenu,
       isLoggedIn: isLoggedInPromise,
       publicStoreDomain,
     },
@@ -239,23 +231,3 @@ const FOOTER_MENU_QUERY = `#graphql
   }
   ${MENU_FRAGMENT}
 ` as const;
-
-export const COLLECTION_MENU_QUERY = `#graphql
-query CollectionMenu(
-  $handle: String!
-) {
-  menu(handle: $handle) {
-    items {
-      title
-      id
-      resource {
-        ... on Collection {
-          ...Collection
-        }
-      }
-    }
-    title
-  }
-}
-${COLLECTION_FRAGMENT}
-`;

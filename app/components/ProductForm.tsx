@@ -166,6 +166,7 @@ export function GrilleTaille(props: GrilleTailleProps) {
                   pathname: '',
                   searchParams: new URLSearchParams(),
                 })}
+                preventScrollReset={true}
               >
                 {info.currentlyNotInStock ? null : (
                   <div className="liv48h">

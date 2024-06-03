@@ -64,7 +64,8 @@ $cartBadge-height: calc($icons-height / 2.25);
         padding: 0 10px;
         > img {
           height: 100%;
-          width: 100%;
+          margin: 0 auto;
+          display: block;
         }
       }
       > .header-menu-mobile-toggle {
