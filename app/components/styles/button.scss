@@ -1,8 +1,14 @@
+@import "../../styles/colors";
+
 button {
   &.primary,
   &.price {
     background-color: var(--color-primary);
     color: var(--color-white);
+
+    &:hover {
+      background-color: darken($primary, 15) !important;
+    }
   }
   &.secondary {
     background-color: var(--color-white);
@@ -46,7 +52,7 @@ button {
     }
   }
 
-  transition: border-radius 0.15s;
+  transition: 0.15s;
   &:hover {
     border-radius: 10px;
   }

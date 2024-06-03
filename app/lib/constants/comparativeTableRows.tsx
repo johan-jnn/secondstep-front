@@ -1,6 +1,5 @@
 import {CheckIcon, XIcon} from '@shopify/polaris-icons';
 import Icon from '~/components/Icon';
-import CarteAuthenticite from '~/assets/carte_authenticite.png';
 import France from '~/assets/svg/france.svg';
 
 interface comparativeRow {
@@ -52,17 +51,6 @@ export const comparativeRows: comparativeRow[] = [
     sm: <Icon icon={CheckIcon} />,
     an: <Icon icon={XIcon} />,
     handle: 'rare',
-  },
-  {
-    title: (
-      <>
-        Carte <b>authentification certifiée</b>
-      </>
-    ),
-    ss: <img src={CarteAuthenticite} alt="Carte d'authenticité" />,
-    sm: <Icon icon={XIcon} />,
-    an: <Icon icon={XIcon} />,
-    handle: 'authentifiees',
   },
   {
     title: (

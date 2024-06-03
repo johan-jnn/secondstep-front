@@ -1,10 +1,8 @@
 import {Virtual, Navigation, Pagination} from 'swiper/modules';
-import {Swiper, SwiperSlide} from 'swiper/react';
+import {Swiper, SwiperRef, SwiperSlide} from 'swiper/react';
 import BlogCard from './BlogCard';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 import './styles/blogCarousel.scss';
+import 'swiper/css/bundle';
 import type {ArticleItemBlogFragment} from 'storefrontapi.generated';
 import {getContentOfFirstParagraph} from 'app/lib/htmlStringExtractor';
 type BlogCarouselProps = {
@@ -29,18 +27,22 @@ export default function BlogCarousel({articles}: BlogCarouselProps) {
             300: {
               slidesPerView: 1,
               spaceBetween: 30,
+              slidesPerGroup: 1,
             },
             800: {
               slidesPerView: 2,
               spaceBetween: 10,
+              slidesPerGroup: 2,
             },
             1050: {
               slidesPerView: 3,
               spaceBetween: 10,
+              slidesPerGroup: 3,
             },
             1200: {
               slidesPerView: 4,
               spaceBetween: 10,
+              slidesPerGroup: 4,
             },
           }}
         >

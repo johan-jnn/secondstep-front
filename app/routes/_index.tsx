@@ -17,7 +17,6 @@ import Passionate from '~/components/PassionateSection';
 import PressSection from '~/components/PressSection';
 import OpinionSection from '~/components/OpinionSection';
 import FAQ from '~/components/FAQ';
-import CarteAuthenticite from '~/components/CarteAuthenticite';
 import BlogCarousel from '~/components/BlogCarousel';
 import CollectionCard from '~/components/CollectionCard';
 import FeaturedCollection from '~/components/FeaturedCollection';
@@ -103,23 +102,23 @@ export default function Homepage() {
           );
         })}
       </div>
-      <Engagements />
+
       {!!featuredProducts.length && (
         <FeaturedCollection products={featuredProducts} />
       )}
+      <BrandImageGrid />
+      <PressSection />
       <VideoCards />
       <Await resolve={data.restoredProducts}>
         {({collection}) =>
           collection && <RestoredProduct collection={collection} />
         }
       </Await>
-      <BrandImageGrid />
+      <Engagements />
       <Passionate />
-      <PressSection />
       <OpinionSection />
       <BlogCarousel articles={data.blogArticles} />
       <FAQ />
-      <CarteAuthenticite />
     </div>
   );
 }
