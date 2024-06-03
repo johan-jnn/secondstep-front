@@ -139,9 +139,6 @@ function HeaderCtas({
       </NavLink>
       <SearchToggle />
       <CartToggle cart={cart} />
-      <a href="#collection-aside" className="collectionOpenner">
-        <Icon icon={MenuIcon} />
-      </a>
       <HeaderMenuMobileToggle />
     </nav>
   );
