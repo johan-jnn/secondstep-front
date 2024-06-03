@@ -24,7 +24,7 @@ main {
     font-weight: 800;
     color: transparent;
     background-clip: text;
-
+    background-color: var(--color-light);
     background-image: linear-gradient(
       to right,
       var(--color-dark),
@@ -47,7 +47,7 @@ main {
 }
 
 .homepage-featured-collection {
-  background-color: var(--color-darkwhite);
+  background-color: var(--color-light);
   display: flex;
   justify-content: center;
   grid-gap: 1%;

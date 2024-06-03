@@ -109,14 +109,18 @@ export default function Homepage() {
       <BrandImageGrid />
       <PressSection />
       <VideoCards />
+      {/*
       <Await resolve={data.restoredProducts}>
         {({collection}) =>
           collection && <RestoredProduct collection={collection} />
         }
-      </Await>
+      </Await>*/}
       <Engagements />
       <OpinionSection />
       <BlogCarousel articles={data.blogArticles} />
+      {!!featuredProducts.length && (
+        <FeaturedCollection products={featuredProducts} />
+      )}
       <FAQ />
     </div>
   );
