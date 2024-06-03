@@ -19,6 +19,8 @@ import CollectionAsideContent, {
 } from './CollectionsAsideContent';
 import SearchForm from './searchForm';
 import type {MetaFunction} from '@shopify/remix-oxygen';
+import {ProductFragment} from 'storefrontapi.generated';
+import {GrilleTaille} from './ProductForm';
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
@@ -121,8 +123,8 @@ function MobileMenuAside({
         />
         <hr />
         <SearchForm />
-        <CollectionAsideContent menu={collectionMenu} />
       </Aside>
     )
   );
 }
+

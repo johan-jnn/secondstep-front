@@ -7,10 +7,10 @@ $infos-max-width: 300px;
 
 .product {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   padding: 25px 15px;
-  gap: 50px;
-  align-items: center;
+  gap: 15px;
+
   > .infos {
     min-width: $infos-max-width;
     grid-area: info;

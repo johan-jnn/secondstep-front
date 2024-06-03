@@ -8,7 +8,6 @@ import Pastille from './Pastille';
 import './styles/productForm.scss';
 import PriceButton from './PriceButton';
 import {CartForm} from '@shopify/hydrogen';
-import {Aside} from './Aside';
 import type {CartLineInput} from '@shopify/hydrogen/storefront-api-types';
 import {Link} from '@remix-run/react';
 import {getVariantUrl} from '~/lib/variants';
@@ -38,7 +37,6 @@ export default function ProductForm({product}: ProductFormProps) {
     throw new Error("No product' variant selected.");
   const {selectedVariant} = product;
   const [fastDelivery, setFastDelivery] = useState(false);
-  const [showSizeChart, setShowSizeChart] = useState(false); // Nouvel état pour la visibilité de la grille de tailles
   const lines: CartLineInput[] = [
     {
       merchandiseId: selectedVariant.id,
@@ -54,21 +52,50 @@ export default function ProductForm({product}: ProductFormProps) {
         <p>{titles[1]}</p>
 
         <section id="price">
+          {product.selectedVariant.compareAtPrice && (
+            <>
+              <div id="neuf" className="priceDisplay">
+                <p>
+                  <Price value={product.selectedVariant?.compareAtPrice} />
+                </p>
+                <span>Prix neuf</span>
+              </div>
+              <hr />
+            </>
+          )}
           <div id="ss_price" className="priceDisplay">
             <p>
-              {' '}
-              A partir de&nbsp;
               <Price value={product.selectedVariant.price} />
             </p>
+            <span>
+              Prix
+              <Banner color="var(--color-primary)" />
+            </span>
           </div>
+
+          {product.selectedVariant.compareAtPrice && (
+            <div id="priceDiff">
+              Economise{' '}
+              <Price
+                value={{
+                  amount:
+                    '' +
+                    (parseFloat(product.selectedVariant.compareAtPrice.amount) -
+                      parseFloat(product.selectedVariant.price.amount)),
+                  currencyCode: 'EUR',
+                }}
+                decimals={0}
+              />
+            </div>
+          )}
         </section>
-        {/*
+
         <PriceButton
           caption="Ajouter au panier"
           btnType="submit"
           price={product.selectedVariant.price}
         />
-         */}
+
         <section id="taille">
           <div className="heading">
             <h5>Tailles</h5>
@@ -76,15 +103,7 @@ export default function ProductForm({product}: ProductFormProps) {
               Guide des tailles
             </a>
           </div>
-          <a href="#grid-aside">choisir ma taille</a>
-          <Aside id="grid-aside" heading="">
-            <h3>Choisissez votre Taille</h3>
-            <GrilleTaille
-              tailles={product.variants.nodes}
-              selected={product.selectedVariant}
-              productHandle={product.handle}
-            />
-          </Aside>
+
           {product.variants.nodes.find(
             (variant) => !variant.currentlyNotInStock,
           ) ? (
@@ -93,6 +112,12 @@ export default function ProductForm({product}: ProductFormProps) {
               Livraison 48h disponible
             </div>
           ) : null}
+
+          <GrilleTaille
+            tailles={product.variants.nodes}
+            selected={product.selectedVariant}
+            productHandle={product.handle}
+          />
         </section>
 
         <hr />
