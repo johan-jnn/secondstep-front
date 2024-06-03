@@ -80,13 +80,6 @@
   }
 
   > #taille {
-    > a{
-      color : var(--color-light);
-      background-color: var(--color-dark);
-      width: 100%;
-      margin: 0 auto;
-      text-align: center;
-    }
     > .heading {
       display: flex;
       align-items: center;
@@ -106,7 +99,7 @@
       margin: 15px 0;
     }
 
-    > div > aside > main > #tailleGrid {
+    > #tailleGrid {
       min-height: 75px;
       max-height: 150px;
       overflow-y: scroll;
