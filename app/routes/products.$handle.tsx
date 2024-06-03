@@ -33,7 +33,6 @@ import ProductIRLLooks from '~/components/ProductIRLLooks';
 import KitEntretientCTA from '~/components/KitEntretientCTA';
 import FAQ from '~/components/FAQ';
 import NeufVsSS from '~/components/ComparatifNeufVsSS';
-import CarteAuthenticite from '~/components/CarteAuthenticite';
 import ProductGrid from '~/components/ProductGrid';
 import {
   PRODUCT_CARD_FRAGMENT,
@@ -190,9 +189,6 @@ export default function Product() {
         </section>
         <section id="faq">
           <FAQ />
-        </section>
-        <section id="carte-authenticite">
-          <CarteAuthenticite />
         </section>
       </div>
     </>

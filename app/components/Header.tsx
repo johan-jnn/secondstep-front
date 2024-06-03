@@ -11,7 +11,7 @@ import {
   SearchIcon,
 } from '@shopify/polaris-icons';
 import Icon from './Icon';
-import Banner from '../assets/banner.svg';
+import Banner from '../assets/logo.png';
 
 type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>;
 
