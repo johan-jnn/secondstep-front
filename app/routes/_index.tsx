@@ -83,7 +83,7 @@ export default function Homepage() {
       {data.metaObject?.metaobject ? (
         <HeroBanner metaObject={data.metaObject.metaobject} />
       ) : null}
-      <div className="homepage-featured-collection">
+      {/*<div className="homepage-featured-collection">
         {featuredCollections.map((metaObject) => {
           if (
             metaObject.fields.find((f) => f.key === 'home-page-use')?.value !==
@@ -101,7 +101,7 @@ export default function Homepage() {
             />
           );
         })}
-      </div>
+      </div>*/}
 
       {!!featuredProducts.length && (
         <FeaturedCollection products={featuredProducts} />
@@ -115,7 +115,6 @@ export default function Homepage() {
         }
       </Await>
       <Engagements />
-      <Passionate />
       <OpinionSection />
       <BlogCarousel articles={data.blogArticles} />
       <FAQ />
