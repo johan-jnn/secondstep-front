@@ -41,9 +41,6 @@ export async function loader({context}: LoaderFunctionArgs) {
     await storefront.query<FeaturedProductsquerryQuery>(
       FEATURED_PRODUCTS_QUERY_META,
     );
-  const featured_first_collectionData = await storefront.query(
-    FEATURED_FIRST_COLLECTION_META,
-  );
 
   const blogData = await storefront.query(BLOGS_QUERY, {
     variables: {
@@ -62,7 +59,6 @@ export async function loader({context}: LoaderFunctionArgs) {
     metaObject,
     // featuredCollections: featuredCollectionsData.metaobjects.nodes,
     featuredProducts: featuredProductsData.metaobjects.nodes,
-    featured_first_collectionData,
   });
 }
 
