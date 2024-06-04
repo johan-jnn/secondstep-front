@@ -35,7 +35,6 @@ export default function FeaturedCollection({
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
   return (
     <div className="featuredCollection">
       <h2>{title}</h2>

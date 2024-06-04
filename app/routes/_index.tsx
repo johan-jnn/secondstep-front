@@ -84,26 +84,29 @@ export default function Homepage() {
     );
 
   const featuredFirstProducts = data.featuredFirstCollection
-    .map((field) => field.references?.nodes || [])
+    ?.map((field: any) => field.references?.nodes || [])
     .flat()
     .filter(
-      (reference): reference is NonNullable<typeof reference> =>
+      (reference: any): reference is NonNullable<typeof reference> =>
         reference !== null,
     );
-  const collectionTitleField = data.featuredFirstCollection.fields.find(
-    (field) => field.key === 'title',
+  const collectionTitleField = data.featuredFirstCollection.fields?.find(
+    (field: any) => field.key === 'titre',
   );
   const collectionTitle = collectionTitleField
     ? collectionTitleField.value
-    : '';
+    : null;
+  console.log(collectionTitle);
 
-  const collectionReferenceField = data.featuredFirstCollection.fields.find(
-    (field) => field.reference && field.reference.handle,
+  const collectionReferenceField = data.featuredFirstCollection.fields?.find(
+    (field: any) => field.reference && field.reference.handle,
   );
   const collectionHandle =
     collectionReferenceField && collectionReferenceField.reference
       ? collectionReferenceField.reference.handle
       : '';
+
+  console.log(collectionHandle);
 
   return (
     <div className="home">
