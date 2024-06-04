@@ -10,7 +10,6 @@ $infos-max-width: 300px;
   justify-content: center;
   padding: 25px 15px;
   gap: 50px;
-  align-items: center;
   > .infos {
     min-width: $infos-max-width;
     grid-area: info;
