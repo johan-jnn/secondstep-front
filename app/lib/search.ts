@@ -14,7 +14,7 @@ if (algoliasearch?.name) {
   // const search = algoliasearch('SDF2554WHI', '3dc97f4efed43e70ceb2e3dd520399aa');
   // console.log(search);
 } else {
-  console.error('!! ALGOLIA SEARCH IS NOT AVAILABLE !!');
+  console.error('!! ALGOLIA SEARCH IS NOT AVAILABLE !!', algoliasearch);
 }
 
 export function applyTrackingParams(

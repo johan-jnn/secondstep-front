@@ -5,7 +5,8 @@ export type ValidBrands =
   | 'Air Jordan'
   | 'Salomon'
   | 'Second Step'
-  | 'Alexander McQueen';
+  | 'Alexander McQueen'
+  | 'Converse';
 
 export interface BrandLogoProps {
   brand: ValidBrands;

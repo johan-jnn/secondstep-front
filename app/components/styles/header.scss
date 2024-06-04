@@ -5,11 +5,18 @@
 */
 
 $header-height: 75px;
+$sub-header-height: 40px;
+$sticky-content-height: $header-height + $sub-header-height;
+
 $icons-height: calc($header-height / 2.25);
 $cartBadge-height: calc($icons-height / 2.25);
 
 :root {
-  scroll-padding-top: $header-height;
+  scroll-padding-top: $sticky-content-height;
+}
+
+main {
+  padding-top: $sub-header-height;
 }
 
 .header {
@@ -77,18 +84,70 @@ $cartBadge-height: calc($icons-height / 2.25);
           height: 100%;
         }
       }
-      @media(max-width: 500px){
+      @media (max-width: 500px) {
         grid-template-columns: 40px 1fr 40px;
-        > .cart-section{
+        > .cart-section {
           height: 100%;
           width: 100%;
-          > .cartOpenner{
+          > .cartOpenner {
             height: 100%;
             width: 100%;
-            > .icon{
+            > .icon {
               aspect-ratio: 1/1;
               height: 100%;
             }
+          }
+        }
+      }
+    }
+  }
+
+  > .sub {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: $sub-header-height;
+    padding: 0 15px;
+    display: flex;
+    align-items: stretch;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+
+    ul {
+      display: flex;
+      align-items: stretch;
+      height: 100%;
+      gap: 15px;
+      > li {
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        > a {
+          text-transform: uppercase;
+        }
+        > ol {
+          position: absolute;
+          top: 100%;
+          text-wrap: nowrap;
+          left: 0;
+          scale: 1 0;
+          transform-origin: top center;
+          transition: 0.15s;
+          background-color: var(--color-white);
+          color: var(--color-black);
+
+          list-style: none;
+          box-shadow: 0 2.5px 15px var(--color-grey);
+          border-radius: 0 0 5px 5px;
+          padding: 0;
+        }
+
+        &:hover {
+          > ol {
+            scale: 1 1;
+            padding: 10px 15px;
           }
         }
       }

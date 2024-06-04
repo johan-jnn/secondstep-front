@@ -85,9 +85,7 @@ export default function ProductForm({product}: ProductFormProps) {
               productHandle={product.handle}
             />
           </Aside>
-          {product.variants.nodes.find(
-            (variant) => !variant.currentlyNotInStock,
-          ) ? (
+          {fastDeliveryAvailable ? (
             <div className="liv48h">
               <Pastille color="var(--color-primary)" />
               Livraison 48h disponible

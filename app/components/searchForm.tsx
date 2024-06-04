@@ -42,7 +42,7 @@ export interface SearchFromProps {
   current?: {
     q?: string;
     sort?: sortType;
-    delivery?: (typeof deliveryType)[];
+    delivery?: deliveryType[];
   } & {[key in keyof searchOptions]?: searchOptions[key]};
   options?: searchOptions | 'default';
   inputRef?: Ref<HTMLInputElement>;
@@ -215,14 +215,14 @@ export default function SearchForm({
             <>
               {multipleCheckboxEntry(
                 Object.values(deliveryType).filter(
-                  (v) => typeof v === 'string',
+                  (v) => typeof v === 'number',
                 ),
                 'delivery',
-                current?.delivery as string[] | undefined,
+                current?.delivery as number[] | undefined,
               ).map(({initial, input, key}) => (
                 <label htmlFor={key} key={key}>
                   {input}
-                  {initial}
+                  {deliveryType[initial]}
                 </label>
               ))}
             </>
