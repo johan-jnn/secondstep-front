@@ -37,7 +37,7 @@ import ProductGrid from '~/components/ProductGrid';
 import {
   PRODUCT_CARD_FRAGMENT,
   PRODUCT_FRAGMENT,
-} from '~/lib/constants/fragments';
+} from '~/lib/constants/fragments/defaults';
 
 export const meta: MetaFunction<typeof loader> = ({data, location}) => {
   return [{title: `Hydrogen | ${data?.product.title ?? ''}`}];

@@ -22,7 +22,7 @@ import type {ValidBrands} from '~/components/BrandLogo';
 import {
   COLLECTION_FRAGMENT,
   PRODUCT_CARD_FRAGMENT,
-} from '~/lib/constants/fragments';
+} from '~/lib/constants/fragments/defaults';
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Hydrogen | ${data?.collection.title ?? ''} Collection`}];
 };

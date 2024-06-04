@@ -25,7 +25,9 @@ export function Header({
 }: HeaderProps & {
   marquisTexts: string[];
 }) {
-  const {shop, menu} = header;
+  const {shop, menu, submenu} = header;
+  console.log(submenu);
+
   return (
     <>
       <HeaderMarquis texts={marquisTexts} />

@@ -2,6 +2,7 @@ projects:
   default:
     schema: 'node_modules/@shopify/hydrogen/storefront.schema.json'
     documents:
+      - 'app/lib/constants/fragments/defaults.ts'
       - '!*.d.ts'
       - '*.{ts,tsx,js,jsx}'
       - 'app/**/*.{ts,tsx,js,jsx}'

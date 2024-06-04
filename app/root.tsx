@@ -17,7 +17,10 @@ import appStyles from './styles/app.scss?url';
 
 import {Layout} from '~/components/Layout';
 import type {footerMenus} from './components/Footer';
-import {COLLECTION_FRAGMENT} from './lib/constants/fragments';
+import {
+  COLLECTION_FRAGMENT,
+  MENU_FRAGMENT,
+} from './lib/constants/fragments/defaults';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -78,10 +81,11 @@ export async function loader({context}: LoaderFunctionArgs) {
   }))();
 
   // await the header query (above the fold)
-  const headerPromise = storefront.query(HEADER_QUERY, {
-    cache: storefront.CacheLong(),
+  const header = await storefront.query(HEADER_QUERY, {
+    cache: storefront.CacheNone(),
     variables: {
-      headerMenuHandle: 'main-menu', // Adjust to your header menu handle
+      headerMenuHandle: 'main-menu',
+      headerSubMenuHandle: 'sub-menu',
     },
   });
 
@@ -89,7 +93,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     {
       cart: cartPromise,
       footerMenus,
-      header: await headerPromise,
+      header,
       isLoggedIn: isLoggedInPromise,
       publicStoreDomain,
     },
@@ -162,32 +166,6 @@ export function ErrorBoundary() {
   );
 }
 
-const MENU_FRAGMENT = `#graphql
-  fragment MenuItem on MenuItem {
-    id
-    resourceId
-    tags
-    title
-    type
-    url
-  }
-  fragment ChildMenuItem on MenuItem {
-    ...MenuItem
-  }
-  fragment ParentMenuItem on MenuItem {
-    ...MenuItem
-    items {
-      ...ChildMenuItem
-    }
-  }
-  fragment Menu on Menu {
-    id
-    items {
-      ...ParentMenuItem
-    }
-  }
-` as const;
-
 const HEADER_QUERY = `#graphql
   fragment Shop on Shop {
     id
@@ -207,12 +185,16 @@ const HEADER_QUERY = `#graphql
   query Header(
     $country: CountryCode
     $headerMenuHandle: String!
+    $headerSubMenuHandle: String!
     $language: LanguageCode
   ) @inContext(language: $language, country: $country) {
     shop {
       ...Shop
     }
-    menu(handle: $headerMenuHandle) {
+    menu: menu(handle: $headerMenuHandle) {
+      ...Menu
+    }
+    submenu: menu(handle: $headerSubMenuHandle) {
       ...Menu
     }
   }
