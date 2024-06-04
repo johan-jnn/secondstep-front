@@ -41,6 +41,9 @@ export async function loader({context}: LoaderFunctionArgs) {
     await storefront.query<FeaturedProductsquerryQuery>(
       FEATURED_PRODUCTS_QUERY_META,
     );
+  const featured_first_collectionData = await storefront.query(
+    FEATURED_FIRST_COLLECTION_META,
+  );
 
   const blogData = await storefront.query(BLOGS_QUERY, {
     variables: {
@@ -59,6 +62,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     metaObject,
     // featuredCollections: featuredCollectionsData.metaobjects.nodes,
     featuredProducts: featuredProductsData.metaobjects.nodes,
+    featured_first_collectionData,
   });
 }
 
@@ -249,3 +253,25 @@ const BLOGS_QUERY = `#graphql
     }
   }
 ` as const;
+
+const FEATURED_FIRST_COLLECTION_META = `#graphql
+${PRODUCT_CARD_FRAGMENT}
+  metaobject(handle: {handle: "featured-collection-1", type: "featured_collection_1"}) {
+    fields {
+      references {
+        nodes {
+          ... on Product {
+            ...ProductCard
+          }
+        }
+      }
+      reference {
+        ... on Collection {
+          handle
+        }
+      }
+      key
+      value
+    }
+  }
+}` as const;
