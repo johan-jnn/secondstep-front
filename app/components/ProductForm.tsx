@@ -14,7 +14,7 @@ import {Link} from '@remix-run/react';
 import {getVariantUrl} from '~/lib/variants';
 import getProductTitleAndSub from '~/lib/productTitles';
 import Icon from './Icon';
-import {DeliveryIcon} from '@shopify/polaris-icons';
+import {DeliveryIcon, CaretDownIcon, CaretUpIcon} from '@shopify/polaris-icons';
 import {useState} from 'react';
 import Button from './Button';
 
@@ -28,6 +28,12 @@ export default function ProductForm({product}: ProductFormProps) {
     ? (JSON.parse(metatTitles.value) as string[])
     : Object.values(getProductTitleAndSub(product.title));
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleAnswer = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    setIsOpen(!isOpen);
+    e.preventDefault();
+  };
   const fastDeliveryAvailable =
     product.metafields.find((meta) => meta?.key === 'fastdelivery')?.value ===
     'true';
@@ -59,7 +65,9 @@ export default function ProductForm({product}: ProductFormProps) {
             <p>
               {' '}
               A partir de&nbsp;
-              <Price value={product.selectedVariant.price} />
+              <span>
+                <Price value={product.selectedVariant.price} />
+              </span>
             </p>
           </div>
         </section>
@@ -71,7 +79,7 @@ export default function ProductForm({product}: ProductFormProps) {
             </a>
           </div>
           <a href="#grid-aside">
-            <Button type="primary" text="Choisir ma taille" />
+            <Button type="primary" text="Choisir ma pointure" />
           </a>
           <Aside id="grid-aside" heading="">
             <h3>Choisissez votre Taille</h3>
@@ -143,6 +151,20 @@ export default function ProductForm({product}: ProductFormProps) {
           </Aside>
         </section>
         <hr />
+        <div className="description">
+          <Link to={''} className="question" onClick={toggleAnswer}>
+            <p>Description</p>
+            <Icon
+              icon={isOpen ? CaretUpIcon : CaretDownIcon}
+              classes={'Icon'}
+            />
+          </Link>
+          {isOpen && (
+            <div className="description-open">
+              <p>{product.description}</p>
+            </div>
+          )}
+        </div>
       </div>
     </CartForm>
   );
