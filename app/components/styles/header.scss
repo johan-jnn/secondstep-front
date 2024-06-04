@@ -103,6 +103,7 @@ main {
   }
 
   > .sub {
+    $bg: var(--color-primary);
     position: absolute;
     top: 100%;
     left: 0;
@@ -111,8 +112,35 @@ main {
     padding: 0 15px;
     display: flex;
     align-items: stretch;
-    background-color: var(--color-primary);
+    background-color: $bg;
     color: var(--color-white);
+
+    @media screen and (max-width: 750px) {
+      padding: 0;
+
+      $trans-size: 50px;
+      > nav {
+        text-wrap: nowrap;
+        overflow: scroll visible;
+        padding: 0 calc($trans-size / 2);
+      }
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+
+        background: linear-gradient(
+          to right,
+          $bg,
+          transparent $trans-size calc(100% - $trans-size),
+          $bg
+        );
+      }
+    }
 
     ul {
       display: flex;
