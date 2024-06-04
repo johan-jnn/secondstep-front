@@ -22,7 +22,7 @@ main {
 .header {
   align-items: center;
   justify-content: space-between;
-  background: var(--color-darkwhite);
+  background: var(--color-light);
   display: flex;
   height: var(--header-height);
   padding: 0 30px;
@@ -103,7 +103,7 @@ main {
   }
 
   > .sub {
-    $bg: var(--color-primary);
+    $bg: var(--color-light);
     position: absolute;
     top: 100%;
     left: 0;
@@ -113,7 +113,7 @@ main {
     display: flex;
     align-items: stretch;
     background-color: $bg;
-    color: var(--color-white);
+    color: var(--color-dark);
 
     @media screen and (max-width: 750px) {
       padding: 0;
