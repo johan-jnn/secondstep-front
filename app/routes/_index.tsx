@@ -18,6 +18,7 @@ import OpinionSection from '~/components/OpinionSection';
 import FAQ from '~/components/FAQ';
 import BlogCarousel from '~/components/BlogCarousel';
 import CollectionCard from '~/components/CollectionCard';
+import FeaturedCollectionProdcuts from '~/components/FeaturedCollectionProducts';
 import FeaturedCollection from '~/components/FeaturedCollection';
 import {Not} from '~/lib/types';
 import {
@@ -34,6 +35,9 @@ export async function loader({context}: LoaderFunctionArgs) {
   const {storefront} = context;
   const restoredProducts = storefront.query(RESTORED_PRODUCT_QUERRY);
   const metaObject = await storefront.query(METAOBJECTQUERRY);
+  const featuredFirstCollectionData = await storefront.query(
+    FEATURED_FIRST_COLLECTION_META,
+  );
   // const featuredCollectionsData = await storefront.query(
   //   FEATURED_COLLECTION_QUERY_META,
   // );
@@ -59,6 +63,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     metaObject,
     // featuredCollections: featuredCollectionsData.metaobjects.nodes,
     featuredProducts: featuredProductsData.metaobjects.nodes,
+    featuredFirstCollection: featuredFirstCollectionData.metaobject.fields,
   });
 }
 
@@ -77,6 +82,28 @@ export default function Homepage() {
       (reference): reference is NonNullable<typeof reference> =>
         reference !== null,
     );
+
+  const featuredFirstProducts = data.featuredFirstCollection
+    .map((field) => field.references?.nodes || [])
+    .flat()
+    .filter(
+      (reference): reference is NonNullable<typeof reference> =>
+        reference !== null,
+    );
+  const collectionTitleField = data.featuredFirstCollection.fields.find(
+    (field) => field.key === 'title',
+  );
+  const collectionTitle = collectionTitleField
+    ? collectionTitleField.value
+    : '';
+
+  const collectionReferenceField = data.featuredFirstCollection.fields.find(
+    (field) => field.reference && field.reference.handle,
+  );
+  const collectionHandle =
+    collectionReferenceField && collectionReferenceField.reference
+      ? collectionReferenceField.reference.handle
+      : '';
 
   return (
     <div className="home">
@@ -104,7 +131,14 @@ export default function Homepage() {
       </div> */}
 
       {!!featuredProducts.length && (
-        <FeaturedCollection products={featuredProducts} />
+        <FeaturedCollectionProdcuts products={featuredProducts} />
+      )}
+      {!!featuredFirstProducts.length && (
+        <FeaturedCollection
+          products={featuredFirstProducts}
+          title={collectionTitle}
+          url={collectionHandle}
+        />
       )}
       <BrandImageGrid />
       <PressSection />
@@ -119,7 +153,7 @@ export default function Homepage() {
       <OpinionSection />
       <BlogCarousel articles={data.blogArticles} />
       {!!featuredProducts.length && (
-        <FeaturedCollection products={featuredProducts} />
+        <FeaturedCollectionProdcuts products={featuredProducts} />
       )}
       <FAQ />
     </div>
@@ -250,24 +284,29 @@ const BLOGS_QUERY = `#graphql
   }
 ` as const;
 
-const FEATURED_FIRST_COLLECTION_META = `#graphql
+export const FEATURED_FIRST_COLLECTION_META = `#graphql
 ${PRODUCT_CARD_FRAGMENT}
-  metaobject(handle: {handle: "featured-collection-1", type: "featured_collection_1"}) {
+query FeaturedFirstquerry {
+  metaobject(handle: {type: "featured_collection_1", handle: "featured-collection-1"}) {
     fields {
-      references {
+      key
+      value
+      reference {
+        ... on Collection {
+          handle
+        }
+        ... on Product {
+          ...ProductCard
+        }
+      }
+      references (first: 10) {
         nodes {
           ... on Product {
             ...ProductCard
           }
         }
       }
-      reference {
-        ... on Collection {
-          handle
-        }
-      }
-      key
-      value
     }
   }
-}` as const;
+}
+` as const;

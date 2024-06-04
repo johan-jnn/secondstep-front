@@ -8,19 +8,12 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import ProductGrid from './ProductGrid';
-import {Link} from 'react-router-dom';
 
-export interface FeaturedCollectionProps {
-  products: ProductCardFragment[];
-  title: string;
-  url: string;
-}
-
-export default function FeaturedCollection({
+export default function FeaturedCollectionProducts({
   products,
-  title,
-  url,
-}: FeaturedCollectionProps) {
+}: {
+  products: ProductCardFragment[];
+}) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -38,10 +31,8 @@ export default function FeaturedCollection({
 
   return (
     <div className="featuredCollection">
-      <h2>{title}</h2>
-      <Link to={url}>
-        <button>Voir plus</button>
-      </Link>
+      <h2>Nos meilleures ventes</h2>
+      <p>Attention ca part un peu (beaucoup) vite</p>
       <div className="featuredCollection-sub">
         {isMobile ? (
           <Swiper
