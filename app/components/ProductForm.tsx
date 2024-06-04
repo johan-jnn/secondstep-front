@@ -16,6 +16,7 @@ import getProductTitleAndSub from '~/lib/productTitles';
 import Icon from './Icon';
 import {DeliveryIcon} from '@shopify/polaris-icons';
 import {useState} from 'react';
+import Button from './Button';
 
 export interface ProductFormProps {
   product: ProductFragment;
@@ -62,13 +63,6 @@ export default function ProductForm({product}: ProductFormProps) {
             </p>
           </div>
         </section>
-        {/*
-        <PriceButton
-          caption="Ajouter au panier"
-          btnType="submit"
-          price={product.selectedVariant.price}
-        />
-         */}
         <section id="taille">
           <div className="heading">
             <h5>Tailles</h5>
@@ -76,68 +70,79 @@ export default function ProductForm({product}: ProductFormProps) {
               Guide des tailles
             </a>
           </div>
-          <a href="#grid-aside">choisir ma taille</a>
+          <a href="#grid-aside">
+            <Button type="primary" text="Choisir ma taille" />
+          </a>
           <Aside id="grid-aside" heading="">
             <h3>Choisissez votre Taille</h3>
+            {product.variants.nodes.find(
+              (variant) => !variant.currentlyNotInStock,
+            ) ? (
+              <div className="liv48h">
+                <Pastille color="var(--color-primary)" />
+                Livraison 48h disponible
+              </div>
+            ) : null}
             <GrilleTaille
               tailles={product.variants.nodes}
               selected={product.selectedVariant}
               productHandle={product.handle}
             />
-          </Aside>
-          {product.variants.nodes.find(
-            (variant) => !variant.currentlyNotInStock,
-          ) ? (
-            <div className="liv48h">
-              <Pastille color="var(--color-primary)" />
-              Livraison 48h disponible
-            </div>
-          ) : null}
-        </section>
-
-        <hr />
-
-        <section id="livraison">
-          <label htmlFor="normalDelivery">
-            <div className="title">
-              <input
-                type="radio"
-                name="fastDelivery"
-                id="normalDelivery"
-                onChange={() => setFastDelivery(false)}
-                defaultChecked
-              />
-              Livraison standard offerte - <b>5/15j</b>
-            </div>
-            <Price
-              value={{
-                amount: '0',
-                currencyCode: 'EUR',
-              }}
-            />
-          </label>
-
-          {fastDeliveryAvailable && (
-            <label htmlFor="fastDelivery">
-              <div className="title">
-                <input
-                  type="radio"
-                  name="fastDelivery"
-                  id="fastDelivery"
-                  onChange={() => setFastDelivery(true)}
+            <p>
+              Prix :&nbsp;
+              <span>
+                <Price value={product.selectedVariant.price} />
+              </span>
+            </p>
+            <section id="livraison">
+              <label htmlFor="normalDelivery">
+                <div className="title">
+                  <input
+                    type="radio"
+                    name="fastDelivery"
+                    id="normalDelivery"
+                    onChange={() => setFastDelivery(false)}
+                    defaultChecked
+                  />
+                  Livraison standard offerte - <b>5/15j</b>
+                </div>
+                <Price
+                  value={{
+                    amount: '0',
+                    currencyCode: 'EUR',
+                  }}
                 />
-                <Icon icon={DeliveryIcon} />
-                Livraison express - <b>24/48h</b>
-              </div>
-              <Price
-                value={{
-                  amount: '9.90',
-                  currencyCode: 'EUR',
-                }}
-              />
-            </label>
-          )}
+              </label>
+
+              {fastDeliveryAvailable && (
+                <label htmlFor="fastDelivery">
+                  <div className="title">
+                    <input
+                      type="radio"
+                      name="fastDelivery"
+                      id="fastDelivery"
+                      onChange={() => setFastDelivery(true)}
+                    />
+                    <Icon icon={DeliveryIcon} />
+                    Livraison express - <b>24/48h</b>
+                  </div>
+                  <Price
+                    value={{
+                      amount: '9.90',
+                      currencyCode: 'EUR',
+                    }}
+                  />
+                </label>
+              )}
+            </section>
+            <PriceButton
+              caption="Ajouter au panier"
+              btnType="submit"
+              price={product.selectedVariant.price}
+            />
+          </Aside>
         </section>
+        <hr />
       </div>
     </CartForm>
   );
