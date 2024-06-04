@@ -8,7 +8,7 @@ import {useRootLoaderData} from '~/lib/root-data';
 import '../styles/cart.scss';
 
 export const meta: MetaFunction = () => {
-  return [{title: `Hydrogen | Cart`}];
+  return [{title: `Minero | Cart`}];
 };
 
 export async function action({request, context}: ActionFunctionArgs) {

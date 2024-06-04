@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import '../styles/blog.$articlehandle.scss';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
-  return [{title: `Hydrogen | ${data?.article.title ?? ''} article`}];
+  return [{title: `Minero | ${data?.article.title ?? ''} article`}];
 };
 
 export async function loader({params, context}: LoaderFunctionArgs) {

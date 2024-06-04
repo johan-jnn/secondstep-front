@@ -5,7 +5,7 @@ import FAQ from '~/components/FAQ';
 import NousDecouvrirPage from './nous-decouvrir';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
-  return [{title: `Hydrogen | ${data?.page.title ?? ''}`}];
+  return [{title: `Minero | ${data?.page.title ?? ''}`}];
 };
 
 export async function loader({params, context}: LoaderFunctionArgs) {

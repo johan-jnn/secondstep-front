@@ -5,7 +5,7 @@ import type {ArticleItemFragment} from 'storefrontapi.generated';
 import 'app/styles/blog._index.scss';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
-  return [{title: `Hydrogen | ${data?.blog.title ?? ''} blog`}];
+  return [{title: `Minero | ${data?.blog.title ?? ''} blog`}];
 };
 
 export async function loader({

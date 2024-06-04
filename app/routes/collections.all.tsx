@@ -10,7 +10,7 @@ import LoadMore from '~/components/loadMoreContent';
 import {PRODUCT_CARD_FRAGMENT} from '~/lib/constants/fragments/defaults';
 
 export const meta: MetaFunction<typeof loader> = () => {
-  return [{title: `Hydrogen | Products`}];
+  return [{title: `Minero | Products`}];
 };
 
 export async function loader({request, context}: LoaderFunctionArgs) {

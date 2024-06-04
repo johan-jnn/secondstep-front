@@ -4,7 +4,7 @@ import {Pagination, getPaginationVariables} from '@shopify/hydrogen';
 import '../styles/blog._index.scss';
 
 export const meta: MetaFunction = () => {
-  return [{title: `Hydrogen | Blogs`}];
+  return [{title: `Minero | Blogs`}];
 };
 
 export const loader = async ({
