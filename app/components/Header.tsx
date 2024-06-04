@@ -1,4 +1,4 @@
-import {Await, NavLink} from '@remix-run/react';
+import {Await, Link, NavLink} from '@remix-run/react';
 import {Suspense} from 'react';
 import type {HeaderQuery} from 'storefrontapi.generated';
 import type {LayoutProps} from './Layout';
@@ -42,8 +42,39 @@ export function Header({
         />
         <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
         <HeaderMenuMobile isLoggedIn={isLoggedIn} cart={cart} />
+        {submenu && <SubMenu sub={submenu} />}
       </header>
     </>
+  );
+}
+
+export function SubMenu({
+  sub,
+}: {
+  sub: NonNullable<HeaderProps['header']['submenu']>;
+}) {
+  return (
+    <div className="sub">
+      <nav>
+        <ul>
+          {sub.items.map((item) => (
+            <li key={item.id}>
+              <Link to={item.url || ''}>{item.title}</Link>
+              {(item.items.length && (
+                <ol className="subitem">
+                  {item.items.map((subitem) => (
+                    <li key={subitem.id}>
+                      <Link to={subitem.url || ''}>{subitem.title}</Link>
+                    </li>
+                  ))}
+                </ol>
+              )) ||
+                false}
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
   );
 }
 

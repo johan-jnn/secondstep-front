@@ -34,9 +34,9 @@ export async function loader({context}: LoaderFunctionArgs) {
   const {storefront} = context;
   const restoredProducts = storefront.query(RESTORED_PRODUCT_QUERRY);
   const metaObject = await storefront.query(METAOBJECTQUERRY);
-  const featuredCollectionsData = await storefront.query(
-    FEATURED_COLLECTION_QUERY_META,
-  );
+  // const featuredCollectionsData = await storefront.query(
+  //   FEATURED_COLLECTION_QUERY_META,
+  // );
   const featuredProductsData =
     await storefront.query<FeaturedProductsquerryQuery>(
       FEATURED_PRODUCTS_QUERY_META,
@@ -57,7 +57,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     restoredProducts,
     blogArticles: blogData.blog.articles.nodes,
     metaObject,
-    featuredCollections: featuredCollectionsData.metaobjects.nodes,
+    // featuredCollections: featuredCollectionsData.metaobjects.nodes,
     featuredProducts: featuredProductsData.metaobjects.nodes,
   });
 }
@@ -65,7 +65,7 @@ export async function loader({context}: LoaderFunctionArgs) {
 export default function Homepage() {
   const data = useLoaderData<typeof loader>();
 
-  const featuredCollections = data.featuredCollections;
+  // const featuredCollections = data.featuredCollections;
   const featuredProducts = data.featuredProducts
     .map((metaObject) => {
       const featuredField = metaObject.fields.find(
@@ -83,7 +83,7 @@ export default function Homepage() {
       {data.metaObject?.metaobject ? (
         <HeroBanner metaObject={data.metaObject.metaobject} />
       ) : null}
-      <div className="homepage-featured-collection">
+      {/* <div className="homepage-featured-collection">
         {featuredCollections.map((metaObject) => {
           if (
             metaObject.fields.find((f) => f.key === 'home-page-use')?.value !==
@@ -101,7 +101,7 @@ export default function Homepage() {
             />
           );
         })}
-      </div>
+      </div> */}
 
       {!!featuredProducts.length && (
         <FeaturedCollection products={featuredProducts} />

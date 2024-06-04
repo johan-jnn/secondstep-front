@@ -3,7 +3,11 @@ import {useLoaderData, type MetaFunction} from '@remix-run/react';
 import {getPaginationVariables} from '@shopify/hydrogen';
 
 import {SearchResults, NoSearchResults} from '~/components/Search';
-import SearchForm, {searchParser, sortType} from '~/components/searchForm';
+import SearchForm, {
+  deliveryType,
+  searchParser,
+  sortType,
+} from '~/components/searchForm';
 import type {ProductFilter} from '@shopify/hydrogen/storefront-api-types';
 import {PRODUCT_CARD_FRAGMENT} from '~/lib/constants/fragments/defaults';
 import type {SearchQuery} from 'storefrontapi.generated';
@@ -56,6 +60,14 @@ export async function loader({request, context}: LoaderFunctionArgs) {
         },
       }),
     ) || [];
+  const deliveryFilters =
+    filters.delivery?.map((delivery) => ({
+      productMetafield: {
+        key: 'fastdelivery',
+        namespace: 'custom',
+        value: (delivery == deliveryType.Fast).toString(),
+      },
+    })) || [];
   const priceFilter: ProductFilter[] = filters.prices
     ? [
         {
@@ -66,17 +78,20 @@ export async function loader({request, context}: LoaderFunctionArgs) {
         },
       ]
     : [];
+
+  const shopifyFilters = [
+    ...brandFilters,
+    ...sizesFilters,
+    ...priceFilter,
+    ...colorFilters,
+    ...deliveryFilters,
+  ];
   const {errors, ...data} = await context.storefront.query<SearchQuery>(
     SEARCH_QUERY,
     {
       variables: {
         query: filters.q,
-        filters: [
-          ...brandFilters,
-          ...sizesFilters,
-          ...priceFilter,
-          ...colorFilters,
-        ],
+        filters: shopifyFilters,
         ...variables,
       },
     },
@@ -97,12 +112,16 @@ export async function loader({request, context}: LoaderFunctionArgs) {
 
   return defer({
     filters,
+    shopifyFilters,
     searchResults,
   });
 }
 
 export default function SearchPage() {
-  const {filters, searchResults} = useLoaderData<typeof loader>();
+  const {filters, shopifyFilters, searchResults} =
+    useLoaderData<typeof loader>();
+  console.log('Filters:', filters, shopifyFilters);
+
   return (
     <div className="search">
       <h1>Search</h1>

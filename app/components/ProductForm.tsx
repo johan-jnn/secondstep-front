@@ -83,44 +83,43 @@ export default function ProductForm({product}: ProductFormProps) {
           </a>
           <Aside id="grid-aside" heading="">
             <h3>Choisissez votre Taille</h3>
-            {product.variants.nodes.find(
-              (variant) => !variant.currentlyNotInStock,
-            ) ? (
-              <div className="liv48h">
-                <Pastille color="var(--color-primary)" />
-                Livraison 48h disponible
-              </div>
-            ) : null}
             <GrilleTaille
               tailles={product.variants.nodes}
               selected={product.selectedVariant}
               productHandle={product.handle}
             />
-            <p>
-              Prix :&nbsp;
-              <span>
-                <Price value={product.selectedVariant.price} />
-              </span>
-            </p>
-            <section id="livraison">
-              <label htmlFor="normalDelivery">
-                <div className="title">
-                  <input
-                    type="radio"
-                    name="fastDelivery"
-                    id="normalDelivery"
-                    onChange={() => setFastDelivery(false)}
-                    defaultChecked
-                  />
-                  Livraison standard offerte - <b>5/15j</b>
-                </div>
-                <Price
-                  value={{
-                    amount: '0',
-                    currencyCode: 'EUR',
-                  }}
-                />
-              </label>
+          </Aside>
+          {product.variants.nodes.find(
+            (variant) => !variant.currentlyNotInStock,
+          ) ? (
+            <div className="liv48h">
+              <Pastille color="var(--color-primary)" />
+              Livraison 48h disponible
+            </div>
+          ) : null}
+        </section>
+
+        <hr />
+
+        <section id="livraison">
+          <label htmlFor="normalDelivery">
+            <div className="title">
+              <input
+                type="radio"
+                name="fastDelivery"
+                id="normalDelivery"
+                onChange={() => setFastDelivery(false)}
+                defaultChecked
+              />
+              Livraison standard offerte - <b>5/15j</b>
+            </div>
+            <Price
+              value={{
+                amount: '0',
+                currencyCode: 'EUR',
+              }}
+            />
+          </label>
 
               {fastDeliveryAvailable && (
                 <label htmlFor="fastDelivery">
