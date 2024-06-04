@@ -27,7 +27,7 @@ import {
 } from '~/lib/constants/fragments/defaults';
 
 export const meta: MetaFunction = () => {
-  return [{title: 'Second Step | Home'}];
+  return [{title: 'Minero | Home'}];
 };
 
 export async function loader({context}: LoaderFunctionArgs) {

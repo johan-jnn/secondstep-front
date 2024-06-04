@@ -13,7 +13,7 @@ import {PRODUCT_CARD_FRAGMENT} from '~/lib/constants/fragments/defaults';
 import type {SearchQuery} from 'storefrontapi.generated';
 
 export const meta: MetaFunction = () => {
-  return [{title: `Hydrogen | Search`}];
+  return [{title: `Minero | Search`}];
 };
 
 export async function loader({request, context}: LoaderFunctionArgs) {

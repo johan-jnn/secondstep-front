@@ -24,7 +24,7 @@ import {
   PRODUCT_CARD_FRAGMENT,
 } from '~/lib/constants/fragments/defaults';
 export const meta: MetaFunction<typeof loader> = ({data}) => {
-  return [{title: `Hydrogen | ${data?.collection.title ?? ''} Collection`}];
+  return [{title: `Minero | ${data?.collection.title ?? ''} Collection`}];
 };
 
 export async function loader({request, params, context}: LoaderFunctionArgs) {

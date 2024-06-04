@@ -12,7 +12,7 @@ export default async function handleRequest(
 ) {
   const {nonce, header, NonceProvider} = createContentSecurityPolicy({
     connectSrc: ['wss://massive-moral-sturgeon.ngrok-free.app:*'],
-    fontSrc: ['data:', "'self'"],
+    fontSrc: ['data:', "'self'", 'https://cdn.shopify.com'],
   });
 
   const body = await renderToReadableStream(
