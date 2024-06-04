@@ -248,10 +248,7 @@ function Galery(props: {images: ProductFragment['images']}) {
           >
             {props.images.nodes.map(({url, altText}, index) => (
               <SwiperSlide key={url}>
-                <Image
-                  src={url}
-                  alt={altText || `Select the ${index + 1}rd preview.`}
-                />
+                <ImageCard src={url} />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -259,6 +256,17 @@ function Galery(props: {images: ProductFragment['images']}) {
       ) : (
         <p>L&apos;article ne contient pas d&apos;image...</p>
       )}
+    </div>
+  );
+}
+
+export interface imageCardProps {
+  src: string;
+}
+export function ImageCard({src}: imageCardProps) {
+  return (
+    <div className="image-card">
+      <img src={src} alt={src} />
     </div>
   );
 }

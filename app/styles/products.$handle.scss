@@ -49,7 +49,9 @@ $infos-max-width: 300px;
     max-width: 750px;
     width: 100%;
     container: galery / inline-size;
-
+    > .swiper{
+      aspect-ratio: 1/1;
+    }
     #viewer {
       width: 100%;
     }
@@ -262,5 +264,16 @@ $infos-max-width: 300px;
   > #allies {
     width: 90%;
     margin: 0 auto;
+  }
+}
+
+
+.image-card{
+  width: 100%;
+  height: 100%;
+  > img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }

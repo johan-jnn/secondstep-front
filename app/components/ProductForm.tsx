@@ -81,8 +81,12 @@ export default function ProductForm({product}: ProductFormProps) {
           <a href="#grid-aside">
             <Button type="primary" text="Choisir ma pointure" />
           </a>
-          <Aside id="grid-aside" heading="">
-            <h3>Choisissez votre Taille</h3>
+          <Aside id="grid-aside" heading="Choisissez votre Taille">
+            <GrilleTaille
+              tailles={product.variants.nodes}
+              selected={product.selectedVariant}
+              productHandle={product.handle}
+            />
             {product.variants.nodes.find(
               (variant) => !variant.currentlyNotInStock,
             ) ? (
@@ -91,11 +95,6 @@ export default function ProductForm({product}: ProductFormProps) {
                 Livraison 48h disponible
               </div>
             ) : null}
-            <GrilleTaille
-              tailles={product.variants.nodes}
-              selected={product.selectedVariant}
-              productHandle={product.handle}
-            />
             <p>
               Prix :&nbsp;
               <span>
