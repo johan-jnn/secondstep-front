@@ -45,7 +45,6 @@ $infos-max-width: 300px;
     grid-area: galery;
     border-radius: 5px;
     overflow: hidden;
-
     position: relative;
     background-color: $galery-bg;
     max-width: 750px;
@@ -180,16 +179,20 @@ $infos-max-width: 300px;
   @media screen and (max-width: 1250px) {
     display: grid;
     grid-template-areas:
-      'galery buying'
-      'info .';
-    grid-template-columns: 1fr auto;
+      'galery'
+      'buying';
+    grid-template-columns: 1fr;
+    justify-content: center;
+    #galery{
+      margin: 0 auto;
+    }
   }
   @media screen and (max-width: 1000px) {
     grid-template-areas:
-      'galery galery'
-      'info buying';
+      'galery'
+      'buying';
     width: 100%;
-    place-items: center;
+    grid-template-columns: 1fr;
 
     > .infos {
       max-width: 95%;
@@ -199,8 +202,7 @@ $infos-max-width: 300px;
   @media screen and (max-width: 700px) {
     grid-template-areas:
       'galery'
-      'buying'
-      'info';
+      'buying';
     width: 100%;
     grid-template-columns: 1fr;
     place-items: center;

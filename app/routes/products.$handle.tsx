@@ -1,5 +1,8 @@
 import {Suspense, useEffect, useState} from 'react';
 import {defer, redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import 'swiper/css/bundle';
+import {Virtual, Navigation, Pagination} from 'swiper/modules';
+import {Swiper, SwiperRef, SwiperSlide} from 'swiper/react';
 import '../styles/products.$handle.scss';
 import {
   Await,
@@ -33,6 +36,7 @@ import ProductIRLLooks from '~/components/ProductIRLLooks';
 import KitEntretientCTA from '~/components/KitEntretientCTA';
 import FAQ from '~/components/FAQ';
 import NeufVsSS from '~/components/ComparatifNeufVsSS';
+import ProductFormOld from '~/components/ProductForm_old';
 import ProductGrid from '~/components/ProductGrid';
 import {
   PRODUCT_CARD_FRAGMENT,
@@ -232,29 +236,25 @@ function Galery(props: {images: ProductFragment['images']}) {
     <div id="galery">
       {props.images.nodes.length ? (
         <>
-          <div id="viewer">
-            <Image
-              src={props.images.nodes[currentIndex].url}
-              alt={
-                props.images.nodes[currentIndex].altText ||
-                `${currentIndex}rd preview of the product`
-              }
-            />
-          </div>
-          <div id="selectorWrapper">
-            <ul id="selector">
-              {props.images.nodes.map(({url, altText}, index) => (
-                <li key={url} data-selected={+(index === currentIndex)}>
-                  <button type="button" onClick={() => setCurrentIndex(index)}>
-                    <Image
-                      src={url}
-                      alt={altText || `Select the ${index + 1}rd preview.`}
-                    />
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <Swiper
+            modules={[Virtual, Navigation, Pagination]}
+            slidesPerView={1}
+            centeredSlides={false}
+            spaceBetween={10}
+            pagination={{clickable: true}}
+            navigation={false}
+            loop={false}
+            grabCursor={true}
+          >
+            {props.images.nodes.map(({url, altText}, index) => (
+              <SwiperSlide key={url}>
+                <Image
+                  src={url}
+                  alt={altText || `Select the ${index + 1}rd preview.`}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </>
       ) : (
         <p>L&apos;article ne contient pas d&apos;image...</p>
