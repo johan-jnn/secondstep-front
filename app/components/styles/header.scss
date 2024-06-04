@@ -121,11 +121,14 @@ main {
     @media screen and (max-width: 750px) {
       padding: 0;
 
-      $trans-size: 50px;
+      $trans-size: 15px;
       > nav {
         text-wrap: nowrap;
-        overflow: scroll visible;
-        padding: 0 calc($trans-size / 2);
+        overflow: scroll clip;
+        > ul {
+          margin-left: $trans-size;
+          width: calc(100% + $trans-size * 1.5);
+        }
       }
       &::after {
         content: '';

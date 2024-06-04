@@ -30,7 +30,6 @@ export function Layout({
   return (
     <>
       <CartAside cart={cart} />
-      <SearchAside />
       <MobileMenuAside menu={header?.menu} shop={header?.shop} />
       {header && (
         <Header
@@ -61,26 +60,6 @@ function CartAside({cart}: {cart: LayoutProps['cart']}) {
           }}
         </Await>
       </Suspense>
-    </Aside>
-  );
-}
-
-function SearchAside() {
-  return (
-    <Aside id="search-aside" heading="SEARCH">
-      <div className="predictive-search">
-        <br />
-        <PredictiveSearchForm>
-          {({fetchResults, inputRef}) => (
-            <SearchForm
-              onChange={fetchResults}
-              onFocus={fetchResults}
-              inputRef={inputRef}
-            />
-          )}
-        </PredictiveSearchForm>
-        <PredictiveSearchResults />
-      </div>
     </Aside>
   );
 }

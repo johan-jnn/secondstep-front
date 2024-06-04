@@ -12,6 +12,8 @@ import {
 } from '@shopify/polaris-icons';
 import Icon from './Icon';
 import Banner from '../assets/logo.png';
+import {PredictiveSearchForm, PredictiveSearchResults} from './Search';
+import SearchForm from './searchForm';
 
 type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>;
 
@@ -170,10 +172,35 @@ function HeaderCtas({
           </Await>
         </Suspense>
       </NavLink>
-      <SearchToggle />
+      <SearchCTA />
       <CartToggle cart={cart} />
       <HeaderMenuMobileToggle />
     </nav>
+  );
+}
+
+export function SearchCTA() {
+  // <>
+  //   <PredictiveSearchForm>
+  //     {({fetchResults, inputRef}) => (
+  //       <SearchForm
+  //         onChange={fetchResults}
+  //         onFocus={fetchResults}
+  //         inputRef={inputRef}
+  //       />
+  //     )}
+  //   </PredictiveSearchForm>
+  //   <PredictiveSearchResults />
+  // </>;
+
+  return (
+    <Link
+      to="/search"
+      className="search-toggle"
+      title="Recherche ta prochaine paire !"
+    >
+      <Icon icon={SearchIcon} />
+    </Link>
   );
 }
 
@@ -200,18 +227,6 @@ function HeaderMenuMobileToggle() {
   return (
     <a className="header-menu-mobile-toggle" href="#mobile-menu-aside">
       <Icon icon={MenuIcon} />
-    </a>
-  );
-}
-
-function SearchToggle() {
-  return (
-    <a
-      href="#search-aside"
-      className="search-toggle"
-      title="Recherche ta prochaine paire !"
-    >
-      <Icon icon={SearchIcon} />
     </a>
   );
 }

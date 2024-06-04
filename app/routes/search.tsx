@@ -36,8 +36,6 @@ export async function loader({request, context}: LoaderFunctionArgs) {
     }
   }
 
-  // todo --> Filtrer par type de livraison
-
   const colorFilters =
     filters.colors?.map(
       (color): ProductFilter => ({

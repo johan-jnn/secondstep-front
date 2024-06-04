@@ -90,6 +90,8 @@ export default function SearchForm({
           defaultValue={current?.q}
           ref={inputRef}
           placeholder="Recherche un modèle, une marque, ..."
+          // eslint-disable-next-line jsx-a11y/no-autofocus
+          autoFocus={true}
         />
 
         <Button
