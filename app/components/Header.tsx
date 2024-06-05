@@ -3,6 +3,7 @@ import {Suspense} from 'react';
 import type {HeaderQuery} from 'storefrontapi.generated';
 import type {LayoutProps} from './Layout';
 import {useRootLoaderData} from '~/lib/root-data';
+import SearchBar from './searchBar';
 import './styles/header.scss';
 import {
   MenuIcon,
@@ -13,7 +14,6 @@ import {
 import Icon from './Icon';
 import Banner from '../assets/logo.png';
 import {PredictiveSearchForm, PredictiveSearchResults} from './Search';
-import SearchForm from './searchForm';
 
 type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>;
 
@@ -34,15 +34,19 @@ export function Header({
     <>
       <HeaderMarquis texts={marquisTexts} />
       <header className="header">
+        <SearchBar />
         <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
           <img src={Banner} alt="Bannière SecondStep" className="header_Logo" />
         </NavLink>
-        <HeaderMenu
-          menu={menu}
-          viewport="desktop"
-          primaryDomainUrl={shop.primaryDomain.url}
-        />
-        <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+        <div className="header-right">
+          <HeaderMenu
+            menu={menu}
+            viewport="desktop"
+            primaryDomainUrl={shop.primaryDomain.url}
+          />
+          <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+        </div>
+
         <HeaderMenuMobile isLoggedIn={isLoggedIn} cart={cart} />
         {submenu && <SubMenu sub={submenu} />}
       </header>
@@ -172,7 +176,6 @@ function HeaderCtas({
           </Await>
         </Suspense>
       </NavLink>
-      <SearchCTA />
       <CartToggle cart={cart} />
       <HeaderMenuMobileToggle />
     </nav>

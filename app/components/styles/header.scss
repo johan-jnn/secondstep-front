@@ -20,19 +20,51 @@ main {
 }
 
 .header {
-
   align-items: center;
   justify-content: space-between;
-  background: var(--color-light);
   display: flex;
+  background: var(--color-light);
   height: var(--header-height);
-  padding: 0 30px;
+  padding: 0 65px;
   position: sticky;
-  gap: 15px;
+  @media (max-width:1200px){
+    padding: 0 20px;
+  }
+
+  > .header-right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    @media (max-width:1200px){
+      gap: 10px;
+    }
+    @media (max-width:900px){
+      display: none;
+    }
+  }
+
   top: 0;
   z-index: 20;
   font-family: 'Manrope';
   height: $header-height;
+
+  > .searchBar{
+    width: 300px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: grid;
+    place-content: center;
+    align-items: center;
+    > div {
+      height: 100%;
+    }
+    @media (max-width:900px){
+      display: none;
+    }
+  }
+
 
   nav .icon {
     height: $icons-height;
@@ -41,22 +73,28 @@ main {
     display: none;
   }
   > a {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
     height: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
     max-width: 50%;
 
     img {
       height: 65%;
-      width: 100%;
+
     }
   }
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     padding: 10px;
     > a {
       display: none;
     }
     > .header-ctas {
+
       display: none;
     }
     > .header-mobile {
@@ -112,7 +150,7 @@ main {
     left: 0;
     width: 100%;
     height: $sub-header-height;
-    padding: 0 50px;
+    padding: 0 80px;
     display: flex;
     align-items: stretch;
     background-color: $bg;
@@ -189,7 +227,7 @@ main {
   }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 900px) {
   .header-menu-mobile-toggle {
     display: none;
   }
@@ -202,11 +240,15 @@ main {
 }
 
 .header-menu-desktop {
+  grid-area: menu;
   display: flex;
   text-transform: uppercase;
-  gap: 10px;
-  @media screen and (min-width: 1000px) {
-    gap: 3rem;
+  gap: 20px !important;
+  @media (max-width: 1200px) {
+    gap: 5px !important;
+    > a{
+      font-size: 15px;
+    }
   }
 }
 @media (max-width: 800px) {
@@ -223,11 +265,15 @@ main {
 .header-ctas {
   align-items: center;
   display: flex;
-  grid-gap: 1rem;
+  grid-gap: 10px;
+  @media (max-width: 1200px) {
+    gap: 5px
+  }
 }
 
 .header_search_icon {
   height: 4vh;
+  
 }
 
 .header_cart_icon {
