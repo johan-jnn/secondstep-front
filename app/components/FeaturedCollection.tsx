@@ -37,7 +37,7 @@ export default function FeaturedCollection({
   }, []);
   return (
     <div className="featuredCollection">
-      <h2>{title}</h2>
+      <h2>{title || 'Collection mise en avant :'}</h2>
       <Link to={url}>Voir plus</Link>
       <div className="featuredCollection-sub">
         {isMobile ? (

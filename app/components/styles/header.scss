@@ -108,14 +108,13 @@ main {
       gap: 10%;
       > a {
         padding: 0 10px;
+        margin: 0 auto;
         > img {
           height: 100%;
-          margin: 0 auto;
           display: block;
         }
       }
       > .header-menu-mobile-toggle {
-        margin: auto 0;
         height: 100%;
         width: 100%;
         > .icon {
@@ -125,6 +124,7 @@ main {
       }
       @media (max-width: 500px) {
         grid-template-columns: 40px 1fr 40px;
+        
         > .cart-section {
           height: 100%;
           width: 100%;

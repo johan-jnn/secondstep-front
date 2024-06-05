@@ -42,7 +42,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     FEATURED_SECOND_COLLECTION_META,
   );
   // const featuredCollectionsData = await storefront.query(
-  //   FEATURED_COLLECTION_QUERY_META,
+  //   FEATURED_COLLECTION_META,
   // );
   const featuredProductsData =
     await storefront.query<FeaturedProductsquerryQuery>(
@@ -251,9 +251,9 @@ const METAOBJECTQUERRY = `#graphql
   }
 ` as const;
 
-const FEATURED_COLLECTION_QUERY_META = `#graphql
+const FEATURED_COLLECTION_META = `#graphql
 ${METAOBJECT_FRAGMENT}
-query FeaturedCollectionsquerry {
+query FeaturedCollections {
   metaobjects(type: "featured_collections", first: 50) {
     nodes {
       ...MetaObjectFields
