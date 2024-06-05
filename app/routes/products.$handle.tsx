@@ -1,28 +1,11 @@
-import {Suspense, useEffect, useState} from 'react';
 import {defer, redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import 'swiper/css/bundle';
 import {Virtual, Navigation, Pagination} from 'swiper/modules';
-import {Swiper, SwiperRef, SwiperSlide} from 'swiper/react';
+import {Swiper, SwiperSlide} from 'swiper/react';
 import '../styles/products.$handle.scss';
-import {
-  Await,
-  Link,
-  useLoaderData,
-  type MetaFunction,
-  type FetcherWithComponents,
-} from '@remix-run/react';
-import type {
-  ProductFragment,
-  ProductVariantFragment,
-} from 'storefrontapi.generated';
-import {
-  Image,
-  Money,
-  VariantSelector,
-  type VariantOption,
-  getSelectedProductOptions,
-  CartForm,
-} from '@shopify/hydrogen';
+import {useLoaderData, type MetaFunction} from '@remix-run/react';
+import type {ProductFragment} from 'storefrontapi.generated';
+import {getSelectedProductOptions} from '@shopify/hydrogen';
 import type {SelectedOption} from '@shopify/hydrogen/storefront-api-types';
 import {getVariantUrl} from '~/lib/variants';
 import ProductForm from '~/components/ProductForm';
@@ -36,7 +19,6 @@ import ProductIRLLooks from '~/components/ProductIRLLooks';
 import KitEntretientCTA from '~/components/KitEntretientCTA';
 import FAQ from '~/components/FAQ';
 import NeufVsSS from '~/components/ComparatifNeufVsSS';
-import ProductFormOld from '~/components/ProductForm_old';
 import ProductGrid from '~/components/ProductGrid';
 import {
   PRODUCT_CARD_FRAGMENT,
@@ -231,7 +213,6 @@ function Infos({product}: {product: ProductFragment}) {
 }
 
 function Galery(props: {images: ProductFragment['images']}) {
-  const [currentIndex, setCurrentIndex] = useState(0);
   return (
     <div id="galery">
       {props.images.nodes.length ? (
@@ -248,7 +229,9 @@ function Galery(props: {images: ProductFragment['images']}) {
           >
             {props.images.nodes.map(({url, altText}, index) => (
               <SwiperSlide key={url}>
-                <ImageCard src={url} />
+                <div className="image-card">
+                  <img src={url} alt={altText || 'No alt defined...'} />
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -256,17 +239,6 @@ function Galery(props: {images: ProductFragment['images']}) {
       ) : (
         <p>L&apos;article ne contient pas d&apos;image...</p>
       )}
-    </div>
-  );
-}
-
-export interface imageCardProps {
-  src: string;
-}
-export function ImageCard({src}: imageCardProps) {
-  return (
-    <div className="image-card">
-      <img src={src} alt={src} />
     </div>
   );
 }

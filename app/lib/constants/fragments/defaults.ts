@@ -1,3 +1,25 @@
+export const METAFIELD_FRAGMENT = `#graphql
+fragment MetaFieldInfo on Metafield {
+  key
+  value
+  type
+  id
+  references(first: 8) {
+    nodes {
+      __typename
+      ... on MediaImage {
+        id
+        image {
+          altText
+          id
+          src
+        }
+      }
+    }
+  }
+}
+`;
+
 export const PRODUCT_VARIANT_FRAGMENT = `#graphql
   fragment ProductVariant on ProductVariant {
     availableForSale
@@ -35,28 +57,6 @@ export const PRODUCT_VARIANT_FRAGMENT = `#graphql
     }
   }
 ` as const;
-
-export const METAFIELD_FRAGMENT = `#graphql
-fragment MetaFieldInfo on Metafield {
-  key
-  value
-  type
-  id
-  references(first: 8) {
-    nodes {
-      __typename
-      ... on MediaImage {
-        id
-        image {
-          altText
-          id
-          src
-        }
-      }
-    }
-  }
-}
-`;
 
 export const PRODUCT_CARD_FRAGMENT = `#graphql
 fragment ProductCard on Product {

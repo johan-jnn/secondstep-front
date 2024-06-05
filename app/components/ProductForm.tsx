@@ -173,6 +173,7 @@ export interface GrilleTailleProps {
   tailles: ProductVariantFragment[];
   selected?: ProductVariantFragment;
   productHandle: string;
+  fastDelivery?: boolean;
 }
 export function GrilleTaille(props: GrilleTailleProps) {
   return (
@@ -194,7 +195,7 @@ export function GrilleTaille(props: GrilleTailleProps) {
                 })}
                 preventScrollReset={true}
               >
-                {info.currentlyNotInStock ? null : (
+                {props.fastDelivery && (
                   <div className="liv48h">
                     <Pastille color="var(--color-primary)" />
                   </div>

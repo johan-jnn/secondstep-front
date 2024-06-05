@@ -29,6 +29,8 @@ export function Aside({
           history.go(-1);
           window.location.hash = '';
         }}
+        type="button"
+        aria-label="Close the aside"
       />
       <aside>
         <header>

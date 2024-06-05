@@ -5,10 +5,6 @@ import {Aside} from '~/components/Aside';
 import {Footer, type footerMenus} from '~/components/Footer';
 import {Header, HeaderMenu} from '~/components/Header';
 import {CartMain} from '~/components/Cart';
-import {
-  PredictiveSearchForm,
-  PredictiveSearchResults,
-} from '~/components/Search';
 import marquisContent from '~/lib/constants/marquis.json';
 import SearchForm from './searchForm';
 
