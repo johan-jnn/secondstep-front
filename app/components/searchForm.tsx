@@ -1,4 +1,4 @@
-import {CaretDownIcon} from '@shopify/polaris-icons';
+import {CaretDownIcon, SearchIcon} from '@shopify/polaris-icons';
 import Button from './Button';
 import Icon from './Icon';
 import type {ValidBrands} from './BrandLogo';
@@ -306,20 +306,24 @@ export function TinySearchBar({
 }: SearchBarProps) {
   return (
     <form
-      className="searchBar"
+      className="tinySearch"
       action="/search"
       method="get"
       onFocus={onFocus}
       onInput={onChange}
       onSubmit={onSubmit}
     >
-      <div className="queryAndSubmit">
+      <div className="searchbar">
+        <button type="submit" title="Launch search">
+          <Icon icon={SearchIcon} />
+        </button>
         <input
           type="text"
           name="q"
           id="query"
           defaultValue={current}
           ref={inputRef}
+          required={true}
           placeholder="Recherche un modèle, une marque, ..."
         />
       </div>

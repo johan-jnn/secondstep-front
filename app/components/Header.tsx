@@ -13,6 +13,7 @@ import {
 import Icon from './Icon';
 import Banner from '../assets/logo.png';
 import {TinySearchBar} from './searchForm';
+import useLocalURL from '~/lib/localURL';
 
 type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>;
 
@@ -32,21 +33,27 @@ export function Header({
   return (
     <>
       <HeaderMarquis texts={marquisTexts} />
-      <header className="header">
-        <TinySearchBar onChange={(e) => e.preventDefault()} />
-        <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
+      <header>
+        <div className="left-side">
+          <a className="menu-toggle" href="#mobile-menu-aside">
+            <Icon icon={MenuIcon} />
+          </a>
+          <TinySearchBar onChange={(e) => e.preventDefault()} />
+        </div>
+        <Link prefetch="intent" to="/" className="logo">
           <img src={Banner} alt="Bannière SecondStep" className="header_Logo" />
-        </NavLink>
-        <div className="header-right">
-          <HeaderMenu
-            menu={menu}
-            viewport="desktop"
-            primaryDomainUrl={shop.primaryDomain.url}
-          />
+        </Link>
+        <div className="right-side">
+          {menu && (
+            <HeaderMenu
+              menu={menu}
+              viewport="desktop"
+              primaryDomainUrl={shop.primaryDomain.url}
+            />
+          )}
           <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
         </div>
 
-        <HeaderMenuMobile isLoggedIn={isLoggedIn} cart={cart} />
         {submenu && <SubMenu sub={submenu} />}
       </header>
     </>
@@ -102,13 +109,10 @@ export function HeaderMenu({
   primaryDomainUrl,
   viewport,
 }: {
-  menu: HeaderProps['header']['menu'];
+  menu: NonNullable<HeaderProps['header']['menu']>;
   primaryDomainUrl: HeaderQuery['shop']['primaryDomain']['url'];
   viewport: Viewport;
 }) {
-  const {publicStoreDomain} = useRootLoaderData();
-  const className = `header-menu-${viewport}`;
-
   function closeAside(event: React.MouseEvent<HTMLAnchorElement>) {
     if (viewport === 'mobile') {
       event.preventDefault();
@@ -116,8 +120,10 @@ export function HeaderMenu({
     }
   }
 
+  const getLocalURL = useLocalURL(primaryDomainUrl);
+
   return (
-    <nav className={className} role="navigation">
+    <nav role="navigation">
       {viewport === 'mobile' && (
         <NavLink
           end
@@ -129,16 +135,10 @@ export function HeaderMenu({
           Home
         </NavLink>
       )}
-      {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
+      {menu.items.map((item) => {
         if (!item.url) return null;
+        const url = getLocalURL(item.url);
 
-        // if the url is internal, we strip the domain
-        const url =
-          item.url.includes('myshopify.com') ||
-          item.url.includes(publicStoreDomain) ||
-          item.url.includes(primaryDomainUrl)
-            ? new URL(item.url).pathname
-            : item.url;
         return (
           <NavLink
             className="header-menu-item"
@@ -175,8 +175,9 @@ function HeaderCtas({
           </Await>
         </Suspense>
       </NavLink>
-      <CartToggle cart={cart} />
-      <HeaderMenuMobileToggle />
+      <Await resolve={cart}>
+        {(res) => <CartBadge count={res?.totalQuantity} />}
+      </Await>
     </nav>
   );
 }
@@ -206,51 +207,16 @@ export function SearchCTA() {
   );
 }
 
-export function HeaderMenuMobile({
-  isLoggedIn,
-  cart,
-}: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
-  return (
-    <div className="header-mobile">
-      <HeaderMenuMobileToggle />
-      <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-        <img src={Banner} alt="Bannière SecondStep" className="header_Logo" />
-      </NavLink>
-      <CartToggle cart={cart} />
-    </div>
-  );
-}
-
 function LogInIcon() {
   return <Icon icon={PersonIcon} />;
 }
 
-function HeaderMenuMobileToggle() {
-  return (
-    <a className="header-menu-mobile-toggle" href="#mobile-menu-aside">
-      <Icon icon={MenuIcon} />
-    </a>
-  );
-}
-
-function CartBadge({count}: {count: number}) {
+function CartBadge({count}: {count?: number}) {
   return (
     <a href="#cart-aside" className="cartOpenner">
       <Icon icon={OrderIcon} />
-      <span>{count}</span>
+      {typeof count === 'number' && <span>{count}</span>}
     </a>
-  );
-}
-
-function CartToggle({cart}: Pick<HeaderProps, 'cart'>) {
-  return (
-    <div className="cart-section">
-      <Suspense fallback={<CartBadge count={0} />}>
-        <Await resolve={cart}>
-          {(cart) => <CartBadge count={cart?.totalQuantity || 0} />}
-        </Await>
-      </Suspense>
-    </div>
   );
 }
 
