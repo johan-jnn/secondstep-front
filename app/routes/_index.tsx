@@ -38,6 +38,9 @@ export async function loader({context}: LoaderFunctionArgs) {
   const featuredFirstCollectionData = await storefront.query(
     FEATURED_FIRST_COLLECTION_META,
   );
+  const featuredSecondCollectionData = await storefront.query(
+    FEATURED_SECOND_COLLECTION_META,
+  );
   // const featuredCollectionsData = await storefront.query(
   //   FEATURED_COLLECTION_QUERY_META,
   // );
@@ -64,6 +67,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     // featuredCollections: featuredCollectionsData.metaobjects.nodes,
     featuredProducts: featuredProductsData.metaobjects.nodes,
     featuredFirstCollection: featuredFirstCollectionData.metaobject.fields,
+    featuredSecondCollection: featuredSecondCollectionData.metaobject.fields,
   });
 }
 
@@ -82,7 +86,7 @@ export default function Homepage() {
       (reference): reference is NonNullable<typeof reference> =>
         reference !== null,
     );
-
+  //FirstQuery
   const featuredFirstProducts = data.featuredFirstCollection
     ?.map((field: any) => field.references?.nodes || [])
     .flat()
@@ -96,17 +100,35 @@ export default function Homepage() {
   const collectionTitle = collectionTitleField
     ? collectionTitleField.value
     : null;
-  console.log(collectionTitle);
 
   const collectionReferenceField = data.featuredFirstCollection.fields?.find(
-    (field: any) => field.reference && field.reference.handle,
+    (field: any) => field.reference,
   );
-  const collectionHandle =
-    collectionReferenceField && collectionReferenceField.reference
-      ? collectionReferenceField.reference.handle
-      : '';
+  const collectionHandle = collectionReferenceField
+    ? collectionReferenceField.reference.handle
+    : '';
 
-  console.log(collectionHandle);
+  //SecondQuery
+  const featuredSecondProducts = data.featuredSecondCollection
+    ?.map((field: any) => field.references?.nodes || [])
+    .flat()
+    .filter(
+      (reference: any): reference is NonNullable<typeof reference> =>
+        reference !== null,
+    );
+  const collectionTitleField_2 = data.featuredSecondCollection.fields?.find(
+    (field: any) => field.key === 'titre',
+  );
+  const collectionTitle_2 = collectionTitleField
+    ? collectionTitleField_2.value
+    : null;
+
+  const collectionReferenceField_2 = data.featuredSecondCollection.fields?.find(
+    (field: any) => field.reference,
+  );
+  const collectionHandle_2 = collectionReferenceField_2
+    ? collectionReferenceField_2.reference.handle
+    : '';
 
   return (
     <div className="home">
@@ -143,8 +165,16 @@ export default function Homepage() {
           url={collectionHandle}
         />
       )}
+
       <BrandImageGrid />
       <PressSection />
+      {!!featuredSecondProducts.length && (
+        <FeaturedCollection
+          products={featuredSecondProducts}
+          title={collectionTitle_2}
+          url={collectionHandle_2}
+        />
+      )}
       <VideoCards />
       {/*
       <Await resolve={data.restoredProducts}>
@@ -291,6 +321,33 @@ export const FEATURED_FIRST_COLLECTION_META = `#graphql
 ${PRODUCT_CARD_FRAGMENT}
 query FeaturedFirstquerry {
   metaobject(handle: {type: "featured_collection_1", handle: "featured-collection-1"}) {
+    fields {
+      key
+      value
+      reference {
+        ... on Collection {
+          handle
+        }
+        ... on Product {
+          ...ProductCard
+        }
+      }
+      references (first: 10) {
+        nodes {
+          ... on Product {
+            ...ProductCard
+          }
+        }
+      }
+    }
+  }
+}
+` as const;
+
+export const FEATURED_SECOND_COLLECTION_META = `#graphql
+${PRODUCT_CARD_FRAGMENT}
+query FeaturedSecondquerry {
+  metaobject(handle: {type: "featured_collection_2", handle: "featured-collection-2"}) {
     fields {
       key
       value
