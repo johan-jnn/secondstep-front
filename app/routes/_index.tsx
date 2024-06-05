@@ -1,26 +1,17 @@
 import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
-import {Await, useLoaderData, Link, type MetaFunction} from '@remix-run/react';
-import {Suspense} from 'react';
+import {useLoaderData, type MetaFunction} from '@remix-run/react';
 import '../styles/app.scss';
-import type {
-  CollectionFragment,
-  FeaturedProductsquerryQuery,
-} from 'storefrontapi.generated';
+import type {FeaturedProductsquerryQuery} from 'storefrontapi.generated';
 import HeroBanner from '~/components/HeroBanner';
 import Engagements from '~/components/Engagements';
-import ProductGrid from '~/components/ProductGrid';
 import VideoCards from '~/components/VideoCards';
-import RestoredProduct from '~/components/RestoredProduct';
 import BrandImageGrid from '~/components/BrandImageGrid';
-import Passionate from '~/components/PassionateSection';
 import PressSection from '~/components/PressSection';
 import OpinionSection from '~/components/OpinionSection';
 import FAQ from '~/components/FAQ';
 import BlogCarousel from '~/components/BlogCarousel';
-import CollectionCard from '~/components/CollectionCard';
 import FeaturedCollectionProdcuts from '~/components/FeaturedCollectionProducts';
 import FeaturedCollection from '~/components/FeaturedCollection';
-import {Not} from '~/lib/types';
 import {
   ARTICLE_ITEM_FRAGMENT,
   COLLECTION_FRAGMENT,
