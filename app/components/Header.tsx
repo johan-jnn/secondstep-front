@@ -3,7 +3,6 @@ import {Suspense} from 'react';
 import type {HeaderQuery} from 'storefrontapi.generated';
 import type {LayoutProps} from './Layout';
 import {useRootLoaderData} from '~/lib/root-data';
-import SearchBar from './searchBar';
 import './styles/header.scss';
 import {
   MenuIcon,
@@ -13,7 +12,7 @@ import {
 } from '@shopify/polaris-icons';
 import Icon from './Icon';
 import Banner from '../assets/logo.png';
-import {PredictiveSearchForm, PredictiveSearchResults} from './Search';
+import {TinySearchBar} from './searchForm';
 
 type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>;
 
@@ -34,7 +33,7 @@ export function Header({
     <>
       <HeaderMarquis texts={marquisTexts} />
       <header className="header">
-        <SearchBar />
+        <TinySearchBar onChange={(e) => e.preventDefault()} />
         <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
           <img src={Banner} alt="Bannière SecondStep" className="header_Logo" />
         </NavLink>

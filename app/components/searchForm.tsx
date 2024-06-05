@@ -16,6 +16,7 @@ import Price from './Price';
 import DoubleRangedSlider from './doubleRangedSlider';
 import searchOptionsValues from '~/lib/constants/searchOptionsValues';
 import colors from '~/lib/constants/colors.json';
+import './styles/searchBar.scss';
 
 export enum sortType {
   'Tendances',
@@ -286,6 +287,43 @@ function Filter({name, children, className}: FilterProps) {
         <div className="wrapper">{children}</div>
       </div>
     </li>
+  );
+}
+export interface SearchBarProps {
+  current?: string;
+  inputRef?: Ref<HTMLInputElement>;
+  onChange?: FormEventHandler<HTMLFormElement>;
+  onFocus?: FormEventHandler<HTMLFormElement>;
+  onSubmit?: FormEventHandler<HTMLFormElement>;
+}
+
+export function TinySearchBar({
+  current,
+  inputRef,
+  onChange,
+  onFocus,
+  onSubmit,
+}: SearchBarProps) {
+  return (
+    <form
+      className="searchBar"
+      action="/search"
+      method="get"
+      onFocus={onFocus}
+      onInput={onChange}
+      onSubmit={onSubmit}
+    >
+      <div className="queryAndSubmit">
+        <input
+          type="text"
+          name="q"
+          id="query"
+          defaultValue={current}
+          ref={inputRef}
+          placeholder="Recherche un modèle, une marque, ..."
+        />
+      </div>
+    </form>
   );
 }
 
