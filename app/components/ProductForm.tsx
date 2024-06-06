@@ -18,6 +18,8 @@ import {DeliveryIcon, CaretDownIcon, CaretUpIcon} from '@shopify/polaris-icons';
 import {useState} from 'react';
 import Button from './Button';
 import FilDarianne from './FilDarianne';
+import closeAside from '~/lib/asideCloser';
+import {toast} from 'react-toastify';
 
 export interface ProductFormProps {
   product: ProductFragment;
@@ -148,7 +150,12 @@ export default function ProductForm({product}: ProductFormProps) {
               caption="Ajouter au panier"
               btnType="submit"
               price={product.selectedVariant.price}
-              onClick={() => history.back()}
+              onClick={() => {
+                toast.success(
+                  `La paire "${product.title}" vient d'être ajouté à votre panier !`,
+                );
+                closeAside();
+              }}
             />
           </Aside>
         </section>

@@ -6,7 +6,8 @@ import {Footer, type footerMenus} from '~/components/Footer';
 import {Header, HeaderMenu} from '~/components/Header';
 import {CartMain} from '~/components/Cart';
 import marquisContent from '~/lib/constants/marquis.json';
-import SearchForm from './searchForm';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/ReactToastify.min.css';
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
@@ -35,6 +36,7 @@ export function Layout({
         />
       )}
       <main>{children}</main>
+      <ToastContainer position="bottom-right" autoClose={5000} />
       <Await
         resolve={footerMenus}
         errorElement={'Error while loading the footer...'}

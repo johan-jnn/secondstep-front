@@ -7,6 +7,7 @@ import {useVariantUrl} from '~/lib/variants';
 import Price from './Price';
 import '../styles/cart.scss';
 import getProductTitleAndSub from '~/lib/productTitles';
+import {toast} from 'react-toastify';
 
 type CartMainProps = {
   cart: CartApiQueryFragment | null;
@@ -36,9 +37,10 @@ export default function CartLineItem({
           <Link
             prefetch="intent"
             to={lineItemUrl}
-            onClick={() => {
+            onClick={(e) => {
               if (layout === 'aside') {
                 // close the drawer
+                e.preventDefault();
                 window.location.href = lineItemUrl;
               }
             }}
@@ -155,7 +157,13 @@ function CartLineRemoveButton({lineIds}: {lineIds: string[]}) {
       action={CartForm.ACTIONS.LinesRemove}
       inputs={{lineIds}}
     >
-      <button className="cart-line-remove-btn" type="submit">
+      <button
+        className="cart-line-remove-btn"
+        type="submit"
+        onClick={() => {
+          toast.success("L'article vient d'être supprimé de votre panier !");
+        }}
+      >
         Remove
       </button>
     </CartForm>
