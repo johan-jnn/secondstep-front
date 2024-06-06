@@ -9,15 +9,17 @@ $sub-header-height: 52px;
 $sticky-content-height: $header-height + $sub-header-height;
 
 $icons-height: calc($header-height / 2.5);
-$mobile-icon-height: $icons-height;
+$mobile-icon-height: calc(#{$icons-height} * 1.25);
 $header-horizontal-padding: 10vw;
 
 :root {
   scroll-padding-top: $sticky-content-height;
 }
 
-main {
-  padding-top: $sub-header-height;
+@media screen and (min-width: 850px) {
+  main {
+    padding-top: $sub-header-height;
+  }
 }
 
 header {
@@ -53,7 +55,7 @@ header {
     .tinySearch,
     .header-desktop,
     .sub {
-      display: none;
+      display: none !important;
     }
 
     .menu-toggle {
@@ -177,7 +179,7 @@ header {
           opacity: 0;
           padding: 10px 15px;
           text-wrap: nowrap;
-          
+
           background-color: var(--color-white);
           color: var(--color-black);
 
@@ -187,7 +189,7 @@ header {
           border-radius: 0 0 5px 5px;
           pointer-events: none;
           font-weight: normal;
-          
+
           display: flex;
           flex-direction: column;
           gap: 8px;
@@ -195,7 +197,7 @@ header {
           transition: 0.15s;
 
           &::before {
-            content: "Collections";
+            content: 'Collections';
             text-transform: uppercase;
             color: var(--color-grey);
             margin-bottom: 8px;

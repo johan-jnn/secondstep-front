@@ -26,7 +26,6 @@ export function Layout({
   return (
     <>
       <CartAside cart={cart} />
-      <MobileMenuAside menu={header?.menu} shop={header?.shop} />
       {header && (
         <Header
           marquisTexts={marquisContent}
@@ -57,28 +56,5 @@ function CartAside({cart}: {cart: LayoutProps['cart']}) {
         </Await>
       </Suspense>
     </Aside>
-  );
-}
-
-function MobileMenuAside({
-  menu,
-  shop,
-}: {
-  menu: HeaderQuery['menu'];
-  shop: HeaderQuery['shop'];
-}) {
-  return (
-    menu &&
-    shop?.primaryDomain?.url && (
-      <Aside id="mobile-menu-aside" heading="MENU">
-        <HeaderMenu
-          menu={menu}
-          viewport="mobile"
-          primaryDomainUrl={shop.primaryDomain.url}
-        />
-        <hr />
-        <SearchForm />
-      </Aside>
-    )
   );
 }

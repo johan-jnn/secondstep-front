@@ -2,18 +2,13 @@ import {Await, Link, NavLink} from '@remix-run/react';
 import {Suspense} from 'react';
 import type {HeaderQuery} from 'storefrontapi.generated';
 import type {LayoutProps} from './Layout';
-import {useRootLoaderData} from '~/lib/root-data';
 import './styles/header.scss';
-import {
-  MenuIcon,
-  OrderIcon,
-  PersonIcon,
-  SearchIcon,
-} from '@shopify/polaris-icons';
+import {MenuIcon, OrderIcon, PersonIcon} from '@shopify/polaris-icons';
 import Icon from './Icon';
 import Banner from '../assets/logo.png';
-import {TinySearchBar} from './searchForm';
+import SearchForm, {TinySearchBar} from './searchForm';
 import useLocalURL from '~/lib/localURL';
+import {Aside} from './Aside';
 
 type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>;
 
@@ -32,6 +27,8 @@ export function Header({
 
   return (
     <>
+      <MobileMenuAside menu={menu} submenu={submenu} shop={shop} />
+
       <HeaderMarquis texts={marquisTexts} />
       <header>
         <div className="left-side">
@@ -97,6 +94,34 @@ export function SubMenu({
         </ul>
       </nav>
     </div>
+  );
+}
+
+function MobileMenuAside({
+  menu,
+  shop,
+  submenu,
+}: {
+  menu: HeaderQuery['menu'];
+  shop: HeaderQuery['shop'];
+  submenu: HeaderQuery['submenu'];
+}) {
+  return (
+    menu &&
+    shop?.primaryDomain?.url && (
+      <Aside id="mobile-menu-aside" heading="MENU">
+        {submenu && (
+          <SubMenu sub={submenu} primaryDomainUrl={shop.primaryDomain.url} />
+        )}
+        <HeaderMenu
+          menu={menu}
+          viewport="mobile"
+          primaryDomainUrl={shop.primaryDomain.url}
+        />
+        <hr />
+        <SearchForm />
+      </Aside>
+    )
   );
 }
 
@@ -192,31 +217,6 @@ function HeaderCtas({
   );
 }
 
-export function SearchCTA() {
-  // <>
-  //   <PredictiveSearchForm>
-  //     {({fetchResults, inputRef}) => (
-  //       <SearchForm
-  //         onChange={fetchResults}
-  //         onFocus={fetchResults}
-  //         inputRef={inputRef}
-  //       />
-  //     )}
-  //   </PredictiveSearchForm>
-  //   <PredictiveSearchResults />
-  // </>;
-
-  return (
-    <Link
-      to="/search"
-      className="search-toggle"
-      title="Recherche ta prochaine paire !"
-    >
-      <Icon icon={SearchIcon} />
-    </Link>
-  );
-}
-
 function LogInIcon() {
   return <Icon icon={PersonIcon} />;
 }
@@ -229,48 +229,6 @@ function CartBadge({count}: {count?: number}) {
     </a>
   );
 }
-
-const FALLBACK_HEADER_MENU = {
-  id: 'gid://shopify/Menu/199655587896',
-  items: [
-    {
-      id: 'gid://shopify/MenuItem/461609500728',
-      resourceId: null,
-      tags: [],
-      title: 'Collections',
-      type: 'HTTP',
-      url: '/collections',
-      items: [],
-    },
-    {
-      id: 'gid://shopify/MenuItem/461609533496',
-      resourceId: null,
-      tags: [],
-      title: 'Blog',
-      type: 'HTTP',
-      url: '/blogs/journal',
-      items: [],
-    },
-    {
-      id: 'gid://shopify/MenuItem/461609566264',
-      resourceId: null,
-      tags: [],
-      title: 'Policies',
-      type: 'HTTP',
-      url: '/policies',
-      items: [],
-    },
-    {
-      id: 'gid://shopify/MenuItem/461609599032',
-      resourceId: 'gid://shopify/Page/92591030328',
-      tags: [],
-      title: 'About',
-      type: 'PAGE',
-      url: '/pages/about',
-      items: [],
-    },
-  ],
-};
 
 function activeLinkStyle({
   isActive,

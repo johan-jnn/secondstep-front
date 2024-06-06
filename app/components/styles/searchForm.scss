@@ -23,6 +23,12 @@
     align-items: stretch;
     justify-content: stretch;
     flex-direction: column;
+    @media screen and (max-width: 540px) {
+      flex-direction: column !important;
+      > input {
+        height: 50px;
+      }
+    }
     gap: 10px;
 
     > input {

@@ -48,6 +48,7 @@ export default function FeaturedCollection({
             spaceBetween={10}
             pagination={{clickable: true}}
             navigation={true}
+            color="var(--color-primary)"
             breakpoints={{
               320: {
                 slidesPerView: 1,
