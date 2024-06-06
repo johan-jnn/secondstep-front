@@ -1,20 +1,16 @@
 .brand-img-grid {
-  padding: 2%;
   display: grid;
-  width: 100%;
+  width: 90%;
   height: max-content;
-  padding: 50px 65px 50px 65px;
-  @media (max-width:800px){
-    padding: 30px 20px 10px 20px;
-  }
   background-color: var(--color-light);
+  margin: 50px auto !important;
   > .brand-img-grid-top {
     padding-bottom: 2%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     > h2{
-      font-size: 40px;
+      font-size: 30px;
       min-width: max-content;
       @media (max-width:900px){
         text-align: center;
@@ -58,7 +54,7 @@
         height: 100%;
         background-color: var(--color-light);
         > h2 {
-          text-transform: uppercase;
+          font-size: 30px;
         }
       }
     }
@@ -109,7 +105,7 @@
     ); /* Modification de la largeur des colonnes */
     gap: 15px;
     > a > div > h2 {
-      font-size: 30px; /* Ajustement de la taille du texte */
+      font-size: 20px; /* Ajustement de la taille du texte */
     }
   }
 }
@@ -177,10 +173,10 @@
     ); /* Réduction de la largeur des colonnes */
     gap: 5px;
     > a > div > h2 {
-      font-size: 30px; /* Ajustement de la taille du texte */
+      font-size: 20px; /* Ajustement de la taille du texte */
     }
     > a > div > p {
-      font-size: 16px;
+      font-size: 15px;
     }
   }
   .brand-img-grid .brand-img-grid-top > a > button {

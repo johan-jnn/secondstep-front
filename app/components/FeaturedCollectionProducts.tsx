@@ -32,7 +32,6 @@ export default function FeaturedCollectionProducts({
   return (
     <div className="featuredCollection">
       <h2>Nos meilleures ventes</h2>
-      <p>Attention ca part un peu (beaucoup) vite</p>
       <div className="featuredCollection-sub">
         {isMobile ? (
           <Swiper

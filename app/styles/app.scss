@@ -17,8 +17,8 @@ img {
 main {
   min-height: 50vh;
   > div {
-    &.home > *:not(.hero-banner):not(.video-cards):not(.faq) {
-      max-width: 1000px;
+    &.home > *:not(.hero-banner) {
+      max-width: 1150px;
       margin: 0 auto;
     }
     > h1:first-of-type {

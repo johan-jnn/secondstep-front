@@ -3,13 +3,13 @@
   align-items: stretch;
   justify-content: center;
   gap: 2.4%;
-  padding: 50px 65px 50px 65px;
+  width: 90%;
+  margin: 50px auto !important;
   background-color: var(--color-light);
 }
 
 @media (max-width: 800px) {
   .video-cards {
-    padding: 50px 20px 50px 20px;
     display: grid;
     grid-template-columns: 1fr; 
     grid-template-rows: repeat(3,320px);   

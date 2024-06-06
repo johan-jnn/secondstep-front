@@ -1,11 +1,10 @@
 .faq {
+  width: 90%;
   display: grid;
-  padding: 25px 0;
-  padding-bottom: 0;
   gap: 25px;
   background-color: var(--color-light);
   grid-template-areas: 'socials faq';
-  grid-template-columns: 35% 55%;
+  grid-template-columns: 45% 55%;
   justify-content: center;
   > .faq-questions {
     grid-area: faq;
@@ -109,7 +108,7 @@
     grid-template-areas:
       'socials'
       'faq';
-    grid-template-columns: 90%;
+    grid-template-columns: 100%;
     padding-bottom: 2%;
   }
   .faq-item {
@@ -126,7 +125,7 @@
 
 @media (max-width: 515px) {
   .faq-socials {
-    grid-template-columns: 90%;
+    grid-template-columns: 100%;
     > .faq-socials-min {
       font-size: 0.9rem;
     }

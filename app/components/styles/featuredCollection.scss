@@ -2,12 +2,12 @@
   position: relative;
   height: 100%;
   width: 90%;
-  margin: 15px auto;
+  margin: 50px auto !important;
   background-color: white;
   > h2 {
-    text-transform: uppercase;
-    font-weight: 100;
-    font-size: 40px;
+    padding: 15px 0;
+    font-weight: 700;
+    font-size: 30px;
   }
   > p {
     font-size: 18px;
@@ -31,7 +31,6 @@
         scale: 0.5;
         aspect-ratio: 1/1;
         color: var(--color-dark);
-        padding: 4% 2.7%;
         opacity: 1;
         position: absolute !important;
         top: 0;
