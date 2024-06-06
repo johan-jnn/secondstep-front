@@ -148,6 +148,7 @@ export default function ProductForm({product}: ProductFormProps) {
               caption="Ajouter au panier"
               btnType="submit"
               price={product.selectedVariant.price}
+              onClick={() => history.back()}
             />
           </Aside>
         </section>

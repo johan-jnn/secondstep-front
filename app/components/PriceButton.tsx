@@ -6,11 +6,16 @@ export interface PriceButtonProps {
   caption: string;
   price: MoneyV2;
   btnType?: HTMLButtonElement['type'];
+  onClick?: () => any;
 }
 
 export default function PriceButton(props: PriceButtonProps) {
   return (
-    <button className="price" type={props.btnType || 'button'}>
+    <button
+      className="price"
+      type={props.btnType || 'button'}
+      onClick={props.onClick}
+    >
       <p>{props.caption}</p>
       <hr />
       <p className="amount">
