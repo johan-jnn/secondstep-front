@@ -7,7 +7,7 @@ class VideoCards extends React.Component {
     return (
       <div className="video-cards">
         <VideoCard
-          backgroundcolor="var(--color-darkwhite)"
+          backgroundcolor="#e8e8e8"
           textColor="var(--color-dark)"
           num="01"
           text="Chez SecondStep, l'autheticité des produits constitue un pilier fondamental de notre philosophie d'entreprise. Nous comprenons à quel point il est essentiel pour nos clients de se sentir en confiance lors de leurs achats."
@@ -33,7 +33,7 @@ class VideoCards extends React.Component {
           ]}
         />
         <VideoCard
-          backgroundcolor="var(--color-darkwhite)"
+          backgroundcolor="#e8e8e8"
           textColor="var(--color-dark)"
           num="03"
           text="Chez SecondStep, l'autheticité des produits constitue un pilier fondamental de notre philosophie d'entreprise. Nous comprenons à quel point il est essentiel pour nos clients de se sentir en confiance lors de leurs achats."

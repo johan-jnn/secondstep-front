@@ -158,7 +158,6 @@ export default function Homepage() {
       )}
 
       <BrandImageGrid />
-      <PressSection />
       {!!featuredSecondProducts.length && (
         <FeaturedCollection
           products={featuredSecondProducts}
@@ -173,7 +172,6 @@ export default function Homepage() {
           collection && <RestoredProduct collection={collection} />
         }
       </Await>*/}
-      <Engagements />
       <OpinionSection />
       <BlogCarousel articles={data.blogArticles} />
       {!!featuredProducts.length && (

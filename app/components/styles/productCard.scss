@@ -1,6 +1,6 @@
-$card-aspect-ratio: #{1.5 / 2};
+$card-aspect-ratio: #{1.7 / 2};
 $card-height: auto;
-$card-border-radius: 5px;
+$card-border-radius: 0px;
 
 .product-card {
   background-color: transparent;
@@ -23,7 +23,7 @@ $card-border-radius: 5px;
     flex-grow: 1;
     box-shadow: 0 5px 10px -5px var(--color-grey);
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 0px;
 
     transition: .15s;
 
@@ -35,7 +35,7 @@ $card-border-radius: 5px;
         display: flex;
         align-items: center;
         gap: 10px;
-        font-size: 1em;
+        font-size: 0.8em;
         margin: 5px 0;
       }
     }
@@ -47,6 +47,7 @@ $card-border-radius: 5px;
       object-fit: contain;
       background-color: #f2f2f2;
       transition: scale .15s;
+      border-radius: 5px;
     }
 
     > .brand {
@@ -68,6 +69,7 @@ $card-border-radius: 5px;
       'sub sub'
       'rate rate';
     grid-template-rows: auto max-content 15%;
+    column-gap: 10px;
     row-gap: 5px;
     margin-top: 2%;
     align-items: baseline;
@@ -75,23 +77,21 @@ $card-border-radius: 5px;
 
     > h3 {
       grid-area: title;
-      font-size: 20px;
-      text-transform: uppercase;
+      font-size: 15px;
     }
     > p {
       grid-area: sub;
       font-size: 14px;
+      color : var(--color-grey);
       font-weight: normal;
     }
     > .price {
       grid-area: price;
-      font-size: 1em;
+      font-size: 15px;
       width: 100%;
       text-align: right;
 
-      > span {
-        font-weight: bold;
-      }
+
     }
     > .rating {
       grid-area: rate;
@@ -108,13 +108,11 @@ $card-border-radius: 5px;
   &:hover {
     text-decoration: inherit;
     > .top {
-      border-color: var(--color-primary);
       box-shadow: 0 5px 10px 0 var(--color-grey);
       > img {
         scale: 1.05;
       }
     }
-    color: var(--color-primary);
   }
 }
 
