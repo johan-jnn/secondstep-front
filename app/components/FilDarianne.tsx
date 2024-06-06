@@ -7,7 +7,7 @@ export default function FilDarianne() {
     const pathnames = location.pathname.split('/').filter((x) => x);
     return (
       <div className="fildarianne">
-        <Link to="/">Acceuil</Link>
+        <Link to="/">Accueil</Link>
         {pathnames.map((value, index) => {
           const to = `/${pathnames.slice(0, index + 1).join('/')}`;
           const isLast = index === pathnames.length - 1;
