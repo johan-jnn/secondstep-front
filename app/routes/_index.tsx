@@ -3,15 +3,14 @@ import {useLoaderData, type MetaFunction} from '@remix-run/react';
 import '../styles/app.scss';
 import type {FeaturedProductsquerryQuery} from 'storefrontapi.generated';
 import HeroBanner from '~/components/HeroBanner';
-import Engagements from '~/components/Engagements';
 import VideoCards from '~/components/VideoCards';
 import BrandImageGrid from '~/components/BrandImageGrid';
-import PressSection from '~/components/PressSection';
 import OpinionSection from '~/components/OpinionSection';
 import FAQ from '~/components/FAQ';
 import BlogCarousel from '~/components/BlogCarousel';
 import FeaturedCollectionProdcuts from '~/components/FeaturedCollectionProducts';
 import FeaturedCollection from '~/components/FeaturedCollection';
+import FilDarianne from '~/components/FilDarianne';
 import {
   ARTICLE_ITEM_FRAGMENT,
   COLLECTION_FRAGMENT,
@@ -126,6 +125,7 @@ export default function Homepage() {
       {data.metaObject?.metaobject ? (
         <HeroBanner metaObject={data.metaObject.metaobject} />
       ) : null}
+      <FilDarianne />
       {/* <div className="homepage-featured-collection">
         {featuredCollections.map((metaObject) => {
           if (
