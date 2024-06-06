@@ -23,7 +23,6 @@ export function Header({
   marquisTexts: string[];
 }) {
   const {shop, menu, submenu} = header;
-  console.log(submenu);
 
   return (
     <>
@@ -44,7 +43,7 @@ export function Header({
           {menu && (
             <HeaderMenu
               menu={menu}
-              viewport="desktop"
+              mobile={false}
               primaryDomainUrl={shop.primaryDomain.url}
             />
           )}
@@ -54,6 +53,7 @@ export function Header({
         {submenu && (
           <SubMenu
             sub={submenu}
+            mobile={false}
             primaryDomainUrl={header.shop.primaryDomain.url}
           />
         )}
@@ -65,25 +65,46 @@ export function Header({
 export function SubMenu({
   sub,
   primaryDomainUrl,
+  mobile,
 }: {
   sub: NonNullable<HeaderProps['header']['submenu']>;
   primaryDomainUrl: HeaderQuery['shop']['primaryDomain']['url'];
+  mobile: boolean;
 }) {
+  function closeAside(event: React.MouseEvent<HTMLAnchorElement>) {
+    if (mobile) {
+      event.preventDefault();
+      window.location.href = event.currentTarget.href;
+    }
+  }
+
   const getLocalURL = useLocalURL(primaryDomainUrl);
   return (
     <div className="sub">
-      <nav>
+      <nav role="navigation">
         <ul>
           {sub.items.map((item) => (
             <li key={item.id}>
-              <Link to={getLocalURL(item.url || '')}>{item.title}</Link>
+              <NavLink
+                prefetch="intent"
+                style={activeLinkStyle}
+                to={getLocalURL(item.url || '')}
+                onClick={closeAside}
+              >
+                {item.title}
+              </NavLink>
               {(item.items.length && (
                 <ol className="subitem">
                   {item.items.map((subitem) => (
                     <li key={subitem.id}>
-                      <Link to={getLocalURL(subitem.url || '')}>
+                      <NavLink
+                        prefetch="intent"
+                        style={activeLinkStyle}
+                        to={getLocalURL(subitem.url || '')}
+                        onClick={closeAside}
+                      >
                         {subitem.title}
-                      </Link>
+                      </NavLink>
                     </li>
                   ))}
                 </ol>
@@ -109,13 +130,17 @@ function MobileMenuAside({
   return (
     menu &&
     shop?.primaryDomain?.url && (
-      <Aside id="mobile-menu-aside" heading="MENU">
+      <Aside id="mobile-menu-aside" heading="Navigation">
         {submenu && (
-          <SubMenu sub={submenu} primaryDomainUrl={shop.primaryDomain.url} />
+          <SubMenu
+            mobile={true}
+            sub={submenu}
+            primaryDomainUrl={shop.primaryDomain.url}
+          />
         )}
         <HeaderMenu
           menu={menu}
-          viewport="mobile"
+          mobile={true}
           primaryDomainUrl={shop.primaryDomain.url}
         />
         <hr />
@@ -142,14 +167,14 @@ export function HeaderMarquis(props: {texts: string[]}) {
 export function HeaderMenu({
   menu,
   primaryDomainUrl,
-  viewport,
+  mobile,
 }: {
   menu: NonNullable<HeaderProps['header']['menu']>;
   primaryDomainUrl: HeaderQuery['shop']['primaryDomain']['url'];
-  viewport: Viewport;
+  mobile: boolean;
 }) {
   function closeAside(event: React.MouseEvent<HTMLAnchorElement>) {
-    if (viewport === 'mobile') {
+    if (mobile) {
       event.preventDefault();
       window.location.href = event.currentTarget.href;
     }
@@ -158,8 +183,8 @@ export function HeaderMenu({
   const getLocalURL = useLocalURL(primaryDomainUrl);
 
   return (
-    <nav role="navigation">
-      {viewport === 'mobile' && (
+    <nav role="navigation" className="main_nav">
+      {mobile && (
         <NavLink
           end
           onClick={closeAside}

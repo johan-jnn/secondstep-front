@@ -281,3 +281,55 @@ header {
     translate: -100% 0;
   }
 }
+
+/*
+* --------------------------------------------------
+* Mobile Header Aside
+* --------------------------------------------------
+*/
+
+#mobile-menu-aside aside main {
+  $font-size: 20px;
+  font-size: $font-size;
+  > .sub ul,
+  > .main_nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 16px;
+    margin: 16px 0;
+    list-style: none;
+
+    > li {
+      position: relative;
+      &:has(> ol)::after {
+        content: '>';
+        position: absolute;
+        top: 0;
+        right: 0;
+        transition: rotate 0.15s;
+      }
+
+      > ol {
+        max-height: 0;
+        overflow: hidden;
+        transition: 0.15s;
+        padding: 0;
+        list-style: none;
+        > li {
+          margin: 10px 0;
+          font-style: italic;
+        }
+      }
+      &:hover {
+        &::after {
+          rotate: 90deg;
+        }
+        > ol {
+          max-height: 50vh;
+          padding: 10px 15px;
+        }
+      }
+    }
+  }
+}

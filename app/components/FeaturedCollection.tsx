@@ -59,6 +59,7 @@ export default function FeaturedCollection({
                 slidesPerView: 2,
                 spaceBetween: 10,
                 slidesPerGroup: 2,
+                navigation: false,
               },
               740: {
                 slidesPerView: 3,
