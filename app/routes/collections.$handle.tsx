@@ -1,6 +1,7 @@
 import {json, redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, Link, type MetaFunction} from '@remix-run/react';
 import '../styles/collections.$handle.scss';
+import FilDarianne from '~/components/FilDarianne';
 import {
   Pagination,
   getPaginationVariables,
@@ -83,11 +84,7 @@ export default function Collection() {
   return (
     <div className="collection">
       <h1>{collection.title}</h1>
-      <DropBanner
-        image={dropCollection?.image?.url}
-        handle={dropCollection?.handle}
-        description={dropCollection?.description}
-      />
+      <FilDarianne />
       <SearchForm
         options={searchOptionsValues}
         current={{

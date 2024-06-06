@@ -17,6 +17,7 @@ import Icon from './Icon';
 import {DeliveryIcon, CaretDownIcon, CaretUpIcon} from '@shopify/polaris-icons';
 import {useState} from 'react';
 import Button from './Button';
+import FilDarianne from './FilDarianne';
 
 export interface ProductFormProps {
   product: ProductFragment;
@@ -57,6 +58,7 @@ export default function ProductForm({product}: ProductFormProps) {
   return (
     <CartForm route="/cart" action={CartForm.ACTIONS.LinesAdd} inputs={{lines}}>
       <div id="productForm">
+        <FilDarianne />
         <h3>{titles[0]}</h3>
         <p>{titles[1]}</p>
 
