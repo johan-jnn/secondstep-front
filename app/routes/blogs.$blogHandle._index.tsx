@@ -3,6 +3,7 @@ import {Link, useLoaderData, type MetaFunction} from '@remix-run/react';
 import {Image, Pagination, getPaginationVariables} from '@shopify/hydrogen';
 import type {ArticleItemFragment} from 'storefrontapi.generated';
 import 'app/styles/blog._index.scss';
+import FilDarianne from '~/components/FilDarianne';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Minero | ${data?.blog.title ?? ''} blog`}];
@@ -42,6 +43,7 @@ export default function Blog() {
   return (
     <div className="blog">
       <h1>{blog.title}</h1>
+      <FilDarianne />
       <div className="blog-grid">
         <Pagination connection={articles}>
           {({nodes, isLoading, PreviousLink, NextLink}) => {

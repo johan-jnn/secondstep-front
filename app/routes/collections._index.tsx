@@ -6,6 +6,7 @@ import '../styles/collections._index.scss';
 import CollectionCTA from '~/components/CollectionCTA';
 import LoadMore from '~/components/loadMoreContent';
 import {COLLECTION_FRAGMENT} from '~/lib/constants/fragments/defaults';
+import FilDarianne from '~/components/FilDarianne';
 
 export async function loader({context, request}: LoaderFunctionArgs) {
   const paginationVariables = getPaginationVariables(request, {
@@ -25,6 +26,7 @@ export default function Collections() {
   return (
     <div className="collections">
       <h1>Nos Collections</h1>
+      <FilDarianne />
       <Pagination connection={collections}>
         {({nodes, isLoading, PreviousLink, NextLink}) => (
           <div>
