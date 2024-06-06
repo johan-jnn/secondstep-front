@@ -9,7 +9,7 @@ import {Image, Money, Pagination} from '@shopify/hydrogen';
 import React, {useRef, useEffect, type FormEvent} from 'react';
 import {applyTrackingParams} from '~/lib/search';
 import '../styles/search.scss';
-
+import FilDarianne from './FilDarianne';
 import type {
   PredictiveProductFragment,
   PredictiveCollectionFragment,

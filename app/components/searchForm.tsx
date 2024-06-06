@@ -17,6 +17,7 @@ import DoubleRangedSlider from './doubleRangedSlider';
 import searchOptionsValues from '~/lib/constants/searchOptionsValues';
 import colors from '~/lib/constants/colors.json';
 import './styles/searchBar.scss';
+import FilDarianne from './FilDarianne';
 
 export enum sortType {
   'Tendances',
@@ -82,6 +83,7 @@ export default function SearchForm({
       onInput={onChange}
       onSubmit={onSubmit}
     >
+      <FilDarianne />
       <h2>Recherchez votre prochaine paire !</h2>
       <div className="queryAndSubmit">
         <input

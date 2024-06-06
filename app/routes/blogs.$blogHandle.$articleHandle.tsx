@@ -3,6 +3,7 @@ import {useLoaderData, type MetaFunction} from '@remix-run/react';
 import {Image} from '@shopify/hydrogen';
 import {Link} from 'react-router-dom';
 import '../styles/blog.$articlehandle.scss';
+import FilDarianne from '~/components/FilDarianne';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Minero | ${data?.article.title ?? ''} article`}];
@@ -41,6 +42,7 @@ export default function Article() {
   return (
     <div className="article">
       <h1>Blog</h1>
+      <FilDarianne />
       <div
         className="article-header"
         style={{
