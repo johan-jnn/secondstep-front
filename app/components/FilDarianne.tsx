@@ -1,13 +1,13 @@
 import {Link, useLocation} from 'react-router-dom';
-
+import './styles/fildarianne.scss';
 export default function FilDarianne() {
   const location = useLocation();
 
   const generateBreadcrumbs = () => {
     const pathnames = location.pathname.split('/').filter((x) => x);
     return (
-      <div>
-        <Link to="/">Home</Link>
+      <div className="fildarianne">
+        <Link to="/">Acceuil</Link>
         {pathnames.map((value, index) => {
           const to = `/${pathnames.slice(0, index + 1).join('/')}`;
           const isLast = index === pathnames.length - 1;

@@ -45,7 +45,6 @@
 
 .hero-banner-title {
   text-transform: uppercase;
-  font-family: 'Bebas';
   font-weight: bold;
   padding-top: 24px;
   font-size: 55px;
@@ -60,8 +59,8 @@
   border: none;
   border-radius: 3px;
   font-weight: 400;
+  margin: 0 auto;
   text-transform: uppercase;
-  font-family: 'Bebas';
   font-size: 20px;
   @media (max-width: 800px) {
     margin-top: 5%;

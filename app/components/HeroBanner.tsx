@@ -82,9 +82,9 @@ function HeroPageBanner({metaObject}: HeroPageBannerProps) {
             <div className="hero-banner-timer">
               {targetDate ? <Timer targetDate={targetDate} /> : null}
             </div>
-            <h1 className="hero-banner-title">{title}</h1>
+            {title ? <h1 className="hero-banner-title">{title}</h1> : null}
           </div>
-          {collectionFeatured?.handle ? (
+          {collectionFeatured?.handle && buttonText ? (
             <Link
               to={`/collections/${collectionFeatured?.handle}`}
               className="link-btn"
@@ -93,7 +93,7 @@ function HeroPageBanner({metaObject}: HeroPageBannerProps) {
             </Link>
           ) : null}
 
-          {buttonUrl ? (
+          {buttonUrl && buttonText ? (
             <Link to={buttonUrl} target="_blank" className="link-btn">
               <button
                 className="hero-banner-btn"
@@ -103,10 +103,11 @@ function HeroPageBanner({metaObject}: HeroPageBannerProps) {
               </button>
             </Link>
           ) : null}
-
-          <p className="hero-banner-sub" style={{color: subtitleColor}}>
-            {subtitle}
-          </p>
+          {subtitle ? (
+            <p className="hero-banner-sub" style={{color: subtitleColor}}>
+              {subtitle}
+            </p>
+          ) : null}
         </div>
       </div>
     </div>
