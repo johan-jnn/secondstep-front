@@ -100,6 +100,12 @@ export const PRODUCT_FRAGMENT = `#graphql
       name
       values
     }
+    priceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+    }
     metafields(identifiers: [
       {key: "titres", namespace: "custom"},
       {key: "notes", namespace: "custom"},

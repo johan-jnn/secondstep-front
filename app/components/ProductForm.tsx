@@ -70,7 +70,7 @@ export default function ProductForm({product}: ProductFormProps) {
               {' '}
               A partir de&nbsp;
               <span>
-                <Price value={product.selectedVariant.price} />
+                <Price value={product.priceRange.minVariantPrice} />
               </span>
             </p>
           </div>
@@ -154,7 +154,7 @@ export default function ProductForm({product}: ProductFormProps) {
                 toast.success(
                   `La paire "${product.title}" vient d'être ajouté à votre panier !`,
                 );
-                closeAside();
+                window.location.href = window.location.pathname;
               }}
             />
           </Aside>
@@ -170,7 +170,9 @@ export default function ProductForm({product}: ProductFormProps) {
           </Link>
           {isOpen && (
             <div className="description-open">
-              <p>{product.description}</p>
+              <p
+                dangerouslySetInnerHTML={{__html: product.descriptionHtml}}
+              ></p>
             </div>
           )}
         </div>
