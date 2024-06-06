@@ -54,7 +54,12 @@ export function Header({
           <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
         </div>
 
-        {submenu && <SubMenu sub={submenu} />}
+        {submenu && (
+          <SubMenu
+            sub={submenu}
+            primaryDomainUrl={header.shop.primaryDomain.url}
+          />
+        )}
       </header>
     </>
   );
@@ -62,21 +67,26 @@ export function Header({
 
 export function SubMenu({
   sub,
+  primaryDomainUrl,
 }: {
   sub: NonNullable<HeaderProps['header']['submenu']>;
+  primaryDomainUrl: HeaderQuery['shop']['primaryDomain']['url'];
 }) {
+  const getLocalURL = useLocalURL(primaryDomainUrl);
   return (
     <div className="sub">
       <nav>
         <ul>
           {sub.items.map((item) => (
             <li key={item.id}>
-              <Link to={item.url || ''}>{item.title}</Link>
+              <Link to={getLocalURL(item.url || '')}>{item.title}</Link>
               {(item.items.length && (
                 <ol className="subitem">
                   {item.items.map((subitem) => (
                     <li key={subitem.id}>
-                      <Link to={subitem.url || ''}>{subitem.title}</Link>
+                      <Link to={getLocalURL(subitem.url || '')}>
+                        {subitem.title}
+                      </Link>
                     </li>
                   ))}
                 </ol>
