@@ -4,12 +4,13 @@
 * --------------------------------------------------
 */
 
-$header-height: 70px;
-$sub-header-height: 40px;
+$header-height: 72px;
+$sub-header-height: 52px;
 $sticky-content-height: $header-height + $sub-header-height;
 
-$icons-height: calc($header-height / 1.25);
+$icons-height: calc($header-height / 2.5);
 $mobile-icon-height: $icons-height;
+$header-horizontal-padding: 10vw;
 
 :root {
   scroll-padding-top: $sticky-content-height;
@@ -20,18 +21,30 @@ main {
 }
 
 header {
-  align-items: center;
-  justify-content: space-between;
-  display: flex;
-  background: var(--color-light);
+  display: grid;
+  align-items: stretch;
+  grid-template-columns: 1fr 200px 1fr;
+  gap: 24px;
+  padding: 0 $header-horizontal-padding;
+  font-weight: 500;
+
+  background: var(--color-white);
   height: var(--header-height);
-  padding: 0 5%;
   position: sticky;
   top: 0;
   z-index: 20;
   font-family: 'Manrope';
+  font-size: 14px;
+  text-underline-offset: 0.2em;
   height: $header-height;
   --icon-height: #{$icons-height};
+
+  @media screen and (max-width: 1000px) {
+    &,
+    & > .sub {
+      padding: 0 calc($header-horizontal-padding / 4) !important;
+    }
+  }
 
   @media screen and (max-width: 850px) {
     --icon-height: #{$mobile-icon-height};
@@ -61,10 +74,12 @@ header {
 
   .icon {
     height: var(--icon-height);
+    width: var(--icon-height);
   }
 
   > .left-side {
     height: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
     > .menu-toggle {
@@ -73,18 +88,13 @@ header {
   }
 
   > .logo {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    translate: -50% -50%;
-    height: 50%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 50%;
 
     img {
-      height: 100%;
+      width: 100%;
     }
   }
   > .right-side {
@@ -92,12 +102,13 @@ header {
     align-items: center;
     justify-content: flex-end;
     gap: 15%;
+    flex-grow: 1;
     > nav {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       &:first-of-type {
-        gap: 25px;
+        gap: 14px;
       }
     }
   }
@@ -111,7 +122,7 @@ header {
     left: 0;
     width: 100%;
     height: $sub-header-height;
-    padding: 0 80px;
+    padding: 0 $header-horizontal-padding;
     display: flex;
     align-items: stretch;
     background-color: $bg;
@@ -157,30 +168,45 @@ header {
         height: 100%;
         display: flex;
         align-items: center;
-        > a {
-          text-transform: uppercase;
-        }
         > ol {
           position: absolute;
-          top: 100%;
-          text-wrap: nowrap;
+          top: 50%;
           left: 0;
-          scale: 1 0;
-          transform-origin: top center;
-          transition: 0.15s;
+          min-width: 200px;
+
+          opacity: 0;
+          padding: 10px 15px;
+          text-wrap: nowrap;
+          
           background-color: var(--color-white);
           color: var(--color-black);
 
           list-style: none;
           box-shadow: 0 2.5px 15px var(--color-grey);
+          border: 1px solid var(--color-darkwhite);
           border-radius: 0 0 5px 5px;
-          padding: 0;
+          pointer-events: none;
+          font-weight: normal;
+          
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+
+          transition: 0.15s;
+
+          &::before {
+            content: "Collections";
+            text-transform: uppercase;
+            color: var(--color-grey);
+            margin-bottom: 8px;
+          }
         }
 
         &:hover {
           > ol {
-            scale: 1 1;
-            padding: 10px 15px;
+            opacity: 1;
+            top: 100%;
+            pointer-events: all;
           }
         }
       }
@@ -190,12 +216,11 @@ header {
 
 .cartOpenner {
   position: relative;
-  $badge-height: calc(var(--icon-height) * 0.25);
+  $badge-height: calc(var(--icon-height) * 0.45);
 
   > span {
     position: absolute;
     top: 0;
-    translate: 0 75%;
     right: 0;
     background-color: var(--color-primary);
     color: var(--color-white);
