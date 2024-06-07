@@ -1,0 +1,13 @@
+.videoButton {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border: solid 3px white;
+  border-radius: 50px;
+  overflow: hidden;
+  > img {
+    aspect-ratio: 1/1;
+    width: 100%;
+    object-fit: cover;
+  }
+}

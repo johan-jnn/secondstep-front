@@ -1,0 +1,212 @@
+.brand-img-grid {
+  display: grid;
+  width: 90%;
+  height: max-content;
+  background-color: var(--color-light);
+  margin: 50px auto !important;
+  > .brand-img-grid-top {
+    padding-bottom: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    > h2{
+      font-size: 30px;
+      min-width: max-content;
+      @media (max-width:900px){
+        text-align: center;
+        width: 100%;
+      }
+    }
+    > a {
+      display: flex;
+      justify-content: flex-end;
+      > button {
+        color: var(--color-light);
+        width: 100px;
+        background-color: var(--color-dark);
+        font-family: 'Manrope';
+      }
+      @media (max-width:900px){
+        display: none;
+      }
+    }
+  }
+  .brand-img-grid-bottom {
+    display: grid;
+    height: max-content;
+    place-content: center;
+    grid-template-areas:
+      'img1 img4 img6 img6'
+      'img2 img4 img7 img8'
+      'img3 img5 img7 img8';
+    grid-template-rows: repeat(3, 200px);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    @for $i from 1 to 9 {
+      > a:nth-of-type(#{$i}) {
+        grid-area: img#{$i};
+      }
+    }
+    > a {
+      text-decoration: none !important;
+
+      > div {
+        height: 100%;
+        background-color: var(--color-light);
+        > h2 {
+          font-size: 30px;
+        }
+      }
+    }
+    .img1,
+    .img2,
+    .img3,
+    .img4,
+    .img5,
+    .img6,
+    .img7,
+    .img8 {
+      color: var(--color-light);
+      text-decoration-color: var(--color-light);
+      display: grid;
+      place-content: center;
+      place-items: center;
+      width: 100%;
+      border: solid 1px;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .img1:hover,
+    .img2:hover,
+    .img3:hover,
+    .img4:hover,
+    .img5:hover,
+    .img6:hover,
+    .img7:hover,
+    .img8:hover {
+      opacity: 0.8;
+      transform: scale(1.02);
+    }
+  }
+}
+
+@media (max-width: 1500px) {
+  .brand-img-grid .brand-img-grid-bottom {
+    grid-template-rows: repeat(
+      3,
+      200px
+    ); /* Modification de la hauteur des lignes */
+    grid-template-columns: repeat(
+      4,
+      1fr
+    ); /* Modification de la largeur des colonnes */
+    gap: 15px;
+    > a > div > h2 {
+      font-size: 20px; /* Ajustement de la taille du texte */
+    }
+  }
+}
+
+@media (max-width: 1300px) {
+  .brand-img-grid .brand-img-grid-bottom {
+    grid-template-rows: repeat(
+      3,
+      200px
+    ); /* Modification de la hauteur des lignes */
+    grid-template-columns: repeat(
+      4,
+      1fr
+    ); /* Modification de la largeur des colonnes */
+    gap: 15px;
+    > a > div > h2 {
+      font-size: 30px; /* Ajustement de la taille du texte */
+    }
+  }
+  .brand-img-grid .brand-img-grid-top > a > button {
+    width: 80px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 955px) {
+  .brand-img-grid .brand-img-grid-bottom {
+    grid-template-rows: repeat(
+      3,
+      150px
+    ); /* Réduction de la hauteur des lignes */
+    grid-template-columns: repeat(
+      4,
+      1fr
+    ); /* Réduction de la largeur des colonnes */
+    gap: 10px;
+    > a > div > h2 {
+      font-size: 1rem; /* Ajustement de la taille du texte */
+    }
+  }
+  .brand-img-grid .brand-img-grid-top > a > button {
+    height: 25px;
+  }
+}
+
+@media (max-width: 745px) {
+  .brand-img-grid .brand-img-grid-bottom {
+    display: grid;
+    height: max-content;
+    place-content: center;
+    grid-template-areas:
+      'img1 img4'
+      'img2 img4'
+      'img3 img5'
+      'img6 img6'
+      'img7 img8'
+      'img7 img8';
+    grid-template-rows: repeat(
+      6,
+      160px
+    ); /* Réduction de la hauteur des lignes */
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* Réduction de la largeur des colonnes */
+    gap: 5px;
+    > a > div > h2 {
+      font-size: 20px; /* Ajustement de la taille du texte */
+    }
+    > a > div > p {
+      font-size: 15px;
+    }
+  }
+  .brand-img-grid .brand-img-grid-top > a > button {
+    height: 25px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 645px) {
+  .brand-img-grid .brand-img-grid-bottom {
+    grid-template-rows: repeat(
+      6,
+      120px
+    ); /* Réduction de la hauteur des lignes */
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* Réduction de la largeur des colonnes */
+  }
+}
+
+@media (max-width: 520px) {
+  .brand-img-grid .brand-img-grid-bottom {
+    grid-template-rows: repeat(
+      6,
+      100px
+    ); /* Réduction de la hauteur des lignes */
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* Réduction de la largeur des colonnes */
+  }
+}

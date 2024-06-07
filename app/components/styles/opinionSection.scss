@@ -1,0 +1,10 @@
+.opinion-section{
+    display: flex;
+    padding: 3%;
+    gap:2%;
+    > div{
+        padding: 5%;
+        border: solid 1px var(--color-grey);
+        border-radius: 10px;
+    }
+}
