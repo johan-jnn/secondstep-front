@@ -4,9 +4,10 @@
   gap: 25px;
   background-color: var(--color-light);
   grid-template-areas: 'socials faq';
-  grid-template-columns: 1fr 65%;
+  grid-template-columns: 35% 65%;
   justify-content: center;
   padding: 50px 0px;
+  margin: 0 auto;
   > .faq-questions {
     grid-area: faq;
     display: grid;
