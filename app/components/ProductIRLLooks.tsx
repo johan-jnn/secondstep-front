@@ -4,6 +4,7 @@ import Button from './Button';
 import {Link} from '@remix-run/react';
 import {Image} from '@shopify/hydrogen';
 import InstagramPostCard from './InstagramPostCard';
+import {Swiper, SwiperSlide} from 'swiper/react';
 
 export interface ProductIRLLooksProps {
   product: ProductFragment;
@@ -58,14 +59,21 @@ export default function ProductIRLLooks({product}: ProductIRLLooksProps) {
         </a>
       </div>
       {picturesList.length ? (
-        <ul className="galery">
+        <Swiper slidesPerGroup={3}>
           {picturesList.map((url) => (
-            <li key={url.pathname}>
+            <SwiperSlide key={url.pathname}>
               <InstagramPostCard postURL={url} />
-            </li>
+            </SwiperSlide>
           ))}
-        </ul>
+        </Swiper>
       ) : (
+        // <ul className="galery">
+        //   {picturesList.map((url) => (
+        //     <li key={url.pathname}>
+        //       <InstagramPostCard postURL={url} />
+        //     </li>
+        //   ))}
+        // </ul>
         <div className="noGalery">
           <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">
             <Button
