@@ -1,0 +1,40 @@
+.image-caption {
+  display: grid;
+  grid-template-areas: 'col1 col2';
+  justify-content: center;
+  gap: 70px;
+  align-items: stretch;
+  width: 90%;
+  height: 100%;
+  margin: 50px auto !important;
+  > .image-content {
+    > img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  > .text-content {
+    > h3 {
+      color: var(--color-grey);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 1px;
+      padding: 20px 0px;
+    }
+
+    > h2{
+        font-size: 28px;
+        width: 70%;
+        padding: 10px 0px;
+    }
+
+    > p{
+        font-size: 16px;
+    }
+
+    > .button{
+        padding: 20px 0px;
+    }
+  }
+}
