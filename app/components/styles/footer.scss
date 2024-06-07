@@ -1,0 +1,85 @@
+/*
+* --------------------------------------------------
+* components/Footer
+* --------------------------------------------------
+*/
+footer {
+  background: var(--color-dark);
+  color: var(--color-light);
+  padding: 50px 15px;
+
+  #buyingTrust {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 50px;
+    background-color: var(--color-lightblack);
+    border-radius: 10px;
+    padding: 10px;
+
+    > div {
+      width: 275px;
+
+      > img {
+        float: left;
+        margin-right: 4%;
+        rotate: 110deg;
+      }
+
+      > h3 {
+        color: var(--color-light);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+      }
+
+      > p {
+        color: var(--color-light);
+        font-weight: 1;
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  .navigations {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 0.75em;
+    padding: 0 20px;
+
+    > .menus {
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      flex-wrap: wrap;
+      gap: 25px;
+
+      > .nav {
+        min-width: 115px;
+        > h2 {
+          margin-bottom: 10px;
+        }
+        ul {
+          list-style: none;
+          > li {
+            margin: 5px 0;
+          }
+        }
+      }
+    }
+
+    > .aboutus {
+      max-width: 225px;
+    }
+
+    > .socials {
+      > .medias ul {
+        display: flex;
+      }
+    }
+  }
+}

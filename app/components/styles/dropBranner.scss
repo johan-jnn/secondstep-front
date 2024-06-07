@@ -1,0 +1,92 @@
+.drop-banner{
+    padding: 2%;
+    aspect-ratio: 1/0.2;
+    width: 100%;
+    display: grid;
+    margin: 0 auto;
+    justify-content: center;
+    > a > .drop-banner-item{
+        position: relative;
+        margin: 0 auto;
+        
+        > .drop-banner-img{
+            border: solid 2px var(--color-primary);
+            object-fit: cover;
+            aspect-ratio: 1/0.2;
+            width: 100%;
+        }
+        > .drop-banner-timer{
+            position: absolute;
+            background-color: var(--color-primary);
+            width: min-content;
+            text-align: center;
+            left: 0;
+            top : 0;
+            margin: 3% 2%;
+            color : var(--color-light);
+            padding: .5% 2%;
+            border-radius: 10px;
+        }
+        > .drop-banner-text{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            margin: 3% 2%;
+            text-transform: uppercase;
+        }
+    }
+}
+
+@media (max-width: 1050px){
+    .drop-banner > a >.drop-banner-item {
+        > .drop-banner-text{
+            width: 100%;
+            margin: 1% 2%;
+            > .drop-banner-title{
+                font-size: 1.5rem;
+            }
+
+            > .drop-banner-sub{
+                font-size: 1rem;
+            }
+        }
+
+        > .drop-banner-timer{
+            font-size: 0.85rem;
+        }
+    }
+}
+
+@media (max-width: 750px){
+    .drop-banner > a >.drop-banner-item {
+        > .drop-banner-text{
+            position: relative;
+            text-align: center;
+            > .drop-banner-title{
+                font-size: 1.5rem;
+            }
+
+            > .drop-banner-sub{
+                display: none;
+            }
+    }
+}
+}
+
+@media (max-width: 600px){
+    .drop-banner > a >.drop-banner-item {
+        > .drop-banner-timer{
+            position: relative;
+            margin: 0 auto;
+
+        }
+        > .drop-banner-text{
+            grid-area: text;
+            position: absolute;
+            left:0;
+            top :0;
+
+        }
+
+    }
+}
