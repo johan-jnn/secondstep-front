@@ -121,7 +121,7 @@ export default function Homepage() {
     : '';
 
   return (
-    <div className="home">
+    <>
       {data.metaObject?.metaobject ? (
         <HeroBanner metaObject={data.metaObject.metaobject} />
       ) : null}
@@ -178,7 +178,7 @@ export default function Homepage() {
         <FeaturedCollectionProdcuts products={featuredProducts} />
       )}
       <FAQ />
-    </div>
+    </>
   );
 }
 

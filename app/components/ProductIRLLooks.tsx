@@ -3,6 +3,7 @@ import './styles/productIRLLooks.scss';
 import Button from './Button';
 import {Link} from '@remix-run/react';
 import {Image} from '@shopify/hydrogen';
+import InstagramPostCard from './InstagramPostCard';
 
 export interface ProductIRLLooksProps {
   product: ProductFragment;
@@ -17,6 +18,8 @@ export default function ProductIRLLooks({product}: ProductIRLLooksProps) {
     post: URL;
     postID: string;
   }[] = [];
+  console.log(looksMetafield);
+
   // ! Instagram CDN API doesn't allow to get its content be on a different website.
   // if (looksMetafield) {
   //   const urls = JSON.parse(looksMetafield.value) as string[];
@@ -33,6 +36,13 @@ export default function ProductIRLLooks({product}: ProductIRLLooksProps) {
   // }
   return (
     <div className="bestLooks">
+      <InstagramPostCard
+        postURL={
+          new URL(
+            'https://www.instagram.com/p/C76V5fIqEV-/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+          )
+        }
+      />
       <div className="heading">
         <h3>Vos meilleurs Looks</h3>
         <p>

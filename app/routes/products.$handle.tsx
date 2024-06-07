@@ -129,7 +129,7 @@ export default function Product() {
         </div>
       )}
       <div className="extra">
-        <aside className="menu">
+        {/* <nav role="navigation" className="menu">
           <ul>
             <li>
               <a href="#reviews">Avis</a>
@@ -155,11 +155,11 @@ export default function Product() {
               </a>
             </li>
           </ul>
-        </aside>
+        </nav> */}
 
-        <section id="reviews">
+        {/* <section id="reviews">
           <TrustPilotReviews />
-        </section>
+        </section> */}
         <section id="process">
           <ProcessReconditionnement />
         </section>

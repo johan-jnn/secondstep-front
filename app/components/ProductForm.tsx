@@ -3,7 +3,6 @@ import type {
   ProductVariantFragment,
 } from 'storefrontapi.generated';
 import Price from './Price';
-import Banner from './Banner';
 import Pastille from './Pastille';
 import './styles/productForm.scss';
 import PriceButton from './PriceButton';
@@ -76,16 +75,19 @@ export default function ProductForm({product}: ProductFormProps) {
           </div>
         </section>
         <section id="taille">
-          <div className="heading">
-            <h5>Tailles</h5>
-            <a href="/guide_des_tailles.pdf" target="_blank">
-              Guide des tailles
-            </a>
-          </div>
           <a href="#grid-aside">
             <Button type="primary" text="Choisir ma pointure" />
           </a>
           <Aside id="grid-aside" heading="Choisissez votre Taille">
+            <p className="size_helper-cta">
+              Un doute sur votre pointure ?
+              <br />
+              Découvrez notre{' '}
+              <a href="/checkmark.svg" download={true}>
+                guide des tailles{' '}
+              </a>
+              !
+            </p>
             <GrilleTaille
               tailles={product.variants.nodes}
               selected={product.selectedVariant}

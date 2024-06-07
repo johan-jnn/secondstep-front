@@ -1,21 +1,22 @@
 #productForm {
   border: 1px solid #eeeff0;
   border-radius: 5px;
-  padding: 65px;
+  padding: 35px;
   width: 500px;
   background-color: #f6f7f8;
-  > nav > .fildarianne{
+  > nav > .fildarianne {
     padding: 0px;
-    color : var(--color-grey);
-    font-size: 15px;
-    
+    color: var(--color-grey);
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 15px;
   }
   > h3 {
-    font-size: 40px;
+    font-size: 24px;
     font-family: 'Manrope';
   }
   > p {
-    font-size: 25px;
+    font-size: 16px;
   }
 
   > section {
@@ -47,12 +48,11 @@
 
       p {
         display: flex;
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 500;
         padding: 20px 0px;
         width: 100%;
         > span {
-          font-size: 20px;
           font-weight: 900;
         }
       }
@@ -115,27 +115,24 @@
         background-color: var(--color-dark);
       }
     }
-    > .heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      > h5 {
-        font-size: 20px;
-      }
-      > a {
-        font-size: 12.5px;
-        text-decoration: underline;
-      }
-    }
 
     > div > aside > main {
+      > p.size_helper-cta {
+        font-size: 12.5px;
+        margin: 0;
+        margin-bottom: 15px;
+        text-align: right;
+        > a {
+          text-decoration: underline;
+        }
+      }
       > h3 {
         text-align: center;
         padding: 10px 0;
       }
       > p {
         font-size: 20px;
-        padding: 20px 0;
+        margin: 20px 0;
         font-weight: 600;
         > span {
           font-weight: 700;
