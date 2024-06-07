@@ -89,7 +89,9 @@ function HeroPageBanner({metaObject}: HeroPageBannerProps) {
               to={`/collections/${collectionFeatured?.handle}`}
               className="link-btn"
             >
-              <button className="hero-banner-btn">{buttonText}</button>
+              <button type="button" className="hero-banner-btn">
+                {buttonText}
+              </button>
             </Link>
           ) : null}
 

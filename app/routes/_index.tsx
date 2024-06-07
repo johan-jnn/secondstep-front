@@ -244,7 +244,7 @@ query FeaturedCollections {
 
 export const FEATURED_PRODUCTS_QUERY_META = `#graphql
   ${PRODUCT_CARD_FRAGMENT}
-  query FeaturedProductsquerry {
+  query FeaturedProducts {
     metaobjects(type: "featured_products", first: 50) {
       nodes {
         fields {

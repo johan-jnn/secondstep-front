@@ -6,11 +6,11 @@ import type {
 } from 'storefrontapi.generated';
 import {useRootLoaderData} from '~/lib/root-data';
 import './styles/footer.scss';
-import CardIcon from '../assets/Logos/icons-card.png?url';
-import Instagram from '../assets/Logos/logo-instagram.svg?url';
-import Facebook from '../assets/Logos/logo-facebook.svg?url';
-import Linkedin from '../assets/Logos/logo-linkedin.svg?url';
-import Tiktok from '../assets/Logos/logo-tiktok.svg?url';
+import CardIcon from '~/assets/icons/card.png';
+import Instagram from '~/assets/logo/logo-instagram.svg';
+import Facebook from '~/assets/logo/logo-facebook.svg';
+import Linkedin from '~/assets/logo/logo-linkedin.svg';
+import Tiktok from '~/assets/logo/logo-tiktok.svg';
 import EmailInbox from './EmailInBox';
 
 export interface footerMenus {
