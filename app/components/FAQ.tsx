@@ -3,11 +3,15 @@ import {Link} from 'react-router-dom';
 import './styles/faq.scss';
 import Icon from './Icon';
 import data from '../lib/constants/faqHomePage.json';
+import faqImg1 from '~/assets/faq/faqImg1.webp';
+import faqImg2 from '~/assets/faq/faqImg2.webp';
+import faqImg3 from '~/assets/faq/faqImg3.webp';
 import {
   PlusIcon,
   LogoInstagramIcon,
   EmailIcon,
   ChatIcon,
+  PhoneIcon,
   ChevronRightIcon,
   PersonFilledIcon,
   CaretDownIcon,
@@ -32,7 +36,7 @@ function FAQItem({question, answer, link}: FAQItemProps) {
     <div className="faq-item">
       <Link to={link || ''} className="question" onClick={toggleAnswer}>
         <p>{question}</p>
-        <Icon icon={link ? ExternalIcon : CaretDownIcon} />
+        <Icon icon={link ? ExternalIcon : ChevronRightIcon} />
       </Link>
       {isOpen && (
         <div className="answer">
@@ -57,43 +61,20 @@ export default function FAQ() {
       <div className="faq-socials">
         <div className="faq-socials-top">
           <p className="title">Une question?</p>
-          <p>La team est là pour vous aider !</p>
+          <p className="sub">Notre équipe est à votré écoute !</p>
         </div>
-        <a href="mailto:contact@second-step.fr" className="faq-socials-min">
-          <Icon
-            icon={ChevronRightIcon}
-            customStyling={{fill: 'var(--color)'}}
-          />
-          <p>Mail : contact@second-step.fr</p>
-          <Icon
-            icon={ChevronRightIcon}
-            customStyling={{fill: 'var(--color)'}}
-          />
-        </a>
+        <div className="faq-images">
+          <img src={faqImg1} alt="faqImg1" />
+          <img src={faqImg2} alt="faqImg2" />
+          <img src={faqImg3} alt="faqImg3" />
+        </div>
         <a href="whatsapp://send?phone=0785838528" className="faq-socials-min">
-          <Icon
-            icon={ChevronRightIcon}
-            customStyling={{fill: 'var(--color)'}}
-          />
-          <p>Chat WhatsApp : 07 85 83 85 28</p>
-          <Icon
-            icon={ChevronRightIcon}
-            customStyling={{fill: 'var(--color)'}}
-          />
+          <Icon icon={PhoneIcon} customStyling={{fill: 'var(--color-light)'}} />
+          <p>07 85 83 85 28</p>
         </a>
-        <a
-          href="https://www.instagram.com/secondstep.fr/"
-          className="faq-socials-min"
-        >
-          <Icon
-            icon={ChevronRightIcon}
-            customStyling={{fill: 'var(--color)'}}
-          />
-          <p>Instagram : @secondstep.fr</p>
-          <Icon
-            icon={ChevronRightIcon}
-            customStyling={{fill: 'var(--color)'}}
-          />
+        <a href="mailto:contact@second-step.fr" className="faq-socials-min">
+          <Icon icon={EmailIcon} customStyling={{fill: 'var(--color-light)'}} />
+          <p>contact@second-step.fr</p>
         </a>
       </div>
       <div className="faq-questions">

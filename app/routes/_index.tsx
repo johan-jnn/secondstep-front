@@ -153,7 +153,7 @@ export default function Homepage() {
         title="Donner une nouvelle vie aux sneakers"
         subtitle="NOTRE VISION"
         buttonText="Découvrir notre concept"
-        buttonLink="/nous-d-courvrir"
+        buttonLink="/nous-d-couvrir"
         imagePlacement="right"
         image={ThomasInspecting}
       >

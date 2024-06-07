@@ -16,7 +16,7 @@
   > a {
     float: right;
   }
- 
+
   > .featuredCollection-sub {
     height: 100%;
     position: static;
@@ -25,12 +25,13 @@
       width: 100%;
       height: 100%;
       padding: 0%;
-      .swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled {
+      .swiper-button-prev.swiper-button-disabled,
+      .swiper-button-next.swiper-button-disabled {
         opacity: 0.35;
         cursor: auto;
-        pointer-events: none;}
-      
-      
+        pointer-events: none;
+      }
+
       .swiper-button-prev {
         scale: 0.5;
         aspect-ratio: 1/1;
@@ -82,7 +83,6 @@
     }
   }
 }
-
 
 .swiper-pagination-bullet-active {
   background-color: var(--color-dark);
