@@ -8,9 +8,7 @@ import BrandImageGrid from '~/components/BrandImageGrid';
 import OpinionSection from '~/components/OpinionSection';
 import FAQ from '~/components/FAQ';
 import BlogCarousel from '~/components/BlogCarousel';
-import FeaturedCollectionProdcuts from '~/components/FeaturedCollectionProducts';
 import FeaturedCollection from '~/components/FeaturedCollection';
-import FilDarianne from '~/components/FilDarianne';
 import {
   ARTICLE_ITEM_FRAGMENT,
   COLLECTION_FRAGMENT,
@@ -91,13 +89,6 @@ export default function Homepage() {
     ? collectionTitleField.value
     : null;
 
-  const collectionReferenceField = data.featuredFirstCollection.fields?.find(
-    (field: any) => field.reference,
-  );
-  const collectionHandle = collectionReferenceField
-    ? collectionReferenceField.reference.handle
-    : '';
-
   //SecondQuery
   const featuredSecondProducts = data.featuredSecondCollection
     ?.map((field: any) => field.references?.nodes || [])
@@ -125,7 +116,6 @@ export default function Homepage() {
       {data.metaObject?.metaobject ? (
         <HeroBanner metaObject={data.metaObject.metaobject} />
       ) : null}
-      <FilDarianne />
       {/* <div className="homepage-featured-collection">
         {featuredCollections.map((metaObject) => {
           if (
@@ -147,13 +137,15 @@ export default function Homepage() {
       </div> */}
 
       {!!featuredProducts.length && (
-        <FeaturedCollectionProdcuts products={featuredProducts} />
+        <FeaturedCollection
+          products={featuredProducts}
+          title="Nos meilleures ventes"
+        />
       )}
       {!!featuredFirstProducts.length && (
         <FeaturedCollection
           products={featuredFirstProducts}
           title={collectionTitle}
-          url={collectionHandle}
         />
       )}
 
@@ -162,7 +154,6 @@ export default function Homepage() {
         <FeaturedCollection
           products={featuredSecondProducts}
           title={collectionTitle_2}
-          url={collectionHandle_2}
         />
       )}
       <VideoCards />
@@ -175,7 +166,7 @@ export default function Homepage() {
       <OpinionSection />
       <BlogCarousel articles={data.blogArticles} />
       {!!featuredProducts.length && (
-        <FeaturedCollectionProdcuts products={featuredProducts} />
+        <FeaturedCollection products={featuredProducts} title=''/>
       )}
       <FAQ />
     </div>
