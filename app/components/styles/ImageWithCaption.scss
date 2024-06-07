@@ -38,3 +38,12 @@
     }
   }
 }
+
+@media (max-width : 800px){
+  .image-caption {
+    grid-template-areas: 
+    'col1' 
+    'col2';
+    gap: 20px;
+  }
+}

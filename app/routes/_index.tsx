@@ -208,6 +208,12 @@ export default function Homepage() {
           authentiques.
         </p>
       </ImageWithCaption>
+      {!!featuredSecondProducts.length && (
+        <FeaturedCollection
+          products={featuredSecondProducts}
+          title={collectionTitle_2}
+        />
+      )}
       <FAQ />
     </div>
   );
