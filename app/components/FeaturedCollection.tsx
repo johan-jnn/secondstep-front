@@ -8,18 +8,15 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import ProductGrid from './ProductGrid';
-import {Link} from 'react-router-dom';
 
 export interface FeaturedCollectionProps {
   products: ProductCardFragment[];
   title: string;
-  url: string;
 }
 
 export default function FeaturedCollection({
   products,
   title,
-  url,
 }: FeaturedCollectionProps) {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -35,12 +32,10 @@ export default function FeaturedCollection({
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
   return (
     <div className="featuredCollection">
-      <h2>{title || 'Collection mise en avant :'}</h2>
-      <Link to={url}>
-        <button type="button">Voir plus</button>
-      </Link>
+      {title ? <h2>{title}</h2> : <h2>Collection mise en avant</h2>}
       <div className="featuredCollection-sub">
         {isMobile ? (
           <Swiper
@@ -50,19 +45,16 @@ export default function FeaturedCollection({
             spaceBetween={10}
             pagination={{clickable: true}}
             navigation={true}
-            color="var(--color-primary)"
             breakpoints={{
               320: {
                 slidesPerView: 1,
                 spaceBetween: 10,
                 slidesPerGroup: 1,
-                navigation: false,
               },
               620: {
                 slidesPerView: 2,
                 spaceBetween: 10,
                 slidesPerGroup: 2,
-                navigation: false,
               },
               740: {
                 slidesPerView: 3,

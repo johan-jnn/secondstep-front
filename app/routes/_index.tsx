@@ -3,14 +3,12 @@ import {useLoaderData, type MetaFunction} from '@remix-run/react';
 import '../styles/app.scss';
 import type {FeaturedProductsquerryQuery} from 'storefrontapi.generated';
 import HeroBanner from '~/components/HeroBanner';
-import VideoCards from '~/components/VideoCards';
 import BrandImageGrid from '~/components/BrandImageGrid';
-import OpinionSection from '~/components/OpinionSection';
 import FAQ from '~/components/FAQ';
-import BlogCarousel from '~/components/BlogCarousel';
-import FeaturedCollectionProdcuts from '~/components/FeaturedCollectionProducts';
 import FeaturedCollection from '~/components/FeaturedCollection';
-import FilDarianne from '~/components/FilDarianne';
+import ImageWithCaption from '~/components/ImageWithCaption';
+import ThomasInspecting from '~/assets/images/ThomasInspecting.webp';
+import GrilInspecting from '~/assets/images/GirlInspecting.webp';
 import {
   ARTICLE_ITEM_FRAGMENT,
   COLLECTION_FRAGMENT,
@@ -91,13 +89,6 @@ export default function Homepage() {
     ? collectionTitleField.value
     : null;
 
-  const collectionReferenceField = data.featuredFirstCollection.fields?.find(
-    (field: any) => field.reference,
-  );
-  const collectionHandle = collectionReferenceField
-    ? collectionReferenceField.reference.handle
-    : '';
-
   //SecondQuery
   const featuredSecondProducts = data.featuredSecondCollection
     ?.map((field: any) => field.references?.nodes || [])
@@ -125,7 +116,6 @@ export default function Homepage() {
       {data.metaObject?.metaobject ? (
         <HeroBanner metaObject={data.metaObject.metaobject} />
       ) : null}
-      <FilDarianne />
       {/* <div className="homepage-featured-collection">
         {featuredCollections.map((metaObject) => {
           if (
@@ -147,35 +137,82 @@ export default function Homepage() {
       </div> */}
 
       {!!featuredProducts.length && (
-        <FeaturedCollectionProdcuts products={featuredProducts} />
+        <FeaturedCollection
+          products={featuredProducts}
+          title="Nos meilleures ventes"
+        />
       )}
+      <BrandImageGrid />
       {!!featuredFirstProducts.length && (
         <FeaturedCollection
           products={featuredFirstProducts}
           title={collectionTitle}
-          url={collectionHandle}
         />
       )}
-
-      <BrandImageGrid />
-      {!!featuredSecondProducts.length && (
-        <FeaturedCollection
-          products={featuredSecondProducts}
-          title={collectionTitle_2}
-          url={collectionHandle_2}
-        />
-      )}
-      <VideoCards />
+      <ImageWithCaption
+        title="Donner une nouvelle vie aux sneakers"
+        subtitle="NOTRE VISION"
+        buttonText="Découvrir notre concept"
+        buttonLink="/nous-d-couvrir"
+        imagePlacement="right"
+        image={ThomasInspecting}
+      >
+        <p>
+          <br />
+          Depuis nos modestes débuts en tant que passionnés de sneakers, nous
+          avons toujours été fascinés par la richesse de l’histoire que chaque
+          paire de chaussures portait. <br />
+          <br />
+          C’est cette fascination qui nous a conduit à créer notre boutique de
+          sneakers seconde main, avec pour objectif principal de redonner une
+          nouvelle vie à ces sneakers pleines de caractère.
+          <br />
+          <br /> Chaque paire que nous acquérons raconte une histoire unique,
+          qu’il s’agisse d’une édition limitée qui a marqué une époque ou d’un
+          modèle classique qui a accompagné des générations de sneakerheads
+        </p>
+      </ImageWithCaption>
       {/*
       <Await resolve={data.restoredProducts}>
         {({collection}) =>
           collection && <RestoredProduct collection={collection} />
         }
       </Await>*/}
-      <OpinionSection />
-      <BlogCarousel articles={data.blogArticles} />
-      {!!featuredProducts.length && (
-        <FeaturedCollectionProdcuts products={featuredProducts} />
+      {/*<BlogCarousel articles={data.blogArticles} />*/}
+      {!!featuredSecondProducts.length && (
+        <FeaturedCollection
+          products={featuredSecondProducts}
+          title={collectionTitle_2}
+        />
+      )}
+      <ImageWithCaption
+        title="Redéfinir la consommation
+        de sneakers"
+        subtitle="NOTRE MISSION"
+        imagePlacement="left"
+        image={GrilInspecting}
+      >
+        <p>
+          <br />
+          Notre vision est de redéfinir la façon dont les sneakers sont
+          consommées et perçues dans le monde de la mode. Nous croyons fermement
+          que les sneakers seconde main peuvent être une alternative à la
+          consommation excessive et à la production de masse, tout en étant une
+          déclaration de style unique et consciente. <br />
+          <br /> Nous aspirons à créer une communauté de sneakerheads engagés
+          qui apprécient la valeur des sneakers d’occasion, tant sur le plan
+          esthétique que sur le plan éthique. <br />
+          <br />
+          En encourageant l’achat et la vente de sneakers seconde main, nous
+          offrons à nos clients la possibilité de posséder des pièces uniques et
+          authentiques.
+        </p>
+      </ImageWithCaption>
+      {!!featuredSecondProducts.length && (
+        <FeaturedCollection
+          products={featuredSecondProducts}
+          title={collectionTitle_2}
+        />
       )}
       <FAQ />
     </>

@@ -26,8 +26,7 @@ export default function BrandImageGrid() {
               backgroundImage: `url(${img1})`,
             }}
           >
-            <h2>Dunk Low</h2>
-            <p>Lorem Ipsum</p>
+            <h2>New Balance</h2>
           </div>
         </Link>
         <Link to="/collections/nike">
@@ -36,7 +35,9 @@ export default function BrandImageGrid() {
             style={{
               backgroundImage: `url(${img2})`,
             }}
-          ></div>
+          >
+            <h2>Collab</h2>
+          </div>
         </Link>
         <Link to="/collections/new-balance">
           <div
@@ -45,8 +46,7 @@ export default function BrandImageGrid() {
               backgroundImage: `url(${img3})`,
             }}
           >
-            <h2>New Balance</h2>
-            <p>Lorem Ipsum</p>
+            <h2>Air jordan 1</h2>
           </div>
         </Link>
         <Link to="/collections/air-jordan">
@@ -55,7 +55,9 @@ export default function BrandImageGrid() {
             style={{
               backgroundImage: `url(${img4})`,
             }}
-          ></div>
+          >
+            <h2>Paires à moins de 200 &#x20AC;</h2>
+          </div>
         </Link>
         <Link to="/collections/air-force-1">
           <div
@@ -64,8 +66,7 @@ export default function BrandImageGrid() {
               backgroundImage: `url(${img5})`,
             }}
           >
-            <h2>Air Force 1</h2>
-            <p>Lorem Ipsum</p>
+            <h2>Jordan 4</h2>
           </div>
         </Link>
         <Link to="/collections/adidas">
@@ -74,7 +75,9 @@ export default function BrandImageGrid() {
             style={{
               backgroundImage: `url(${img6})`,
             }}
-          ></div>
+          >
+            <h2>Adidas Campus</h2>
+          </div>
         </Link>
         <Link to="/collections/yeezy">
           <div
@@ -84,7 +87,6 @@ export default function BrandImageGrid() {
             }}
           >
             <h2>Yeezy</h2>
-            <p>Lorem Ipsum</p>
           </div>
         </Link>
         <Link to="/collections/air-jordan">
@@ -94,8 +96,7 @@ export default function BrandImageGrid() {
               backgroundImage: `url(${img8})`,
             }}
           >
-            <h2>Jordan</h2>
-            <p>Lorem Ipsum</p>
+            <h2>Nike Dunk</h2>
           </div>
         </Link>
       </div>

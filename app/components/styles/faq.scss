@@ -4,8 +4,9 @@
   gap: 25px;
   background-color: var(--color-light);
   grid-template-areas: 'socials faq';
-  grid-template-columns: 45% 55%;
+  grid-template-columns: 1fr 65%;
   justify-content: center;
+  padding: 50px 0px;
   > .faq-questions {
     grid-area: faq;
     display: grid;
@@ -13,6 +14,7 @@
   }
 
   > .faq-socials {
+    margin-top: 5%;
     grid-area: socials;
     width: 100%;
     height: 300px;
@@ -22,29 +24,52 @@
 .faq-socials {
   --color: var(--color-grey);
   border: solid 1px var(--color);
-  background-color: var(--color-darkwhite);
+  background-color: var(--color-dark);
   border-radius: 10px;
   display: grid;
-  grid-template-columns: max(50%, 450px);
   place-content: center;
+  height: 100%;
+  padding: 2%;
   gap: 2%;
   > .faq-socials-top {
     text-align: center;
+    color: var(--color-light);
     > .title {
       font-weight: 700;
+      font-size: 30px;
+      text-align: left;
+    }
+    > .sub {
+      text-align: left;
+      color: var(--color-grey);
+      font-weight: 500;
+    }
+  }
+  > .faq-images {
+    width: 70%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-areas: 'img1 img2 img3';
+    > img {
+      border: solid 2px var(--color-light);
+      border-radius: 100%;
+      aspect-ratio: 1/1;
+      height: 100%;
+      width: 100%;
+      scale: 0.6;
     }
   }
   > .faq-socials-min {
-    border: solid 1px var(--color);
-    border-radius: 5px;
-    background-color: var(--color-light);
+    border-radius: 50px;
+    background-color: var(--color-lightblack);
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     align-items: center;
     text-align: center;
-    color: var(--color);
-    &, & * {
-        transition: .05s;
+    color: var(--color-light);
+    &,
+    & * {
+      transition: 0.05s;
     }
 
     .icon {
@@ -52,8 +77,6 @@
     }
 
     &:hover {
-      --color: var(--color-dark);
-      background-color: var(--color-light);
       text-decoration: none;
       font-weight: 700;
     }
@@ -64,7 +87,6 @@
   display: flex;
   flex-direction: column;
   padding: 1% 0;
-  border-top: solid 1px var(--color-grey);
   flex-grow: 1;
   > .question {
     display: flex;
@@ -73,21 +95,25 @@
     align-items: center;
     margin: auto 2%;
     color: inherit;
+    &:hover {
+      text-decoration: none !important;
+    }
     > p {
-      font-size: 1rem;
-      padding: 10px 0px;
+      font-size: 16px;
+      padding: 8px 0px;
       font-weight: 300;
+      font-weight: 500;
     }
     > .icon {
       width: 40px;
       transform-origin: center;
-      transition: rotate 0.15s;
+      transition: rotate 0.3s;
     }
 
     &:has(+ .answer) {
       text-decoration: underline;
       > .icon {
-        rotate: 180deg;
+        rotate: 90deg;
       }
     }
   }
@@ -111,13 +137,53 @@
     grid-template-columns: 100%;
     padding-bottom: 2%;
   }
-  .faq-item {
-    > .question {
-      > p {
-        width: 80%;
+  .faq-socials {
+    > .faq-socials-top {
+      text-align: center;
+      > .title {
+        text-align: center;
       }
-      > a {
-        width: 30px;
+      > .sub {
+        text-align: center;
+      }
+    }
+    > .faq-socials-min {
+      justify-content: center;
+    }
+  }
+
+  .faq-item {
+    display: flex;
+    flex-direction: column;
+    padding: 1% 0;
+    flex-grow: 1;
+    > .question {
+      display: flex;
+      flex-grow: 1;
+      justify-content: space-between;
+      align-items: center;
+      margin: auto 2%;
+      color: inherit;
+      &:hover {
+        text-decoration: none !important;
+      }
+      > p {
+        font-size: 16px;
+        padding: 8px 0px;
+        font-weight: 300;
+        font-weight: 500;
+      }
+      > .icon {
+        width: 40px;
+        transform-origin: center;
+        transition: rotate 0.15s;
+      }
+
+      &:has(+ .answer) {
+        text-decoration: underline;
+        > .icon {
+          rotate: 180deg;
+        }
       }
     }
   }
