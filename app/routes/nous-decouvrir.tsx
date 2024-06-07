@@ -1,7 +1,7 @@
 import '../styles/pages.scss';
-import image1 from 'app/assets/history-img.png';
-import image2 from 'app/assets/Nousdecimg2.png';
-import image3 from 'app/assets/equipe-full.png';
+import image1 from '~/assets/images/history-img.png';
+import image2 from '~/assets/images/Nousdecimg2.png';
+import image3 from '~/assets/images/equipe-full.png';
 import {Link} from 'react-router-dom';
 import FilDarianne from '~/components/FilDarianne';
 export default function NousDecouvrirPage() {

@@ -1,5 +1,5 @@
 import {Link} from '@remix-run/react';
-import VidButtonImg from '../assets/VideoCard-Btn.png';
+import VidButtonImg from '~/assets/icons/video-card.png';
 import './styles/VideoButton.scss';
 
 export interface VideoButtonProps {

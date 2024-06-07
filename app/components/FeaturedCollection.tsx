@@ -38,7 +38,9 @@ export default function FeaturedCollection({
   return (
     <div className="featuredCollection">
       <h2>{title || 'Collection mise en avant :'}</h2>
-      <Link to={url}>Voir plus</Link>
+      <Link to={url}>
+        <button type="button">Voir plus</button>
+      </Link>
       <div className="featuredCollection-sub">
         {isMobile ? (
           <Swiper

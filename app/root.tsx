@@ -11,9 +11,9 @@ import {
   isRouteErrorResponse,
   type ShouldRevalidateFunction,
 } from '@remix-run/react';
-import favicon from './assets/favicon.svg';
-import resetStyles from './styles/reset.scss?url';
-import appStyles from './styles/app.scss?url';
+import favicon from '~/assets/favicon.webp';
+import resetStyles from '~/styles/reset.scss?url';
+import appStyles from '~/styles/app.scss?url';
 
 import {Layout} from '~/components/Layout';
 import type {footerMenus} from './components/Footer';
