@@ -135,6 +135,7 @@ export default function ProductForm({product}: ProductFormProps) {
                   pathname: '',
                   searchParams: new URLSearchParams(),
                 })}
+                preventScrollReset={true}
               >
                 <label htmlFor="normalDelivery">
                   <div className="title">
@@ -163,6 +164,7 @@ export default function ProductForm({product}: ProductFormProps) {
                     pathname: '',
                     searchParams: new URLSearchParams(),
                   })}
+                  preventScrollReset={true}
                 >
                   <label htmlFor="fastDelivery">
                     <div className="title">
@@ -247,8 +249,7 @@ export function GrilleTaille(props: GrilleTailleProps) {
           variant.selectedOptions,
           'Livraison',
         );
-        return deliveryOpt === 'Standard';
-        // return deliveryOpt === props.selectedDelivery;
+        return deliveryOpt === props.selectedDelivery;
       });
       const variant = deliveryVariant || variants[0];
       variant.title = title;
