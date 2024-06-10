@@ -44,3 +44,13 @@ export function getVariantUrl({
 
   return path + (searchString ? '?' + searchParams.toString() : '');
 }
+
+export function getVariantOption<T extends string>(
+  selectedOptions: {name: string; value: string}[],
+  option: string,
+): T | undefined {
+  return selectedOptions.find((opt) => opt.name === option)?.value as T;
+}
+
+export const getVariantSize = (title: string) =>
+  /.+\d/.exec(title)?.[0] as string;
