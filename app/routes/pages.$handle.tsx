@@ -3,6 +3,7 @@ import {useLoaderData, type MetaFunction} from '@remix-run/react';
 import ContactPage from './contact';
 import FAQ from '~/components/FAQ';
 import NousDecouvrirPage from './nous-decouvrir';
+import PageFaq from './faq';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Minero | ${data?.page.title ?? ''}`}];
@@ -41,7 +42,11 @@ export default function Page() {
           <NousDecouvrirPage />
         </>
       ) : null}
-      <FAQ />
+      {page.handle === 'faq' ? (
+        <>
+          <PageFaq />
+        </>
+      ) : null}
     </div>
   );
 }

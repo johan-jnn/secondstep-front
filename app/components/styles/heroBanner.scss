@@ -1,10 +1,13 @@
 .hero-banner {
   background-color: var(--color-darkwhite);
-  margin: 0 auto;
-  max-width: 90%;
+  margin: 30px auto;
+  max-width: 85%;
   height: 60vh;
-  border-radius: 0 0 15px 15px;
+  border-radius: 15px 15px 15px 15px;
   overflow: hidden;
+  @media (max-width: 1350px){
+    max-width: 90%;
+  }
 }
 .hero-banner-img {
   display: grid;
