@@ -10,7 +10,7 @@ import {CartForm} from '@shopify/hydrogen';
 import {Aside} from './Aside';
 import type {CartLineInput} from '@shopify/hydrogen/storefront-api-types';
 import {Link} from '@remix-run/react';
-import {getVariantUrl} from '~/lib/variants';
+import {getVariantOption, getVariantSize, getVariantUrl} from '~/lib/variants';
 import getProductTitleAndSub from '~/lib/productTitles';
 import Icon from './Icon';
 import {DeliveryIcon, CaretDownIcon, CaretUpIcon} from '@shopify/polaris-icons';
@@ -20,6 +20,7 @@ import FilDarianne from './FilDarianne';
 import closeAside from '~/lib/asideCloser';
 import {toast} from 'react-toastify';
 
+export type Delivery = 'EXPRESS' | 'Standard';
 export interface ProductFormProps {
   product: ProductFragment;
 }
@@ -36,28 +37,45 @@ export default function ProductForm({product}: ProductFormProps) {
     setIsOpen(!isOpen);
     e.preventDefault();
   };
-  const fastDeliveryAvailable =
-    product.metafields.find((meta) => meta?.key === 'fastdelivery')?.value ===
-    'true';
   if (!product.selectedVariant)
     product.selectedVariant = product.variants.nodes.find(
       (p) => p.availableForSale,
     );
-  if (!product.selectedVariant)
-    throw new Error("No product' variant selected.");
   const {selectedVariant} = product;
-  const [fastDelivery, setFastDelivery] = useState(false);
-  const [showSizeChart, setShowSizeChart] = useState(false); // Nouvel état pour la visibilité de la grille de tailles
-  const lines: CartLineInput[] = [
-    {
-      merchandiseId: selectedVariant.id,
-      // ! TODO --> "SellingPlanID" pour obtenir une livraison plus rapide
-      // sellingPlanId: fastDelivery ? 'fastDelivery' : undefined,
-    },
-  ];
+  if (!selectedVariant) throw new Error("No product's variant selected.");
 
+  const joinedVariants = product.variants.nodes.filter(
+    (v) => getVariantSize(v.title) === getVariantSize(selectedVariant.title),
+  );
+  const deliveryVariants = {
+    standard: joinedVariants.find(
+      (v) =>
+        getVariantOption<Delivery>(v.selectedOptions, 'Livraison') ===
+        'Standard',
+    ),
+    express: joinedVariants.find(
+      (v) =>
+        getVariantOption<Delivery>(v.selectedOptions, 'Livraison') ===
+        'EXPRESS',
+    ),
+  };
+
+  const selectedDelivery = getVariantOption<Delivery>(
+    selectedVariant.selectedOptions,
+    'Livraison',
+  );
   return (
-    <CartForm route="/cart" action={CartForm.ACTIONS.LinesAdd} inputs={{lines}}>
+    <CartForm
+      route="/cart"
+      action={CartForm.ACTIONS.LinesAdd}
+      inputs={{
+        lines: [
+          {
+            merchandiseId: selectedVariant.id,
+          },
+        ],
+      }}
+    >
       <div id="productForm">
         <FilDarianne />
         <h3>{titles[0]}</h3>
@@ -92,6 +110,7 @@ export default function ProductForm({product}: ProductFormProps) {
               tailles={product.variants.nodes}
               selected={product.selectedVariant}
               productHandle={product.handle}
+              selectedDelivery={selectedDelivery || 'Standard'}
             />
             {product.variants.nodes.find(
               (variant) => !variant.currentlyNotInStock,
@@ -104,54 +123,74 @@ export default function ProductForm({product}: ProductFormProps) {
             <p>
               Prix :&nbsp;
               <span>
-                <Price value={product.selectedVariant.price} />
+                <Price value={selectedVariant.price} />
               </span>
             </p>
             <section id="livraison">
-              <label htmlFor="normalDelivery">
-                <div className="title">
-                  <input
-                    type="radio"
-                    name="fastDelivery"
-                    id="normalDelivery"
-                    onChange={() => setFastDelivery(false)}
-                    defaultChecked
-                  />
-                  Livraison standard offerte - <b>5/15j</b>
-                </div>
-                <Price
-                  value={{
-                    amount: '0',
-                    currencyCode: 'EUR',
-                  }}
-                />
-              </label>
-
-              {fastDeliveryAvailable && (
-                <label htmlFor="fastDelivery">
+              <Link
+                to={getVariantUrl({
+                  handle: product.handle,
+                  selectedOptions:
+                    deliveryVariants.standard?.selectedOptions || [],
+                  pathname: '',
+                  searchParams: new URLSearchParams(),
+                })}
+                preventScrollReset={true}
+              >
+                <label htmlFor="normalDelivery">
                   <div className="title">
                     <input
                       type="radio"
                       name="fastDelivery"
-                      id="fastDelivery"
-                      onChange={() => setFastDelivery(true)}
+                      id="normalDelivery"
+                      checked={selectedDelivery === 'Standard'}
                     />
-                    <Icon icon={DeliveryIcon} />
-                    Livraison express - <b>24/48h</b>
+                    Livraison standard offerte - <b>5/15j</b>
                   </div>
                   <Price
                     value={{
-                      amount: '9.90',
+                      amount: '0',
                       currencyCode: 'EUR',
                     }}
                   />
                 </label>
+              </Link>
+
+              {deliveryVariants.express && (
+                <Link
+                  to={getVariantUrl({
+                    handle: product.handle,
+                    selectedOptions: deliveryVariants.express.selectedOptions,
+                    pathname: '',
+                    searchParams: new URLSearchParams(),
+                  })}
+                  preventScrollReset={true}
+                >
+                  <label htmlFor="fastDelivery">
+                    <div className="title">
+                      <input
+                        type="radio"
+                        name="fastDelivery"
+                        id="fastDelivery"
+                        checked={selectedDelivery === 'EXPRESS'}
+                      />
+                      <Icon icon={DeliveryIcon} />
+                      Livraison express - <b>24/48h</b>
+                    </div>
+                    <Price
+                      value={{
+                        amount: '9.90',
+                        currencyCode: 'EUR',
+                      }}
+                    />
+                  </label>
+                </Link>
               )}
             </section>
             <PriceButton
               caption="Ajouter au panier"
               btnType="submit"
-              price={product.selectedVariant.price}
+              price={selectedVariant.price}
               onClick={() => {
                 toast.success(
                   `La paire "${product.title}" vient d'être ajouté à votre panier !`,
@@ -187,38 +226,74 @@ export interface GrilleTailleProps {
   tailles: ProductVariantFragment[];
   selected?: ProductVariantFragment;
   productHandle: string;
-  fastDelivery?: boolean;
+  selectedDelivery: Delivery;
 }
 export function GrilleTaille(props: GrilleTailleProps) {
+  // Filtrage pour n'obtenir qu'une poiture sans dupliqués
+  const variantTitles = new Set(
+    props.tailles.map((v) => getVariantSize(v.title)),
+  );
+
+  const sizes = Array.from(variantTitles)
+    .sort((a, b) => {
+      const nbA = parseFloat(a);
+      const nbB = parseFloat(b);
+      return nbA - nbB;
+    })
+    .map((title) => {
+      const variants = props.tailles.filter(
+        (v) => getVariantSize(v.title) === title,
+      );
+      const deliveryVariant = variants.find((variant) => {
+        const deliveryOpt = getVariantOption<Delivery>(
+          variant.selectedOptions,
+          'Livraison',
+        );
+        return deliveryOpt === props.selectedDelivery;
+      });
+      const variant = deliveryVariant || variants[0];
+      variant.title = title;
+
+      return {
+        variant,
+        EXPRESS_Delivery_Available: !!variants.find(
+          (variant) =>
+            getVariantOption<Delivery>(variant.selectedOptions, 'Livraison') ===
+            'EXPRESS',
+        ),
+      };
+    });
+
   return (
     <ul id="tailleGrid">
-      {props.tailles.map((info) => (
+      {sizes.map(({variant, EXPRESS_Delivery_Available}) => (
         <li
-          key={info.title}
+          key={variant.title}
           className="variant_card"
-          data-selected={props.selected?.title === info.title}
+          data-selected={
+            props.selected &&
+            getVariantSize(props.selected.title) === variant.title
+          }
         >
-          {info.availableForSale ? (
+          {variant.availableForSale ? (
             <>
               <Link
                 to={getVariantUrl({
                   handle: props.productHandle,
-                  selectedOptions: info.selectedOptions,
+                  selectedOptions: variant.selectedOptions,
                   pathname: '',
                   searchParams: new URLSearchParams(),
                 })}
                 preventScrollReset={true}
               >
-                {props.fastDelivery && (
+                {EXPRESS_Delivery_Available && (
                   <div className="liv48h">
                     <Pastille color="var(--color-primary)" />
                   </div>
                 )}
-                <p className="variantName">
-                  {info.title.match(/.+\d/)?.[0] || info.title}
-                </p>
+                <p className="variantName">{variant.title}</p>
                 <p className="variantPrice">
-                  <Price value={info.price} decimals={0} />
+                  <Price value={variant.price} decimals={0} />
                 </p>
               </Link>
             </>
@@ -226,7 +301,7 @@ export function GrilleTaille(props: GrilleTailleProps) {
             <>
               <div className="soldout">
                 <p className="variantName">
-                  {info.title.match(/.+\d/)?.[0] || info.title}
+                  {variant.title.match(/.+\d/)?.[0] || variant.title}
                 </p>
                 <p className="soldout_sub">Epuisé</p>
               </div>

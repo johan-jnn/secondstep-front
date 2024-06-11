@@ -24,6 +24,8 @@ import {
   PRODUCT_CARD_FRAGMENT,
   PRODUCT_FRAGMENT,
 } from '~/lib/constants/fragments/defaults';
+import ImageWithCaption from '~/components/ImageWithCaption';
+import ThomasInspection from '~/assets/images/ThomasInspecting.webp';
 
 export const meta: MetaFunction<typeof loader> = ({data, location}) => {
   return [{title: `Minero | ${data?.product.title ?? ''}`}];
@@ -78,7 +80,7 @@ export async function loader({params, request, context}: LoaderFunctionArgs) {
     product.selectedVariant = firstVariant;
   } else {
     // if no selected variant was returned from the selected options,
-    // we redirect to the first variant's url with it's selected options applied
+    // we redirect to the first variant&apos;s url with it&apos;s selected options applied
     if (!product.selectedVariant) {
       throw redirectToFirstVariant({product, request});
     }
@@ -161,7 +163,46 @@ export default function Product() {
           <TrustPilotReviews />
         </section> */}
         <section id="process">
-          <ProcessReconditionnement />
+          <ImageWithCaption
+            image={ThomasInspection}
+            imagePlacement="right"
+            title="Authentification"
+            subtitle="Processus"
+          >
+            <>
+              <p>
+                Chez <b>SecondStep</b>, l&apos;authenticité des produits
+                constitue le pilier fondamental de notre philosophie
+                d&apos;entreprise. Nous comprenons à quel point il est essentiel
+                pour nos clients de se sentir en confiance lors de leurs achats.
+              </p>
+              <br />
+              <p>
+                C&apos;est pourquoi nous avons instauré un processus de
+                vérification rigoureux pour chaque article proposé sur notre
+                plateforme.
+              </p>
+              <br />
+              <h5>UN PROCESSUS DE VÉRIFICATION RIGOUREUX</h5>
+              <br />
+              <p>
+                Avant qu&apos;un produit ne parvienne entre les mains de nos
+                clients, il passe par les{' '}
+                <strong>mains expertes de notre équipe de contrôle</strong>. Ces
+                professionnels hautement qualifiés sont spécialement formés pour
+                déceler les contrefaçons et garantir ainsi que seuls les
+                produits authentiques sont mis en vente.
+              </p>
+              <br />
+              <p>
+                Chez SecondStep, nous croyons fermement que l&apos;authenticité
+                est la clé de relations durables avec nos clients. Nous nous
+                engageons à maintenir cet <b>engagement</b> et à vous offrir une
+                expérience d&apos;achat sereine et fiable à chaque fois que vous
+                choisissez de faire confiance à notre plateforme
+              </p>
+            </>
+          </ImageWithCaption>
         </section>
         <section id="looks">
           <ProductIRLLooks product={product} />
@@ -169,9 +210,9 @@ export default function Product() {
         <section id="allies">
           <KitEntretientCTA for={product} />
         </section>
-        <section id="neuf-vs-recond">
+        {/* <section id="neuf-vs-recond">
           <NeufVsSS />
-        </section>
+        </section> */}
         <section id="faq">
           <FAQ />
         </section>
@@ -226,6 +267,9 @@ function Galery(props: {images: ProductFragment['images']}) {
             navigation={false}
             loop={false}
             grabCursor={true}
+            autoplay={{
+              delay: 5000,
+            }}
           >
             {props.images.nodes.map(({url, altText}, index) => (
               <SwiperSlide key={url}>

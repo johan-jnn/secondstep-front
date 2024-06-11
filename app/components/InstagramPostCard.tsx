@@ -13,7 +13,6 @@ export default function InstagramPostCard({postURL}: InstagramPostCardProps) {
     <>
       <blockquote
         className="instagram-media"
-        data-instgrm-captioned
         data-instgrm-permalink={postLink}
         data-instgrm-version="14"
       >

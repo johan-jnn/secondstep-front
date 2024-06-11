@@ -4,6 +4,7 @@ import Button from './Button';
 import {Link} from '@remix-run/react';
 import {Image} from '@shopify/hydrogen';
 import InstagramPostCard from './InstagramPostCard';
+import {Swiper, SwiperSlide} from 'swiper/react';
 
 export interface ProductIRLLooksProps {
   product: ProductFragment;
@@ -13,36 +14,19 @@ export default function ProductIRLLooks({product}: ProductIRLLooksProps) {
   const looksMetafield = product.metafields.find(
     (meta) => meta?.key === 'looks',
   );
-  const picturesList: {
-    image: URL;
-    post: URL;
-    postID: string;
-  }[] = [];
-  console.log(looksMetafield);
+  const picturesList: URL[] = [];
 
-  // ! Instagram CDN API doesn't allow to get its content be on a different website.
-  // if (looksMetafield) {
-  //   const urls = JSON.parse(looksMetafield.value) as string[];
-  //   for (const url of urls) {
-  //     const post = new URL(url, 'https://www.instagram.com/');
-  //     const postID = /\/p\/(.+?)(?:\/|$)/.exec(post.pathname)?.[1];
-  //     if (!postID) continue;
+  if (looksMetafield) {
+    picturesList.push(
+      ...(JSON.parse(looksMetafield.value) as string[]).map(
+        (url) => new URL(url),
+      ),
+    );
 
-  //     const image = new URL(post.toString());
-  //     image.pathname = (post.pathname + '/media/').replaceAll('//', '/');
-
-  //     picturesList.push({post, image, postID});
-  //   }
-  // }
+    console.log(picturesList);
+  }
   return (
     <div className="bestLooks">
-      <InstagramPostCard
-        postURL={
-          new URL(
-            'https://www.instagram.com/p/C76V5fIqEV-/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
-          )
-        }
-      />
       <div className="heading">
         <h3>Vos meilleurs Looks</h3>
         <p>
@@ -75,19 +59,21 @@ export default function ProductIRLLooks({product}: ProductIRLLooksProps) {
         </a>
       </div>
       {picturesList.length ? (
-        <ul className="galery">
-          {picturesList.map(({image, post, postID}) => (
-            <li key={postID}>
-              <Link to={post.toString()} target="_blank">
-                <img
-                  src={image.toString()}
-                  alt={`First media of the post ${postID}`}
-                />
-              </Link>
-            </li>
+        <Swiper slidesPerGroup={3}>
+          {picturesList.map((url) => (
+            <SwiperSlide key={url.pathname}>
+              <InstagramPostCard postURL={url} />
+            </SwiperSlide>
           ))}
-        </ul>
+        </Swiper>
       ) : (
+        // <ul className="galery">
+        //   {picturesList.map((url) => (
+        //     <li key={url.pathname}>
+        //       <InstagramPostCard postURL={url} />
+        //     </li>
+        //   ))}
+        // </ul>
         <div className="noGalery">
           <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">
             <Button
